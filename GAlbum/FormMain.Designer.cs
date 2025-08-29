@@ -28,13 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.butSelezione = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // butSelezione
+            // 
+            this.butSelezione.Location = new System.Drawing.Point(45, 39);
+            this.butSelezione.Name = "butSelezione";
+            this.butSelezione.Size = new System.Drawing.Size(75, 23);
+            this.butSelezione.TabIndex = 0;
+            this.butSelezione.Text = "Selezione";
+            this.butSelezione.UseVisualStyleBackColor = true;
+            this.butSelezione.Click += new System.EventHandler(this.butSelezione_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.butSelezione);
             this.Name = "FormMain";
             this.Text = "GAlbum";
             this.ResumeLayout(false);
@@ -42,6 +54,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Button butSelezione;
     }
 }
 
