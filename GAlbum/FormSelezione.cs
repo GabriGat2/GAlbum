@@ -99,6 +99,25 @@ namespace GAlbum
             pictureBox1.Image = (Image)MyImage;
             //pictureBox1.Image = Image.FromFile(@pathFoto);
         }
+        /// <summary>
+        /// Mostra la foto precedente contenuta nella lista
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butPrecedente_Click(object sender, EventArgs e)
+        {
+            // controlla che la lista esiste 
+            if (fotoSrcList == null)
+                return;
+           
+            // verifica se l'idece puo essere decrementato
+            if (idFotoSrcList < 1)
+                return;
 
+            // decrementa indice 
+            idFotoSrcList--;
+
+            MostraFoto(fotoSrcList[idFotoSrcList]);
+        }
     }
 }

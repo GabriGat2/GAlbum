@@ -32,6 +32,7 @@
             this.butApri = new System.Windows.Forms.Button();
             this.textBoxPathFoto = new System.Windows.Forms.TextBox();
             this.butSuccessiva = new System.Windows.Forms.Button();
+            this.butPrecedente = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,11 +73,22 @@
             this.butSuccessiva.UseVisualStyleBackColor = true;
             this.butSuccessiva.Click += new System.EventHandler(this.butSuccessiva_Click);
             // 
+            // butPrecedente
+            // 
+            this.butPrecedente.Location = new System.Drawing.Point(33, 90);
+            this.butPrecedente.Name = "butPrecedente";
+            this.butPrecedente.Size = new System.Drawing.Size(75, 23);
+            this.butPrecedente.TabIndex = 4;
+            this.butPrecedente.Text = "Precedente";
+            this.butPrecedente.UseVisualStyleBackColor = true;
+            this.butPrecedente.Click += new System.EventHandler(this.butPrecedente_Click);
+            // 
             // FormSelezione
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.butPrecedente);
             this.Controls.Add(this.butSuccessiva);
             this.Controls.Add(this.textBoxPathFoto);
             this.Controls.Add(this.butApri);
@@ -95,5 +107,6 @@
         private System.Windows.Forms.Button butApri;
         private System.Windows.Forms.TextBox textBoxPathFoto;
         private System.Windows.Forms.Button butSuccessiva;
+        private System.Windows.Forms.Button butPrecedente;
     }
 }
