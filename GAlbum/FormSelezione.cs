@@ -44,6 +44,10 @@ namespace GAlbum
 
             // seleziona la directory delle foto
             FolderBrowserDialog dlg = new FolderBrowserDialog();
+
+            // inizializza path @DEBUG
+            dlg.SelectedPath = "D:\\Angelo\\Prj\\GAlbum\\Foto\\Heic";
+
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 path = dlg.SelectedPath;
@@ -55,7 +59,7 @@ namespace GAlbum
             textBoxPathFoto.Text = path;
 
             // carica la lista dei file contenuti nella directory
-            fotoSrcList = Directory.GetFiles(path, "*.jpg");
+            fotoSrcList = Directory.GetFiles(path, "*.*");
             idFotoSrcList = 0;
 
             // Per caricare un'immagine da un file
@@ -92,12 +96,12 @@ namespace GAlbum
             if (MyImage != null)
                 MyImage.Dispose();
 
-            MyImage = new Bitmap(pathFoto);
+            //MyImage = new Bitmap(pathFoto);
 
 
             // Carica l'immagine dal file
-            pictureBox1.Image = (Image)MyImage;
-            //pictureBox1.Image = Image.FromFile(@pathFoto);
+            //pictureBox1.Image = (Image)MyImage;
+            pictureBox1.Image = Image.FromFile(@pathFoto);
         }
         /// <summary>
         /// Mostra la foto precedente contenuta nella lista

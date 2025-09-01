@@ -38,7 +38,6 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::GAlbum.Properties.Resources.CTNY4062;
             this.pictureBox1.Location = new System.Drawing.Point(180, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(608, 354);
