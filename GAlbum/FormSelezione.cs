@@ -3,6 +3,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using static GAlbum.GstErrori;
 using Image = System.Drawing.Image;
 
 namespace GAlbum
@@ -56,7 +57,7 @@ namespace GAlbum
             textBoxPathFoto.Text = path;
 
             // carica la lista dei file contenuti nella directory
-            fotoSrcList = Directory.GetFiles(path, "*.heic");
+            fotoSrcList = Directory.GetFiles(path, "*.*");
             idFotoSrcList = 0;
 
             MostraFoto(fotoSrcList[0]);
@@ -83,8 +84,14 @@ namespace GAlbum
         /// <param name="pathFoto"></param>
         private void MostraFoto(string pathFoto)
         {
+            // stampa il path della foto
+            textBoxPathFoto.Text = pathFoto;
+
+            CImmagine immagine = new CImmagine();
+            EErrore esito =  immagine.MostraImmagine(pathFoto, ref pictureBox1);
+
             //MostraFotoStream(pathFoto);
-            MostraFotoFile(pathFoto);
+            //MostraFotoFile(pathFoto);
         }
         /// <summary>
         /// Converte un a foto da HEIC a Jpeg appoggiandosi allo stream
@@ -186,8 +193,8 @@ namespace GAlbum
             MyImage = new Bitmap(outputJpgPath);
 
             // Carica l'immagine dal file
-            pictureBox1.Image = (Image)MyImage;
-            //pictureBox1.Image = Image.FromFile(@pathFoto);
+            //pictureBox1.Image = (Image)MyImage;
+            pictureBox1.Image = Image.FromFile(@pathFoto);
         }
         /// <summary>
         /// Mostra la foto precedente contenuta nella lista
