@@ -26,7 +26,7 @@ namespace GAlbum
         /// <returns></returns>
        public EErrore MostraImmagine(string pathFoto, ref System.Windows.Forms.PictureBox pictureBox)
         {
-            // verifico che picture box contenga un indirizzo cooretto
+            // verifico che picture box contenga un indirizzo corretto
             if (pictureBox == null) 
                 return EErrore.E0001_NOK;
 
@@ -34,15 +34,16 @@ namespace GAlbum
             if (!File.Exists(pathFoto))
                 return EErrore.E1401_ImmagineNonEsiste;
             
-            // scompone il path dell'immagine
+            // scompone il path dell'immagine e ricava il nome dell'immagine
             string [] campiImmagine = pathFoto.Split('\\');
+            String nomeImmagine = campiImmagine[campiImmagine.Length - 1];
 
-            // scompone il nome del file 
+            // scompone il nome dell'immagine e ricava l'estenzione del file 
             string[] campiNomeFile = campiImmagine[campiImmagine.Length - 1].Split('.');
-
+            String estensioneNomeImmagine = campiNomeFile[campiNomeFile.Length - 1];
 
             // Analizza estensione file
-            switch (campiNomeFile[campiNomeFile.Length - 1].ToLowerInvariant())
+            switch (estensioneNomeImmagine.ToLowerInvariant())
             {
                 case "jpg":
                     pictureBox.Image = Image.FromFile(@pathFoto);
