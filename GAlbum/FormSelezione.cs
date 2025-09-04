@@ -89,10 +89,10 @@ namespace GAlbum
 
             CImmagine immagine = new CImmagine();
             EErrore esito =  immagine.MostraImmagine(pathFoto, ref pictureBox1);
-            if (esito != EErrore.E0000_OK)
-            {
-                StampaMessaggioErrore(esito, pathFoto);
-            }
+            //if (esito != EErrore.E0000_OK)
+            //{
+            //    StampaMessaggioErrore(esito, pathFoto);
+            //}
 
 
 

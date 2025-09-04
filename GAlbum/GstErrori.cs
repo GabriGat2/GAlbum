@@ -231,6 +231,26 @@ namespace GAlbum
 
             return true;
         }
+        public static bool TestoMessaggioErrore(GstErrori.EErrore esito, string messaggio2, out string messaggio, out string titolo)
+        {
+            messaggio = "";
+            titolo = "";
+
+            // controlla l'esito del risultatao
+            if (esito != EErrore.E0000_OK)
+            {
+                if (true)
+                {
+                    // compone il messaggio da stampare
+                    titolo = "Errore!";
+                    messaggio = "Problema: \n" + messaggio2 + "\n\n" +
+                                "ha generato l'errore: \n\n" +
+                                     RestultToSting(esito);
+                }
+            }
+
+            return true;
+        }
         /// <summary>
         /// Stampa un avviso
         /// </summary>

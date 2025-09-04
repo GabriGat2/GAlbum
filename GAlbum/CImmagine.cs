@@ -5,8 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Image = System.Drawing.Image;
+//using Image = System.Drawing.Image;
+using System.Drawing.Imaging;
 using static GAlbum.GstErrori;
+using System.Drawing;
+using System.Security.Cryptography;
 
 namespace GAlbum
 {
@@ -24,7 +27,24 @@ namespace GAlbum
         /// <param name="pathFoto">"path dell'immagine"</param>
         /// <param name="pictureBox">"picture box dove é visualizzata l'immagine "</param>
         /// <returns></returns>
-       public EErrore MostraImmagine(string pathFoto, ref System.Windows.Forms.PictureBox pictureBox)
+        /// 
+        public EErrore MostraImmagine(string pathFoto, ref System.Windows.Forms.PictureBox pictureBox)
+        {
+            EErrore esito = MostraImmagine2(pathFoto, ref pictureBox);
+            if (esito != EErrore.E0000_OK)
+            {
+                CreaImmagineErrore(ref pictureBox, esito, pathFoto);
+            }
+
+            return esito;
+        }
+        /// <summary>
+        /// Mostra l'immagine nella picture box,dopo averla opportunamente convertita 
+        /// </summary>
+        /// <param name="pathFoto"></param>
+        /// <param name="pictureBox"></param>
+        /// <returns></returns>
+        private EErrore MostraImmagine2(string pathFoto, ref System.Windows.Forms.PictureBox pictureBox)
         {
             // verifico che picture box contenga un indirizzo corretto
             if (pictureBox == null) 
@@ -46,7 +66,7 @@ namespace GAlbum
             switch (estensioneNomeImmagine.ToLowerInvariant())
             {
                 case "jpg":
-                    pictureBox.Image = Image.FromFile(@pathFoto);
+                    pictureBox.Image = System.Drawing.Image.FromFile(@pathFoto);
                     break;
 
                 default:
@@ -56,8 +76,56 @@ namespace GAlbum
 
             return EErrore.E0000_OK;
         }
+        /// <summary>
+        /// Crea un immagine con la causa di errore
+        /// </summary>
+        /// <param name="pictureBox"></param>
+        /// <param name="esito"></param>
+        /// <param name="pathImmagine"></param>
+        private void CreaImmagineErrore(ref System.Windows.Forms.PictureBox pictureBox, EErrore esito, string pathImmagine)
+        {
+            // crea una bitmap
+            int larghezza = 400;
+            int altezza = 200;
+            Bitmap immagine = new Bitmap(larghezza, altezza);
+
+            // Crea un oggetto Graphics
+            Graphics g = Graphics.FromImage(immagine);
+
+            // Imposta il colore di sfondo
+            Brush coloreSfondo = new SolidBrush(Color.LightYellow); // O un altro colore desiderato
+            g.FillRectangle(coloreSfondo, 0, 0, larghezza, altezza);
+
+            // Definisce il font e la dimensione del testo
+            Font fontTesto = new Font("Arial", 10, FontStyle.Regular);
+
+            // Definisce il colore del testo
+            Brush coloreTesto = new SolidBrush(Color.Red); // O un altro colore desiderato
 
 
+            // coverte l'errore in testo
+            string messaggio;
+            string titolo;
+            bool reso = TestoMessaggioErrore(esito, pathImmagine, out messaggio, out titolo);
+
+
+            // Usa il metodo DrawString() per scrivere il testo nella posizione desiderata sull'immagine. 
+            float x = 50; // Posizione orizzontale
+            float y = 50; // Posizione verticale
+            g.DrawString(messaggio, fontTesto, coloreTesto, x, y);
+            y = 150; // Posizione verticale
+            g.DrawString(titolo, fontTesto, coloreTesto, x, y);
+
+
+            // Libera le risorse
+            g.Dispose();
+            fontTesto.Dispose();
+            coloreTesto.Dispose();
+
+            // Stampa immagine
+            pictureBox.Image = immagine;
+
+        }
 
     }
 }
