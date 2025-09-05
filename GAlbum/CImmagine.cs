@@ -65,8 +65,29 @@ namespace GAlbum
             // Analizza estensione file
             switch (estensioneNomeImmagine.ToLowerInvariant())
             {
+                // immagini Jpeg
                 case "jpg":
+                case "jpeg":
+                case "jpe":
+                case "jfif":
+                // immagini png
+                case "png":
                     pictureBox.Image = System.Drawing.Image.FromFile(@pathFoto);
+                    break;
+                // immagini bmp
+                case "bmp":
+                case "dib":
+                    pictureBox.Image = System.Drawing.Image.FromFile(@pathFoto);
+                    break;
+
+                case "heic":
+                    CDevImmagine dev = new CDevImmagine_Magic();
+                    System.Drawing.Image image;
+                    EErrore esito = dev.ConvertiHeicJpeg(pathFoto, out image);
+                    if (esito != EErrore.E0000_OK)
+                        return esito;
+                    else
+                        pictureBox.Image = image;
                     break;
 
                 default:

@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CDevImmagine.cs" />
+    <Compile Include="CDevImmagine_Magic.cs" />
     <Compile Include="CImmagine.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
