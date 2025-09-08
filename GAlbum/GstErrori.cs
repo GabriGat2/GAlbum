@@ -113,6 +113,9 @@ namespace GAlbum
             E1400_ImmagineEsiste,
             E1401_ImmagineNonEsiste,
             E1402_TipoImmagineNonGestita,
+            E1403_NonRiesceACancellareImmagineAppoggio,
+            E1404_NonRiesceAAggiornareImmagineAppoggio,
+            E1405_ProblemiNellaConversioneDellaImmagine,
 
             // Errori relativi ad un tipo di dato
             //10 sbyte System.SByte

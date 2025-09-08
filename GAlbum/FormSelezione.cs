@@ -60,7 +60,7 @@ namespace GAlbum
             fotoSrcList = Directory.GetFiles(path, "*.*");
             idFotoSrcList = 0;
 
-            MostraFoto(fotoSrcList[0]);
+            MostraFoto(fotoSrcList[0], ref butApri);
         }
         /// <summary>
         /// Mostra la prossima foto contenuta nella lista
@@ -69,6 +69,7 @@ namespace GAlbum
         /// <param name="e"></param>
         private void butSuccessiva_Click(object sender, EventArgs e)
         {
+
             if (fotoSrcList == null)
                 return;
             if (idFotoSrcList >= (fotoSrcList.Length - 1))
@@ -76,133 +77,29 @@ namespace GAlbum
 
             idFotoSrcList++;
 
-            MostraFoto(fotoSrcList[idFotoSrcList]);
+            MostraFoto(fotoSrcList[idFotoSrcList], ref butSuccessiva);
         }
         /// <summary>
         /// Mostra la foto selezionata
         /// </summary>
         /// <param name="pathFoto"></param>
-        private void MostraFoto(string pathFoto)
+        private void MostraFoto(string pathFoto, ref System.Windows.Forms.Button button)
         {
             // stampa il path della foto
             textBoxPathFoto.Text = pathFoto;
+
+            // salva il tipo di cursore
+            Cursor saveCursor = button.Cursor;
+
+            // Cambia il cursore in clessidra
+            button.Cursor = Cursors.WaitCursor;
 
             CImmagine immagine = new CImmagine();
             EErrore esito =  immagine.MostraImmagine(pathFoto, ref pictureBox1);
-            //if (esito != EErrore.E0000_OK)
-            //{
-            //    StampaMessaggioErrore(esito, pathFoto);
-            //}
 
+            // ripristina cursore
+            button.Cursor = saveCursor;
 
-
-
-
-            //MostraFotoStream(pathFoto);
-            //MostraFotoFile(pathFoto);
-        }
-        /// <summary>
-        /// Converte un a foto da HEIC a Jpeg appoggiandosi allo stream
-        /// </summary>
-        /// <param name="pathFoto"></param>
-        private void MostraFotoStream(string pathFoto)
-        {
-            // rilascia eventuale foto visualizzata
-            if (MyImage != null)
-                MyImage.Dispose();
-
-            // stampa il path della foto
-            textBoxPathFoto.Text = pathFoto;
-
-
-            // Assegna il nome della foto HEIC
-            string inputHeicPath = @pathFoto;
-
-            try
-            {
-                // Carica l'immagine HEIC
-                using (var image = new MagickImage(inputHeicPath))
-                {
-                    // Seleziona il formato desiderato: JPEG
-                    image.Format = MagickFormat.Jpeg;
-
-                    // Salva l'immagine nello stram                   
-                    using (MemoryStream memStream = new MemoryStream(image.ToByteArray()))
-                    {
-                        // visualizza l'immagina
-                        pictureBox1.Image = Image.FromStream(memStream);
-
-
-                        memStream.Dispose();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Errore durante la conversione: {ex.Message}");
-            }
-        }
-        /// <summary>
-        /// Converte un a foto da HEIC a Jpeg appoggiandosi a un file
-        /// </summary>
-        /// <param name="pathFoto"></param>
-        private void MostraFotoFile(string pathFoto)
-        {
-            // rilascia eventuale foto visualizzata
-            if (MyImage != null)
-                MyImage.Dispose();
-
-            // stampa il path della foto
-            textBoxPathFoto.Text = pathFoto;
-
-            // Assegna il nome della foto HEIC
-            string inputHeicPath = @pathFoto;
-
-            // compone il nome della foto di appoggio
-            string outputJpgPath = @"C:\Temp\ConvHeic.jpg";
-
-            // Verifica se la direcrory Temp esiste, nel caso contrario la crea
-            Directory.CreateDirectory("C:\\Temp\\");
-
-            // verifica se il nome della foto di appoggio esiste
-            if (File.Exists(outputJpgPath))
-            {
-                // cancella il file di appoggio
-                try
-                {
-                    File.Delete(outputJpgPath);
-
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Non si cancella: {ex.Message}");
-                }
-            }
-
-
-            try
-            {
-                // Carica l'immagine HEIC
-                using (var image = new MagickImage(inputHeicPath))
-                {
-                    // Seleziona il formato desiderato: JPEG
-                    image.Format = MagickFormat.Jpeg;
-
-                    // Salva l'immagine in formato JPG
-                    image.Write(outputJpgPath, MagickFormat.Jpeg);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Errore durante la conversione: {ex.Message}");
-            }
-
-
-            MyImage = new Bitmap(outputJpgPath);
-
-            // Carica l'immagine dal file
-            //pictureBox1.Image = (Image)MyImage;
-            pictureBox1.Image = Image.FromFile(@pathFoto);
         }
         /// <summary>
         /// Mostra la foto precedente contenuta nella lista
@@ -222,7 +119,7 @@ namespace GAlbum
             // decrementa indice 
             idFotoSrcList--;
 
-            MostraFoto(fotoSrcList[idFotoSrcList]);
+            MostraFoto(fotoSrcList[idFotoSrcList], ref butPrecedente);
         }
     }
 }
