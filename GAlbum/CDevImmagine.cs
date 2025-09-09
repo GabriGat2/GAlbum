@@ -23,7 +23,16 @@ namespace GAlbum
         public virtual GstErrori.EErrore ConvertiHeicJpeg(string pathImmagine, out System.Drawing.Image image)
         {
             image = null;
-            return GstErrori.EErrore.E0001_NOK;
+            return GstErrori.EErrore.E1502_TipoFilmNonGestita;
+        }
+        /// <summary>
+        /// Mostra un film
+        /// </summary>
+        /// <param name="pathFilm"></param>
+        /// <returns></returns>
+        public virtual GstErrori.EErrore MostraFilm(string pathFilm)
+        {
+            return GstErrori.EErrore.E1502_TipoFilmNonGestita;
         }
     }
 }

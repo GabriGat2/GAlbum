@@ -46,6 +46,8 @@ namespace GAlbum
         /// <returns></returns>
         private EErrore MostraImmagine2(string pathFoto, ref System.Windows.Forms.PictureBox pictureBox)
         {
+            EErrore esito = EErrore.E0001_NOK;
+
             // verifico che picture box contenga un indirizzo corretto
             if (pictureBox == null) 
                 return EErrore.E0001_NOK;
@@ -80,10 +82,16 @@ namespace GAlbum
                     pictureBox.Image = System.Drawing.Image.FromFile(@pathFoto);
                     break;
 
+                // immagini mov
+                case "mov":
+                    CDevFilm_Vlc film = new CDevFilm_Vlc();
+                    esito = film.MostraFilm(pathFoto);
+                    return esito;
+
                 case "heic":
                     CDevImmagine dev = new CDevImmagine_Magic();
                     System.Drawing.Image image;
-                    EErrore esito = dev.ConvertiHeicJpeg(pathFoto, out image);
+                    esito = dev.ConvertiHeicJpeg(pathFoto, out image);
                     if (esito != EErrore.E0000_OK)
                         return esito;
                     else

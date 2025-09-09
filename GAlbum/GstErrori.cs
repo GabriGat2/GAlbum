@@ -117,6 +117,13 @@ namespace GAlbum
             E1404_NonRiesceAAggiornareImmagineAppoggio,
             E1405_ProblemiNellaConversioneDellaImmagine,
 
+            // Errori relativi a filmati
+            // ==========================
+            E1500_FilmEsiste,
+            E1501_FilmNonEsiste,
+            E1502_TipoFilmNonGestita,
+            E1503_VlcExeNonInstallato,
+
             // Errori relativi ad un tipo di dato
             //10 sbyte System.SByte
             //20 byte System.Byte
