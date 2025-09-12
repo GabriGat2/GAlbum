@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static GAlbum.GstErrori;
 
 
 namespace GAlbum
@@ -19,25 +21,31 @@ namespace GAlbum
         {
         }
         /// <summary>
-        /// Mostra un film
+        /// Mostra un film, nell'immagine rende il nome del file e del tool usato per visualizzarlo
         /// </summary>
         /// <param name="pathFilm"></param>
+        /// <param name="image"></param>
         /// <returns></returns>
-        public override GstErrori.EErrore MostraFilm(string pathFilm)
+        public virtual GstErrori.EErrore MostraFilm(string pathFilm, out System.Drawing.Image image)
         {
+            // inizializza image
+            image = null;
+
             // trova il path del vlc
             string pathVlc = GetVlcPath();
             if (string.IsNullOrEmpty(pathVlc))
                 return GstErrori.EErrore.E1503_VlcExeNonInstallato;
 
-
+            // verifica se il film esiste
             if (!File.Exists(pathFilm))
             {
-                return GstErrori.EErrore.E1502_TipoFilmNonGestita;
+                return GstErrori.EErrore.E1501_FilmNonEsiste;
             }
 
+            // prova a visualizzare il film con Vlc
             try
             {
+                // prepara i dati per l'esecuzione
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
                     FileName = pathVlc, // Percorso dell'eseguibile VLC
@@ -45,17 +53,19 @@ namespace GAlbum
                     UseShellExecute = false // Importante per evitare errori con le virgolette
                 };
 
+                // esegue Vlc
                 Process.Start(startInfo);
             }
             catch (Exception ex)
             {
+                // La visualizzazione del film é fallita
                 return GstErrori.EErrore.E1502_TipoFilmNonGestita;
             }
 
+            // compone immagine con informazioni sul film visualizzato 
+            CreaImmagineInfoFilm(pathFilm, out image);        
+            return GstErrori.EErrore.E0000_OK;
 
-
-
-            return GstErrori.EErrore.E1502_TipoFilmNonGestita;
         }
         /// <summary>
         /// trova il path vlc
@@ -97,55 +107,53 @@ namespace GAlbum
         
             return path;
         }
+        /// <summary>
+        /// Crea un immagine con le informazioni sul film che sta visualizzanfo
+        /// </summary>
+        /// <param name="pathFilm"></param>
+        private void CreaImmagineInfoFilm(string pathFilm, out System.Drawing.Image image)
+        {
+            // crea una bitmap
+            int larghezza = 400;
+            int altezza = 200;
+            Bitmap immagine = new Bitmap(larghezza, altezza);
+
+            // Crea un oggetto Graphics
+            Graphics g = Graphics.FromImage(immagine);
+
+            // Imposta il colore di sfondo
+            Brush coloreSfondo = new SolidBrush(Color.LightGreen); // O un altro colore desiderato
+            g.FillRectangle(coloreSfondo, 0, 0, larghezza, altezza);
+
+            // Definisce il font e la dimensione del testo
+            Font fontTesto = new Font("Arial", 10, FontStyle.Regular);
+
+            // Definisce il colore del testo
+            Brush coloreTesto = new SolidBrush(Color.Blue); // O un altro colore desiderato
 
 
-        // ============================================================================================
-        // ============================================================================================
-        // ============================================================================================
-
-    //using System.Diagnostics;
-    //using System.IO;
-
-    //public static void PlayVideoWithVLC(string vlcPath, string videoPath)
-    //{
-    //    if (!File.Exists(vlcPath))
-    //    {
-    //        Console.WriteLine($"Errore: Il file eseguibile di VLC non è stato trovato in '{vlcPath}'");
-    //        return;
-    //    }
-
-    //    if (!File.Exists(videoPath))
-    //    {
-    //        Console.WriteLine($"Errore: Il file video non è stato trovato in '{videoPath}'");
-    //        return;
-    //    }
-
-    //    try
-    //    {
-    //        ProcessStartInfo startInfo = new ProcessStartInfo
-    //        {
-    //            FileName = vlcPath, // Percorso dell'eseguibile VLC
-    //            Arguments = $"\"{videoPath}\"", // Percorso del file video tra virgolette
-    //            UseShellExecute = false // Importante per evitare errori con le virgolette
-    //        };
-
-    //        Process.Start(startInfo);
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        Console.WriteLine($"Errore nell'avvio di VLC: {ex.Message}");
-    //    }
-    //}
-
-    // Esempio di utilizzo:
-    // string vlcExecutablePath = @"C:\Program Files\VideoLAN\VLC\vlc.exe"; // Modifica questo percorso
-    // string myVideo = @"C:\Percorso\Del\Tuo\Video.mp4"; // Modifica questo percorso
-    // PlayVideoWithVLC(vlcExecutablePath, myVideo);
+            // informazioni sul tool usato per visualizzare il film
+            string messaggioTool = "VLC visualizza:";
+            string messaggioFilm = pathFilm;
+       
+            // Usa il metodo DrawString() per scrivere il testo nella posizione desiderata sull'immagine. 
+            float x = 50; // Posizione orizzontale
+            float y = 50; // Posizione verticale
+            g.DrawString(messaggioTool, fontTesto, coloreTesto, x, y);
+            y = 150; // Posizione verticale
+            g.DrawString(messaggioFilm, fontTesto, coloreTesto, x, y);
 
 
-    // ============================================================================================
-    // ============================================================================================
-    // ============================================================================================
+            // Libera le risorse
+            g.Dispose();
+            fontTesto.Dispose();
+            coloreTesto.Dispose();
+
+            // Stampa immagine
+            image = immagine;
+
+        }
+
 
 
     }

@@ -14,7 +14,13 @@ using System.Security.Cryptography;
 namespace GAlbum
 {
     public class CImmagine
-    {
+    {   
+        /// <summary>
+        /// Immagine di appoggio
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        private System.Drawing.Image image;
         /// <summary>
         /// Costruttore
         /// </summary>
@@ -85,12 +91,16 @@ namespace GAlbum
                 // immagini mov
                 case "mov":
                     CDevFilm_Vlc film = new CDevFilm_Vlc();
-                    esito = film.MostraFilm(pathFoto);
-                    return esito;
+                    esito = film.MostraFilm(pathFoto, out image);
+                    if (esito != EErrore.E0000_OK)
+                        return esito;
+                    else
+                        pictureBox.Image = image;
+                    break;
 
+                // immagini heic
                 case "heic":
                     CDevImmagine dev = new CDevImmagine_Magic();
-                    System.Drawing.Image image;
                     esito = dev.ConvertiHeicJpeg(pathFoto, out image);
                     if (esito != EErrore.E0000_OK)
                         return esito;

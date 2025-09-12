@@ -26,12 +26,14 @@ namespace GAlbum
             return GstErrori.EErrore.E1502_TipoFilmNonGestita;
         }
         /// <summary>
-        /// Mostra un film
+        /// Mostra un film, nell'immagine rende il nome del file e del tool usato per visualizzarlo
         /// </summary>
         /// <param name="pathFilm"></param>
+        /// <param name="image"></param>
         /// <returns></returns>
-        public virtual GstErrori.EErrore MostraFilm(string pathFilm)
+        public virtual GstErrori.EErrore MostraFilm(string pathFilm, out System.Drawing.Image image)
         {
+            image = null;
             return GstErrori.EErrore.E1502_TipoFilmNonGestita;
         }
     }
