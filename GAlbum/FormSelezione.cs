@@ -28,6 +28,16 @@ namespace GAlbum
         public FormSelezione()
         {
             InitializeComponent();
+            InizializzaClasse();
+        }
+        /// <summary>
+        /// Inizializza classe
+        /// </summary>
+        private void InizializzaClasse()
+        {
+            // DEBUG
+            textBoxSorgente.Text = "D:\\Angelo\\Prj\\GAlbum\\Foto\\Sorgente\\Heic";
+            textBoxDestinazione.Text = "D:\\Angelo\\Prj\\GAlbum\\Foto\\Destinazione";
         }
         /// <summary>
         /// Carica le fotografie contenute nella directory specificata
@@ -36,24 +46,9 @@ namespace GAlbum
         /// <param name="e"></param>
         private void butApri_Click(object sender, EventArgs e)
         {
-            // definisci il path della directory delle foto da elaborare
-            string path = string.Empty;
-
-            // seleziona la directory delle foto
-            FolderBrowserDialog dlg = new FolderBrowserDialog();
-
-            // inizializza path @DEBUG
-            dlg.SelectedPath = "D:\\Angelo\\Prj\\GAlbum\\Foto\\Heic";
-
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                path = dlg.SelectedPath;
-            }
-            // verifica se ha selezionato una directory
-            if (path == string.Empty)
-                return;
-
+ 
             // stampa il path della directory
+            string path = textBoxSorgente.Text;
             textBoxPathFoto.Text = path;
 
             // carica la lista dei file contenuti nella directory
@@ -120,6 +115,57 @@ namespace GAlbum
             idFotoSrcList--;
 
             MostraFoto(fotoSrcList[idFotoSrcList], ref butPrecedente);
+        }
+        /// <summary>
+        /// Seleziona la directory sorgente 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butSorgente_Click(object sender, EventArgs e)
+        {
+            // definisci il path della directory delle foto da elaborare
+            string path = string.Empty;
+
+            // seleziona la directory delle foto
+            FolderBrowserDialog dlg = new FolderBrowserDialog();
+
+            // inizializza path @DEBUG
+            dlg.SelectedPath = textBoxSorgente.Text;
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                path = dlg.SelectedPath;
+            }
+            //// verifica se ha selezionato una directory
+            //if (path == string.Empty)
+            //    return;
+
+            // stampa il path della directory
+            textBoxSorgente.Text = path;
+        }
+        /// <summary>
+        /// Apre directory di destinazione 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butDestinazione_Click(object sender, EventArgs e)
+        {
+            // definisci il path della directory delle foto da elaborare
+            string path = string.Empty;
+
+            // Crea l'oggetto del browser
+            FolderBrowserDialog dlg = new FolderBrowserDialog();
+
+            // inizializza path 
+            dlg.SelectedPath = textBoxDestinazione.Text;
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                path = dlg.SelectedPath;
+            }
+            
+            // stampa il path della directory
+            textBoxDestinazione.Text = path;
         }
     }
 }
