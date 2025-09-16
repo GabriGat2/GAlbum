@@ -1,5 +1,6 @@
 ﻿using ImageMagick;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -38,6 +39,9 @@ namespace GAlbum
             // DEBUG
             textBoxSorgente.Text = "D:\\Angelo\\Prj\\GAlbum\\Foto\\Sorgente\\Heic";
             textBoxDestinazione.Text = "D:\\Angelo\\Prj\\GAlbum\\Foto\\Destinazione";
+
+            // aggiorna la visualizzazione delle sub directory di destinazione
+            AggiornaDestinazione();    
         }
         /// <summary>
         /// Carica le fotografie contenute nella directory specificata
@@ -166,6 +170,62 @@ namespace GAlbum
             
             // stampa il path della directory
             textBoxDestinazione.Text = path;
+
+            // aggiorna la visualizzazione delle sub directory di destinazione
+            AggiornaDestinazione();
+
+        }
+       /// <summary>
+        /// aggiorna le destinazioni, cioé visualizza le sotto directory contenute in destinazione
+        /// </summary>
+        private void AggiornaDestinazione()
+        {
+            // verifica che la directory esiste 
+            if (!Directory.Exists(textBoxDestinazione.Text))
+                return;
+
+            // Crea la lista delle sub directory
+            string[] ListaSubDir = Directory.GetDirectories(textBoxDestinazione.Text);
+
+            // crea lista nomi sub dir
+            List<string> ListaNomiSubDir = new List<string>();
+            foreach (var path in ListaSubDir)
+            {
+                string[] campi = path.Split('\\');
+                ListaNomiSubDir.Add(campi[campi.Length-1]);
+
+            }
+
+
+            if (ListaNomiSubDir.Count >= 1)
+            { 
+                checkBox1.Text = ListaNomiSubDir[0];
+            }
+
+            if (ListaNomiSubDir.Count >= 2)
+            {
+                checkBox2.Text = ListaNomiSubDir[1];
+            }
+
+            if (ListaNomiSubDir.Count >= 3)
+            {
+                checkBox3.Text = ListaNomiSubDir[2];
+            }
+
+            if (ListaNomiSubDir.Count >= 4)
+            {
+                checkBox4.Text = ListaNomiSubDir[3];
+            }
+        }
+        /// <summary>
+        /// il testo della destinazione é cambiato
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxDestinazione_TextChanged(object sender, EventArgs e)
+        {
+            // aggiorna la visualizzazione delle sub directory di destinazione
+            AggiornaDestinazione();
         }
     }
 }
