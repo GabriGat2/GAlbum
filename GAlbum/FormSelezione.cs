@@ -24,6 +24,11 @@ namespace GAlbum
         /// </summary>
         private Bitmap MyImage;
         /// <summary>
+        /// lista check box delle sub directory di destinazione 
+        /// </summary>
+        private List<CheckBox> ListacheckboxSubDir = new List<CheckBox>();
+        private CheckBox checkBox = new CheckBox();
+        /// <summary>
         /// Costruttore
         /// </summary>
         public FormSelezione()
@@ -180,6 +185,9 @@ namespace GAlbum
         /// </summary>
         private void AggiornaDestinazione()
         {
+            // svuota la lista delle check box
+            ListacheckboxSubDir.Clear();
+
             // verifica che la directory esiste 
             if (!Directory.Exists(textBoxDestinazione.Text))
                 return;
@@ -187,35 +195,82 @@ namespace GAlbum
             // Crea la lista delle sub directory
             string[] ListaSubDir = Directory.GetDirectories(textBoxDestinazione.Text);
 
+            //this.groupBox1.SuspendLayout();
+            //this.SuspendLayout();
+            
+            checkBox5.Visible = false;
+            checkBox1.Visible = false;
+            checkBox2.Visible = false;
+            checkBox3.Visible = false;
+            checkBox4.Visible = false;
+
             // crea lista nomi sub dir
             List<string> ListaNomiSubDir = new List<string>();
             foreach (var path in ListaSubDir)
             {
+                // estrae il nome della sub directory
                 string[] campi = path.Split('\\');
-                ListaNomiSubDir.Add(campi[campi.Length-1]);
+                string nome = campi[campi.Length - 1];
+                ListaNomiSubDir.Add(nome);
+
+                // crea check box per la sub directory
+                //CheckBox checkBox = new CheckBox();
+                checkBox.Name = nome;
+                checkBox.Text = "Dinamico: " + nome;
+                checkBox.Location = checkBox1.Location;
+                checkBox.Size = checkBox1.Size;
+                checkBox.Invalidate();
+
+
+
+                //ListacheckboxSubDir.Add(checkBox);
+                //groupBox1.Controls.Add(checkBox);
+                //this.groupBox1.Controls.Add(this.checkBox5);
+                this.Controls.Add(checkBox);
+
 
             }
 
+            //checkBox.Name = "pippo";
+            //checkBox.Text = "Dinamico: ";// + nome;
+            //checkBox.Location = checkBox1.Location;
+            //checkBox.Size = checkBox5.Size;
+            //checkBox.Invalidate();
 
-            if (ListaNomiSubDir.Count >= 1)
-            { 
-                checkBox1.Text = ListaNomiSubDir[0];
-            }
 
-            if (ListaNomiSubDir.Count >= 2)
-            {
-                checkBox2.Text = ListaNomiSubDir[1];
-            }
+            //this.Controls.Add(checkBox);
+            ////this.Controls.Remove(checkBox);
+            //ListacheckboxSubDir.Add(checkBox);
+            ////groupBox1.Controls.Add(checkBox);
 
-            if (ListaNomiSubDir.Count >= 3)
-            {
-                checkBox3.Text = ListaNomiSubDir[2];
-            }
+            //groupBox1.Invalidate();
 
-            if (ListaNomiSubDir.Count >= 4)
-            {
-                checkBox4.Text = ListaNomiSubDir[3];
-            }
+            //groupBox1.Update();
+            //this.groupBox1.ResumeLayout(false);
+            //this.groupBox1.PerformLayout();
+            //this.ResumeLayout(false);
+            //this.PerformLayout();
+
+
+            //    if (ListaNomiSubDir.Count >= 1)
+            //    { 
+            //        checkBox1.Text = ListaNomiSubDir[0];
+            //    }
+
+            //    if (ListaNomiSubDir.Count >= 2)
+            //    {
+            //        checkBox2.Text = ListaNomiSubDir[1];
+            //    }
+
+            //    if (ListaNomiSubDir.Count >= 3)
+            //    {
+            //        checkBox3.Text = ListaNomiSubDir[2];
+            //    }
+
+            //    if (ListaNomiSubDir.Count >= 4)
+            //    {
+            //        checkBox4.Text = ListaNomiSubDir[3];
+            //    }
         }
         /// <summary>
         /// il testo della destinazione é cambiato
