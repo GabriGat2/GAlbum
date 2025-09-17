@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.butSelezione = new System.Windows.Forms.Button();
+            this.ButSelezioneFoto = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // butSelezione
@@ -41,11 +42,22 @@
             this.butSelezione.UseVisualStyleBackColor = true;
             this.butSelezione.Click += new System.EventHandler(this.butSelezione_Click);
             // 
+            // ButSelezioneFoto
+            // 
+            this.ButSelezioneFoto.Location = new System.Drawing.Point(45, 88);
+            this.ButSelezioneFoto.Name = "ButSelezioneFoto";
+            this.ButSelezioneFoto.Size = new System.Drawing.Size(103, 23);
+            this.ButSelezioneFoto.TabIndex = 1;
+            this.ButSelezioneFoto.Text = "Selezione Foto";
+            this.ButSelezioneFoto.UseVisualStyleBackColor = true;
+            this.ButSelezioneFoto.Click += new System.EventHandler(this.ButSelezioneFoto_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ButSelezioneFoto);
             this.Controls.Add(this.butSelezione);
             this.Name = "FormMain";
             this.Text = "GAlbum";
@@ -56,6 +68,7 @@
         #endregion
 
         private System.Windows.Forms.Button butSelezione;
+        private System.Windows.Forms.Button ButSelezioneFoto;
     }
 }
 

@@ -180,7 +180,7 @@ namespace GAlbum
             AggiornaDestinazione();
 
         }
-       /// <summary>
+        /// <summary>
         /// aggiorna le destinazioni, cioé visualizza le sotto directory contenute in destinazione
         /// </summary>
         private void AggiornaDestinazione()
