@@ -28,6 +28,18 @@ namespace GAlbum
         /// </summary>
         private Bitmap MyImage;
         /// <summary>
+        /// Path della directory sorgente attiva 
+        /// </summary>
+        private string PathDirSorgente = null;
+        /// <summary>
+        /// Path della directory destinazione attiva 
+        /// </summary>
+        private string PathDirDestinazione = null;
+        /// <summary>
+        /// massimo livello di indentazione
+        /// </summary>
+        private int MaxLivello = 3;
+        /// <summary>
         /// costruttore
         /// </summary>
         public FormSelezioneFoto()
@@ -41,8 +53,8 @@ namespace GAlbum
         private void InizializzaClasse()
         {
             // DEBUG
-            textBoxSorgente.Text = "D:\\Angelo\\Prj\\GAlbum\\Foto\\Sorgente\\Heic";
-            textBoxDestinazione.Text = "D:\\Angelo\\Prj\\GAlbum\\Foto\\Destinazione";
+            textBoxSorgente.Text = "E:\\Angelo\\Prj\\GAlbum\\Foto\\Sorgente\\Heic";
+            textBoxDestinazione.Text = "E:\\Angelo\\Prj\\GAlbum\\Foto\\Destinazione";
 
             // aggiorna la visualizzazione delle sub directory di destinazione
             //AggiornaDestinazione();
@@ -108,51 +120,93 @@ namespace GAlbum
         /// </summary>
         private void AggiornaDestinazione()
         {
-            // svuota la lista delle check box
-            //ListacheckboxSubDir.Clear();
+            // assegna la directory di destinazione
+            PathDirDestinazione = textBoxDestinazione.Text;
 
-            //// verifica che la directory esiste 
-            //if (!Directory.Exists(textBoxDestinazione.Text))
-            //    return;
-
-            //// Crea la lista delle sub directory
-            //string[] ListaSubDir = Directory.GetDirectories(textBoxDestinazione.Text);
-
-            ////this.groupBox1.SuspendLayout();
-            ////this.SuspendLayout();
-
-            //checkBox5.Visible = false;
-            //checkBox1.Visible = false;
-            //checkBox2.Visible = false;
-            //checkBox3.Visible = false;
-            //checkBox4.Visible = false;
-
-            //// crea lista nomi sub dir
-            //List<string> ListaNomiSubDir = new List<string>();
-            //foreach (var path in ListaSubDir)
-            //{
-            //    // estrae il nome della sub directory
-            //    string[] campi = path.Split('\\');
-            //    string nome = campi[campi.Length - 1];
-            //    ListaNomiSubDir.Add(nome);
-
-            //    // crea check box per la sub directory
-            //    //CheckBox checkBox = new CheckBox();
-            //    checkBox.Name = nome;
-            //    checkBox.Text = "Dinamico: " + nome;
-            //    checkBox.Location = checkBox1.Location;
-            //    checkBox.Size = checkBox1.Size;
-            //    checkBox.Invalidate();
-
-
-
-            //    //ListacheckboxSubDir.Add(checkBox);
-            //    //groupBox1.Controls.Add(checkBox);
-            //    //this.groupBox1.Controls.Add(this.checkBox5);
-            //    this.Controls.Add(checkBox);
-
-
+            // verifica che la directory esiste 
+            if (!Directory.Exists(PathDirDestinazione))
+            {
+                PathDirDestinazione = null;
+                return;
             }
+
+
+            // Crea la lista delle sub directory
+            string [] listaSubDir = Directory.GetDirectories(PathDirDestinazione);
+
+
+            // inizia aggiornamnto tree view
+            treeViewDestinazione.BeginUpdate();
+
+            // Azzera Tree view
+            treeViewDestinazione.Nodes.Clear();
+
+            // creiamo il nodo base
+            TreeNode nodoBase = new TreeNode("Destinazione");
+            treeViewDestinazione.Nodes.Add(nodoBase);
+
+            // Aggiunge un nodo per ogni subdirectory
+            foreach (var subDir in listaSubDir)
+            {
+                AggiungiNodo(subDir, ref nodoBase, 1);
+
+                //// estrae il nome della sub directory
+                //string[] campi = subDir.Split('\\');
+                //string nome = campi[campi.Length - 1];
+                
+                //// crea il nodo
+                //TreeNode nodo = new TreeNode(nome);
+                //nodoBase.Nodes.Add(nodo);
+            }
+
+            // Espandi il sommario
+            treeViewDestinazione.ExpandAll();
+
+            // termina aggiornamnto
+            treeViewDestinazione.EndUpdate();
+
+        }
+        /// <summary>
+        /// Aggiunge un nodo
+        /// </summary>
+        /// <param name="pathDir"></param>
+        /// <param name="nodoBase"></param>
+        /// <param name="livello"></param>
+        private void AggiungiNodo(string pathDir, ref TreeNode nodoBase, int livello)
+        {
+            // estrae il nome della sub directory
+            string[] campi = pathDir.Split('\\');
+            string nome = campi[campi.Length - 1];
+
+            // crea il nodo
+            TreeNode nodo = new TreeNode(nome);
+            nodoBase.Nodes.Add(nodo);
+
+            // verifica se ha raggiunto il livello di massima indentazione
+            if (livello >= MaxLivello)
+            {
+                return;
+            }
+
+
+            // Crea la lista delle sub directory
+            try
+            { 
+                string[] listaSubDir = Directory.GetDirectories(pathDir);   
+
+
+                // Aggiunge un nodo per ogni subdirectory
+                foreach (var subDir in listaSubDir)
+                {
+                    AggiungiNodo(subDir, ref nodo, ++livello);
+
+                }
+            }  
+            catch (Exception ex) 
+            {
+                return;
+            }
+        }
         /// <summary>
         /// il testo della destinazione é cambiato
         /// </summary>

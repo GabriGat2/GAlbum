@@ -46,16 +46,16 @@
             this.butSorgente = new System.Windows.Forms.Button();
             this.butDestinazione = new System.Windows.Forms.Button();
             this.splitContainer1B2 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer1B2A3 = new System.Windows.Forms.SplitContainer();
+            this.groupBoxSorgente = new System.Windows.Forms.GroupBox();
+            this.groupBoxDestinazione = new System.Windows.Forms.GroupBox();
+            this.treeViewDestinazione = new System.Windows.Forms.TreeView();
             this.splitContainer1B2B3 = new System.Windows.Forms.SplitContainer();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.textBoxPathFoto = new System.Windows.Forms.TextBox();
             this.butPrecedente = new System.Windows.Forms.Button();
             this.butApri = new System.Windows.Forms.Button();
             this.butSuccessiva = new System.Windows.Forms.Button();
-            this.splitContainer1B2A3 = new System.Windows.Forms.SplitContainer();
-            this.groupBoxDestinazione = new System.Windows.Forms.GroupBox();
-            this.groupBoxSorgente = new System.Windows.Forms.GroupBox();
-            this.treeViewDestinazione = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -65,16 +65,16 @@
             this.splitContainer1B2.Panel1.SuspendLayout();
             this.splitContainer1B2.Panel2.SuspendLayout();
             this.splitContainer1B2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1B2B3)).BeginInit();
-            this.splitContainer1B2B3.Panel1.SuspendLayout();
-            this.splitContainer1B2B3.Panel2.SuspendLayout();
-            this.splitContainer1B2B3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1B2A3)).BeginInit();
             this.splitContainer1B2A3.Panel1.SuspendLayout();
             this.splitContainer1B2A3.Panel2.SuspendLayout();
             this.splitContainer1B2A3.SuspendLayout();
             this.groupBoxDestinazione.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1B2B3)).BeginInit();
+            this.splitContainer1B2B3.Panel1.SuspendLayout();
+            this.splitContainer1B2B3.Panel2.SuspendLayout();
+            this.splitContainer1B2B3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -161,6 +161,65 @@
             this.splitContainer1B2.SplitterDistance = 296;
             this.splitContainer1B2.TabIndex = 0;
             // 
+            // splitContainer1B2A3
+            // 
+            this.splitContainer1B2A3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1B2A3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1B2A3.Name = "splitContainer1B2A3";
+            // 
+            // splitContainer1B2A3.Panel1
+            // 
+            this.splitContainer1B2A3.Panel1.Controls.Add(this.groupBoxSorgente);
+            // 
+            // splitContainer1B2A3.Panel2
+            // 
+            this.splitContainer1B2A3.Panel2.Controls.Add(this.groupBoxDestinazione);
+            this.splitContainer1B2A3.Size = new System.Drawing.Size(296, 632);
+            this.splitContainer1B2A3.TabIndex = 0;
+            // 
+            // groupBoxSorgente
+            // 
+            this.groupBoxSorgente.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxSorgente.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxSorgente.Name = "groupBoxSorgente";
+            this.groupBoxSorgente.Size = new System.Drawing.Size(50, 632);
+            this.groupBoxSorgente.TabIndex = 0;
+            this.groupBoxSorgente.TabStop = false;
+            this.groupBoxSorgente.Text = "Sorgente";
+            // 
+            // groupBoxDestinazione
+            // 
+            this.groupBoxDestinazione.Controls.Add(this.treeViewDestinazione);
+            this.groupBoxDestinazione.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxDestinazione.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxDestinazione.Name = "groupBoxDestinazione";
+            this.groupBoxDestinazione.Size = new System.Drawing.Size(242, 632);
+            this.groupBoxDestinazione.TabIndex = 0;
+            this.groupBoxDestinazione.TabStop = false;
+            this.groupBoxDestinazione.Text = "Destinazione";
+            // 
+            // treeViewDestinazione
+            // 
+            this.treeViewDestinazione.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewDestinazione.Location = new System.Drawing.Point(3, 16);
+            this.treeViewDestinazione.Name = "treeViewDestinazione";
+            treeNode1.Name = "Nodo1";
+            treeNode1.Text = "Nodo1";
+            treeNode2.Name = "Nodo2";
+            treeNode2.Text = "Nodo2";
+            treeNode3.Name = "Nodo5";
+            treeNode3.Text = "Nodo5";
+            treeNode4.Name = "Nodo4";
+            treeNode4.Text = "Nodo4";
+            treeNode5.Name = "Nodo3";
+            treeNode5.Text = "Nodo3";
+            treeNode6.Name = "Nodo0";
+            treeNode6.Text = "Nodo0";
+            this.treeViewDestinazione.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode6});
+            this.treeViewDestinazione.Size = new System.Drawing.Size(236, 613);
+            this.treeViewDestinazione.TabIndex = 0;
+            // 
             // splitContainer1B2B3
             // 
             this.splitContainer1B2B3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -229,66 +288,6 @@
             this.butSuccessiva.UseVisualStyleBackColor = true;
             this.butSuccessiva.Click += new System.EventHandler(this.butSuccessiva_Click);
             // 
-            // splitContainer1B2A3
-            // 
-            this.splitContainer1B2A3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1B2A3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1B2A3.Name = "splitContainer1B2A3";
-            // 
-            // splitContainer1B2A3.Panel1
-            // 
-            this.splitContainer1B2A3.Panel1.Controls.Add(this.groupBoxSorgente);
-            // 
-            // splitContainer1B2A3.Panel2
-            // 
-            this.splitContainer1B2A3.Panel2.Controls.Add(this.groupBoxDestinazione);
-            this.splitContainer1B2A3.Size = new System.Drawing.Size(296, 632);
-            this.splitContainer1B2A3.SplitterDistance = 145;
-            this.splitContainer1B2A3.TabIndex = 0;
-            // 
-            // groupBoxDestinazione
-            // 
-            this.groupBoxDestinazione.Controls.Add(this.treeViewDestinazione);
-            this.groupBoxDestinazione.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxDestinazione.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxDestinazione.Name = "groupBoxDestinazione";
-            this.groupBoxDestinazione.Size = new System.Drawing.Size(147, 632);
-            this.groupBoxDestinazione.TabIndex = 0;
-            this.groupBoxDestinazione.TabStop = false;
-            this.groupBoxDestinazione.Text = "Destinazione";
-            // 
-            // groupBoxSorgente
-            // 
-            this.groupBoxSorgente.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxSorgente.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxSorgente.Name = "groupBoxSorgente";
-            this.groupBoxSorgente.Size = new System.Drawing.Size(145, 632);
-            this.groupBoxSorgente.TabIndex = 0;
-            this.groupBoxSorgente.TabStop = false;
-            this.groupBoxSorgente.Text = "Sorgente";
-            // 
-            // treeViewDestinazione
-            // 
-            this.treeViewDestinazione.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewDestinazione.Location = new System.Drawing.Point(3, 16);
-            this.treeViewDestinazione.Name = "treeViewDestinazione";
-            treeNode1.Name = "Nodo1";
-            treeNode1.Text = "Nodo1";
-            treeNode2.Name = "Nodo2";
-            treeNode2.Text = "Nodo2";
-            treeNode3.Name = "Nodo5";
-            treeNode3.Text = "Nodo5";
-            treeNode4.Name = "Nodo4";
-            treeNode4.Text = "Nodo4";
-            treeNode5.Name = "Nodo3";
-            treeNode5.Text = "Nodo3";
-            treeNode6.Name = "Nodo0";
-            treeNode6.Text = "Nodo0";
-            this.treeViewDestinazione.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6});
-            this.treeViewDestinazione.Size = new System.Drawing.Size(141, 613);
-            this.treeViewDestinazione.TabIndex = 0;
-            // 
             // FormSelezioneFoto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -307,17 +306,17 @@
             this.splitContainer1B2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1B2)).EndInit();
             this.splitContainer1B2.ResumeLayout(false);
+            this.splitContainer1B2A3.Panel1.ResumeLayout(false);
+            this.splitContainer1B2A3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1B2A3)).EndInit();
+            this.splitContainer1B2A3.ResumeLayout(false);
+            this.groupBoxDestinazione.ResumeLayout(false);
             this.splitContainer1B2B3.Panel1.ResumeLayout(false);
             this.splitContainer1B2B3.Panel2.ResumeLayout(false);
             this.splitContainer1B2B3.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1B2B3)).EndInit();
             this.splitContainer1B2B3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.splitContainer1B2A3.Panel1.ResumeLayout(false);
-            this.splitContainer1B2A3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1B2A3)).EndInit();
-            this.splitContainer1B2A3.ResumeLayout(false);
-            this.groupBoxDestinazione.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
