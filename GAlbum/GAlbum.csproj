@@ -58,6 +58,7 @@
     <Compile Include="CDevImmagine.cs" />
     <Compile Include="CDevImmagine_Magic.cs" />
     <Compile Include="CImmagine.cs" />
+    <Compile Include="CInfoDirFoto.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -38,7 +39,7 @@ namespace GAlbum
         /// <summary>
         /// massimo livello di indentazione
         /// </summary>
-        private int MaxLivello = 3;
+        private int MaxLivello = 2;
         /// <summary>
         /// costruttore
         /// </summary>
@@ -174,12 +175,12 @@ namespace GAlbum
         /// <param name="livello"></param>
         private void AggiungiNodo(string pathDir, ref TreeNode nodoBase, int livello)
         {
-            // estrae il nome della sub directory
-            string[] campi = pathDir.Split('\\');
-            string nome = campi[campi.Length - 1];
+            // crea classe info dir foto
+            CInfoDirFoto info = new CInfoDirFoto(pathDir);
 
             // crea il nodo
-            TreeNode nodo = new TreeNode(nome);
+            TreeNode nodo = new TreeNode(info.Nome);
+            nodo.Tag = info;
             nodoBase.Nodes.Add(nodo);
 
             // verifica se ha raggiunto il livello di massima indentazione
@@ -293,5 +294,26 @@ namespace GAlbum
 
             MostraFoto(fotoSrcList[idFotoSrcList], ref butSuccessiva);
         }
+        /// <summary>
+        /// Estrae il nodo selezionato
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeViewDestinazione_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            // recuprea il nodo selezionato 
+            TreeNode nodo = treeViewDestinazione.SelectedNode;
+
+            // Estrae le info della classe 
+            CInfoDirFoto info = (CInfoDirFoto) nodo.Tag;
+
+            // stampa il path della directory 
+            String path = info.Path;
+            textBoxDebug.Text = path;
+
+            // commuta la selezione
+            info.CommutaSelezione(ref nodo);
+        }
+
     }
 }
