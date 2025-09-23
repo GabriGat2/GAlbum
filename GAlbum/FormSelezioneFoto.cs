@@ -5,7 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.ComTypes;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -41,6 +43,10 @@ namespace GAlbum
         /// </summary>
         private int MaxLivello = 2;
         /// <summary>
+        /// Nodo sorgente selezionato
+        /// </summary>
+        private CInfoDirFoto InfoNodoSorgenteSelezionato;
+        /// <summary>
         /// costruttore
         /// </summary>
         public FormSelezioneFoto()
@@ -59,6 +65,7 @@ namespace GAlbum
 
             // aggiorna la visualizzazione delle sub directory di destinazione
             //AggiornaDestinazione();
+            AggiornaSorgente();
         }
         /// <summary>
         /// Seleziona la directory sorgente 
@@ -183,6 +190,10 @@ namespace GAlbum
             nodo.Tag = info;
             nodoBase.Nodes.Add(nodo);
 
+            // Aggiungiamo il riferimento al nodo all'info
+            info.SetNodo(ref nodo);
+
+
             // verifica se ha raggiunto il livello di massima indentazione
             if (livello >= MaxLivello)
             {
@@ -225,8 +236,15 @@ namespace GAlbum
         /// <param name="e"></param>
         private void butApri_Click(object sender, EventArgs e)
         {
+            // Verifica se c'è un nodo sorgente selezionato
+            if (InfoNodoSorgenteSelezionato == null)
+            {
+                return ;
+            }   
+
+
             // stampa il path della directory
-            string path = textBoxSorgente.Text;
+            string path = InfoNodoSorgenteSelezionato.Path;
             textBoxPathFoto.Text = path;
 
             // carica la lista dei file contenuti nella directory
@@ -312,8 +330,101 @@ namespace GAlbum
             textBoxDebug.Text = path;
 
             // commuta la selezione
-            info.CommutaSelezione(ref nodo);
+            info.CommutaSelezione();
         }
+        /// <summary>
+        /// aggiorna le Sorgenti, cioé visualizza le sotto directory contenute in sorgente
+        /// </summary>
+        private void AggiornaSorgente()
+        {
+            // assegna la directory sorgente
+            PathDirSorgente = textBoxSorgente.Text;
 
+            // verifica che la directory esiste 
+            if (!Directory.Exists(PathDirSorgente))
+            {
+                PathDirSorgente = null;
+                return;
+            }
+
+            // Crea la lista delle sub directory
+            string[] listaSubDir = Directory.GetDirectories(PathDirSorgente);
+
+            // annulla riferimento InfoNodoSorgenteSelezionato
+            InfoNodoSorgenteSelezionato = null;
+
+
+            // inizia aggiornamnto tree view
+            treeViewSorgente.BeginUpdate();
+
+            // Azzera Tree view
+            treeViewSorgente.Nodes.Clear();
+
+            // creiamo il nodo base
+            TreeNode nodoBase = new TreeNode("Sorgente");
+            treeViewSorgente.Nodes.Add(nodoBase);
+
+            // Aggiunge un nodo per ogni subdirectory
+            foreach (var subDir in listaSubDir)
+            {
+                AggiungiNodo(subDir, ref nodoBase, 1);
+
+            }
+
+            // Espandi il sommario
+            treeViewSorgente.ExpandAll();
+
+            // termina aggiornamnto
+            treeViewSorgente.EndUpdate();
+
+        }
+        /// <summary>
+        /// cambiato il path di sorgente
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxSorgente_TextChanged(object sender, EventArgs e)
+        {
+            // aggiorna la visualizzazione delle sub directory sorgente
+            AggiornaSorgente();
+        }
+        /// <summary>
+        ///  estrae nodo selezionato 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeViewSorgente_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            // recuprea il nodo selezionato 
+            TreeNode nodo = treeViewSorgente.SelectedNode;
+
+            // Estrae le info della classe 
+            CInfoDirFoto info = (CInfoDirFoto)nodo.Tag;
+
+            // aggiorna nodo sorgente selezionato 
+            AggiornaNodoSorgenteSelezionato(ref info);
+
+            //     // commuta la selezione
+            //info.CommutaSelezione();
+        }
+        /// <summary>
+        /// Aggiorna il nodo sorgente selezionato 
+        /// </summary>
+        /// <param name="infoNodo"></param>
+        private void AggiornaNodoSorgenteSelezionato(ref CInfoDirFoto infoNodo)
+        {
+            // Verifica se il nodo sorgente é assegnato
+            if (InfoNodoSorgenteSelezionato != null)
+            {
+                InfoNodoSorgenteSelezionato.Selezione = false;
+            }
+
+            // aggiona il nodo sorgente selezionato
+            InfoNodoSorgenteSelezionato = infoNodo;
+
+            // seleziona il nodo
+            InfoNodoSorgenteSelezionato.Selezione = true;  
+
+        }
     }
 }

@@ -25,14 +25,20 @@ namespace GAlbum
         /// <summary>
         /// directory selezionata
         /// </summary>
-        public bool Selezione { get => selezione; set => selezione = value; }
+        public bool Selezione { get => selezione; set => ImpostaSelezione(value); }
         private bool selezione;
+        /// <summary>
+        /// Nodo associato all'info
+        /// </summary>
+        //public TreeNode Nodo { get => nodo; set => nodo = value; }
+        private TreeNode nodo;
         /// <summary>
         /// costruttore
         /// </summary>
         public CInfoDirFoto(string path)
         {
             AssegnaPath(path);
+            nodo = null;
         }
         /// <summary>
         /// assegna il path, il nome e resetta la selezione
@@ -55,10 +61,36 @@ namespace GAlbum
         /// commuta lo stato di selezione
         /// </summary>
         /// <param name="nodo"></param>
-        public void CommutaSelezione(ref TreeNode nodo)
+        public void CommutaSelezione(/* ref TreeNode nodo*/)
         {
             // commuta selezione 
             selezione = !selezione;
+
+            // aggiorna stato nodo 
+            AggiornaStatoNodo();
+        }
+        /// <summary>
+        /// imposta il valore di selezionato 
+        /// </summary>
+        /// <param name="selezione"></param>
+        
+        private void ImpostaSelezione(bool selezione)
+        {
+            // imposta nuovo valore di selezionato 
+            this.selezione = selezione;
+
+            // aggiorna stato nodo 
+            AggiornaStatoNodo();
+        }
+
+        // aggiorna lo stato del nodo
+        private void AggiornaStatoNodo()
+        {
+            // verifica che il riferimento al nodo sia impostato 
+            if (this.nodo == null)
+            {
+                return;
+            }
 
             // mostra la selezione 
             if (selezione)
@@ -70,8 +102,16 @@ namespace GAlbum
             {
                 nodo.Text = nome;
                 nodo.BackColor = Color.White;
-            }    
+            }
 
+        }
+        /// <summary>
+        /// Aggiunge il riferimento al nodo associato
+        /// </summary>
+        /// <param name="nodo"></param>
+        public void SetNodo(ref TreeNode nodo)
+        {
+            this.nodo = nodo;
         }
 
     }
