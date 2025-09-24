@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Nodo1");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Nodo2");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Nodo5");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Nodo4", new System.Windows.Forms.TreeNode[] {
-            treeNode15});
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Nodo3", new System.Windows.Forms.TreeNode[] {
-            treeNode16});
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Nodo0", new System.Windows.Forms.TreeNode[] {
-            treeNode13,
-            treeNode14,
-            treeNode17});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Nodo1");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Nodo2");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Nodo5");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Nodo4", new System.Windows.Forms.TreeNode[] {
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Nodo3", new System.Windows.Forms.TreeNode[] {
+            treeNode4});
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Nodo0", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode5});
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBoxPath = new System.Windows.Forms.GroupBox();
             this.textBoxSorgente = new System.Windows.Forms.TextBox();
@@ -48,6 +48,7 @@
             this.splitContainer1B2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer1B2A3 = new System.Windows.Forms.SplitContainer();
             this.groupBoxSorgente = new System.Windows.Forms.GroupBox();
+            this.treeViewSorgente = new System.Windows.Forms.TreeView();
             this.groupBoxDestinazione = new System.Windows.Forms.GroupBox();
             this.treeViewDestinazione = new System.Windows.Forms.TreeView();
             this.splitContainer1B2B3 = new System.Windows.Forms.SplitContainer();
@@ -57,7 +58,7 @@
             this.butPrecedente = new System.Windows.Forms.Button();
             this.butApri = new System.Windows.Forms.Button();
             this.butSuccessiva = new System.Windows.Forms.Button();
-            this.treeViewSorgente = new System.Windows.Forms.TreeView();
+            this.textBoxDebug2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -100,9 +101,11 @@
             // 
             // groupBoxPath
             // 
+            this.groupBoxPath.Controls.Add(this.textBoxDebug2);
             this.groupBoxPath.Controls.Add(this.textBoxSorgente);
             this.groupBoxPath.Controls.Add(this.textBoxDestinazione);
             this.groupBoxPath.Controls.Add(this.butSorgente);
+            this.groupBoxPath.Controls.Add(this.butApri);
             this.groupBoxPath.Controls.Add(this.butDestinazione);
             this.groupBoxPath.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxPath.Location = new System.Drawing.Point(0, 0);
@@ -114,25 +117,25 @@
             // 
             // textBoxSorgente
             // 
-            this.textBoxSorgente.Location = new System.Drawing.Point(106, 29);
+            this.textBoxSorgente.Location = new System.Drawing.Point(172, 29);
             this.textBoxSorgente.Name = "textBoxSorgente";
-            this.textBoxSorgente.Size = new System.Drawing.Size(772, 20);
+            this.textBoxSorgente.Size = new System.Drawing.Size(706, 20);
             this.textBoxSorgente.TabIndex = 10;
             this.textBoxSorgente.TextChanged += new System.EventHandler(this.textBoxSorgente_TextChanged);
             // 
             // textBoxDestinazione
             // 
-            this.textBoxDestinazione.Location = new System.Drawing.Point(106, 59);
+            this.textBoxDestinazione.Location = new System.Drawing.Point(172, 55);
             this.textBoxDestinazione.Name = "textBoxDestinazione";
-            this.textBoxDestinazione.Size = new System.Drawing.Size(772, 20);
+            this.textBoxDestinazione.Size = new System.Drawing.Size(706, 20);
             this.textBoxDestinazione.TabIndex = 12;
             this.textBoxDestinazione.TextChanged += new System.EventHandler(this.textBoxDestinazione_TextChanged);
             // 
             // butSorgente
             // 
-            this.butSorgente.Location = new System.Drawing.Point(10, 27);
+            this.butSorgente.Location = new System.Drawing.Point(80, 27);
             this.butSorgente.Name = "butSorgente";
-            this.butSorgente.Size = new System.Drawing.Size(75, 23);
+            this.butSorgente.Size = new System.Drawing.Size(86, 23);
             this.butSorgente.TabIndex = 9;
             this.butSorgente.Text = "Sorgente";
             this.butSorgente.UseVisualStyleBackColor = true;
@@ -140,9 +143,9 @@
             // 
             // butDestinazione
             // 
-            this.butDestinazione.Location = new System.Drawing.Point(10, 57);
+            this.butDestinazione.Location = new System.Drawing.Point(80, 56);
             this.butDestinazione.Name = "butDestinazione";
-            this.butDestinazione.Size = new System.Drawing.Size(75, 23);
+            this.butDestinazione.Size = new System.Drawing.Size(86, 23);
             this.butDestinazione.TabIndex = 11;
             this.butDestinazione.Text = "Destinazione";
             this.butDestinazione.UseVisualStyleBackColor = true;
@@ -193,6 +196,15 @@
             this.groupBoxSorgente.TabStop = false;
             this.groupBoxSorgente.Text = "Sorgente";
             // 
+            // treeViewSorgente
+            // 
+            this.treeViewSorgente.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewSorgente.Location = new System.Drawing.Point(3, 16);
+            this.treeViewSorgente.Name = "treeViewSorgente";
+            this.treeViewSorgente.Size = new System.Drawing.Size(139, 613);
+            this.treeViewSorgente.TabIndex = 0;
+            this.treeViewSorgente.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewSorgente_AfterSelect);
+            // 
             // groupBoxDestinazione
             // 
             this.groupBoxDestinazione.Controls.Add(this.treeViewDestinazione);
@@ -209,20 +221,20 @@
             this.treeViewDestinazione.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewDestinazione.Location = new System.Drawing.Point(3, 16);
             this.treeViewDestinazione.Name = "treeViewDestinazione";
-            treeNode13.Name = "Nodo1";
-            treeNode13.Text = "Nodo1";
-            treeNode14.Name = "Nodo2";
-            treeNode14.Text = "Nodo2";
-            treeNode15.Name = "Nodo5";
-            treeNode15.Text = "Nodo5";
-            treeNode16.Name = "Nodo4";
-            treeNode16.Text = "Nodo4";
-            treeNode17.Name = "Nodo3";
-            treeNode17.Text = "Nodo3";
-            treeNode18.Name = "Nodo0";
-            treeNode18.Text = "Nodo0";
+            treeNode1.Name = "Nodo1";
+            treeNode1.Text = "Nodo1";
+            treeNode2.Name = "Nodo2";
+            treeNode2.Text = "Nodo2";
+            treeNode3.Name = "Nodo5";
+            treeNode3.Text = "Nodo5";
+            treeNode4.Name = "Nodo4";
+            treeNode4.Text = "Nodo4";
+            treeNode5.Name = "Nodo3";
+            treeNode5.Text = "Nodo3";
+            treeNode6.Name = "Nodo0";
+            treeNode6.Text = "Nodo0";
             this.treeViewDestinazione.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode18});
+            treeNode6});
             this.treeViewDestinazione.Size = new System.Drawing.Size(141, 613);
             this.treeViewDestinazione.TabIndex = 0;
             this.treeViewDestinazione.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDestinazione_AfterSelect);
@@ -243,7 +255,6 @@
             this.splitContainer1B2B3.Panel2.Controls.Add(this.textBoxDebug);
             this.splitContainer1B2B3.Panel2.Controls.Add(this.textBoxPathFoto);
             this.splitContainer1B2B3.Panel2.Controls.Add(this.butPrecedente);
-            this.splitContainer1B2B3.Panel2.Controls.Add(this.butApri);
             this.splitContainer1B2B3.Panel2.Controls.Add(this.butSuccessiva);
             this.splitContainer1B2B3.Size = new System.Drawing.Size(590, 632);
             this.splitContainer1B2B3.SplitterDistance = 560;
@@ -276,7 +287,7 @@
             // 
             // butPrecedente
             // 
-            this.butPrecedente.Location = new System.Drawing.Point(93, 33);
+            this.butPrecedente.Location = new System.Drawing.Point(12, 35);
             this.butPrecedente.Name = "butPrecedente";
             this.butPrecedente.Size = new System.Drawing.Size(75, 23);
             this.butPrecedente.TabIndex = 7;
@@ -286,9 +297,9 @@
             // 
             // butApri
             // 
-            this.butApri.Location = new System.Drawing.Point(12, 33);
+            this.butApri.Location = new System.Drawing.Point(10, 27);
             this.butApri.Name = "butApri";
-            this.butApri.Size = new System.Drawing.Size(75, 23);
+            this.butApri.Size = new System.Drawing.Size(63, 23);
             this.butApri.TabIndex = 5;
             this.butApri.Text = "Apri";
             this.butApri.UseVisualStyleBackColor = true;
@@ -296,7 +307,7 @@
             // 
             // butSuccessiva
             // 
-            this.butSuccessiva.Location = new System.Drawing.Point(174, 33);
+            this.butSuccessiva.Location = new System.Drawing.Point(93, 35);
             this.butSuccessiva.Name = "butSuccessiva";
             this.butSuccessiva.Size = new System.Drawing.Size(75, 23);
             this.butSuccessiva.TabIndex = 6;
@@ -304,14 +315,12 @@
             this.butSuccessiva.UseVisualStyleBackColor = true;
             this.butSuccessiva.Click += new System.EventHandler(this.butSuccessiva_Click);
             // 
-            // treeViewSorgente
+            // textBoxDebug2
             // 
-            this.treeViewSorgente.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewSorgente.Location = new System.Drawing.Point(3, 16);
-            this.treeViewSorgente.Name = "treeViewSorgente";
-            this.treeViewSorgente.Size = new System.Drawing.Size(139, 613);
-            this.treeViewSorgente.TabIndex = 0;
-            this.treeViewSorgente.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewSorgente_AfterSelect);
+            this.textBoxDebug2.Location = new System.Drawing.Point(13, 60);
+            this.textBoxDebug2.Name = "textBoxDebug2";
+            this.textBoxDebug2.Size = new System.Drawing.Size(59, 20);
+            this.textBoxDebug2.TabIndex = 13;
             // 
             // FormSelezioneFoto
             // 
@@ -368,5 +377,6 @@
         private System.Windows.Forms.TreeView treeViewDestinazione;
         private System.Windows.Forms.TextBox textBoxDebug;
         private System.Windows.Forms.TreeView treeViewSorgente;
+        private System.Windows.Forms.TextBox textBoxDebug2;
     }
 }

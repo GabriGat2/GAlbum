@@ -18,6 +18,9 @@ namespace GAlbum
 {
     public partial class FormSelezioneFoto : Form
     {
+        // ==================================================================================================================
+        // Proprietà
+        // ==================================================================================================================
         /// <summary>
         /// lista delle foto sorgente
         /// </summary>
@@ -47,6 +50,15 @@ namespace GAlbum
         /// </summary>
         private CInfoDirFoto InfoNodoSorgenteSelezionato;
         /// <summary>
+        /// stato del form:
+        /// False = Copia delle foto non attiva
+        /// true = Copia delle foto  attiva
+        /// </summary>
+        private bool Stato;
+        // ==================================================================================================================
+        // Metodi
+        // ==================================================================================================================
+        /// <summary>
         /// costruttore
         /// </summary>
         public FormSelezioneFoto()
@@ -59,8 +71,11 @@ namespace GAlbum
         /// </summary>
         private void InizializzaClasse()
         {
+            // Inizializza lo stato del form
+            AggiornaStato(false);
+
             // DEBUG
-            textBoxSorgente.Text = "E:\\Angelo\\Prj\\GAlbum\\Foto\\Sorgente\\Heic";
+            textBoxSorgente.Text = "E:\\Angelo\\Prj\\GAlbum\\Foto\\Sorgente";
             textBoxDestinazione.Text = "E:\\Angelo\\Prj\\GAlbum\\Foto\\Destinazione";
 
             // aggiorna la visualizzazione delle sub directory di destinazione
@@ -236,22 +251,30 @@ namespace GAlbum
         /// <param name="e"></param>
         private void butApri_Click(object sender, EventArgs e)
         {
-            // Verifica se c'è un nodo sorgente selezionato
-            if (InfoNodoSorgenteSelezionato == null)
+            // commuta stato
+            AggiornaStato(!Stato);
+
+            // Verifica che lo stato sia attivo
+            if (Stato)
             {
-                return ;
-            }   
+
+                // Verifica se c'è un nodo sorgente selezionato
+                if (InfoNodoSorgenteSelezionato == null)
+                {
+                    return;
+                }
 
 
-            // stampa il path della directory
-            string path = InfoNodoSorgenteSelezionato.Path;
-            textBoxPathFoto.Text = path;
+                // stampa il path della directory
+                string path = InfoNodoSorgenteSelezionato.Path;
+                textBoxPathFoto.Text = path;
 
-            // carica la lista dei file contenuti nella directory
-            fotoSrcList = Directory.GetFiles(path, "*.*");
-            idFotoSrcList = 0;
+                // carica la lista dei file contenuti nella directory
+                fotoSrcList = Directory.GetFiles(path, "*.*");
+                idFotoSrcList = 0;
 
-            MostraFoto(fotoSrcList[0], ref butApri);
+                MostraFoto(fotoSrcList[0], ref butApri);
+            }
         }
         /// <summary>
         /// Mostra la foto selezionata
@@ -395,6 +418,11 @@ namespace GAlbum
         /// <param name="e"></param>
         private void treeViewSorgente_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            // verifica lo stato del form
+            if (Stato)
+                return;
+
+
             // recuprea il nodo selezionato 
             TreeNode nodo = treeViewSorgente.SelectedNode;
 
@@ -424,7 +452,53 @@ namespace GAlbum
 
             // seleziona il nodo
             InfoNodoSorgenteSelezionato.Selezione = true;  
+            
 
         }
-    }
-}
+        /// <summary>
+        /// aggiorna lo stato del form e gli oggetti ad esso collegati 
+        /// </summary>
+        /// <param name="stato"></param>
+        private void AggiornaStato(bool newStato)
+        {
+            //aggiorna lo stato del form
+            this.Stato = newStato;
+
+            // Debug: mostra stato
+            textBoxDebug2.Text = Stato.ToString();
+
+            // button Apri
+            if (Stato)
+            {
+                butApri.Text = "Chiudi";
+            }
+            else
+            {
+                butApri.Text = "Apri";
+            }
+
+            // button Sorgente
+            butSorgente.Enabled = !Stato;
+            textBoxSorgente.ReadOnly = Stato;
+
+            // button Detinazione
+            butDestinazione.Enabled = !Stato;
+            textBoxDestinazione .ReadOnly = Stato;
+
+            // button Precedente
+            butPrecedente.Enabled = Stato;
+
+            // button Successiva
+            butSuccessiva.Enabled = Stato;
+
+            //pictureBox1
+            if (Stato)
+            {
+                pictureBox1.Image = null;
+
+            }
+
+
+        }
+    } // fine della classe
+}// fine del name scope
