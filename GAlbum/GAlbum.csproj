@@ -59,6 +59,13 @@
     <Compile Include="CDevImmagine_Magic.cs" />
     <Compile Include="CImmagine.cs" />
     <Compile Include="CInfoDirFoto.cs" />
+    <Compile Include="CInfoTreeView.cs" />
+    <Compile Include="FormConfigTreeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConfigTreeView.Designer.cs">
+      <DependentUpon>FormConfigTreeView.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +87,9 @@
     <Compile Include="GstErrori.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormConfigTreeView.resx">
+      <DependentUpon>FormConfigTreeView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>

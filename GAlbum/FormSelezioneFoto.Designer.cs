@@ -41,9 +41,11 @@
             treeNode5});
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBoxPath = new System.Windows.Forms.GroupBox();
+            this.textBoxDebug2 = new System.Windows.Forms.TextBox();
             this.textBoxSorgente = new System.Windows.Forms.TextBox();
             this.textBoxDestinazione = new System.Windows.Forms.TextBox();
             this.butSorgente = new System.Windows.Forms.Button();
+            this.butApri = new System.Windows.Forms.Button();
             this.butDestinazione = new System.Windows.Forms.Button();
             this.splitContainer1B2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer1B2A3 = new System.Windows.Forms.SplitContainer();
@@ -56,9 +58,7 @@
             this.textBoxDebug = new System.Windows.Forms.TextBox();
             this.textBoxPathFoto = new System.Windows.Forms.TextBox();
             this.butPrecedente = new System.Windows.Forms.Button();
-            this.butApri = new System.Windows.Forms.Button();
             this.butSuccessiva = new System.Windows.Forms.Button();
-            this.textBoxDebug2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -115,6 +115,13 @@
             this.groupBoxPath.TabStop = false;
             this.groupBoxPath.Text = "Selezione di sorgente e destinazione";
             // 
+            // textBoxDebug2
+            // 
+            this.textBoxDebug2.Location = new System.Drawing.Point(13, 60);
+            this.textBoxDebug2.Name = "textBoxDebug2";
+            this.textBoxDebug2.Size = new System.Drawing.Size(59, 20);
+            this.textBoxDebug2.TabIndex = 13;
+            // 
             // textBoxSorgente
             // 
             this.textBoxSorgente.Location = new System.Drawing.Point(172, 29);
@@ -140,6 +147,16 @@
             this.butSorgente.Text = "Sorgente";
             this.butSorgente.UseVisualStyleBackColor = true;
             this.butSorgente.Click += new System.EventHandler(this.butSorgente_Click);
+            // 
+            // butApri
+            // 
+            this.butApri.Location = new System.Drawing.Point(10, 27);
+            this.butApri.Name = "butApri";
+            this.butApri.Size = new System.Drawing.Size(63, 23);
+            this.butApri.TabIndex = 5;
+            this.butApri.Text = "Apri";
+            this.butApri.UseVisualStyleBackColor = true;
+            this.butApri.Click += new System.EventHandler(this.butApri_Click);
             // 
             // butDestinazione
             // 
@@ -204,6 +221,7 @@
             this.treeViewSorgente.Size = new System.Drawing.Size(139, 613);
             this.treeViewSorgente.TabIndex = 0;
             this.treeViewSorgente.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewSorgente_AfterSelect);
+            this.treeViewSorgente.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeViewSorgente_MouseDoubleClick);
             // 
             // groupBoxDestinazione
             // 
@@ -295,16 +313,6 @@
             this.butPrecedente.UseVisualStyleBackColor = true;
             this.butPrecedente.Click += new System.EventHandler(this.butPrecedente_Click);
             // 
-            // butApri
-            // 
-            this.butApri.Location = new System.Drawing.Point(10, 27);
-            this.butApri.Name = "butApri";
-            this.butApri.Size = new System.Drawing.Size(63, 23);
-            this.butApri.TabIndex = 5;
-            this.butApri.Text = "Apri";
-            this.butApri.UseVisualStyleBackColor = true;
-            this.butApri.Click += new System.EventHandler(this.butApri_Click);
-            // 
             // butSuccessiva
             // 
             this.butSuccessiva.Location = new System.Drawing.Point(93, 35);
@@ -314,13 +322,6 @@
             this.butSuccessiva.Text = "Successiva";
             this.butSuccessiva.UseVisualStyleBackColor = true;
             this.butSuccessiva.Click += new System.EventHandler(this.butSuccessiva_Click);
-            // 
-            // textBoxDebug2
-            // 
-            this.textBoxDebug2.Location = new System.Drawing.Point(13, 60);
-            this.textBoxDebug2.Name = "textBoxDebug2";
-            this.textBoxDebug2.Size = new System.Drawing.Size(59, 20);
-            this.textBoxDebug2.TabIndex = 13;
             // 
             // FormSelezioneFoto
             // 

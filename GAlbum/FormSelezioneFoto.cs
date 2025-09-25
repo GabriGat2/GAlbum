@@ -164,22 +164,18 @@ namespace GAlbum
             // Azzera Tree view
             treeViewDestinazione.Nodes.Clear();
 
+            // crea classe info dir foto vuota
+            CInfoDirFoto info = new CInfoDirFoto("");
+
             // creiamo il nodo base
             TreeNode nodoBase = new TreeNode("Destinazione");
+            nodoBase.Tag = info;
             treeViewDestinazione.Nodes.Add(nodoBase);
 
             // Aggiunge un nodo per ogni subdirectory
             foreach (var subDir in listaSubDir)
             {
                 AggiungiNodo(subDir, ref nodoBase, 1);
-
-                //// estrae il nome della sub directory
-                //string[] campi = subDir.Split('\\');
-                //string nome = campi[campi.Length - 1];
-                
-                //// crea il nodo
-                //TreeNode nodo = new TreeNode(nome);
-                //nodoBase.Nodes.Add(nodo);
             }
 
             // Espandi il sommario
@@ -376,15 +372,18 @@ namespace GAlbum
             // annulla riferimento InfoNodoSorgenteSelezionato
             InfoNodoSorgenteSelezionato = null;
 
-
             // inizia aggiornamnto tree view
             treeViewSorgente.BeginUpdate();
 
             // Azzera Tree view
             treeViewSorgente.Nodes.Clear();
 
+            // crea classe info dir foto vuota
+            CInfoDirFoto info = new CInfoDirFoto("");
+
             // creiamo il nodo base
             TreeNode nodoBase = new TreeNode("Sorgente");
+            nodoBase.Tag = info;
             treeViewSorgente.Nodes.Add(nodoBase);
 
             // Aggiunge un nodo per ogni subdirectory
@@ -421,7 +420,6 @@ namespace GAlbum
             // verifica lo stato del form
             if (Stato)
                 return;
-
 
             // recuprea il nodo selezionato 
             TreeNode nodo = treeViewSorgente.SelectedNode;
@@ -492,10 +490,26 @@ namespace GAlbum
             butSuccessiva.Enabled = Stato;
 
             //pictureBox1
-            if (Stato)
+            if (!Stato)
             {
                 pictureBox1.Image = null;
+                textBoxPathFoto.Text = "";
+            }
 
+
+        }
+        /// <summary>
+        /// Doppio click suula tree view sorgente
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeViewSorgente_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            // verifica se é stato premuto il tasto destro
+            if (e.Button == MouseButtons.Right)
+            {
+                FormConfigTreeView formConfigTreeView = new FormConfigTreeView();
+                formConfigTreeView.ShowDialog();
             }
 
 
