@@ -55,6 +55,21 @@ namespace GAlbum
         /// true = Copia delle foto  attiva
         /// </summary>
         private bool Stato;
+        /// <summary>
+        /// Infro tree view Sorgente
+        /// </summary>
+        private CInfoTreeView InfoTWSorgente;
+        /// <summary>
+        /// Infro tree view Destinazione
+        /// </summary>
+        private CInfoTreeView InfoTWDestinazione;
+        // ==================================================================================================================
+        /// <summary>
+        /// Mette qui i refatoring generati automaticamente
+        /// </summary>
+        private bool mettiloQui;
+        public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
+
         // ==================================================================================================================
         // Metodi
         // ==================================================================================================================
@@ -74,6 +89,10 @@ namespace GAlbum
             // Inizializza lo stato del form
             AggiornaStato(false);
 
+            // CRea info tree view
+            InfoTWSorgente = new CInfoTreeView();
+            InfoTWDestinazione = new CInfoTreeView();
+
             // DEBUG
             textBoxSorgente.Text = "E:\\Angelo\\Prj\\GAlbum\\Foto\\Sorgente";
             textBoxDestinazione.Text = "E:\\Angelo\\Prj\\GAlbum\\Foto\\Destinazione";
@@ -81,6 +100,9 @@ namespace GAlbum
             // aggiorna la visualizzazione delle sub directory di destinazione
             //AggiornaDestinazione();
             AggiornaSorgente();
+
+
+            
         }
         /// <summary>
         /// Seleziona la directory sorgente 
@@ -195,6 +217,10 @@ namespace GAlbum
         {
             // crea classe info dir foto
             CInfoDirFoto info = new CInfoDirFoto(pathDir);
+
+            // verifichiamo se può essere aggiunta all'albero della tree vie
+            if (!InfoTWSorgente.NomeVisibile(info.Nome))
+                return;
 
             // crea il nodo
             TreeNode nodo = new TreeNode(info.Nome);
@@ -352,7 +378,7 @@ namespace GAlbum
             info.CommutaSelezione();
         }
         /// <summary>
-        /// aggiorna le Sorgenti, cioé visualizza le sotto directory contenute in sorgente
+        /// aggiorna Sorgenti, cioé visualizza le sotto directory contenute in sorgente
         /// </summary>
         private void AggiornaSorgente()
         {
