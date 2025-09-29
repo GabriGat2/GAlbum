@@ -534,11 +534,31 @@ namespace GAlbum
             // verifica se é stato premuto il tasto destro
             if (e.Button == MouseButtons.Right)
             {
-                FormConfigTreeView formConfigTreeView = new FormConfigTreeView();
+                FormConfigTreeView formConfigTreeView = new FormConfigTreeView(ref InfoTWSorgente);
+                formConfigTreeView.ShowDialog();
+
+                // aggiorna la treeview
+                AggiornaSorgente();
+
+            }
+
+        }
+        /// <summary>
+        /// Doppio click suula tree view destinazione
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeViewDestinazione_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            // verifica se é stato premuto il tasto destro
+            if (e.Button == MouseButtons.Right)
+            {
+                FormConfigTreeView formConfigTreeView = new FormConfigTreeView(ref InfoTWDestinazione);
                 formConfigTreeView.ShowDialog();
             }
 
-
+            // aggiorna la treeview
+            AggiornaDestinazione();
         }
     } // fine della classe
 }// fine del name scope
