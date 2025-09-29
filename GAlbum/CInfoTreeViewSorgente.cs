@@ -22,7 +22,11 @@ namespace GAlbum
         /// </summary>
         public CInfoTreeViewSorgente()
         {
-            
+            // Definisce il tipo della tree view
+            tipoTreeView = ETipoTreeView.Sorgente;
+
+            // Configurazione di default
+            MostraFoglie = true;
         }
     }// fine class CInfoTreeViewSorgente
 }// fine namespace GAlbum

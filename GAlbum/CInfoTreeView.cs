@@ -25,7 +25,7 @@ namespace GAlbum
         /// Tipo della treeView
         /// </summary>
         public ETipoTreeView TipoTreeView { get => tipoTreeView; /* set => tipoTreeView = value;*/ }
-        private ETipoTreeView tipoTreeView;
+        protected ETipoTreeView tipoTreeView;
         /// <summary>
         /// abilita la visualizzazione di un ramo
         /// </summary>

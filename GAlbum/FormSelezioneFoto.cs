@@ -90,8 +90,8 @@ namespace GAlbum
             AggiornaStato(false);
 
             // CRea info tree view
-            InfoTWSorgente = new CInfoTreeView();
-            InfoTWDestinazione = new CInfoTreeView();
+            InfoTWSorgente = new CInfoTreeViewSorgente ();
+            InfoTWDestinazione = new CInfoTreeViewDestinazione();
 
             // DEBUG
             textBoxSorgente.Text = "E:\\Angelo\\Prj\\GAlbum\\Foto\\Sorgente";
@@ -197,7 +197,7 @@ namespace GAlbum
             // Aggiunge un nodo per ogni subdirectory
             foreach (var subDir in listaSubDir)
             {
-                AggiungiNodo(subDir, ref nodoBase, 1);
+                AggiungiNodo(subDir, ref nodoBase, 1, ref InfoTWDestinazione);
             }
 
             // Espandi il sommario
@@ -213,13 +213,13 @@ namespace GAlbum
         /// <param name="pathDir"></param>
         /// <param name="nodoBase"></param>
         /// <param name="livello"></param>
-        private void AggiungiNodo(string pathDir, ref TreeNode nodoBase, int livello)
+        private void AggiungiNodo(string pathDir, ref TreeNode nodoBase, int livello, ref CInfoTreeView infoTW)
         {
             // crea classe info dir foto
             CInfoDirFoto info = new CInfoDirFoto(pathDir);
 
             // verifichiamo se può essere aggiunta all'albero della tree vie
-            if (!InfoTWSorgente.NomeVisibile(info.Nome))
+            if (!infoTW.NomeVisibile(info.Nome))
                 return;
 
             // crea il nodo
@@ -247,7 +247,7 @@ namespace GAlbum
                 // Aggiunge un nodo per ogni subdirectory
                 foreach (var subDir in listaSubDir)
                 {
-                    AggiungiNodo(subDir, ref nodo, ++livello);
+                    AggiungiNodo(subDir, ref nodo, ++livello,  ref infoTW);
 
                 }
             }  
@@ -415,7 +415,7 @@ namespace GAlbum
             // Aggiunge un nodo per ogni subdirectory
             foreach (var subDir in listaSubDir)
             {
-                AggiungiNodo(subDir, ref nodoBase, 1);
+                AggiungiNodo(subDir, ref nodoBase, 1, ref InfoTWSorgente);
 
             }
 

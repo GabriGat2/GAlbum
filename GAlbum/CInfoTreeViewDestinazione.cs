@@ -21,7 +21,11 @@ namespace GAlbum
         /// </summary>
         public CInfoTreeViewDestinazione()
         {
+            // Definisce il tipo della tree view
+            tipoTreeView = ETipoTreeView.Destinazione;
 
+            // Configurazione di default
+            MostraRami = true;
         }
     }// fine class CInfoTreeViewDestinazione
 }// fine namespace GAlbum
