@@ -92,10 +92,10 @@ namespace GAlbum
                 case "jpeg":
                 case "raw":
                     return true;
-                    break;
+             
                 default:
                     return false;
-                    break;
+                    
 
             }
 
