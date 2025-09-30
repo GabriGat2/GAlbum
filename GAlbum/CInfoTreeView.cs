@@ -58,6 +58,9 @@ namespace GAlbum
         {
             // Definisce il tipo della tree view
             tipoTreeView = ETipoTreeView.NonDefinito;
+
+            // setta i valori di default
+            RipristinaDefault();
         }
         /// <summary>
         /// Verifica se la directory puo essere visualizzata
@@ -99,7 +102,15 @@ namespace GAlbum
 
             }
 
-       }
-
+        }
+        /// <summary>
+        /// ripristina valori di default
+        /// </summary>
+        public virtual void RipristinaDefault()
+        {
+            mostraRami = false;
+            mostraFoglie = false;
+            mostraRamiRiservati = false;
+        }
     }// fine class CInfoTreeView
 }// fine namespace GAlbum

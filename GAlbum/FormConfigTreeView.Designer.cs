@@ -30,10 +30,11 @@
         {
             this.tabVisualizza = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.checkBoxRami = new System.Windows.Forms.CheckBox();
-            this.checkBoxFoglie = new System.Windows.Forms.CheckBox();
+            this.butDefault = new System.Windows.Forms.Button();
             this.checkBoxRamiRiservati = new System.Windows.Forms.CheckBox();
+            this.checkBoxFoglie = new System.Windows.Forms.CheckBox();
+            this.checkBoxRami = new System.Windows.Forms.CheckBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabVisualizza.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -51,6 +52,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.butDefault);
             this.tabPage1.Controls.Add(this.checkBoxRamiRiservati);
             this.tabPage1.Controls.Add(this.checkBoxFoglie);
             this.tabPage1.Controls.Add(this.checkBoxRami);
@@ -62,26 +64,26 @@
             this.tabPage1.Text = "Visualizza";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // butDefault
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(792, 424);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.butDefault.Location = new System.Drawing.Point(709, 393);
+            this.butDefault.Name = "butDefault";
+            this.butDefault.Size = new System.Drawing.Size(75, 23);
+            this.butDefault.TabIndex = 3;
+            this.butDefault.Text = "Default";
+            this.butDefault.UseVisualStyleBackColor = true;
+            this.butDefault.Click += new System.EventHandler(this.butDefault_Click);
             // 
-            // checkBoxRami
+            // checkBoxRamiRiservati
             // 
-            this.checkBoxRami.AutoSize = true;
-            this.checkBoxRami.Location = new System.Drawing.Point(29, 44);
-            this.checkBoxRami.Name = "checkBoxRami";
-            this.checkBoxRami.Size = new System.Drawing.Size(50, 17);
-            this.checkBoxRami.TabIndex = 0;
-            this.checkBoxRami.Text = "Rami";
-            this.checkBoxRami.UseVisualStyleBackColor = true;
-            this.checkBoxRami.CheckedChanged += new System.EventHandler(this.checkBoxRami_CheckedChanged);
+            this.checkBoxRamiRiservati.AutoSize = true;
+            this.checkBoxRamiRiservati.Location = new System.Drawing.Point(29, 125);
+            this.checkBoxRamiRiservati.Name = "checkBoxRamiRiservati";
+            this.checkBoxRamiRiservati.Size = new System.Drawing.Size(89, 17);
+            this.checkBoxRamiRiservati.TabIndex = 2;
+            this.checkBoxRamiRiservati.Text = "Rami riservati";
+            this.checkBoxRamiRiservati.UseVisualStyleBackColor = true;
+            this.checkBoxRamiRiservati.CheckedChanged += new System.EventHandler(this.checkBoxRamiRiservati_CheckedChanged);
             // 
             // checkBoxFoglie
             // 
@@ -94,16 +96,26 @@
             this.checkBoxFoglie.UseVisualStyleBackColor = true;
             this.checkBoxFoglie.CheckedChanged += new System.EventHandler(this.checkBoxFoglie_CheckedChanged);
             // 
-            // checkBoxRamiRiservati
+            // checkBoxRami
             // 
-            this.checkBoxRamiRiservati.AutoSize = true;
-            this.checkBoxRamiRiservati.Location = new System.Drawing.Point(29, 125);
-            this.checkBoxRamiRiservati.Name = "checkBoxRamiRiservati";
-            this.checkBoxRamiRiservati.Size = new System.Drawing.Size(89, 17);
-            this.checkBoxRamiRiservati.TabIndex = 2;
-            this.checkBoxRamiRiservati.Text = "Rami riservati";
-            this.checkBoxRamiRiservati.UseVisualStyleBackColor = true;
-            this.checkBoxRamiRiservati.CheckedChanged += new System.EventHandler(this.checkBoxRamiRiservati_CheckedChanged);
+            this.checkBoxRami.AutoSize = true;
+            this.checkBoxRami.Location = new System.Drawing.Point(29, 44);
+            this.checkBoxRami.Name = "checkBoxRami";
+            this.checkBoxRami.Size = new System.Drawing.Size(50, 17);
+            this.checkBoxRami.TabIndex = 0;
+            this.checkBoxRami.Text = "Rami";
+            this.checkBoxRami.UseVisualStyleBackColor = true;
+            this.checkBoxRami.CheckedChanged += new System.EventHandler(this.checkBoxRami_CheckedChanged);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(792, 424);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // FormConfigTreeView
             // 
@@ -128,5 +140,6 @@
         private System.Windows.Forms.CheckBox checkBoxRamiRiservati;
         private System.Windows.Forms.CheckBox checkBoxFoglie;
         private System.Windows.Forms.CheckBox checkBoxRami;
+        private System.Windows.Forms.Button butDefault;
     }
 }

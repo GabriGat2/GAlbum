@@ -26,6 +26,17 @@ namespace GAlbum
             tipoTreeView = ETipoTreeView.Sorgente;
 
             // Configurazione di default
+            RipristinaDefault();
+        }
+        /// <summary>
+        /// ripristina i valori di default
+        /// </summary>
+        public override void RipristinaDefault()
+        {
+            // ripristina i valori di default base
+            base.RipristinaDefault();
+
+            // Configurazione di default
             MostraFoglie = true;
         }
     }// fine class CInfoTreeViewSorgente

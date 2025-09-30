@@ -37,8 +37,16 @@ namespace GAlbum
         private void inizializzaClasse()
         {
             // mostra il tipo della info tree view
-            this.Text = "Configurazione dell'info " + InfoTW.TipoTreeView.ToString(); 
+            this.Text = "Configurazione dell'info " + InfoTW.TipoTreeView.ToString();
 
+            // inizializa pannello visualizzazione
+            AggiornaForm();
+        }
+        /// <summary>
+        /// Aggiorna tutti gli oggetti del form
+        /// </summary>
+        private void AggiornaForm()
+        {
             // inizializa pannello visualizzazione
             this.checkBoxFoglie.Checked = InfoTW.MostraFoglie;
             this.checkBoxRami.Checked = InfoTW.MostraRami;
@@ -70,6 +78,16 @@ namespace GAlbum
         private void checkBoxRamiRiservati_CheckedChanged(object sender, EventArgs e)
         {
             InfoTW.MostraRamiRiservati = this.checkBoxRamiRiservati.Checked;
+        }
+        /// <summary>
+        /// Riassegna i valori di default
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butDefault_Click(object sender, EventArgs e)
+        {
+            InfoTW.RipristinaDefault();
+            AggiornaForm();
         }
     }// fine class  FormConfigTreeView
 }// fine namespace GAlbum
