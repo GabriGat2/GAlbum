@@ -54,11 +54,11 @@ namespace GAlbum
         /// <summary>
         /// Infro tree view Sorgente
         /// </summary>
-        private CInfoTreeView InfoTWSorgente;
+        private CInfoTreeView InfoTVSorgente;
         /// <summary>
         /// Infro tree view Destinazione
         /// </summary>
-        private CInfoTreeView InfoTWDestinazione;
+        private CInfoTreeView InfoTVDestinazione;
         // ==================================================================================================================
         /// <summary>
         /// Mette qui i refatoring generati automaticamente
@@ -86,8 +86,8 @@ namespace GAlbum
             AggiornaStato(false);
 
             // CRea info tree view
-            InfoTWSorgente = new CInfoTreeViewSorgente ();
-            InfoTWDestinazione = new CInfoTreeViewDestinazione();
+            InfoTVSorgente = new CInfoTreeViewSorgente ();
+            InfoTVDestinazione = new CInfoTreeViewDestinazione();
 
             // DEBUG
             textBoxSorgente.Text = "E:\\Angelo\\Prj\\GAlbum\\Foto\\Sorgente";
@@ -193,7 +193,7 @@ namespace GAlbum
             // Aggiunge un nodo per ogni subdirectory
             foreach (var subDir in listaSubDir)
             {
-                AggiungiNodo(subDir, ref nodoBase, 1, ref InfoTWDestinazione);
+                AggiungiNodo(subDir, ref nodoBase, 1, ref InfoTVDestinazione);
             }
 
             // Espandi il sommario
@@ -411,7 +411,7 @@ namespace GAlbum
             // Aggiunge un nodo per ogni subdirectory
             foreach (var subDir in listaSubDir)
             {
-                AggiungiNodo(subDir, ref nodoBase, 1, ref InfoTWSorgente);
+                AggiungiNodo(subDir, ref nodoBase, 1, ref InfoTVSorgente);
 
             }
 
@@ -530,7 +530,7 @@ namespace GAlbum
             // verifica se é stato premuto il tasto destro
             if (e.Button == MouseButtons.Right)
             {
-                FormConfigTreeView formConfigTreeView = new FormConfigTreeView(ref InfoTWSorgente);
+                FormConfigTreeView formConfigTreeView = new FormConfigTreeView(ref InfoTVSorgente);
                 formConfigTreeView.ShowDialog();
 
                 // aggiorna la treeview
@@ -549,7 +549,7 @@ namespace GAlbum
             // verifica se é stato premuto il tasto destro
             if (e.Button == MouseButtons.Right)
             {
-                FormConfigTreeView formConfigTreeView = new FormConfigTreeView(ref InfoTWDestinazione);
+                FormConfigTreeView formConfigTreeView = new FormConfigTreeView(ref InfoTVDestinazione);
                 formConfigTreeView.ShowDialog();
             }
 
