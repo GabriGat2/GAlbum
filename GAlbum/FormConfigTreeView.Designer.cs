@@ -30,13 +30,19 @@
         {
             this.tabVisualizza = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.butDefault = new System.Windows.Forms.Button();
-            this.checkBoxRamiRiservati = new System.Windows.Forms.CheckBox();
-            this.checkBoxFoglie = new System.Windows.Forms.CheckBox();
+            this.groupBoxLivello = new System.Windows.Forms.GroupBox();
+            this.groupBoxDirectory = new System.Windows.Forms.GroupBox();
             this.checkBoxRami = new System.Windows.Forms.CheckBox();
+            this.checkBoxFoglie = new System.Windows.Forms.CheckBox();
+            this.checkBoxRamiRiservati = new System.Windows.Forms.CheckBox();
+            this.numericUpDownLivello = new System.Windows.Forms.NumericUpDown();
+            this.butDefault = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabVisualizza.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBoxLivello.SuspendLayout();
+            this.groupBoxDirectory.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLivello)).BeginInit();
             this.SuspendLayout();
             // 
             // tabVisualizza
@@ -52,10 +58,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBoxLivello);
+            this.tabPage1.Controls.Add(this.groupBoxDirectory);
             this.tabPage1.Controls.Add(this.butDefault);
-            this.tabPage1.Controls.Add(this.checkBoxRamiRiservati);
-            this.tabPage1.Controls.Add(this.checkBoxFoglie);
-            this.tabPage1.Controls.Add(this.checkBoxRami);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -63,6 +68,69 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Visualizza";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxLivello
+            // 
+            this.groupBoxLivello.Controls.Add(this.numericUpDownLivello);
+            this.groupBoxLivello.Location = new System.Drawing.Point(8, 19);
+            this.groupBoxLivello.Name = "groupBoxLivello";
+            this.groupBoxLivello.Size = new System.Drawing.Size(143, 56);
+            this.groupBoxLivello.TabIndex = 6;
+            this.groupBoxLivello.TabStop = false;
+            this.groupBoxLivello.Text = "Livello";
+            // 
+            // groupBoxDirectory
+            // 
+            this.groupBoxDirectory.Controls.Add(this.checkBoxRami);
+            this.groupBoxDirectory.Controls.Add(this.checkBoxFoglie);
+            this.groupBoxDirectory.Controls.Add(this.checkBoxRamiRiservati);
+            this.groupBoxDirectory.Location = new System.Drawing.Point(8, 91);
+            this.groupBoxDirectory.Name = "groupBoxDirectory";
+            this.groupBoxDirectory.Size = new System.Drawing.Size(143, 147);
+            this.groupBoxDirectory.TabIndex = 5;
+            this.groupBoxDirectory.TabStop = false;
+            this.groupBoxDirectory.Text = "Directory";
+            // 
+            // checkBoxRami
+            // 
+            this.checkBoxRami.AutoSize = true;
+            this.checkBoxRami.Location = new System.Drawing.Point(6, 28);
+            this.checkBoxRami.Name = "checkBoxRami";
+            this.checkBoxRami.Size = new System.Drawing.Size(50, 17);
+            this.checkBoxRami.TabIndex = 0;
+            this.checkBoxRami.Text = "Rami";
+            this.checkBoxRami.UseVisualStyleBackColor = true;
+            this.checkBoxRami.CheckedChanged += new System.EventHandler(this.checkBoxRami_CheckedChanged);
+            // 
+            // checkBoxFoglie
+            // 
+            this.checkBoxFoglie.AutoSize = true;
+            this.checkBoxFoglie.Location = new System.Drawing.Point(6, 66);
+            this.checkBoxFoglie.Name = "checkBoxFoglie";
+            this.checkBoxFoglie.Size = new System.Drawing.Size(54, 17);
+            this.checkBoxFoglie.TabIndex = 1;
+            this.checkBoxFoglie.Text = "Foglie";
+            this.checkBoxFoglie.UseVisualStyleBackColor = true;
+            this.checkBoxFoglie.CheckedChanged += new System.EventHandler(this.checkBoxFoglie_CheckedChanged);
+            // 
+            // checkBoxRamiRiservati
+            // 
+            this.checkBoxRamiRiservati.AutoSize = true;
+            this.checkBoxRamiRiservati.Location = new System.Drawing.Point(6, 109);
+            this.checkBoxRamiRiservati.Name = "checkBoxRamiRiservati";
+            this.checkBoxRamiRiservati.Size = new System.Drawing.Size(89, 17);
+            this.checkBoxRamiRiservati.TabIndex = 2;
+            this.checkBoxRamiRiservati.Text = "Rami riservati";
+            this.checkBoxRamiRiservati.UseVisualStyleBackColor = true;
+            this.checkBoxRamiRiservati.CheckedChanged += new System.EventHandler(this.checkBoxRamiRiservati_CheckedChanged);
+            // 
+            // numericUpDownLivello
+            // 
+            this.numericUpDownLivello.Location = new System.Drawing.Point(6, 19);
+            this.numericUpDownLivello.Name = "numericUpDownLivello";
+            this.numericUpDownLivello.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownLivello.TabIndex = 4;
+            this.numericUpDownLivello.ValueChanged += new System.EventHandler(this.numericUpDownLivello_ValueChanged);
             // 
             // butDefault
             // 
@@ -73,39 +141,6 @@
             this.butDefault.Text = "Default";
             this.butDefault.UseVisualStyleBackColor = true;
             this.butDefault.Click += new System.EventHandler(this.butDefault_Click);
-            // 
-            // checkBoxRamiRiservati
-            // 
-            this.checkBoxRamiRiservati.AutoSize = true;
-            this.checkBoxRamiRiservati.Location = new System.Drawing.Point(29, 125);
-            this.checkBoxRamiRiservati.Name = "checkBoxRamiRiservati";
-            this.checkBoxRamiRiservati.Size = new System.Drawing.Size(89, 17);
-            this.checkBoxRamiRiservati.TabIndex = 2;
-            this.checkBoxRamiRiservati.Text = "Rami riservati";
-            this.checkBoxRamiRiservati.UseVisualStyleBackColor = true;
-            this.checkBoxRamiRiservati.CheckedChanged += new System.EventHandler(this.checkBoxRamiRiservati_CheckedChanged);
-            // 
-            // checkBoxFoglie
-            // 
-            this.checkBoxFoglie.AutoSize = true;
-            this.checkBoxFoglie.Location = new System.Drawing.Point(29, 82);
-            this.checkBoxFoglie.Name = "checkBoxFoglie";
-            this.checkBoxFoglie.Size = new System.Drawing.Size(54, 17);
-            this.checkBoxFoglie.TabIndex = 1;
-            this.checkBoxFoglie.Text = "Foglie";
-            this.checkBoxFoglie.UseVisualStyleBackColor = true;
-            this.checkBoxFoglie.CheckedChanged += new System.EventHandler(this.checkBoxFoglie_CheckedChanged);
-            // 
-            // checkBoxRami
-            // 
-            this.checkBoxRami.AutoSize = true;
-            this.checkBoxRami.Location = new System.Drawing.Point(29, 44);
-            this.checkBoxRami.Name = "checkBoxRami";
-            this.checkBoxRami.Size = new System.Drawing.Size(50, 17);
-            this.checkBoxRami.TabIndex = 0;
-            this.checkBoxRami.Text = "Rami";
-            this.checkBoxRami.UseVisualStyleBackColor = true;
-            this.checkBoxRami.CheckedChanged += new System.EventHandler(this.checkBoxRami_CheckedChanged);
             // 
             // tabPage2
             // 
@@ -127,7 +162,10 @@
             this.Text = "FormConfigTreeView";
             this.tabVisualizza.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.groupBoxLivello.ResumeLayout(false);
+            this.groupBoxDirectory.ResumeLayout(false);
+            this.groupBoxDirectory.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLivello)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -141,5 +179,8 @@
         private System.Windows.Forms.CheckBox checkBoxFoglie;
         private System.Windows.Forms.CheckBox checkBoxRami;
         private System.Windows.Forms.Button butDefault;
+        private System.Windows.Forms.NumericUpDown numericUpDownLivello;
+        private System.Windows.Forms.GroupBox groupBoxLivello;
+        private System.Windows.Forms.GroupBox groupBoxDirectory;
     }
 }

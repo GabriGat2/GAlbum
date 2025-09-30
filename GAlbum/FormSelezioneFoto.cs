@@ -42,10 +42,6 @@ namespace GAlbum
         /// </summary>
         private string PathDirDestinazione = null;
         /// <summary>
-        /// massimo livello di indentazione
-        /// </summary>
-        private int MaxLivello = 2;
-        /// <summary>
         /// Nodo sorgente selezionato
         /// </summary>
         private CInfoDirFoto InfoNodoSorgenteSelezionato;
@@ -213,13 +209,13 @@ namespace GAlbum
         /// <param name="pathDir"></param>
         /// <param name="nodoBase"></param>
         /// <param name="livello"></param>
-        private void AggiungiNodo(string pathDir, ref TreeNode nodoBase, int livello, ref CInfoTreeView infoTW)
+        private void AggiungiNodo(string pathDir, ref TreeNode nodoBase, int livello, ref CInfoTreeView infoTV)
         {
             // crea classe info dir foto
             CInfoDirFoto info = new CInfoDirFoto(pathDir);
 
             // verifichiamo se può essere aggiunta all'albero della tree vie
-            if (!infoTW.NomeVisibile(info.Nome))
+            if (!infoTV.NomeVisibile(info.Nome))
                 return;
 
             // crea il nodo
@@ -232,7 +228,7 @@ namespace GAlbum
 
 
             // verifica se ha raggiunto il livello di massima indentazione
-            if (livello >= MaxLivello)
+            if (livello >= infoTV.MaxLivello)
             {
                 return;
             }
@@ -247,7 +243,7 @@ namespace GAlbum
                 // Aggiunge un nodo per ogni subdirectory
                 foreach (var subDir in listaSubDir)
                 {
-                    AggiungiNodo(subDir, ref nodo, ++livello,  ref infoTW);
+                    AggiungiNodo(subDir, ref nodo, ++livello,  ref infoTV);
 
                 }
             }  

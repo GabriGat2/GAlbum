@@ -51,6 +51,7 @@ namespace GAlbum
             this.checkBoxFoglie.Checked = InfoTW.MostraFoglie;
             this.checkBoxRami.Checked = InfoTW.MostraRami;
             this.checkBoxRamiRiservati.Checked = InfoTW.MostraRamiRiservati;
+            this.numericUpDownLivello.Value = InfoTW.MaxLivello;
         }
         /// <summary>
         /// é cambiata la check box mostra stati 
@@ -88,6 +89,15 @@ namespace GAlbum
         {
             InfoTW.RipristinaDefault();
             AggiornaForm();
+        }
+        /// <summary>
+        /// il valore del livello é cambiato
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void numericUpDownLivello_ValueChanged(object sender, EventArgs e)
+        {
+            InfoTW.MaxLivello = ((uint)numericUpDownLivello.Value);
         }
     }// fine class  FormConfigTreeView
 }// fine namespace GAlbum

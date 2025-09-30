@@ -41,12 +41,19 @@ namespace GAlbum
         /// </summary>
         public bool MostraRamiRiservati { get => mostraRamiRiservati; set => mostraRamiRiservati = value; }
         private bool mostraRamiRiservati = false;
+
+        /// <summary>
+        /// massimo livello di indentazione
+        /// </summary>
+        public uint MaxLivello { get => maxLivello; set => maxLivello = value; }
+        private uint maxLivello = 1;
         // ==================================================================================================================
         /// <summary>
         /// Mette qui i refatoring generati automaticamente
         /// </summary>
         private bool mettiloQui;
         public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
+        
 
         // ==================================================================================================================
         // Metodi
@@ -111,6 +118,7 @@ namespace GAlbum
             mostraRami = false;
             mostraFoglie = false;
             mostraRamiRiservati = false;
+            maxLivello =  1;
         }
     }// fine class CInfoTreeView
 }// fine namespace GAlbum
