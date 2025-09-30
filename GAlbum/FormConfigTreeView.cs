@@ -15,15 +15,15 @@ namespace GAlbum
         // ==================================================================================================================
         // Proprietà
         // ==================================================================================================================
-        private CInfoTreeView InfoTW;
+        private CInfoTreeView InfoTV;
 
         // ==================================================================================================================
         // Metodi
         // ==================================================================================================================
-        public FormConfigTreeView(ref CInfoTreeView infoTW)
+        public FormConfigTreeView(ref CInfoTreeView infoTV)
         {
              // assegna riferimento alla info treeView
-            InfoTW = infoTW;           
+            InfoTV = infoTV;           
             
             
             InitializeComponent();
@@ -37,7 +37,7 @@ namespace GAlbum
         private void inizializzaClasse()
         {
             // mostra il tipo della info tree view
-            this.Text = "Configurazione dell'info " + InfoTW.TipoTreeView.ToString();
+            this.Text = "Configurazione dell'info " + InfoTV.TipoTreeView.ToString();
 
             // inizializa pannello visualizzazione
             AggiornaForm();
@@ -48,10 +48,10 @@ namespace GAlbum
         private void AggiornaForm()
         {
             // inizializa pannello visualizzazione
-            this.checkBoxFoglie.Checked = InfoTW.MostraFoglie;
-            this.checkBoxRami.Checked = InfoTW.MostraRami;
-            this.checkBoxRamiRiservati.Checked = InfoTW.MostraRamiRiservati;
-            this.numericUpDownLivello.Value = InfoTW.MaxLivello;
+            this.checkBoxFoglie.Checked = InfoTV.MostraFoglie;
+            this.checkBoxRami.Checked = InfoTV.MostraRami;
+            this.checkBoxRamiRiservati.Checked = InfoTV.MostraRamiRiservati;
+            this.numericUpDownLivello.Value = InfoTV.MaxLivello;
         }
         /// <summary>
         /// é cambiata la check box mostra stati 
@@ -60,7 +60,7 @@ namespace GAlbum
         /// <param name="e"></param>
         private void checkBoxRami_CheckedChanged(object sender, EventArgs e)
         {
-            InfoTW.MostraRami = this.checkBoxRami.Checked;
+            InfoTV.MostraRami = this.checkBoxRami.Checked;
         }
         /// <summary>
         /// é cambiata la check box mostra stati 
@@ -69,7 +69,7 @@ namespace GAlbum
         /// <param name="e"></param>
         private void checkBoxFoglie_CheckedChanged(object sender, EventArgs e)
         {
-            InfoTW.MostraFoglie = this.checkBoxFoglie.Checked;
+            InfoTV.MostraFoglie = this.checkBoxFoglie.Checked;
         }
         /// <summary>
         /// é cambiata la check box mostra stati 
@@ -78,7 +78,7 @@ namespace GAlbum
         /// <param name="e"></param>
         private void checkBoxRamiRiservati_CheckedChanged(object sender, EventArgs e)
         {
-            InfoTW.MostraRamiRiservati = this.checkBoxRamiRiservati.Checked;
+            InfoTV.MostraRamiRiservati = this.checkBoxRamiRiservati.Checked;
         }
         /// <summary>
         /// Riassegna i valori di default
@@ -87,7 +87,7 @@ namespace GAlbum
         /// <param name="e"></param>
         private void butDefault_Click(object sender, EventArgs e)
         {
-            InfoTW.RipristinaDefault();
+            InfoTV.RipristinaDefault();
             AggiornaForm();
         }
         /// <summary>
@@ -97,7 +97,7 @@ namespace GAlbum
         /// <param name="e"></param>
         private void numericUpDownLivello_ValueChanged(object sender, EventArgs e)
         {
-            InfoTW.MaxLivello = ((uint)numericUpDownLivello.Value);
+            InfoTV.MaxLivello = ((uint)numericUpDownLivello.Value);
         }
     }// fine class  FormConfigTreeView
 }// fine namespace GAlbum
