@@ -343,7 +343,21 @@ namespace GAlbum
         /// <param name="e"></param>
         private void butSuccessiva_Click(object sender, EventArgs e)
         {
+            FotoSuccessiva();
+            //if (fotoSrcList == null)
+            //    return;
+            //if (idFotoSrcList >= (fotoSrcList.Length - 1))
+            //    return;
 
+            //idFotoSrcList++;
+
+            //MostraFoto(fotoSrcList[idFotoSrcList], ref butSuccessiva);
+        }
+        /// <summary>
+        /// passa alla foto successiva
+        /// </summary>
+        private void FotoSuccessiva()
+        {
             if (fotoSrcList == null)
                 return;
             if (idFotoSrcList >= (fotoSrcList.Length - 1))
@@ -555,6 +569,26 @@ namespace GAlbum
 
             // aggiorna la treeview
             AggiornaDestinazione();
+        }
+        /// <summary>
+        /// Assegna la foto e passa alla successiva
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butAssegna_Click(object sender, EventArgs e)
+        {
+            //mostra la foto successiva
+            FotoSuccessiva();
+        }
+        /// <summary>
+        ///  Non Assegna la foto e passa alla successiva
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butNonAssegna_Click(object sender, EventArgs e)
+        {
+            //mostra la foto successiva
+            FotoSuccessiva();
         }
     } // fine della classe
 }// fine del name scope

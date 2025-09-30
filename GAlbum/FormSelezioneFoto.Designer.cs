@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Nodo1");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Nodo2");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Nodo5");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Nodo4", new System.Windows.Forms.TreeNode[] {
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Nodo3", new System.Windows.Forms.TreeNode[] {
-            treeNode4});
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Nodo0", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode5});
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Nodo1");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Nodo2");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Nodo5");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Nodo4", new System.Windows.Forms.TreeNode[] {
+            treeNode15});
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Nodo3", new System.Windows.Forms.TreeNode[] {
+            treeNode16});
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Nodo0", new System.Windows.Forms.TreeNode[] {
+            treeNode13,
+            treeNode14,
+            treeNode17});
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBoxPath = new System.Windows.Forms.GroupBox();
             this.textBoxDebug2 = new System.Windows.Forms.TextBox();
@@ -59,6 +59,8 @@
             this.textBoxPathFoto = new System.Windows.Forms.TextBox();
             this.butPrecedente = new System.Windows.Forms.Button();
             this.butSuccessiva = new System.Windows.Forms.Button();
+            this.butAssegna = new System.Windows.Forms.Button();
+            this.butNonAssegna = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -239,20 +241,20 @@
             this.treeViewDestinazione.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewDestinazione.Location = new System.Drawing.Point(3, 16);
             this.treeViewDestinazione.Name = "treeViewDestinazione";
-            treeNode1.Name = "Nodo1";
-            treeNode1.Text = "Nodo1";
-            treeNode2.Name = "Nodo2";
-            treeNode2.Text = "Nodo2";
-            treeNode3.Name = "Nodo5";
-            treeNode3.Text = "Nodo5";
-            treeNode4.Name = "Nodo4";
-            treeNode4.Text = "Nodo4";
-            treeNode5.Name = "Nodo3";
-            treeNode5.Text = "Nodo3";
-            treeNode6.Name = "Nodo0";
-            treeNode6.Text = "Nodo0";
+            treeNode13.Name = "Nodo1";
+            treeNode13.Text = "Nodo1";
+            treeNode14.Name = "Nodo2";
+            treeNode14.Text = "Nodo2";
+            treeNode15.Name = "Nodo5";
+            treeNode15.Text = "Nodo5";
+            treeNode16.Name = "Nodo4";
+            treeNode16.Text = "Nodo4";
+            treeNode17.Name = "Nodo3";
+            treeNode17.Text = "Nodo3";
+            treeNode18.Name = "Nodo0";
+            treeNode18.Text = "Nodo0";
             this.treeViewDestinazione.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6});
+            treeNode18});
             this.treeViewDestinazione.Size = new System.Drawing.Size(141, 613);
             this.treeViewDestinazione.TabIndex = 0;
             this.treeViewDestinazione.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDestinazione_AfterSelect);
@@ -271,6 +273,8 @@
             // 
             // splitContainer1B2B3.Panel2
             // 
+            this.splitContainer1B2B3.Panel2.Controls.Add(this.butNonAssegna);
+            this.splitContainer1B2B3.Panel2.Controls.Add(this.butAssegna);
             this.splitContainer1B2B3.Panel2.Controls.Add(this.textBoxDebug);
             this.splitContainer1B2B3.Panel2.Controls.Add(this.textBoxPathFoto);
             this.splitContainer1B2B3.Panel2.Controls.Add(this.butPrecedente);
@@ -291,10 +295,10 @@
             // 
             // textBoxDebug
             // 
-            this.textBoxDebug.Location = new System.Drawing.Point(277, 35);
+            this.textBoxDebug.Location = new System.Drawing.Point(532, 37);
             this.textBoxDebug.Name = "textBoxDebug";
             this.textBoxDebug.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.textBoxDebug.Size = new System.Drawing.Size(290, 20);
+            this.textBoxDebug.Size = new System.Drawing.Size(46, 20);
             this.textBoxDebug.TabIndex = 9;
             // 
             // textBoxPathFoto
@@ -323,6 +327,26 @@
             this.butSuccessiva.Text = "Successiva";
             this.butSuccessiva.UseVisualStyleBackColor = true;
             this.butSuccessiva.Click += new System.EventHandler(this.butSuccessiva_Click);
+            // 
+            // butAssegna
+            // 
+            this.butAssegna.Location = new System.Drawing.Point(194, 35);
+            this.butAssegna.Name = "butAssegna";
+            this.butAssegna.Size = new System.Drawing.Size(75, 23);
+            this.butAssegna.TabIndex = 10;
+            this.butAssegna.Text = "Assegna";
+            this.butAssegna.UseVisualStyleBackColor = true;
+            this.butAssegna.Click += new System.EventHandler(this.butAssegna_Click);
+            // 
+            // butNonAssegna
+            // 
+            this.butNonAssegna.Location = new System.Drawing.Point(275, 35);
+            this.butNonAssegna.Name = "butNonAssegna";
+            this.butNonAssegna.Size = new System.Drawing.Size(80, 23);
+            this.butNonAssegna.TabIndex = 11;
+            this.butNonAssegna.Text = "NonAssegna";
+            this.butNonAssegna.UseVisualStyleBackColor = true;
+            this.butNonAssegna.Click += new System.EventHandler(this.butNonAssegna_Click);
             // 
             // FormSelezioneFoto
             // 
@@ -380,5 +404,7 @@
         private System.Windows.Forms.TextBox textBoxDebug;
         private System.Windows.Forms.TreeView treeViewSorgente;
         private System.Windows.Forms.TextBox textBoxDebug2;
+        private System.Windows.Forms.Button butNonAssegna;
+        private System.Windows.Forms.Button butAssegna;
     }
 }
