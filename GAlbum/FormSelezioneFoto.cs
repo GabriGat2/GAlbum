@@ -47,8 +47,8 @@ namespace GAlbum
         private CInfoDirFoto InfoNodoSorgenteSelezionato;
         /// <summary>
         /// stato del form:
-        /// False = Copia delle foto non attiva
-        /// true = Copia delle foto  attiva
+        /// False = Copia delle foto non attiva perchè, sta coonfigurando le operazioni da eseguire
+        /// true = Copia delle foto  attiva, perchè esegue l'operazione richiesta
         /// </summary>
         private bool Stato;
         /// <summary>
@@ -524,6 +524,12 @@ namespace GAlbum
 
             // button Successiva
             butSuccessiva.Enabled = Stato;
+
+            // button Assegna
+            butAssegna.Enabled = Stato;
+
+            // button NonAssegna
+            butNonAssegna.Enabled = Stato;
 
             //pictureBox1
             if (!Stato)
