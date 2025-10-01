@@ -582,8 +582,19 @@ namespace GAlbum
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void butAssegna_Click(object sender, EventArgs e)
-        {
-            //mostra la foto successiva
+        { 
+            // Assegna foto
+            CArchivia archivia = new CArchivia();
+
+            // crea la lista dei nodi selezionati
+            List<String> pathDestinazioni;
+            TreeNode nodo = treeViewDestinazione.Nodes[0];
+            archivia.EstraiNdodiSelezionati(ref nodo, out pathDestinazioni);
+
+
+            //archivia.Assegna(textBoxPathFoto.Text, pathDestinazioni);
+
+            // mostra la foto successiva
             FotoSuccessiva();
         }
         /// <summary>
