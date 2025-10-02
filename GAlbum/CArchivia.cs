@@ -41,12 +41,12 @@ namespace GAlbum
         /// <param name="pathSrc"> path + nome del file sorgente </param>
         /// <param name="pathDestinazioni"> Lista dei path di destinazione senza il nome del file </param>
         /// <returns></returns>
-        public GstErrori.EErrore Assegna(string pathSrc, string [] pathDestinazioni)
+        public GstErrori.EErrore Assegna(string pathSrc, List<String> pathDestinazioni)
         {
             GstErrori.EErrore esito = GstErrori.EErrore.E0001_NOK;
 
 
-            // Esegue le copie
+            // Esegue le copie nel numero specificato dalla lista destinazioni
             foreach (var pathDst in pathDestinazioni)
             {
                 // esegue la copia
@@ -67,7 +67,29 @@ namespace GAlbum
         /// <returns></returns>
         public GstErrori.EErrore Copia(string pathSrc, string pathDst)
         {
+            // verifica se esite il file sorgente
+            if (!File.Exists(pathSrc))
+            {
+                return GstErrori.EErrore.E1360_FileSorgenteNonEsiste;
+            }
 
+            //verifica se esite la directory di destinazione
+            if (!Directory.Exists(pathDst))
+            {
+                return GstErrori.EErrore.E1320_DirectoryDestinazioneNonEsiste;
+            }
+
+            // scompone path sorgente
+            string[] campiSrc = pathSrc.Split('\\');
+            if (campiSrc.Length < 3)
+            {
+                return GstErrori.EErrore.E1312_DirectorySorgenteCampiMinimiNonPresenti;
+            }    
+
+            // Estrae i dati notevoli da pathSorgente
+            string ramoSrc = campiSrc [campiSrc.Length - 3];
+            string foglia = campiSrc[campiSrc.Length - 2];
+            string nome = campiSrc[campiSrc.Length - 1];
 
             return GstErrori.EErrore.E0000_OK;
         }

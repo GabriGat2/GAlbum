@@ -24,70 +24,115 @@ namespace GAlbum
 
 
             // Errori relativi alla gestione di una tabelle
-            E1000_TabellaInesistente,
-            E1001_ColonnaTabellaFuoriLimiti,
-            E1002_RigaTabellaFuoriLimiti,
-            E1003_CellaTabellaFuoriLimiti,
-            E1004_IndiceColonnaTabellaFuoriLimiti,
-            E1005_IndiceRigaTabellaFuoriLimiti,
-            E1006_IndiceCellaTabellaFuoriLimiti,
-            E1007_LaDimensioniDelleTabelleSorgenteEDestinazioneSonoDiverse,
+            //E1000_TabellaInesistente,
+            //E1001_ColonnaTabellaFuoriLimiti,
+            //E1002_RigaTabellaFuoriLimiti,
+            //E1003_CellaTabellaFuoriLimiti,
+            //E1004_IndiceColonnaTabellaFuoriLimiti,
+            //E1005_IndiceRigaTabellaFuoriLimiti,
+            //E1006_IndiceCellaTabellaFuoriLimiti,
+            //E1007_LaDimensioniDelleTabelleSorgenteEDestinazioneSonoDiverse,
 
 
             // Operazioni
             E1200_UnaOperazioneInCorso,
 
+            // Errori relativi una directory
+            // =======================
+            E1300_DirectoryNonEsiste,
+            E1301_DirectoryEsiste,
+            E1302_DirectoryCampiMinimiNonPresenti,
+
+
+            // Errori relativi una directory sorgente
+            // =======================
+            E1310_DirectorySorgenteNonEsiste,
+            E1311_DirectorySorgenteEsiste,
+            E1312_DirectorySorgenteCampiMinimiNonPresenti,
+
+            // Errori relativi una directory Destinazione
+            // =======================
+            E1320_DirectoryDestinazioneNonEsiste,
+            E1321_DirectoryDestinazioneEsiste,
+            E1322_DirectoryDestinazioneCampiMinimiNonPresenti,
+
+
             // Gestione directory
-            E1300_NomeArchivioErrato,
+            //E1300_NomeArchivioErrato,
 
-            E1310_PathArchivioErrato,
-            E1311_PathAreaArchivioErrata,
-            E1312_PathEscursioneErrato,
-            E1313_PathTracciaErrato,
+            //E1310_PathArchivioErrato,
+            //E1311_PathAreaArchivioErrata,
+            //E1312_PathEscursioneErrato,
+            //E1313_PathTracciaErrato,
 
-            E1320_PathArchivioNonEsiste,
-            E1321_PathAreaArchivioNonEsiste,
-            E1322_PathEscursioneNonEsiste,
-            E1323_PathTracciaNonEsiste,
+            //E1320_PathArchivioNonEsiste,
+            //E1321_PathAreaArchivioNonEsiste,
+            //E1322_PathEscursioneNonEsiste,
+            //E1323_PathTracciaNonEsiste,
 
-            E1330_PathArchivioEsiste,
-            E1331_PathAreaArchivioEsiste,
-            E1332_PathEscursioneEsiste,
-            E1333_PathTracciaEsiste,
+            //E1330_PathArchivioEsiste,
+            //E1331_PathAreaArchivioEsiste,
+            //E1332_PathEscursioneEsiste,
+            //E1333_PathTracciaEsiste,
 
-            E1330_PathArchivioCreazioneFallita,
-            E1331_PathAreaArchivioCreazioneFallita,
-            E1332_PathEscursioneCreazioneFallita,
-            E1333_PathTracciaCreazioneFallita,
-            E1334_DirectoryCreazioneFallita,
+            //E1330_PathArchivioCreazioneFallita,
+            //E1331_PathAreaArchivioCreazioneFallita,
+            //E1332_PathEscursioneCreazioneFallita,
+            //E1333_PathTracciaCreazioneFallita,
+            //E1334_DirectoryCreazioneFallita,
 
-            E1340_NonEsiste,
-            E1341_Esiste,
-            E1342_AreaArchivioNonEsiste,
-            E1343_AreaArchivioEsiste,
-            E1344_EscursioneNonEsiste,
-            E1345_Escursionesiste,
-            E1346_TracciaNonEsiste,
-            E1347_TracciaEsiste,
+            //E1340_NonEsiste,
+            //E1341_Esiste,
+            //E1342_AreaArchivioNonEsiste,
+            //E1343_AreaArchivioEsiste,
+            //E1344_EscursioneNonEsiste,
+            //E1345_Escursionesiste,
+            //E1346_TracciaNonEsiste,
+            //E1347_TracciaEsiste,
 
+            // Errori relativi a file
+            // =======================
             E1350_FileNonEsiste,
             E1351_FileEsiste,
-            E1355_FileNonSpostato,
-            E1356_FileSpostato,
-            E1357_FileNonCopiato,
-            E1358_FileCopiato,
-            E1359_FileNonCancellato,
-            E1360_FileCancellato,
+            E1352_FileNonSpostato,
+            E1353_FileSpostato,
+            E1354_FileNonCopiato,
+            E1355_FileCopiato,
+            E1356_FileNonCancellato,
+            E1357_FileCancellato,
 
-            E1360_IstruzioneErrata,
-            E1360_IstruzioneSconosciuta,
+            // Errori relativi a file sorgente
+            // =======================
+            E1360_FileSorgenteNonEsiste,
+            E1361_FileSorgenteEsiste,
+            E1362_FileSorgenteNonSpostato,
+            E1363_FileSorgenteSpostato,
+            E1364_FileSorgenteNonCopiato,
+            E1365_FileSorgenteCopiato,
+            E1366_FileSorgenteNonCancellato,
+            E1367_FileSorgenteCancellato,
 
-            E1370_IdentitaOK,
-            E1371_IdentitaNOK,
-            E1372_IdentitaEsiste,
-            E1373_IdentitaNonEsiste,
-            E1374_IdentitaGenitore,
-            E1375_IdentitaParente,
+            // Errori relativi a file Destinazione
+            // =======================
+            E1370_FileDestinazioneNonEsiste,
+            E1371_FileDestinazioneEsiste,
+            E1372_FileDestinazioneNonSpostato,
+            E1373_FileDestinazioneSpostato,
+            E1374_FileDestinazioneNonCopiato,
+            E1375_FileDestinazioneCopiato,
+            E1376_FileDestinazioneNonCancellato,
+            E1377_FileDestinazioneCancellato,
+
+
+            //E1360_IstruzioneErrata,
+            //E1360_IstruzioneSconosciuta,
+
+            //E1370_IdentitaOK,
+            //E1371_IdentitaNOK,
+            //E1372_IdentitaEsiste,
+            //E1373_IdentitaNonEsiste,
+            //E1374_IdentitaGenitore,
+            //E1375_IdentitaParente,
 
 
             //E1310_PathArchivioNonEsiste,
@@ -106,7 +151,7 @@ namespace GAlbum
 
 
 
-            E1324_EscursionePresente,
+            //E1324_EscursionePresente,
 
             // Errori relativi a immagini
             // ==========================

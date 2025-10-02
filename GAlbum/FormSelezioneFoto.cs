@@ -592,7 +592,7 @@ namespace GAlbum
             archivia.EstraiNdodiSelezionati(ref nodo, out pathDestinazioni);
 
 
-            //archivia.Assegna(textBoxPathFoto.Text, pathDestinazioni);
+            archivia.Assegna(textBoxPathFoto.Text, pathDestinazioni);
 
             // mostra la foto successiva
             FotoSuccessiva();
