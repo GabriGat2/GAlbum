@@ -42,6 +42,8 @@ namespace GAlbum
             E1300_DirectoryNonEsiste,
             E1301_DirectoryEsiste,
             E1302_DirectoryCampiMinimiNonPresenti,
+            E1303_DirectoryRamoonEsiste,
+            E1304_DirectoryFogliaNonEsiste,
 
 
             // Errori relativi una directory sorgente
@@ -49,12 +51,16 @@ namespace GAlbum
             E1310_DirectorySorgenteNonEsiste,
             E1311_DirectorySorgenteEsiste,
             E1312_DirectorySorgenteCampiMinimiNonPresenti,
+            E1313_DirectoryRamoSorgenteNonEsiste,
+            E1314_DirectoryFogliaSorgenteNonEsiste,
 
             // Errori relativi una directory Destinazione
             // =======================
             E1320_DirectoryDestinazioneNonEsiste,
             E1321_DirectoryDestinazioneEsiste,
             E1322_DirectoryDestinazioneCampiMinimiNonPresenti,
+            E1323_DirectoryRamoDestinazioneNonEsiste,
+            E1324_DirectoryFogliaDestinazioneNonEsiste,
 
 
             // Gestione directory

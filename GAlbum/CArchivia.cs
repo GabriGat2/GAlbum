@@ -73,7 +73,7 @@ namespace GAlbum
                 return GstErrori.EErrore.E1360_FileSorgenteNonEsiste;
             }
 
-            //verifica se esite la directory di destinazione
+            // verifica se esite la directory di destinazione
             if (!Directory.Exists(pathDst))
             {
                 return GstErrori.EErrore.E1320_DirectoryDestinazioneNonEsiste;
@@ -88,8 +88,48 @@ namespace GAlbum
 
             // Estrae i dati notevoli da pathSorgente
             string ramoSrc = campiSrc [campiSrc.Length - 3];
-            string foglia = campiSrc[campiSrc.Length - 2];
+            string foglia = campiSrc[campiSrc.Length - 2].ToUpper();
             string nome = campiSrc[campiSrc.Length - 1];
+                        
+            // Compone il path foglia destinazione fino alla foglia
+            string pathFogliaDst = pathDst + "\\" + foglia;
+
+            // verifica se esite la  directory foglia
+            if (!Directory.Exists(pathFogliaDst))
+            {
+
+                // la foglia non esiste, la crea
+                try
+                {
+                    Directory.CreateDirectory(pathFogliaDst);
+                }
+                catch (IOException dirError)
+                {
+                    return GstErrori.EErrore.E1324_DirectoryFogliaDestinazioneNonEsiste;
+                    //Console.WriteLine(copyError.Message);
+                }
+            }
+
+            // Compone il path file destinazione completo
+            string pathFileDst = pathFogliaDst + "\\" + nome;
+
+            // verifica se esite il file destinazione
+            if (File.Exists(pathFileDst))
+            {
+                // DEBUG GG: gestire la duplicazione
+                return GstErrori.EErrore.E1370_FileDestinazioneNonEsiste;
+            }
+
+            // copia il file
+            try
+            {
+                File.Copy(pathSrc, pathFileDst, false);
+            }
+            catch (IOException copyError)
+            {
+                return GstErrori.EErrore.E1371_FileDestinazioneEsiste;
+                //Console.WriteLine(copyError.Message);
+            }
 
             return GstErrori.EErrore.E0000_OK;
         }

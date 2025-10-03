@@ -583,7 +583,7 @@ namespace GAlbum
         /// <param name="e"></param>
         private void butAssegna_Click(object sender, EventArgs e)
         { 
-            // Assegna foto
+            // Crea l'archivo per movimentare le foto
             CArchivia archivia = new CArchivia();
 
             // crea la lista dei nodi selezionati
@@ -591,7 +591,7 @@ namespace GAlbum
             TreeNode nodo = treeViewDestinazione.Nodes[0];
             archivia.EstraiNdodiSelezionati(ref nodo, out pathDestinazioni);
 
-
+            // Assegna la foto
             archivia.Assegna(textBoxPathFoto.Text, pathDestinazioni);
 
             // mostra la foto successiva
