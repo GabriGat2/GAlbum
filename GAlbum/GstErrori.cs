@@ -62,6 +62,14 @@ namespace GAlbum
             E1323_DirectoryRamoDestinazioneNonEsiste,
             E1324_DirectoryFogliaDestinazioneNonEsiste,
 
+            // Errori relativi una directory Archivio
+            // =======================
+            E1330_DirectoryArchivioNonEsiste,
+            E1331_DirectoryArchivioEsiste,
+            E1332_DirectoryArchivioCampiMinimiNonPresenti,
+            E1333_DirectoryRamoArchivioNonEsiste,
+            E1334_DirectoryFogliaArchivioNonEsiste,
+            
 
             // Gestione directory
             //E1300_NomeArchivioErrato,
@@ -129,6 +137,16 @@ namespace GAlbum
             E1376_FileDestinazioneNonCancellato,
             E1377_FileDestinazioneCancellato,
 
+            // Errori relativi a file Archivio
+            // =======================
+            E1380_FileArchivioNonEsiste,
+            E1381_FileArchivioEsiste,
+            E1382_FileArchivioNonSpostato,
+            E1383_FileArchivioSpostato,
+            E1384_FileArchivioNonCopiato,
+            E1385_FileArchivioCopiato,
+            E1386_FileArchivioNonCancellato,
+            E1387_FileArchivioCancellato,
 
             //E1360_IstruzioneErrata,
             //E1360_IstruzioneSconosciuta,

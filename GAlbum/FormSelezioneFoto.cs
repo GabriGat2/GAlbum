@@ -591,6 +591,9 @@ namespace GAlbum
             TreeNode nodo = treeViewDestinazione.Nodes[0];
             archivia.EstraiNdodiSelezionati(ref nodo, out pathDestinazioni);
 
+            // libera la risorsa della foto
+            pictureBox1.Image = null;
+
             // Assegna la foto
             archivia.Assegna(textBoxPathFoto.Text, pathDestinazioni);
 
@@ -606,6 +609,11 @@ namespace GAlbum
         {
             //mostra la foto successiva
             FotoSuccessiva();
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            int i = 0;
         }
     } // fine della classe
 }// fine del name scope

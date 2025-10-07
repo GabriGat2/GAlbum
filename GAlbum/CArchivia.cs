@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static GAlbum.CInfoTreeView;
+using static GAlbum.GstErrori;
 
 namespace GAlbum
 {
@@ -47,6 +48,22 @@ namespace GAlbum
         /// <returns></returns>
         public GstErrori.EErrore Assegna(string pathSrc, List<String> pathDestinazioni)
         {
+            EErrore esito = Assegna2(pathSrc, pathDestinazioni);
+            if (esito != EErrore.E0000_OK)
+            {
+                GstErrori.StampaMessaggioErrore(esito, pathSrc);
+            }
+
+            return esito;
+        }
+        /// <summary>
+        /// Assena un file a varie destinazioni
+        /// </summary>
+        /// <param name="pathSrc"> path + nome del file sorgente </param>
+        /// <param name="pathDestinazioni"> Lista dei path di destinazione senza il nome del file </param>
+        /// <returns></returns>
+        public GstErrori.EErrore Assegna2(string pathSrc, List<String> pathDestinazioni)
+        {
             GstErrori.EErrore esito = GstErrori.EErrore.E0001_NOK;
 
 
@@ -62,10 +79,14 @@ namespace GAlbum
 
             // archivia la foto sorgente
             esito = Archivia(pathSrc, DirArchivio);
-
+            if (esito != GstErrori.EErrore.E0000_OK)
+                return esito;
 
             return GstErrori.EErrore.E0000_OK;
-        }        
+        }
+
+
+
         /// <summary>
         /// Copia un file
         /// </summary>
@@ -231,61 +252,75 @@ namespace GAlbum
             string foglia = campiSrc[campiSrc.Length - 2].ToUpper();
             string nome = campiSrc[campiSrc.Length - 1];
 
-            // coporre path archivio
-            string pathArchivio = "";
-            for (int i = 0; i < campiSrc.Length - 3; i++)
+            // ----------------------------------------------------------------------------------------
+
+            // comporre path archivio
+            string pathArchivio = campiSrc[0];
+            for (int i = 1; i < campiSrc.Length - 3; i++)
             {
-                pathArchivio += campiSrc[i] + "\\";    
+                //pathArchivio += campiSrc[i] + "\\";
+                pathArchivio +=  "\\" + campiSrc[i];
+            }
+            // aggiunge dir Archivio
+            pathArchivio += "\\"+ dirArchivio;
+
+            // verifica se esite la  directory Archivio
+            if (!Directory.Exists(pathArchivio))
+            {
+
+                // dir Archivio non esiste, la crea
+                try
+                {
+                    Directory.CreateDirectory(pathArchivio);
+                }
+                catch (IOException dirError)
+                {
+                    // DEBUG GG: migliorare la gestione
+                    return GstErrori.EErrore.E1330_DirectoryArchivioNonEsiste;
+                    //Console.WriteLine(copyError.Message);
+                }
             }
 
-
-
-            //string pathArchivio = campiSrc[campiSrc.Length - 3];
-
-
-            // verifica se esite la directory di destinazione
-            if (!Directory.Exists(dirArchivio))
-            {
-                return GstErrori.EErrore.E1320_DirectoryDestinazioneNonEsiste;
-            }
-
-             // Compone il path foglia destinazione fino alla foglia
-            string pathFogliaDst = dirArchivio + "\\" + foglia;
+            // ----------------------------------------------------------------------------------------
+            // comporre path archivioFoglia
+            string pathArchivioFoglia = pathArchivio + "\\" + foglia;
 
             // verifica se esite la  directory foglia
-            if (!Directory.Exists(pathFogliaDst))
+            if (!Directory.Exists(pathArchivioFoglia))
             {
 
                 // la foglia non esiste, la crea
                 try
                 {
-                    Directory.CreateDirectory(pathFogliaDst);
+                    Directory.CreateDirectory(pathArchivioFoglia);
                 }
                 catch (IOException dirError)
                 {
-                    return GstErrori.EErrore.E1324_DirectoryFogliaDestinazioneNonEsiste;
+                    return GstErrori.EErrore.E1334_DirectoryFogliaArchivioNonEsiste;
                     //Console.WriteLine(copyError.Message);
                 }
             }
 
+            // ----------------------------------------------------------------------------------------
             // Compone il path file destinazione completo
-            string pathFileDst = pathFogliaDst + "\\" + nome;
+            string pathFileDst = pathArchivioFoglia + "\\" + nome;
 
             // verifica se esite il file destinazione
-            if (File.Exists(dirArchivio))
+            if (File.Exists(pathFileDst))
             {
                 // DEBUG GG: gestire la duplicazione
-                return GstErrori.EErrore.E1370_FileDestinazioneNonEsiste;
+                return GstErrori.EErrore.E1381_FileArchivioEsiste;
             }
 
-            // copia il file
+            // ----------------------------------------------------------------------------------------
+            // sposta il file
             try
             {
-                File.Copy(pathSrc, pathFileDst, false);
+                File.Move(pathSrc, pathFileDst);
             }
-            catch (IOException copyError)
+            catch (IOException moveError)
             {
-                return GstErrori.EErrore.E1371_FileDestinazioneEsiste;
+                return GstErrori.EErrore.E1382_FileArchivioNonSpostato;
                 //Console.WriteLine(copyError.Message);
             }
 

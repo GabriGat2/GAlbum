@@ -1,20 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+//using Image = System.Drawing.Image;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using Image = System.Drawing.Image;
-using System.Drawing.Imaging;
 using static GAlbum.GstErrori;
-using System.Drawing;
-using System.Security.Cryptography;
 
 namespace GAlbum
 {
     public class CImmagine
-    {   
+    {
+        // ==================================================================================================================
+        // Proprietà
+        // ==================================================================================================================
+        /// <summary>
+        /// nome della directory di archivio
+        /// </summary>
+        private const string DirTMP = "_TMP_";
         /// <summary>
         /// Immagine di appoggio
         /// </summary>
@@ -58,12 +66,18 @@ namespace GAlbum
             if (pictureBox == null) 
                 return EErrore.E0001_NOK;
 
+            // duplico il file dell'immagine
+            string pathFotoTmp;
+            esito = CopiaImmagineTemporanea(pathFoto, out pathFotoTmp);
+            if (esito != EErrore.E0000_OK)
+                return esito;
+
             // verifico se il file dell'immagine esiste
-            if (!File.Exists(pathFoto))
+            if (!File.Exists(pathFotoTmp))
                 return EErrore.E1401_ImmagineNonEsiste;
             
             // scompone il path dell'immagine e ricava il nome dell'immagine
-            string [] campiImmagine = pathFoto.Split('\\');
+            string [] campiImmagine = pathFotoTmp.Split('\\');
             String nomeImmagine = campiImmagine[campiImmagine.Length - 1];
 
             // scompone il nome dell'immagine e ricava l'estenzione del file 
@@ -80,18 +94,18 @@ namespace GAlbum
                 case "jfif":
                 // immagini png
                 case "png":
-                    pictureBox.Image = System.Drawing.Image.FromFile(@pathFoto);
+                    pictureBox.Image = System.Drawing.Image.FromFile(@pathFotoTmp);
                     break;
                 // immagini bmp
                 case "bmp":
                 case "dib":
-                    pictureBox.Image = System.Drawing.Image.FromFile(@pathFoto);
+                    pictureBox.Image = System.Drawing.Image.FromFile(@pathFotoTmp);
                     break;
 
                 // immagini mov
                 case "mov":
                     CDevFilm_Vlc film = new CDevFilm_Vlc();
-                    esito = film.MostraFilm(pathFoto, out image);
+                    esito = film.MostraFilm(pathFotoTmp, out image);
                     if (esito != EErrore.E0000_OK)
                         return esito;
                     else
@@ -101,7 +115,7 @@ namespace GAlbum
                 // immagini heic
                 case "heic":
                     CDevImmagine dev = new CDevImmagine_Magic();
-                    esito = dev.ConvertiHeicJpeg(pathFoto, out image);
+                    esito = dev.ConvertiHeicJpeg(pathFotoTmp, out image);
                     if (esito != EErrore.E0000_OK)
                         return esito;
                     else
@@ -164,6 +178,114 @@ namespace GAlbum
             // Stampa immagine
             pictureBox.Image = immagine;
 
+        }
+        /// <summary>
+        /// Fa una copia del file nella directory _TMP
+        /// </summary>
+        /// <param name="pathSrc"></param>
+        /// <param name="pathSrcTmp"></param>
+        /// <returns></returns>
+        private EErrore CopiaImmagineTemporanea(string pathSrc, out string pathSrcTmp)
+        {
+            // inizializza pathSrcTmp
+            pathSrcTmp = "";
+
+
+            // verifica se esite il file sorgente
+            if (!File.Exists(pathSrc))
+            {
+                return GstErrori.EErrore.E1360_FileSorgenteNonEsiste;
+            }
+
+            // scompone path sorgente
+            string[] campiSrc = pathSrc.Split('\\');
+            if (campiSrc.Length < 3)
+            {
+                return GstErrori.EErrore.E1312_DirectorySorgenteCampiMinimiNonPresenti;
+            }
+
+            // Estrae i dati notevoli da pathSorgente
+            string ramoSrc = campiSrc[campiSrc.Length - 3];
+            string foglia = campiSrc[campiSrc.Length - 2].ToUpper();
+            string nome = campiSrc[campiSrc.Length - 1];
+
+            // ----------------------------------------------------------------------------------------
+
+            // compone path archivio
+            string pathArchivio = campiSrc[0];
+            for (int i = 1; i < campiSrc.Length - 3; i++)
+            {
+                pathArchivio += "\\" + campiSrc[i];
+            }
+            // aggiunge dir Archivio
+            pathArchivio += "\\" + DirTMP;
+
+            // verifica se esite la  directory Archivio
+            if (!Directory.Exists(pathArchivio))
+            {
+
+                // dir Archivio non esiste, la crea
+                try
+                {
+                    Directory.CreateDirectory(pathArchivio);
+                }
+                catch (IOException dirError)
+                {
+                    // DEBUG GG: migliorare la gestione
+                    return GstErrori.EErrore.E1330_DirectoryArchivioNonEsiste;
+                    //Console.WriteLine(copyError.Message);
+                }
+            }
+
+            // ----------------------------------------------------------------------------------------
+            // comporre path archivioFoglia
+            string pathArchivioFoglia = pathArchivio + "\\" + foglia;
+
+            // verifica se esite la  directory foglia
+            if (!Directory.Exists(pathArchivioFoglia))
+            {
+
+                // la foglia non esiste, la crea
+                try
+                {
+                    Directory.CreateDirectory(pathArchivioFoglia);
+                }
+                catch (IOException dirError)
+                {
+                    return GstErrori.EErrore.E1334_DirectoryFogliaArchivioNonEsiste;
+                    //Console.WriteLine(copyError.Message);
+                }
+            }
+
+            // ----------------------------------------------------------------------------------------
+            // Compone il path file destinazione completo
+            string pathFileDst = pathArchivioFoglia + "\\" + DirTMP + nome;
+
+            //// verifica se esite il file destinazione
+            //if (File.Exists(pathFileDst))
+            //{
+            //    // DEBUG GG: gestire la duplicazione
+            //    return GstErrori.EErrore.E1381_FileArchivioEsiste;
+            //}
+
+            // ----------------------------------------------------------------------------------------
+            // copia il file
+            try
+            {
+                File.Copy(pathSrc, pathFileDst, true);
+            }
+            catch (IOException copyError)
+            {
+                return GstErrori.EErrore.E1382_FileArchivioNonSpostato;
+                //Console.WriteLine(copyError.Message);
+            }
+
+
+            // Assegna path src
+            pathSrcTmp = pathFileDst;
+
+
+            return GstErrori.EErrore.E0000_OK;
         }
 
     }
