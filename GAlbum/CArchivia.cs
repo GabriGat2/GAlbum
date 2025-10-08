@@ -84,9 +84,6 @@ namespace GAlbum
 
             return GstErrori.EErrore.E0000_OK;
         }
-
-
-
         /// <summary>
         /// Copia un file
         /// </summary>
@@ -175,18 +172,6 @@ namespace GAlbum
         {
             // crea una lista di stringhe
             pathDestinazioni = new List<String>();
-
-
-            //// Estrae le info del nodo 
-            //CInfoDirFoto info = (CInfoDirFoto)nodoBase.Tag;
-
-
-            //// verifica se il nodo è selezionato
-            //if (info.Selezione)
-            //{
-            //    pathDestinazioni.Add(info.Path);
-            //}
-
 
             // Analizza i nodi figlio
             return NodiSelezionati(nodoBase, ref pathDestinazioni);
@@ -340,7 +325,5 @@ namespace GAlbum
 
             return GstErrori.EErrore.E1382_FileArchivioNonSpostato;
         }
-
-
-        }// fine class CArchivia
-    }// fine namespace GAlbum
+    }// fine class CArchivia
+}// fine namespace GAlbum

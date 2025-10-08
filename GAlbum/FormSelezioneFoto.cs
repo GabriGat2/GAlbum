@@ -286,8 +286,6 @@ namespace GAlbum
             CImmagine cImmagine = new CImmagine();
             GstErrori.EErrore esito = cImmagine.CancellaDirTemporanea(pathSrc);
 
-
-
             // Verifica che lo stato sia attivo
             if (Stato)
             {

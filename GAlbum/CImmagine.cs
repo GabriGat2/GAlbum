@@ -83,12 +83,6 @@ namespace GAlbum
             if (pictureBox == null) 
                 return EErrore.E0001_NOK;
 
-            // duplico il file dell'immagine
-            //string pathFotoTmp;
-            //esito = CopiaImmagineTemporanea(pathFoto, out pathFotoTmp);
-            //if (esito != EErrore.E0000_OK)
-            //    return esito;
-
             // verifico se il file dell'immagine esiste
             if (!File.Exists(pathFoto))
                 return EErrore.E1401_ImmagineNonEsiste;
@@ -111,53 +105,6 @@ namespace GAlbum
                 case "jfif":
                 // immagini png
                 case "png":
-
-
-                    // ###################################################################################################
-
-
-                        //// Crea uno Stream dal percorso del file
-                        //using (FileStream fileStream = new FileStream(pathFotoTmp, FileMode.Open, FileAccess.Read))
-                        //{
-                        //    try
-                        //    {
-                        //        // Carica l'immagine dallo Stream
-                        //        this.image = Image.FromStream(fileStream);
-
-                        //        // chiude il file stream
-                        //        fileStream.Close();
-
-                        //        // Assegna l'immagine al PictureBox
-                        //        pictureBox.Image = this.image;
-                        //    }
-                        //    catch (Exception ex)
-                        //    {
-                        //        MessageBox.Show("Errore nel caricamento dell'immagine: " + ex.Message);
-                        //    }
-                        //}
-
-
-                    /// ##################################################################################################
-
-
-
-
-                    //try
-                    //{
-                    //    using (Image image2 = Image.FromFile(@pathFotoTmp))
-                    //    {
-                    //        this.image = image2;
-                    //        //pictureBox.Image = image2;
-                    //    }
-                    //    // L'immagine è ora "libera" e il file può essere modificato o spostato.
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    return EErrore.E0001_NOK;
-                    //}
-
-                    //pictureBox.Image = this.image;
-                    //pictureBox.Image = System.Drawing.Image.FromFile(@pathFotoTmp);
                     esito = CaricaFoto(pathFoto, ref pictureBox);
                     if (esito != EErrore.E0000_OK)
                         return esito;
@@ -165,8 +112,6 @@ namespace GAlbum
                 // immagini bmp
                 case "bmp":
                 case "dib":
-                    //pictureBox.Image = System.Drawing.Image.FromFile(@pathFotoTmp);
-                    //break;
                     esito = CaricaFoto(pathFoto, ref pictureBox);
                     if (esito != EErrore.E0000_OK)
                         return esito;
@@ -364,9 +309,6 @@ namespace GAlbum
         /// <returns></returns>
         public EErrore CancellaDirTemporanea(string pathSrc)
         {
-            return CancellaFileTemporanei(pathSrc); 
-
-
             // scompone path della directory  sorgente
             string[] campiSrc = pathSrc.Split('\\');
             if (campiSrc.Length < 2)
@@ -456,9 +398,7 @@ namespace GAlbum
                     }   
                 }
 
-
-
-                Directory.Delete(pathArchivio, true);
+                //Directory.Delete(pathArchivio, true);
             }
             catch (IOException dirError)
             {
