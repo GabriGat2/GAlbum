@@ -272,23 +272,43 @@ namespace GAlbum
             // commuta stato
             AggiornaStato(!Stato);
 
+            // Verifica se c'è un nodo sorgente selezionato
+            if (InfoNodoSorgenteSelezionato == null)
+            {
+                return;
+            }
+
+            // stampa il path della directory
+            string pathSrc = InfoNodoSorgenteSelezionato.Path;
+            textBoxPathFoto.Text = pathSrc;
+
+            // Cancella, eventuale, dir TMP
+            CImmagine cImmagine = new CImmagine();
+            GstErrori.EErrore esito = cImmagine.CancellaDirTemporanea(pathSrc);
+
+
+
             // Verifica che lo stato sia attivo
             if (Stato)
             {
 
-                // Verifica se c'è un nodo sorgente selezionato
-                if (InfoNodoSorgenteSelezionato == null)
-                {
-                    return;
-                }
+                //// Verifica se c'è un nodo sorgente selezionato
+                //if (InfoNodoSorgenteSelezionato == null)
+                //{
+                //    return;
+                //}
 
+                //// stampa il path della directory
+                //string pathSrc = InfoNodoSorgenteSelezionato.Path;
+                //textBoxPathFoto.Text = pathSrc;
 
-                // stampa il path della directory
-                string path = InfoNodoSorgenteSelezionato.Path;
-                textBoxPathFoto.Text = path;
+                //// Cancella, eventuale, dir TMP
+                //CImmagine cImmagine = new CImmagine();
+                //GstErrori.EErrore esito = cImmagine.CancellaDirTemporanea(pathSrc); 
+
 
                 // carica la lista dei file contenuti nella directory
-                fotoSrcList = Directory.GetFiles(path, "*.*");
+                fotoSrcList = Directory.GetFiles(pathSrc, "*.*");
                 idFotoSrcList = 0;
 
                 MostraFoto(fotoSrcList[0], ref butApri);
@@ -534,7 +554,11 @@ namespace GAlbum
             //pictureBox1
             if (!Stato)
             {
+                if (pictureBox1.Image != null)
+                    pictureBox1.Image.Dispose();
+
                 pictureBox1.Image = null;
+
                 textBoxPathFoto.Text = "";
             }
 

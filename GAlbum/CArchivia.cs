@@ -145,7 +145,11 @@ namespace GAlbum
             if (File.Exists(pathFileDst))
             {
                 // DEBUG GG: gestire la duplicazione
-                return GstErrori.EErrore.E1370_FileDestinazioneNonEsiste;
+                bool reso = GstErrori.StampaMessaggioErrore(GstErrori.EErrore.E1371_FileDestinazioneEsiste);
+                if (reso)
+                    return EErrore.E0000_OK;
+                else
+                    return GstErrori.EErrore.E1371_FileDestinazioneEsiste;
             }
 
             // copia il file
@@ -282,7 +286,7 @@ namespace GAlbum
             }
 
             // ----------------------------------------------------------------------------------------
-            // comporre path archivioFoglia
+            // compone path archivioFoglia
             string pathArchivioFoglia = pathArchivio + "\\" + foglia;
 
             // verifica se esite la  directory foglia
@@ -309,24 +313,34 @@ namespace GAlbum
             if (File.Exists(pathFileDst))
             {
                 // DEBUG GG: gestire la duplicazione
-                return GstErrori.EErrore.E1381_FileArchivioEsiste;
+                File.Delete(pathSrc);
+                return GstErrori.EErrore.E0000_OK;
+                //return GstErrori.EErrore.E1381_FileArchivioEsiste;
             }
 
             // ----------------------------------------------------------------------------------------
             // sposta il file
-            try
+            int cnt = 10;
+            while (cnt-- > 0)
             {
-                File.Move(pathSrc, pathFileDst);
-            }
-            catch (IOException moveError)
-            {
-                return GstErrori.EErrore.E1382_FileArchivioNonSpostato;
-                //Console.WriteLine(copyError.Message);
+                try
+                {
+                    File.Move(pathSrc, pathFileDst);
+                    return GstErrori.EErrore.E0000_OK;
+                }
+                catch (IOException moveError)
+                {
+                    bool reso = GstErrori.StampaMessaggioErrore(GstErrori.EErrore.E1382_FileArchivioNonSpostato);
+                    if (reso)
+                        ;
+                    else
+                        return GstErrori.EErrore.E1382_FileArchivioNonSpostato;
+                }
             }
 
-            return GstErrori.EErrore.E0000_OK;
+            return GstErrori.EErrore.E1382_FileArchivioNonSpostato;
         }
 
 
-    }// fine class CArchivia
+        }// fine class CArchivia
     }// fine namespace GAlbum

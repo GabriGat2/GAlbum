@@ -62,22 +62,39 @@ namespace GAlbum
         {
             EErrore esito = EErrore.E0001_NOK;
 
+            // libero pctureBox
+            if (pictureBox.Image != null)
+            {
+
+                pictureBox.Image.Dispose();
+            }
+            pictureBox.Image = null;
+
+            // libera this.image
+            if (this.image != null)
+            {
+
+                this.image.Dispose();
+            }
+            this.image = null;
+
+
             // verifico che picture box contenga un indirizzo corretto
             if (pictureBox == null) 
                 return EErrore.E0001_NOK;
 
             // duplico il file dell'immagine
-            string pathFotoTmp;
-            esito = CopiaImmagineTemporanea(pathFoto, out pathFotoTmp);
-            if (esito != EErrore.E0000_OK)
-                return esito;
+            //string pathFotoTmp;
+            //esito = CopiaImmagineTemporanea(pathFoto, out pathFotoTmp);
+            //if (esito != EErrore.E0000_OK)
+            //    return esito;
 
             // verifico se il file dell'immagine esiste
-            if (!File.Exists(pathFotoTmp))
+            if (!File.Exists(pathFoto))
                 return EErrore.E1401_ImmagineNonEsiste;
             
             // scompone il path dell'immagine e ricava il nome dell'immagine
-            string [] campiImmagine = pathFotoTmp.Split('\\');
+            string [] campiImmagine = pathFoto.Split('\\');
             String nomeImmagine = campiImmagine[campiImmagine.Length - 1];
 
             // scompone il nome dell'immagine e ricava l'estenzione del file 
@@ -94,18 +111,71 @@ namespace GAlbum
                 case "jfif":
                 // immagini png
                 case "png":
-                    pictureBox.Image = System.Drawing.Image.FromFile(@pathFotoTmp);
+
+
+                    // ###################################################################################################
+
+
+                        //// Crea uno Stream dal percorso del file
+                        //using (FileStream fileStream = new FileStream(pathFotoTmp, FileMode.Open, FileAccess.Read))
+                        //{
+                        //    try
+                        //    {
+                        //        // Carica l'immagine dallo Stream
+                        //        this.image = Image.FromStream(fileStream);
+
+                        //        // chiude il file stream
+                        //        fileStream.Close();
+
+                        //        // Assegna l'immagine al PictureBox
+                        //        pictureBox.Image = this.image;
+                        //    }
+                        //    catch (Exception ex)
+                        //    {
+                        //        MessageBox.Show("Errore nel caricamento dell'immagine: " + ex.Message);
+                        //    }
+                        //}
+
+
+                    /// ##################################################################################################
+
+
+
+
+                    //try
+                    //{
+                    //    using (Image image2 = Image.FromFile(@pathFotoTmp))
+                    //    {
+                    //        this.image = image2;
+                    //        //pictureBox.Image = image2;
+                    //    }
+                    //    // L'immagine è ora "libera" e il file può essere modificato o spostato.
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    return EErrore.E0001_NOK;
+                    //}
+
+                    //pictureBox.Image = this.image;
+                    //pictureBox.Image = System.Drawing.Image.FromFile(@pathFotoTmp);
+                    esito = CaricaFoto(pathFoto, ref pictureBox);
+                    if (esito != EErrore.E0000_OK)
+                        return esito;
                     break;
                 // immagini bmp
                 case "bmp":
                 case "dib":
-                    pictureBox.Image = System.Drawing.Image.FromFile(@pathFotoTmp);
+                    //pictureBox.Image = System.Drawing.Image.FromFile(@pathFotoTmp);
+                    //break;
+                    esito = CaricaFoto(pathFoto, ref pictureBox);
+                    if (esito != EErrore.E0000_OK)
+                        return esito;
                     break;
 
                 // immagini mov
                 case "mov":
                     CDevFilm_Vlc film = new CDevFilm_Vlc();
-                    esito = film.MostraFilm(pathFotoTmp, out image);
+                    esito = film.MostraFilm(pathFoto, out image);
                     if (esito != EErrore.E0000_OK)
                         return esito;
                     else
@@ -115,7 +185,7 @@ namespace GAlbum
                 // immagini heic
                 case "heic":
                     CDevImmagine dev = new CDevImmagine_Magic();
-                    esito = dev.ConvertiHeicJpeg(pathFotoTmp, out image);
+                    esito = dev.ConvertiHeicJpeg(pathFoto, out image);
                     if (esito != EErrore.E0000_OK)
                         return esito;
                     else
@@ -287,6 +357,151 @@ namespace GAlbum
 
             return GstErrori.EErrore.E0000_OK;
         }
+        /// <summary>
+        /// cancella dir temporanea e tutto il suo contenuto
+        /// </summary>
+        /// <param name="pathSrc"></param>
+        /// <returns></returns>
+        public EErrore CancellaDirTemporanea(string pathSrc)
+        {
+            return CancellaFileTemporanei(pathSrc); 
 
-    }
-}
+
+            // scompone path della directory  sorgente
+            string[] campiSrc = pathSrc.Split('\\');
+            if (campiSrc.Length < 2)
+            {
+                return GstErrori.EErrore.E1312_DirectorySorgenteCampiMinimiNonPresenti;
+            }
+
+            // ----------------------------------------------------------------------------------------
+
+            // compone path archivio
+            string pathArchivio = campiSrc[0];
+            for (int i = 1; i < campiSrc.Length - 2; i++)
+            {
+                pathArchivio += "\\" + campiSrc[i];
+            }
+            // aggiunge dir Archivio
+            pathArchivio += "\\" + DirTMP;
+
+            // verifica se esite la  directory Archivio
+            if (!Directory.Exists(pathArchivio))
+            {
+                return EErrore.E0000_OK;
+
+            }
+            
+            // Cancella la directory temporanea e tutto il suo contenuto
+            try
+            {
+                Directory.Delete(pathArchivio, true);
+            }
+            catch (IOException dirError)
+            {
+                // DEBUG GG: migliorare la gestione
+                return GstErrori.EErrore.E1330_DirectoryArchivioNonEsiste;
+                //Console.WriteLine(copyError.Message);
+            }
+
+            return GstErrori.EErrore.E0000_OK;
+        }
+        /// <summary>
+        /// Cancella file temporanei
+        /// </summary>
+        /// <param name="pathSrc"></param>
+        /// <returns></returns>
+        public EErrore CancellaFileTemporanei(string pathSrc)
+        {
+            // scompone path della directory  sorgente
+            string[] campiSrc = pathSrc.Split('\\');
+            if (campiSrc.Length < 2)
+            {
+                return GstErrori.EErrore.E1312_DirectorySorgenteCampiMinimiNonPresenti;
+            }
+
+            // ----------------------------------------------------------------------------------------
+
+            // compone path archivio
+            string pathArchivio = campiSrc[0];
+            for (int i = 1; i < campiSrc.Length - 2; i++)
+            {
+                pathArchivio += "\\" + campiSrc[i];
+            }
+            // aggiunge dir Archivio
+            pathArchivio += "\\" + DirTMP;
+
+            // verifica se esite la  directory Archivio
+            if (!Directory.Exists(pathArchivio))
+            {
+                return EErrore.E0000_OK;
+
+            }
+
+            // Cancella la directory temporanea e tutto il suo contenuto
+            string fileRicerca = DirTMP + "*.*";
+            try
+            {
+                string [] fotoTmpList = Directory.GetFiles(pathArchivio, fileRicerca, SearchOption.AllDirectories);
+
+                foreach (var fileTMP in fotoTmpList)
+                {
+                    try 
+                    { 
+                        File.Delete(fileTMP);
+                    }
+                    catch 
+                    {
+                        ;
+                    }   
+                }
+
+
+
+                Directory.Delete(pathArchivio, true);
+            }
+            catch (IOException dirError)
+            {
+                // DEBUG GG: migliorare la gestione
+                return GstErrori.EErrore.E1330_DirectoryArchivioNonEsiste;
+                //Console.WriteLine(copyError.Message);
+            }
+
+            return GstErrori.EErrore.E0000_OK;
+        }
+        /// <summary>
+        /// Carica un immagine in picturBox lasciando il file immagine libero
+        /// </summary>
+        /// <param name="pathFoto"></param>
+        /// <param name="pictureBox"></param>
+        /// <returns></returns>
+        protected GstErrori.EErrore CaricaFoto(string pathFoto, ref System.Windows.Forms.PictureBox pictureBox)
+        {
+            // Crea uno Stream dal percorso del file
+            using (FileStream fileStream = new FileStream(pathFoto, FileMode.Open, FileAccess.Read))
+            {
+                try
+                {
+                    // Carica l'immagine dallo Stream
+                    this.image = Image.FromStream(fileStream);
+
+                    // chiude il file stream
+                    fileStream.Close();
+
+                    // Assegna l'immagine al PictureBox
+                    pictureBox.Image = this.image;
+                }
+                catch (Exception ex)
+                {
+                    return EErrore.E0001_NOK;
+                    //MessageBox.Show("Errore nel caricamento dell'immagine: " + ex.Message);
+                }
+            }
+
+            return EErrore.E0000_OK;
+        }
+
+
+    }// fine classe CImmagine
+
+}// fine namespace GAlbum
