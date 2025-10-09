@@ -114,6 +114,7 @@ namespace GAlbum
             E1355_FileCopiato,
             E1356_FileNonCancellato,
             E1357_FileCancellato,
+            E1358_FileNomeNonCorretto,
 
             // Errori relativi a file sorgente
             // =======================

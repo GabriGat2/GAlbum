@@ -38,7 +38,7 @@ namespace GAlbum
         /// </summary>
         public CArchivia()
         {
-            
+
         }
         /// <summary>
         /// Assena un file a varie destinazioni
@@ -48,7 +48,15 @@ namespace GAlbum
         /// <returns></returns>
         public GstErrori.EErrore Assegna(string pathSrc, List<String> pathDestinazioni)
         {
+            // Assegna il file specificato
             EErrore esito = Assegna2(pathSrc, pathDestinazioni);
+            if (esito != EErrore.E0000_OK)
+            {
+                GstErrori.StampaMessaggioErrore(esito, pathSrc);
+            }
+
+            // Cerca nelle altr foglie il file specificato e lo assegna
+            esito = AssegnaDaFoglia(pathSrc, pathDestinazioni);
             if (esito != EErrore.E0000_OK)
             {
                 GstErrori.StampaMessaggioErrore(esito, pathSrc);
@@ -85,6 +93,64 @@ namespace GAlbum
             return GstErrori.EErrore.E0000_OK;
         }
         /// <summary>
+        /// Assena un file, prelevato da tutte le foglie, a varie destinazioni
+        /// </summary>
+        /// <param name="pathSrc"></param>
+        /// <param name="pathDestinazioni"></param>
+        /// <returns></returns>
+        private GstErrori.EErrore AssegnaDaFoglia(string pathSrc, List<String> pathDestinazioni)
+        {
+            GstErrori.EErrore esito = GstErrori.EErrore.E0001_NOK;
+
+            // scompone il file sorgente e ricava le sue caratteristiche
+            string pathBase;
+            string ramo;
+            string foglia;
+            string nome;
+            esito = ScomponePath(pathSrc, out pathBase, out ramo, out foglia, out nome);
+            if (esito != EErrore.E0000_OK)
+                return esito;
+
+            // Scompone il nome del file
+            string nomeSE;
+            string estensione;
+            esito = ScomponeNome(nome, out nomeSE, out estensione);
+
+            // compone il path del ramo
+            string pathRamo = pathBase + "\\" + ramo;
+
+            // compone la lista delle foglie 
+            string [] pathFoglie = Directory.GetDirectories(pathRamo);
+
+            foreach (var pathFoglia in pathFoglie)
+            {
+                // estrae nome foglia 
+                string[] campiFoglia = pathFoglia.Split('\\');
+                if (campiFoglia.Length < 2)
+                {
+                    return GstErrori.EErrore.E1312_DirectorySorgenteCampiMinimiNonPresenti;
+                }
+                string nomeFoglia = campiFoglia[campiFoglia.Length - 1];
+
+                // verifica che non sia la foglia sorgente 
+                if (nomeFoglia.ToUpper() == foglia) 
+                    continue;
+
+                // compone la lista dei file 
+                string[] pathNomi = Directory.GetFiles(pathFoglia, nomeSE + ".*");
+
+                // esamina i file nella lista 
+                foreach (var pathNuovoNome in pathNomi)
+                {
+                    esito = Assegna2(pathNuovoNome, pathDestinazioni);
+                    if (esito != EErrore.E0000_OK)
+                        return esito;
+                }
+            }
+
+            return GstErrori.EErrore.E0000_OK;
+        }
+        /// <summary>
         /// Copia un file
         /// </summary>
         /// <param name="pathSrc"> path + nome del file sorgente </param>
@@ -109,13 +175,13 @@ namespace GAlbum
             if (campiSrc.Length < 3)
             {
                 return GstErrori.EErrore.E1312_DirectorySorgenteCampiMinimiNonPresenti;
-            }    
+            }
 
             // Estrae i dati notevoli da pathSorgente
-            string ramoSrc = campiSrc [campiSrc.Length - 3];
+            string ramoSrc = campiSrc[campiSrc.Length - 3];
             string foglia = campiSrc[campiSrc.Length - 2].ToUpper();
             string nome = campiSrc[campiSrc.Length - 1];
-                        
+
             // Compone il path foglia destinazione fino alla foglia
             string pathFogliaDst = pathDst + "\\" + foglia;
 
@@ -248,10 +314,10 @@ namespace GAlbum
             for (int i = 1; i < campiSrc.Length - 3; i++)
             {
                 //pathArchivio += campiSrc[i] + "\\";
-                pathArchivio +=  "\\" + campiSrc[i];
+                pathArchivio += "\\" + campiSrc[i];
             }
             // aggiunge dir Archivio
-            pathArchivio += "\\"+ dirArchivio;
+            pathArchivio += "\\" + dirArchivio;
 
             // verifica se esite la  directory Archivio
             if (!Directory.Exists(pathArchivio))
@@ -325,5 +391,72 @@ namespace GAlbum
 
             return GstErrori.EErrore.E1382_FileArchivioNonSpostato;
         }
+        /// <summary>
+        /// Scopone il path di una foto
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="pathBase"></param>
+        /// <param name="ramo"></param>
+        /// <param name="foglia"></param>
+        /// <param name="nome"></param>
+        /// <returns></returns>
+        private GstErrori.EErrore ScomponePath (string path, out string pathBase, out string ramo, out string foglia, out string nome)
+        {
+            // Inizializza le variabili rese
+            pathBase = "";
+            ramo = "";
+            foglia = "";
+            nome = "";
+
+            // scompone path sorgente
+            string[] campiSrc = path.Split('\\');
+            if (campiSrc.Length < 3)
+            {
+                return GstErrori.EErrore.E1312_DirectorySorgenteCampiMinimiNonPresenti;
+            }
+
+            // Estrae i dati notevoli da pathSorgente
+            ramo = campiSrc[campiSrc.Length - 3];
+            foglia = campiSrc[campiSrc.Length - 2].ToUpper();
+            nome = campiSrc[campiSrc.Length - 1];
+
+            // ricompone pathBase
+            pathBase = campiSrc[0];
+            for (int i = 1; i < campiSrc.Length - 3; i++)
+            {
+                // pathBase += campiSrc[i] + "\\";
+                pathBase += "\\" + campiSrc[i];
+            }
+
+            return EErrore.E0000_OK;
+
+        }
+        /// <summary>
+        /// Scompone nome da estensione
+        /// </summary>
+        /// <param name="nome"></param>
+        /// <param name="nomeSE"></param>
+        /// <param name="estensione"></param>
+        /// <returns></returns>
+        private GstErrori.EErrore ScomponeNome(string nome, out string nomeSE, out string estensione)
+        {
+            // Inizializza le variabili rese
+            nomeSE = "";
+            estensione = "";
+
+            // scompone nome
+            string[] campiNome = nome.Split('.');
+            if (campiNome.Length != 2)
+            {
+                return GstErrori.EErrore.E1358_FileNomeNonCorretto;
+            }
+
+            // Estrae i dati notevoli da pathSorgente
+            nomeSE = campiNome[campiNome.Length - 2];
+            estensione = campiNome[campiNome.Length - 1];
+
+            return EErrore.E0000_OK;
+        }
+
     }// fine class CArchivia
 }// fine namespace GAlbum
