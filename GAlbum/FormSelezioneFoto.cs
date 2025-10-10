@@ -290,23 +290,18 @@ namespace GAlbum
             if (Stato)
             {
 
-                //// Verifica se c'è un nodo sorgente selezionato
-                //if (InfoNodoSorgenteSelezionato == null)
-                //{
-                //    return;
-                //}
-
-                //// stampa il path della directory
-                //string pathSrc = InfoNodoSorgenteSelezionato.Path;
-                //textBoxPathFoto.Text = pathSrc;
-
-                //// Cancella, eventuale, dir TMP
-                //CImmagine cImmagine = new CImmagine();
-                //GstErrori.EErrore esito = cImmagine.CancellaDirTemporanea(pathSrc); 
-
-
                 // carica la lista dei file contenuti nella directory
                 fotoSrcList = Directory.GetFiles(pathSrc, "*.*");
+                if (fotoSrcList.Length == 0)
+                {
+                    // Rimette lo stato falso
+                    AggiornaStato(false);
+
+                    // Mostra codice di errore
+                    GstErrori.StampaMessaggioErrore(GstErrori.EErrore.E1315_DirectorySorgenteVuota, pathSrc);
+                    return;
+                }
+
                 idFotoSrcList = 0;
 
                 MostraFoto(fotoSrcList[0], ref butApri);
