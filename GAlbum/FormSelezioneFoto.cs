@@ -564,6 +564,10 @@ namespace GAlbum
         /// <param name="e"></param>
         private void treeViewSorgente_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            // verifica che sia in stato false
+            if ((this.Stato))
+                return;
+            
             // verifica se é stato premuto il tasto destro
             if (e.Button == MouseButtons.Right)
             {
@@ -612,7 +616,7 @@ namespace GAlbum
             pictureBox1.Image = null;
 
             // Assegna la foto
-            archivia.Assegna(textBoxPathFoto.Text, pathDestinazioni);
+            archivia.Assegna(textBoxPathFoto.Text, pathDestinazioni, InfoTVSorgente.CopiaParallela);
 
             // mostra la foto successiva
             FotoSuccessiva();

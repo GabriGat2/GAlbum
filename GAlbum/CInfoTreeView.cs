@@ -47,13 +47,20 @@ namespace GAlbum
         /// </summary>
         public uint MaxLivello { get => maxLivello; set => maxLivello = value; }
         private uint maxLivello = 1;
+        /// <summary>
+        /// Abilita la copia in parallelo delle foglie
+        /// </summary>
+        public bool CopiaParallela { get => copiaParallela; set => copiaParallela = value; } 
+        private bool copiaParallela = false;
+
         // ==================================================================================================================
         /// <summary>
         /// Mette qui i refatoring generati automaticamente
         /// </summary>
         private bool mettiloQui;
         public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
-        
+
+
 
         // ==================================================================================================================
         // Metodi
@@ -119,6 +126,8 @@ namespace GAlbum
             mostraFoglie = false;
             mostraRamiRiservati = false;
             maxLivello =  1;
+
+            copiaParallela = true;
         }
     }// fine class CInfoTreeView
 }// fine namespace GAlbum

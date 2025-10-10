@@ -46,7 +46,7 @@ namespace GAlbum
         /// <param name="pathSrc"> path + nome del file sorgente </param>
         /// <param name="pathDestinazioni"> Lista dei path di destinazione senza il nome del file </param>
         /// <returns></returns>
-        public GstErrori.EErrore Assegna(string pathSrc, List<String> pathDestinazioni)
+        public GstErrori.EErrore Assegna(string pathSrc, List<String> pathDestinazioni, bool copiaParallelo)
         {
             // Assegna il file specificato
             EErrore esito = Assegna2(pathSrc, pathDestinazioni);
@@ -55,12 +55,16 @@ namespace GAlbum
                 GstErrori.StampaMessaggioErrore(esito, pathSrc);
             }
 
-            // Cerca nelle altr foglie il file specificato e lo assegna
-            esito = AssegnaDaFoglia(pathSrc, pathDestinazioni);
-            if (esito != EErrore.E0000_OK)
+            // copia parallela: cerca nelle altre foglie il file specificato e lo assegna
+            if (copiaParallelo)
             {
-                GstErrori.StampaMessaggioErrore(esito, pathSrc);
+                esito = AssegnaInParallelo(pathSrc, pathDestinazioni);
+                if (esito != EErrore.E0000_OK)
+                {
+                    GstErrori.StampaMessaggioErrore(esito, pathSrc);
+                }
             }
+           
 
             return esito;
         }
@@ -93,12 +97,12 @@ namespace GAlbum
             return GstErrori.EErrore.E0000_OK;
         }
         /// <summary>
-        /// Assena un file, prelevato da tutte le foglie, a varie destinazioni
+        /// Esegue la copia in parallelo: assena un file, prelevato da tutte le foglie, a varie destinazioni
         /// </summary>
         /// <param name="pathSrc"></param>
         /// <param name="pathDestinazioni"></param>
         /// <returns></returns>
-        private GstErrori.EErrore AssegnaDaFoglia(string pathSrc, List<String> pathDestinazioni)
+        private GstErrori.EErrore AssegnaInParallelo(string pathSrc, List<String> pathDestinazioni)
         {
             GstErrori.EErrore esito = GstErrori.EErrore.E0001_NOK;
 

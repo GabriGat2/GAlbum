@@ -52,6 +52,9 @@ namespace GAlbum
             this.checkBoxRami.Checked = InfoTV.MostraRami;
             this.checkBoxRamiRiservati.Checked = InfoTV.MostraRamiRiservati;
             this.numericUpDownLivello.Value = InfoTV.MaxLivello;
+
+            // inizializa pannello archivia
+            this.checkBoxCopiaParallela.Checked = InfoTV.CopiaParallela;
         }
         /// <summary>
         /// é cambiata la check box mostra stati 
@@ -98,6 +101,15 @@ namespace GAlbum
         private void numericUpDownLivello_ValueChanged(object sender, EventArgs e)
         {
             InfoTV.MaxLivello = ((uint)numericUpDownLivello.Value);
+        }
+        /// <summary>
+        /// il valore di copia parallela é cambiato
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxCopiaParallela_CheckedChanged(object sender, EventArgs e)
+        {
+            InfoTV.CopiaParallela = this .checkBoxCopiaParallela.Checked;
         }
     }// fine class  FormConfigTreeView
 }// fine namespace GAlbum
