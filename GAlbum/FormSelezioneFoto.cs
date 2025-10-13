@@ -603,7 +603,24 @@ namespace GAlbum
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void butAssegna_Click(object sender, EventArgs e)
-        { 
+        {
+            EseguiAssegna((true));
+        }
+        /// <summary>
+        ///  Non Assegna la foto e passa alla successiva
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butNonAssegna_Click(object sender, EventArgs e)
+        {
+            EseguiAssegna(false);
+        }
+        /// <summary>
+        /// Attiva l'assegnazione
+        /// </summary>
+        /// <param name="copia"></param>
+        protected void EseguiAssegna(bool copia)
+        {
             // Crea l'archivo per movimentare le foto
             CArchivia archivia = new CArchivia();
 
@@ -616,25 +633,10 @@ namespace GAlbum
             pictureBox1.Image = null;
 
             // Assegna la foto
-            archivia.Assegna(textBoxPathFoto.Text, pathDestinazioni, InfoTVSorgente.CopiaParallela);
+            archivia.Assegna(textBoxPathFoto.Text, pathDestinazioni, copia, InfoTVSorgente.CopiaParallela);
 
             // mostra la foto successiva
             FotoSuccessiva();
-        }
-        /// <summary>
-        ///  Non Assegna la foto e passa alla successiva
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void butNonAssegna_Click(object sender, EventArgs e)
-        {
-            //mostra la foto successiva
-            FotoSuccessiva();
-        }
-
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
-            int i = 0;
         }
     } // fine della classe
 }// fine del name scope

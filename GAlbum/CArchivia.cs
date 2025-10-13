@@ -45,11 +45,16 @@ namespace GAlbum
         /// </summary>
         /// <param name="pathSrc"> path + nome del file sorgente </param>
         /// <param name="pathDestinazioni"> Lista dei path di destinazione senza il nome del file </param>
+        /// <param name="copia"> Abilita la copia del file in destinazione </param>
+        /// <param name="copiaParallelo"> Abilita la copia in parallelo delle foglie </param>
         /// <returns></returns>
-        public GstErrori.EErrore Assegna(string pathSrc, List<String> pathDestinazioni, bool copiaParallelo)
+        public GstErrori.EErrore Assegna(   string pathSrc, 
+                                            List<String> pathDestinazioni, 
+                                            bool copia, 
+                                            bool copiaParallelo)
         {
             // Assegna il file specificato
-            EErrore esito = Assegna2(pathSrc, pathDestinazioni);
+            EErrore esito = Assegna2(pathSrc, pathDestinazioni, copia);
             if (esito != EErrore.E0000_OK)
             {
                 GstErrori.StampaMessaggioErrore(esito, pathSrc);
@@ -58,7 +63,7 @@ namespace GAlbum
             // copia parallela: cerca nelle altre foglie il file specificato e lo assegna
             if (copiaParallelo)
             {
-                esito = AssegnaInParallelo(pathSrc, pathDestinazioni);
+                esito = AssegnaInParallelo(pathSrc, pathDestinazioni, copia);
                 if (esito != EErrore.E0000_OK)
                 {
                     GstErrori.StampaMessaggioErrore(esito, pathSrc);
@@ -74,19 +79,22 @@ namespace GAlbum
         /// <param name="pathSrc"> path + nome del file sorgente </param>
         /// <param name="pathDestinazioni"> Lista dei path di destinazione senza il nome del file </param>
         /// <returns></returns>
-        public GstErrori.EErrore Assegna2(string pathSrc, List<String> pathDestinazioni)
+        public GstErrori.EErrore Assegna2(string pathSrc, List<String> pathDestinazioni, bool copia)
         {
             GstErrori.EErrore esito = GstErrori.EErrore.E0001_NOK;
 
 
             // Esegue le copie nel numero specificato dalla lista destinazioni
-            foreach (var pathDst in pathDestinazioni)
+            if (copia)
             {
-                // esegue la copia
-                esito = Copia(pathSrc, pathDst);
-                if (esito != GstErrori.EErrore.E0000_OK)
-                    return esito;
+                foreach (var pathDst in pathDestinazioni)
+                {
+                    // esegue la copia
+                    esito = Copia(pathSrc, pathDst);
+                    if (esito != GstErrori.EErrore.E0000_OK)
+                        return esito;
 
+                }
             }
 
             // archivia la foto sorgente
@@ -102,7 +110,7 @@ namespace GAlbum
         /// <param name="pathSrc"></param>
         /// <param name="pathDestinazioni"></param>
         /// <returns></returns>
-        private GstErrori.EErrore AssegnaInParallelo(string pathSrc, List<String> pathDestinazioni)
+        private GstErrori.EErrore AssegnaInParallelo(string pathSrc, List<String> pathDestinazioni, bool copia)
         {
             GstErrori.EErrore esito = GstErrori.EErrore.E0001_NOK;
 
@@ -146,7 +154,7 @@ namespace GAlbum
                 // esamina i file nella lista 
                 foreach (var pathNuovoNome in pathNomi)
                 {
-                    esito = Assegna2(pathNuovoNome, pathDestinazioni);
+                    esito = Assegna2(pathNuovoNome, pathDestinazioni, copia);
                     if (esito != EErrore.E0000_OK)
                         return esito;
                 }
