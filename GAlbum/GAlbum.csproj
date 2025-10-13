@@ -64,6 +64,12 @@
     <Compile Include="CInfoTreeView.cs" />
     <Compile Include="CInfoTreeViewDestinazione.cs" />
     <Compile Include="CInfoTreeViewSorgente.cs" />
+    <Compile Include="FormAmbiente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAmbiente.Designer.cs">
+      <DependentUpon>FormAmbiente.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormConfigTreeView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +97,9 @@
     <Compile Include="GstErrori.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormAmbiente.resx">
+      <DependentUpon>FormAmbiente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormConfigTreeView.resx">
       <DependentUpon>FormConfigTreeView.cs</DependentUpon>
     </EmbeddedResource>

@@ -30,5 +30,15 @@ namespace GAlbum
             FormSelezioneFoto dlg = new FormSelezioneFoto();
             dlg.ShowDialog();           
         }
+        /// <summary>
+        /// Attiva il form per selezionare l'ambiente
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void but_Ambiente_Click(object sender, EventArgs e)
+        {
+            FormAmbiente formAmbiente = new FormAmbiente();
+            formAmbiente.ShowDialog();
+        }
     }
 }

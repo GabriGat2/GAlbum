@@ -30,11 +30,12 @@
         {
             this.butSelezione = new System.Windows.Forms.Button();
             this.ButSelezioneFoto = new System.Windows.Forms.Button();
+            this.but_Ambiente = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // butSelezione
             // 
-            this.butSelezione.Location = new System.Drawing.Point(45, 39);
+            this.butSelezione.Location = new System.Drawing.Point(691, 139);
             this.butSelezione.Name = "butSelezione";
             this.butSelezione.Size = new System.Drawing.Size(75, 23);
             this.butSelezione.TabIndex = 0;
@@ -44,7 +45,7 @@
             // 
             // ButSelezioneFoto
             // 
-            this.ButSelezioneFoto.Location = new System.Drawing.Point(45, 88);
+            this.ButSelezioneFoto.Location = new System.Drawing.Point(31, 104);
             this.ButSelezioneFoto.Name = "ButSelezioneFoto";
             this.ButSelezioneFoto.Size = new System.Drawing.Size(103, 23);
             this.ButSelezioneFoto.TabIndex = 1;
@@ -52,11 +53,22 @@
             this.ButSelezioneFoto.UseVisualStyleBackColor = true;
             this.ButSelezioneFoto.Click += new System.EventHandler(this.ButSelezioneFoto_Click);
             // 
+            // but_Ambiente
+            // 
+            this.but_Ambiente.Location = new System.Drawing.Point(31, 61);
+            this.but_Ambiente.Name = "but_Ambiente";
+            this.but_Ambiente.Size = new System.Drawing.Size(103, 23);
+            this.but_Ambiente.TabIndex = 2;
+            this.but_Ambiente.Text = "Ambiente";
+            this.but_Ambiente.UseVisualStyleBackColor = true;
+            this.but_Ambiente.Click += new System.EventHandler(this.but_Ambiente_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.but_Ambiente);
             this.Controls.Add(this.ButSelezioneFoto);
             this.Controls.Add(this.butSelezione);
             this.Name = "FormMain";
@@ -69,6 +81,7 @@
 
         private System.Windows.Forms.Button butSelezione;
         private System.Windows.Forms.Button ButSelezioneFoto;
+        private System.Windows.Forms.Button but_Ambiente;
     }
 }
 
