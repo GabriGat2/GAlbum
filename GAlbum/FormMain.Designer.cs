@@ -30,7 +30,7 @@
         {
             this.butSelezione = new System.Windows.Forms.Button();
             this.ButSelezioneFoto = new System.Windows.Forms.Button();
-            this.but_Ambiente = new System.Windows.Forms.Button();
+            this.butAreaArchivio = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // butSelezione
@@ -53,22 +53,22 @@
             this.ButSelezioneFoto.UseVisualStyleBackColor = true;
             this.ButSelezioneFoto.Click += new System.EventHandler(this.ButSelezioneFoto_Click);
             // 
-            // but_Ambiente
+            // butAreaArchivio
             // 
-            this.but_Ambiente.Location = new System.Drawing.Point(31, 61);
-            this.but_Ambiente.Name = "but_Ambiente";
-            this.but_Ambiente.Size = new System.Drawing.Size(103, 23);
-            this.but_Ambiente.TabIndex = 2;
-            this.but_Ambiente.Text = "Ambiente";
-            this.but_Ambiente.UseVisualStyleBackColor = true;
-            this.but_Ambiente.Click += new System.EventHandler(this.but_Ambiente_Click);
+            this.butAreaArchivio.Location = new System.Drawing.Point(31, 61);
+            this.butAreaArchivio.Name = "butAreaArchivio";
+            this.butAreaArchivio.Size = new System.Drawing.Size(103, 23);
+            this.butAreaArchivio.TabIndex = 2;
+            this.butAreaArchivio.Text = "AreaArchivio";
+            this.butAreaArchivio.UseVisualStyleBackColor = true;
+            this.butAreaArchivio.Click += new System.EventHandler(this.butAreaArchivio_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.but_Ambiente);
+            this.Controls.Add(this.butAreaArchivio);
             this.Controls.Add(this.ButSelezioneFoto);
             this.Controls.Add(this.butSelezione);
             this.Name = "FormMain";
@@ -81,7 +81,7 @@
 
         private System.Windows.Forms.Button butSelezione;
         private System.Windows.Forms.Button ButSelezioneFoto;
-        private System.Windows.Forms.Button but_Ambiente;
+        private System.Windows.Forms.Button butAreaArchivio;
     }
 }
 

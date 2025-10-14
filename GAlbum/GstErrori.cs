@@ -74,6 +74,17 @@ namespace GAlbum
             E1334_DirectoryFogliaArchivioNonEsiste,
             E1335_DirectoryArchivioVuota,
 
+            // Errori relativi a archivio base
+            // =======================
+            E1340_ArchivioBaseNonEsiste,
+            E1341_ArchivioBaseEsiste,
+
+            // Errori relativi a archivio base
+            // =======================
+            E1350_ArchivioNonEsiste,
+            E1351_ArchivioEsiste,
+            E1352_NomeArchivioIllecito,
+            E1353_NomeArchivioNonPuoCreata,
 
             // Gestione directory
             //E1300_NomeArchivioErrato,

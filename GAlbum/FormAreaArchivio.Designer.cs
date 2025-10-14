@@ -1,6 +1,6 @@
 ﻿namespace GAlbum
 {
-    partial class FormAmbiente
+    partial class FormAreaArchivio
     {
         /// <summary>
         /// Required designer variable.
@@ -30,12 +30,13 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBoxPath = new System.Windows.Forms.GroupBox();
-            this.textBoxSorgente = new System.Windows.Forms.TextBox();
-            this.butSorgente = new System.Windows.Forms.Button();
-            this.butApri = new System.Windows.Forms.Button();
+            this.textAreaArchivioBase = new System.Windows.Forms.TextBox();
+            this.butAreaArchivioBase = new System.Windows.Forms.Button();
+            this.butNuova = new System.Windows.Forms.Button();
             this.splitContainer1B2 = new System.Windows.Forms.SplitContainer();
-            this.treeViewSorgente = new System.Windows.Forms.TreeView();
-            this.groupBoxAmbienti = new System.Windows.Forms.GroupBox();
+            this.groupBoxAreeArchivio = new System.Windows.Forms.GroupBox();
+            this.treeViewAreeArchivio = new System.Windows.Forms.TreeView();
+            this.textBoxAreaArchivio = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -44,7 +45,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1B2)).BeginInit();
             this.splitContainer1B2.Panel1.SuspendLayout();
             this.splitContainer1B2.SuspendLayout();
-            this.groupBoxAmbienti.SuspendLayout();
+            this.groupBoxAreeArchivio.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -67,9 +68,10 @@
             // 
             // groupBoxPath
             // 
-            this.groupBoxPath.Controls.Add(this.textBoxSorgente);
-            this.groupBoxPath.Controls.Add(this.butSorgente);
-            this.groupBoxPath.Controls.Add(this.butApri);
+            this.groupBoxPath.Controls.Add(this.textBoxAreaArchivio);
+            this.groupBoxPath.Controls.Add(this.textAreaArchivioBase);
+            this.groupBoxPath.Controls.Add(this.butAreaArchivioBase);
+            this.groupBoxPath.Controls.Add(this.butNuova);
             this.groupBoxPath.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxPath.Location = new System.Drawing.Point(0, 0);
             this.groupBoxPath.Name = "groupBoxPath";
@@ -78,30 +80,32 @@
             this.groupBoxPath.TabStop = false;
             this.groupBoxPath.Text = "Selezione di sorgente e destinazione";
             // 
-            // textBoxSorgente
+            // textAreaArchivioBase
             // 
-            this.textBoxSorgente.Location = new System.Drawing.Point(172, 29);
-            this.textBoxSorgente.Name = "textBoxSorgente";
-            this.textBoxSorgente.Size = new System.Drawing.Size(706, 20);
-            this.textBoxSorgente.TabIndex = 10;
+            this.textAreaArchivioBase.Location = new System.Drawing.Point(172, 29);
+            this.textAreaArchivioBase.Name = "textAreaArchivioBase";
+            this.textAreaArchivioBase.Size = new System.Drawing.Size(706, 20);
+            this.textAreaArchivioBase.TabIndex = 10;
             // 
-            // butSorgente
+            // butAreaArchivioBase
             // 
-            this.butSorgente.Location = new System.Drawing.Point(80, 27);
-            this.butSorgente.Name = "butSorgente";
-            this.butSorgente.Size = new System.Drawing.Size(86, 23);
-            this.butSorgente.TabIndex = 9;
-            this.butSorgente.Text = "Sorgente";
-            this.butSorgente.UseVisualStyleBackColor = true;
+            this.butAreaArchivioBase.Location = new System.Drawing.Point(6, 27);
+            this.butAreaArchivioBase.Name = "butAreaArchivioBase";
+            this.butAreaArchivioBase.Size = new System.Drawing.Size(160, 23);
+            this.butAreaArchivioBase.TabIndex = 9;
+            this.butAreaArchivioBase.Text = "Area Archivio Base";
+            this.butAreaArchivioBase.UseVisualStyleBackColor = true;
+            this.butAreaArchivioBase.Click += new System.EventHandler(this.butAreaArchivioBase_Click);
             // 
-            // butApri
+            // butNuova
             // 
-            this.butApri.Location = new System.Drawing.Point(10, 27);
-            this.butApri.Name = "butApri";
-            this.butApri.Size = new System.Drawing.Size(63, 23);
-            this.butApri.TabIndex = 5;
-            this.butApri.Text = "Apri";
-            this.butApri.UseVisualStyleBackColor = true;
+            this.butNuova.Location = new System.Drawing.Point(6, 52);
+            this.butNuova.Name = "butNuova";
+            this.butNuova.Size = new System.Drawing.Size(160, 23);
+            this.butNuova.TabIndex = 5;
+            this.butNuova.Text = "Nuova";
+            this.butNuova.UseVisualStyleBackColor = true;
+            this.butNuova.Click += new System.EventHandler(this.butNuova_Click);
             // 
             // splitContainer1B2
             // 
@@ -111,37 +115,44 @@
             // 
             // splitContainer1B2.Panel1
             // 
-            this.splitContainer1B2.Panel1.Controls.Add(this.groupBoxAmbienti);
+            this.splitContainer1B2.Panel1.Controls.Add(this.groupBoxAreeArchivio);
             this.splitContainer1B2.Size = new System.Drawing.Size(890, 632);
             this.splitContainer1B2.SplitterDistance = 296;
             this.splitContainer1B2.TabIndex = 0;
             // 
-            // treeViewSorgente
+            // groupBoxAreeArchivio
             // 
-            this.treeViewSorgente.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewSorgente.Location = new System.Drawing.Point(3, 16);
-            this.treeViewSorgente.Name = "treeViewSorgente";
-            this.treeViewSorgente.Size = new System.Drawing.Size(290, 613);
-            this.treeViewSorgente.TabIndex = 0;
+            this.groupBoxAreeArchivio.Controls.Add(this.treeViewAreeArchivio);
+            this.groupBoxAreeArchivio.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxAreeArchivio.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxAreeArchivio.Name = "groupBoxAreeArchivio";
+            this.groupBoxAreeArchivio.Size = new System.Drawing.Size(296, 632);
+            this.groupBoxAreeArchivio.TabIndex = 1;
+            this.groupBoxAreeArchivio.TabStop = false;
+            this.groupBoxAreeArchivio.Text = "Aree Archivio";
             // 
-            // groupBoxAmbienti
+            // treeViewAreeArchivio
             // 
-            this.groupBoxAmbienti.Controls.Add(this.treeViewSorgente);
-            this.groupBoxAmbienti.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxAmbienti.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxAmbienti.Name = "groupBoxAmbienti";
-            this.groupBoxAmbienti.Size = new System.Drawing.Size(296, 632);
-            this.groupBoxAmbienti.TabIndex = 1;
-            this.groupBoxAmbienti.TabStop = false;
-            this.groupBoxAmbienti.Text = "Ambienti";
+            this.treeViewAreeArchivio.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewAreeArchivio.Location = new System.Drawing.Point(3, 16);
+            this.treeViewAreeArchivio.Name = "treeViewAreeArchivio";
+            this.treeViewAreeArchivio.Size = new System.Drawing.Size(290, 613);
+            this.treeViewAreeArchivio.TabIndex = 0;
             // 
-            // FormAmbiente
+            // textBoxAreaArchivio
+            // 
+            this.textBoxAreaArchivio.Location = new System.Drawing.Point(172, 55);
+            this.textBoxAreaArchivio.Name = "textBoxAreaArchivio";
+            this.textBoxAreaArchivio.Size = new System.Drawing.Size(706, 20);
+            this.textBoxAreaArchivio.TabIndex = 11;
+            // 
+            // FormAreaArchivio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(890, 726);
             this.Controls.Add(this.splitContainer1);
-            this.Name = "FormAmbiente";
+            this.Name = "FormAreaArchivio";
             this.Text = "FormAmbiente";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -152,7 +163,7 @@
             this.splitContainer1B2.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1B2)).EndInit();
             this.splitContainer1B2.ResumeLayout(false);
-            this.groupBoxAmbienti.ResumeLayout(false);
+            this.groupBoxAreeArchivio.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -161,11 +172,12 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.GroupBox groupBoxPath;
-        private System.Windows.Forms.TextBox textBoxSorgente;
-        private System.Windows.Forms.Button butSorgente;
-        private System.Windows.Forms.Button butApri;
+        private System.Windows.Forms.TextBox textAreaArchivioBase;
+        private System.Windows.Forms.Button butAreaArchivioBase;
+        private System.Windows.Forms.Button butNuova;
         private System.Windows.Forms.SplitContainer splitContainer1B2;
-        private System.Windows.Forms.GroupBox groupBoxAmbienti;
-        private System.Windows.Forms.TreeView treeViewSorgente;
+        private System.Windows.Forms.GroupBox groupBoxAreeArchivio;
+        private System.Windows.Forms.TreeView treeViewAreeArchivio;
+        private System.Windows.Forms.TextBox textBoxAreaArchivio;
     }
 }

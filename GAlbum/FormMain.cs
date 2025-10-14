@@ -5,6 +5,23 @@ namespace GAlbum
 {
     public partial class FormMain : Form
     {
+        // ==================================================================================================================
+        // Proprietà
+        // ==================================================================================================================
+        public CAreaArchivio AreaArchivio = new CAreaArchivio();
+
+
+        // ==================================================================================================================
+        /// <summary>
+        /// Mette qui i refatoring generati automaticamente
+        /// </summary>
+        private bool mettiloQui;
+        public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
+
+
+        // ==================================================================================================================
+        // Metodi
+        // ==================================================================================================================
         /// <summary>
         /// Costruttore
         /// </summary>
@@ -31,14 +48,19 @@ namespace GAlbum
             dlg.ShowDialog();           
         }
         /// <summary>
-        /// Attiva il form per selezionare l'ambiente
+        /// Attiva il form per selezionare l'area archivio
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void but_Ambiente_Click(object sender, EventArgs e)
+        private void butAreaArchivio_Click(object sender, EventArgs e)
         {
-            FormAmbiente formAmbiente = new FormAmbiente();
-            formAmbiente.ShowDialog();
+            FormAreaArchivio dlg = new FormAreaArchivio(ref this.AreaArchivio);
+            dlg.ShowDialog();
+
         }
-    }
-}
+
+
+
+    }// fine class FormMain
+}// fine namespace GAlbum
+
