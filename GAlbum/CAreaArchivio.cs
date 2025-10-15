@@ -18,6 +18,14 @@ namespace GAlbum
         public string PathArchivioBase { get => pathArchivioBase; set => pathArchivioBase = value; }
         private string pathArchivioBase;
 
+        //-------------------------------------------------------------------------------------------------------------------
+        // Nomi delle directory
+        public const string DirDaAcquisire = "DaAcquisire";
+        public const string DirDaSmistare = "DaSmistare";
+        public const string DirSmistati = "Smistati";
+
+        private const string DirArchivio = "_Archivio";
+
         // ==================================================================================================================
         /// <summary>
         /// Mette qui i refatoring generati automaticamente
@@ -84,11 +92,74 @@ namespace GAlbum
             }
             catch (Exception e)
             {
-                return GstErrori.EErrore.E1353_NomeArchivioNonPuoCreata;
+                return GstErrori.EErrore.E1353_NonPuoCreareArchivio;
             }
+
+            // crea le sotto directory principali
+            // ----------------------------------
+
+            // compone il path della directory acquisire
+            string pathDaAcquisire = pathNomeArchivio + "\\" + DirDaAcquisire;
+
+            // crea directory acquisire
+            try
+            {
+                Directory.CreateDirectory(pathDaAcquisire);
+            }
+            catch (Exception e)
+            {
+                return GstErrori.EErrore.E1353_NonPuoCreareArchivio;
+            }
+
+            // compone il path della directory DaSmistare
+            string pathDaSmistare = pathNomeArchivio + "\\" + DirDaSmistare;
+
+            // crea directory DaSmistare
+            try
+            {
+                Directory.CreateDirectory(pathDaSmistare);
+            }
+            catch (Exception e)
+            {
+                return GstErrori.EErrore.E1353_NonPuoCreareArchivio;
+            }
+
+            // compone il path della directory Smistati
+            string pathSmistati = pathNomeArchivio + "\\" + DirSmistati;
+
+            // crea directory DaSmistare
+            try
+            {
+                Directory.CreateDirectory(pathSmistati);
+            }
+            catch (Exception e)
+            {
+                return GstErrori.EErrore.E1353_NonPuoCreareArchivio;
+            }
+
+            // compone il path della directory _Archivio
+            //string path_Archivio = pathNomeArchivio + "\\" + DirDaSmistare + "\\" + DirArchivio;
+            string path_Archivio = pathDaSmistare + "\\" + DirArchivio;
+
+            // crea directory _Archivio in DaSmistare
+            try
+            {
+                Directory.CreateDirectory(path_Archivio);
+            }
+            catch (Exception e)
+            {
+                return GstErrori.EErrore.E1353_NonPuoCreareArchivio;
+            }
+
+            
+
+
+
 
             return GstErrori.EErrore.E0000_OK;
         }
+        
+
         
 
 

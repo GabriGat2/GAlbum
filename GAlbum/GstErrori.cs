@@ -84,7 +84,7 @@ namespace GAlbum
             E1350_ArchivioNonEsiste,
             E1351_ArchivioEsiste,
             E1352_NomeArchivioIllecito,
-            E1353_NomeArchivioNonPuoCreata,
+            E1353_NonPuoCreareArchivio,
 
             // Gestione directory
             //E1300_NomeArchivioErrato,
