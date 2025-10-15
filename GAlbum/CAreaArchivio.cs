@@ -138,7 +138,6 @@ namespace GAlbum
             }
 
             // compone il path della directory _Archivio
-            //string path_Archivio = pathNomeArchivio + "\\" + DirDaSmistare + "\\" + DirArchivio;
             string path_Archivio = pathDaSmistare + "\\" + DirArchivio;
 
             // crea directory _Archivio in DaSmistare
