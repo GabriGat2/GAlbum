@@ -17,8 +17,15 @@ namespace GAlbum
         // ==================================================================================================================
         // Proprietà
         // ==================================================================================================================
+        /// <summary>
+        /// riferiemnto all'area archivio
+        /// </summary>
         protected CAreaArchivio AreaArchivio = null;
 
+        /// <summary>
+        /// Nodo sorgente selezionato
+        /// </summary>
+        private CInfoDirFoto InfoNodoSelezionato;
 
         // ==================================================================================================================
         /// <summary>
@@ -47,9 +54,7 @@ namespace GAlbum
         /// </summary>
         private void InizializzaClasse()
         {
-            textAreaArchivioBase.Text = this.AreaArchivio.PathArchivioBase;
-
-            AggiornaTreeview();
+            AggiornaForm();
         }
         /// <summary>
         /// eleziono l'area archivio che contiene gli archivi delle foto
@@ -82,10 +87,27 @@ namespace GAlbum
         /// <param name="e"></param>
         private void butNuova_Click(object sender, EventArgs e)
         {
+            // estra il nome dell'archivio
+            string dirArchivio = textBoxArchivioSelezionato.Text;
+
+            // verifica se esiste
+            if (AreaArchivio.VerificaNomeArchivio(dirArchivio))
+            {
+                // attiva l'archivio selezionato
+                AreaArchivio.DirArchivioAttivo = dirArchivio;
+
+                // Aggiorna il form
+                AggiornaForm();
+
+                return;
+            }
+
+
+
             GstErrori.EErrore esito;
 
             // crea la classe 
-            esito = AreaArchivio.CreaAreaArchivio(textBoxAreaArchivio.Text);
+            esito = AreaArchivio.CreaAreaArchivio(textBoxArchivioSelezionato.Text);
             if (esito != GstErrori.EErrore.E0000_OK)
             {
                 GstErrori.StampaMessaggioErrore(esito);
@@ -111,8 +133,8 @@ namespace GAlbum
             // Crea la lista delle sub directory
             string[] listaSubDir = Directory.GetDirectories(AreaArchivio.PathArchivioBase);
 
-            //// annulla riferimento InfoNodoSorgenteSelezionato
-            //InfoNodoSorgenteSelezionato = null;
+            //// annulla riferimento InfoNodoSelezionato
+            //InfoNodoSelezionato = null;
 
             // inizia aggiornamnto tree view
             treeViewAreeArchivio.BeginUpdate();
@@ -192,7 +214,84 @@ namespace GAlbum
                 return;
             }
         }
+        /// <summary>
+        /// Seleziona un archivio foto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeViewAreeArchivio_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            // verifica lo stato del form
+            //if (Stato)
+            //    return;
+
+            // recuprea il nodo selezionato 
+            TreeNode nodo = treeViewAreeArchivio.SelectedNode;
 
 
+            // Estrae le info della classe 
+            CInfoDirFoto info = (CInfoDirFoto)nodo.Tag;
+
+            // mostra il nome dell'archivio selezionato
+            textBoxArchivioSelezionato.Text = info.Nome;
+
+
+            // aggiorna nodo sorgente selezionato 
+            AggiornaNodoSorgenteSelezionato(ref info);
+
+            //     // commuta la selezione
+            //info.CommutaSelezione();
+
+        }
+        /// <summary>
+        /// Aggiorna il nodo sorgente selezionato 
+        /// </summary>
+        /// <param name="infoNodo"></param>
+        private void AggiornaNodoSorgenteSelezionato(ref CInfoDirFoto infoNodo)
+        {
+            // Verifica se il nodo sorgente é assegnato
+            if (InfoNodoSelezionato != null)
+            {
+                InfoNodoSelezionato.Selezione = false;
+            }
+
+            // aggiona il nodo sorgente selezionato
+            InfoNodoSelezionato = infoNodo;
+
+            // seleziona il nodo
+            InfoNodoSelezionato.Selezione = true;
+        }
+        /// <summary>
+        /// Colora opportunamente il campo archivio foto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxAreaArchivio_TextChanged(object sender, EventArgs e)
+        {
+            // compone il path archvio
+            string pathArchivio = AreaArchivio.PathArchivioBase + "//" + textBoxArchivioSelezionato.Text;
+
+            // verifica se esiste
+            if (Directory.Exists(pathArchivio))
+            {
+                textBoxArchivioSelezionato.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                textBoxArchivioSelezionato.BackColor = Color.LightYellow;
+            }
+        }
+        /// <summary>
+        /// Aggiorna il form
+        /// </summary>
+        private void AggiornaForm()
+        {
+            textAreaArchivioBase.Text = this.AreaArchivio.PathArchivioBase;
+            textBoxArchivioAttivo.Text = this.AreaArchivio.DirArchivioAttivo;
+            textBoxArchivioSelezionato.Text = this.AreaArchivio.DirArchivioAttivo;
+
+            AggiornaTreeview();
+
+        }
     }// fine class FormAreaArchivio
 }// fine namespace GAlbum

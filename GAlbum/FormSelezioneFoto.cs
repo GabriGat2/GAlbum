@@ -418,7 +418,7 @@ namespace GAlbum
             // Crea la lista delle sub directory
             string[] listaSubDir = Directory.GetDirectories(PathDirSorgente);
 
-            // annulla riferimento InfoNodoSorgenteSelezionato
+            // annulla riferimento InfoNodoSelezionato
             InfoNodoSorgenteSelezionato = null;
 
             // inizia aggiornamnto tree view

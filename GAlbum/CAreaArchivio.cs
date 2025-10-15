@@ -15,9 +15,18 @@ namespace GAlbum
         /// <summary>
         /// Path archivio base
         /// </summary>
-        public string PathArchivioBase { get => pathArchivioBase; set => pathArchivioBase = value; }
+        public string PathArchivioBase { get => pathArchivioBase; set => pathArchivioBase = SetPathArchivioBase(value); }
         private string pathArchivioBase;
-
+        /// <summary>
+        /// Nome archivio Attivo
+        /// </summary>
+        public string DirArchivioAttivo { get => dirArchivioAttivo;  set => dirArchivioAttivo = SetArchivioAttivo(value); }
+        private string dirArchivioAttivo;
+        /// <summary>
+        /// Path archivio attivo
+        /// </summary>
+        public string PathArchivioAttivo { get => GetPathArchivioAttivo(); /* set => dirArchivioAttivo = value; */ }
+        
         //-------------------------------------------------------------------------------------------------------------------
         // Nomi delle directory
         public const string DirDaAcquisire = "DaAcquisire";
@@ -32,7 +41,8 @@ namespace GAlbum
         /// </summary>
         private bool mettiloQui;
         public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
-       
+        
+
 
 
         // ==================================================================================================================
@@ -53,6 +63,7 @@ namespace GAlbum
             // DUBUG_GG 
             //pathArchivioBase = "";
             pathArchivioBase = "E:\\Angelo\\Prj\\GAlbum\\AreaArchivioBaseFoto";
+            dirArchivioAttivo = "";
 
 
         }
@@ -150,17 +161,93 @@ namespace GAlbum
                 return GstErrori.EErrore.E1353_NonPuoCreareArchivio;
             }
 
-            
-
-
-
-
             return GstErrori.EErrore.E0000_OK;
         }
-        
+        /// <summary>
+        /// Rende il path dell'archivio attivo
+        /// </summary>
+        /// <returns></returns>
+        public string GetPathArchivioAttivo()
+        {
+            // verifica che il nome dell'archivio attivo sia coerente
+            if (dirArchivioAttivo.Length < 1)
+                return "";
 
-        
+            // compone il path dell'archivio attivo
+            string pathArchivioAttivo = PathArchivioBase + "//" + dirArchivioAttivo;
 
+            // verifica che la directory esiste
+            if (!Directory.Exists(pathArchivioAttivo))
+                return "";
+
+            // L'archivio attivo esiste rende il relativo path
+            return pathArchivioAttivo;
+
+        }
+        /// <summary>
+        /// Rende il path dell'archivio attivo
+        /// </summary>
+        /// <returns></returns>
+        protected string SetArchivioAttivo(string dirArchivio)
+        {
+            // verifica il nome dell Archivio
+            if (!VerificaNomeArchivio(dirArchivio))
+                return "";
+
+            //// verifica che il nome dell'archivio attivo sia coerente
+            //if (dirArchivio.Length < 1)
+            //    return "";
+
+            //// compone il path dell'archivio attivo
+            //string pathArchivioAttivo = PathArchivioBase + "//" + dirArchivioAttivo;
+
+            //// verifica che la directory esiste
+            //if (!Directory.Exists(pathArchivioAttivo))
+            //    return "";
+
+            // L'archivio attivo esiste rende il nome dell'archivio attivo
+            return dirArchivio;
+
+        }
+        /// <summary>
+        /// Verifica il nome dell'archivio
+        /// </summary>
+        /// <param name="dirArchivio"></param>
+        /// <returns></returns>
+        public bool VerificaNomeArchivio(string dirArchivio)
+        {
+            // verifica che il nome dell'archivio attivo sia coerente
+            if (dirArchivio.Length < 1)
+                return false;
+
+            // compone il path dell'archivio attivo
+            string pathArchivioAttivo = PathArchivioBase + "//" + dirArchivioAttivo;
+
+            // verifica che la directory esiste
+            if (!Directory.Exists(pathArchivioAttivo))
+                return false;
+
+            return true;
+        }
+
+
+        /// <summary>
+        /// Verifica ed eventualmente imposta il Path dell'archivio base
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+
+        protected string SetPathArchivioBase(string path)
+        {
+            // verifica che la directory esiste
+            if (!Directory.Exists(path))
+                return "";
+
+            // Azzera il nome della directory
+            this.dirArchivioAttivo = "";
+
+            return path;
+        }
 
     }// fine class CAreaArchivio
 }// fine namespace CAreaArchivio
