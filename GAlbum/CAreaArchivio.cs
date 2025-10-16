@@ -12,11 +12,26 @@ namespace GAlbum
         // ==================================================================================================================
         // Proprietà
         // ==================================================================================================================
+        
+        // ------------------------------------------------------------------------------------------------------------------
+        // Archivio Base
         /// <summary>
         /// Path archivio base
         /// </summary>
         public string PathArchivioBase { get => pathArchivioBase; set => pathArchivioBase = SetPathArchivioBase(value); }
         private string pathArchivioBase;
+        /// <summary>
+        /// nome archivio base
+        /// </summary>
+        public string DirArchivioBase { get => GetDirArchivioBase(); /* set => dirArchivioBase = value; */ }
+        private string dirArchivioBase;
+        /// <summary>
+        /// Vero se l'archivio base é disponibile all'uso
+        /// </summary>
+        public bool ArchivioBaseOK { get => TestPathArchivioBase(); /* set => archivioBaseOK = value; */ }
+                
+        // ------------------------------------------------------------------------------------------------------------------
+        // Archivio Attivo
         /// <summary>
         /// Nome archivio Attivo
         /// </summary>
@@ -26,7 +41,11 @@ namespace GAlbum
         /// Path archivio attivo
         /// </summary>
         public string PathArchivioAttivo { get => GetPathArchivioAttivo(); /* set => dirArchivioAttivo = value; */ }
-        
+        /// <summary>
+        /// Vero se l'archivio attivo é disponibile all'uso
+        /// </summary>
+        public bool ArchivioAttivoOK { get => TestPathArchivioAttivo(); /* set => archivioBaseOK = value; */ }
+
         //-------------------------------------------------------------------------------------------------------------------
         // Nomi delle directory
         public const string DirDaAcquisire = "DaAcquisire";
@@ -41,10 +60,8 @@ namespace GAlbum
         /// </summary>
         private bool mettiloQui;
         public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
-        
 
-
-
+       
         // ==================================================================================================================
         // Metodi
         // ==================================================================================================================
@@ -229,14 +246,34 @@ namespace GAlbum
 
             return true;
         }
+        /// <summary>
+        /// Verifica se l'archivio attivo è disponibile
+        /// </summary>
+        /// <returns></returns>
+        protected Boolean TestPathArchivioAttivo()
+        {
+            // verifica l'archivio base 
+            if (!ArchivioBaseOK)
+                return false;
 
+            // verifica che il nome dell'archivio attivo sia coerente
+            if (dirArchivioAttivo.Length < 1)
+                return false;
 
+            // compone il path dell'archivio attivo
+            string pathArchivioAttivo = PathArchivioBase + "//" + dirArchivioAttivo;
+
+            // verifica che la directory esiste
+            if (!Directory.Exists(pathArchivioAttivo))
+                return false;
+
+            return true;
+        }
         /// <summary>
         /// Verifica ed eventualmente imposta il Path dell'archivio base
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-
         protected string SetPathArchivioBase(string path)
         {
             // verifica che la directory esiste
@@ -248,6 +285,30 @@ namespace GAlbum
 
             return path;
         }
+        /// <summary>
+        /// Verifica se l'archivio base è disponibile
+        /// </summary>
+        /// <returns></returns>
+        protected Boolean TestPathArchivioBase()
+        {
+            // verifica che la directory esiste
+            return  Directory.Exists(pathArchivioBase);
+        }
+        /// <summary>
+        /// Rende il nome dell'archivio base
+        /// </summary>
+        /// <returns></returns>
+        protected string GetDirArchivioBase()
+        {
+            // verifica lo stato dell'archivio base
+            if (!ArchivioBaseOK)
+                return "";
+
+            // Scompone il path dell'archivio base
+            string[] campi = pathArchivioBase.Split('\\');
+            return campi[campi.Length - 1];
+        }
+
 
     }// fine class CAreaArchivio
 }// fine namespace CAreaArchivio

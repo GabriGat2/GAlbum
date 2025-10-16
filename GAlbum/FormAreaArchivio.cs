@@ -72,13 +72,9 @@ namespace GAlbum
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 this.AreaArchivio.PathArchivioBase = dlg.SelectedPath;
-                textAreaArchivioBase.Text = this.AreaArchivio.PathArchivioBase;
+                AggiornaForm(); 
             }
 
-
-
-            // verifica se la directory esiste
-            //VerificaAreaArchivio(path);
         }
         /// <summary>
         /// crea una nuova area archivio
@@ -268,13 +264,42 @@ namespace GAlbum
         /// <param name="e"></param>
         private void textBoxAreaArchivio_TextChanged(object sender, EventArgs e)
         {
+            // Aggiorna textBoxArchivioSelezionato
+            AggiornaArchivioSelezionato();
+
+            //// compone il path archvio
+            //string pathArchivio = AreaArchivio.PathArchivioBase + "//" + textBoxArchivioSelezionato.Text;
+
+            //// verifica se esiste
+            //if (Directory.Exists(pathArchivio))
+            //{
+            //    // verifica se il path archivio è uguale all'archvio attivo
+            //    if (AreaArchivio.PathArchivioAttivo.ToLower().Equals(pathArchivio.ToLower()))
+            //        textBoxArchivioSelezionato.BackColor = Color.LightGreen;
+            //    else
+            //        textBoxArchivioSelezionato.BackColor = Color.LightSalmon;
+            //}
+            //else
+            //{
+            //    textBoxArchivioSelezionato.BackColor = Color.LightYellow;
+            //}
+        }
+        /// <summary>
+        /// Aggiorna la text box dell'archivio selezionato
+        /// </summary>
+        private void AggiornaArchivioSelezionato()
+        {
             // compone il path archvio
             string pathArchivio = AreaArchivio.PathArchivioBase + "//" + textBoxArchivioSelezionato.Text;
 
             // verifica se esiste
             if (Directory.Exists(pathArchivio))
             {
-                textBoxArchivioSelezionato.BackColor = Color.LightGreen;
+                // verifica se il path archivio è uguale all'archvio attivo
+                if (AreaArchivio.PathArchivioAttivo.ToLower().Equals(pathArchivio.ToLower()))
+                    textBoxArchivioSelezionato.BackColor = Color.LightGreen;
+                else
+                    textBoxArchivioSelezionato.BackColor = Color.LightSalmon;
             }
             else
             {
@@ -286,9 +311,31 @@ namespace GAlbum
         /// </summary>
         private void AggiornaForm()
         {
+            // Archivio Base
             textAreaArchivioBase.Text = this.AreaArchivio.PathArchivioBase;
+            if (AreaArchivio.ArchivioBaseOK)
+            {
+                textAreaArchivioBase.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                textAreaArchivioBase.BackColor = Color.LightPink;
+            }
+
+            // Archivio Attivo
             textBoxArchivioAttivo.Text = this.AreaArchivio.DirArchivioAttivo;
-            textBoxArchivioSelezionato.Text = this.AreaArchivio.DirArchivioAttivo;
+            if (AreaArchivio.ArchivioAttivoOK)
+            {
+                textBoxArchivioAttivo.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                textBoxArchivioAttivo.BackColor = Color.LightPink;
+            }
+
+            // Archivio selezionato
+            //textBoxArchivioSelezionato.Text = this.AreaArchivio.DirArchivioAttivo;
+            AggiornaArchivioSelezionato();
 
             AggiornaTreeview();
 

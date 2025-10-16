@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace GAlbum
@@ -28,6 +29,14 @@ namespace GAlbum
         public FormMain()
         {
             InitializeComponent();
+            InizializzaClasse();
+        }
+        /// <summary>
+        /// inizializza la classe
+        /// </summary>
+        private void InizializzaClasse()
+        {
+            AggiornaForm();
         }
         /// <summary>
         /// Attiva il form per selezionare le foto
@@ -57,9 +66,52 @@ namespace GAlbum
             FormAreaArchivio dlg = new FormAreaArchivio(ref this.AreaArchivio);
             dlg.ShowDialog();
 
+            // aggiorna form
+            AggiornaForm();
+
         }
+        /// <summary>
+        /// aggiorna il form 
+        /// </summary>
+        private void AggiornaForm()
+        {
+            // archivio base
+            textBoxAreaArchivioBase.Text = AreaArchivio.DirArchivioBase;
+            textBoxPathAreaArchivioBase.Text = AreaArchivio.PathArchivioBase;
+            if (AreaArchivio.ArchivioBaseOK)
+            {
+                textBoxAreaArchivioBase.BackColor = Color.LightGreen;
+                textBoxPathAreaArchivioBase.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                textBoxAreaArchivioBase.BackColor = Color.LightPink;
+                textBoxPathAreaArchivioBase.BackColor = Color.LightPink;
+            }
+
+            // Archivio attivo
+            textBoxArchivioAttivo.Text = AreaArchivio.DirArchivioAttivo;
+            textBoxPathArchivioAttivo.Text = AreaArchivio.PathArchivioAttivo;
+            if (AreaArchivio.ArchivioAttivoOK)
+            {
+                textBoxArchivioAttivo.BackColor = Color.LightGreen;
+                textBoxPathArchivioAttivo.BackColor = Color.LightGreen;
+
+                ButSelezioneFoto.Enabled = true;
+            }
+            else
+            {
+                textBoxArchivioAttivo.BackColor = Color.LightPink;
+                textBoxPathArchivioAttivo.BackColor = Color.LightPink;
+
+                ButSelezioneFoto.Enabled = false;
+            }
 
 
+            butSelezione.Enabled = false;
+
+
+        }
 
     }// fine class FormMain
 }// fine namespace GAlbum
