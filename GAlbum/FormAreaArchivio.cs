@@ -88,38 +88,37 @@ namespace GAlbum
             string dirArchivio = textBoxArchivioSelezionato.Text;
 
             // verifica se esiste
-            if (AreaArchivio.VerificaNomeArchivioSelezionato(dirArchivio))
+            if (! AreaArchivio.VerificaNomeArchivioSelezionato(dirArchivio))
             {
-                // attiva l'archivio selezionato
-                AreaArchivio.DirArchivioAttivo = dirArchivio;
+                //  l'Archivio non esiste chiede conferma per crearlo
+                string titolo = " Archivio non esiste";
+                string messaggio = "L'archivio " + dirArchivio + " NON esiste! \n\n Vuoi crearlo?";
 
-                // Aggiorna il form
-                AggiornaForm();
+                var result = MessageBox.Show(messaggio, titolo, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.No)
+                {
+                    GstErrori.StampaMessaggioErrore(GstErrori.EErrore.E1388_FileArchivioNonCreato);
+                    return;
 
-                return;
+                }
+
+                // crea l'archivio
+                GstErrori.EErrore esito = AreaArchivio.CreaAreaArchivio(textBoxArchivioSelezionato.Text);
+                if (esito != GstErrori.EErrore.E0000_OK)
+                {
+                    GstErrori.StampaMessaggioErrore(esito);
+                    return;
+                } 
             }
 
-            //  l'Archivio non esiste chiede conferma per crearlo
-            string titolo = " Archivio non esiste";
-            string messaggio = "L'archivio " + dirArchivio + " NON esiste! \n\n Vuoi crearlo?";
-
-            var result = MessageBox.Show(messaggio, titolo, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.No)
-                return; //GstErrori.EErrore.E1388_FileArchivioNonCreato;
-
-
-            GstErrori.EErrore esito;
-
-            // crea l'archivio
-            esito = AreaArchivio.CreaAreaArchivio(textBoxArchivioSelezionato.Text);
-            if (esito != GstErrori.EErrore.E0000_OK)
-            {
-                GstErrori.StampaMessaggioErrore(esito);
-            }
-
+            // attiva l'archivio selezionato
+            AreaArchivio.DirArchivioAttivo = dirArchivio;
 
             // Aggiorna il form
             AggiornaForm();
+
+            return;
+
         }
         /// <summary>
         /// aggiorna la tree view delle aree archivio

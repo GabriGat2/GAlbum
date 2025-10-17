@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.butSelezione = new System.Windows.Forms.Button();
             this.ButSelezioneFoto = new System.Windows.Forms.Button();
             this.butAreaArchivio = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -41,12 +40,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBoxArchivioAttivo = new System.Windows.Forms.GroupBox();
+            this.butExplorerArchvioAttivo = new System.Windows.Forms.Button();
             this.textBoxPathArchivioAttivo = new System.Windows.Forms.TextBox();
             this.textBoxArchivioAttivo = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBoxOperazioni = new System.Windows.Forms.GroupBox();
-            this.butExplorerArchvioAttivo = new System.Windows.Forms.Button();
+            this.butAcquisire = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -61,19 +61,9 @@
             this.groupBoxOperazioni.SuspendLayout();
             this.SuspendLayout();
             // 
-            // butSelezione
-            // 
-            this.butSelezione.Location = new System.Drawing.Point(10, 32);
-            this.butSelezione.Name = "butSelezione";
-            this.butSelezione.Size = new System.Drawing.Size(75, 23);
-            this.butSelezione.TabIndex = 0;
-            this.butSelezione.Text = "Selezione";
-            this.butSelezione.UseVisualStyleBackColor = true;
-            this.butSelezione.Click += new System.EventHandler(this.butSelezione_Click);
-            // 
             // ButSelezioneFoto
             // 
-            this.ButSelezioneFoto.Location = new System.Drawing.Point(12, 61);
+            this.ButSelezioneFoto.Location = new System.Drawing.Point(9, 126);
             this.ButSelezioneFoto.Name = "ButSelezioneFoto";
             this.ButSelezioneFoto.Size = new System.Drawing.Size(103, 23);
             this.ButSelezioneFoto.TabIndex = 1;
@@ -212,6 +202,16 @@
             this.groupBoxArchivioAttivo.TabStop = false;
             this.groupBoxArchivioAttivo.Text = "ArchivioAttivo";
             // 
+            // butExplorerArchvioAttivo
+            // 
+            this.butExplorerArchvioAttivo.Location = new System.Drawing.Point(768, 62);
+            this.butExplorerArchvioAttivo.Name = "butExplorerArchvioAttivo";
+            this.butExplorerArchvioAttivo.Size = new System.Drawing.Size(17, 23);
+            this.butExplorerArchvioAttivo.TabIndex = 19;
+            this.butExplorerArchvioAttivo.Text = "E";
+            this.butExplorerArchvioAttivo.UseVisualStyleBackColor = true;
+            this.butExplorerArchvioAttivo.Click += new System.EventHandler(this.butExplorerArchvioAttivo_Click);
+            // 
             // textBoxPathArchivioAttivo
             // 
             this.textBoxPathArchivioAttivo.Location = new System.Drawing.Point(121, 59);
@@ -248,8 +248,8 @@
             // 
             // groupBoxOperazioni
             // 
+            this.groupBoxOperazioni.Controls.Add(this.butAcquisire);
             this.groupBoxOperazioni.Controls.Add(this.ButSelezioneFoto);
-            this.groupBoxOperazioni.Controls.Add(this.butSelezione);
             this.groupBoxOperazioni.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxOperazioni.Location = new System.Drawing.Point(0, 0);
             this.groupBoxOperazioni.Name = "groupBoxOperazioni";
@@ -258,15 +258,15 @@
             this.groupBoxOperazioni.TabStop = false;
             this.groupBoxOperazioni.Text = "groupBoxOperazioni";
             // 
-            // butExplorerArchvioAttivo
+            // butAcquisire
             // 
-            this.butExplorerArchvioAttivo.Location = new System.Drawing.Point(768, 62);
-            this.butExplorerArchvioAttivo.Name = "butExplorerArchvioAttivo";
-            this.butExplorerArchvioAttivo.Size = new System.Drawing.Size(17, 23);
-            this.butExplorerArchvioAttivo.TabIndex = 19;
-            this.butExplorerArchvioAttivo.Text = "E";
-            this.butExplorerArchvioAttivo.UseVisualStyleBackColor = true;
-            this.butExplorerArchvioAttivo.Click += new System.EventHandler(this.butExplorerArchvioAttivo_Click);
+            this.butAcquisire.Location = new System.Drawing.Point(13, 42);
+            this.butAcquisire.Name = "butAcquisire";
+            this.butAcquisire.Size = new System.Drawing.Size(103, 23);
+            this.butAcquisire.TabIndex = 2;
+            this.butAcquisire.Text = "Acquisire";
+            this.butAcquisire.UseVisualStyleBackColor = true;
+            this.butAcquisire.Click += new System.EventHandler(this.butAcquisire_Click);
             // 
             // FormMain
             // 
@@ -295,8 +295,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button butSelezione;
         private System.Windows.Forms.Button ButSelezioneFoto;
         private System.Windows.Forms.Button butAreaArchivio;
         private System.Windows.Forms.SplitContainer splitContainer1;
@@ -315,6 +313,7 @@
         private System.Windows.Forms.GroupBox groupBoxOperazioni;
         private System.Windows.Forms.Button butExplorerArchvioBase;
         private System.Windows.Forms.Button butExplorerArchvioAttivo;
+        private System.Windows.Forms.Button butAcquisire;
     }
 }
 

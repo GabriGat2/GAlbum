@@ -65,6 +65,12 @@
     <Compile Include="CInfoTreeView.cs" />
     <Compile Include="CInfoTreeViewDestinazione.cs" />
     <Compile Include="CInfoTreeViewSorgente.cs" />
+    <Compile Include="FormAcquisire.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAcquisire.Designer.cs">
+      <DependentUpon>FormAcquisire.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormAreaArchivio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,12 +89,6 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormSelezione.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormSelezione.Designer.cs">
-      <DependentUpon>FormSelezione.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormSelezioneFoto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +98,9 @@
     <Compile Include="GstErrori.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormAcquisire.resx">
+      <DependentUpon>FormAcquisire.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAreaArchivio.resx">
       <DependentUpon>FormAreaArchivio.cs</DependentUpon>
     </EmbeddedResource>
@@ -106,9 +109,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormSelezione.resx">
-      <DependentUpon>FormSelezione.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSelezioneFoto.resx">
       <DependentUpon>FormSelezioneFoto.cs</DependentUpon>

@@ -38,18 +38,6 @@ namespace GAlbum
         {
             AggiornaForm();
         }
-        /// <summary>
-        /// Attiva il form per selezionare le foto
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void butSelezione_Click(object sender, EventArgs e)
-        {
-            FormSelezione formSelezione = new FormSelezione();
-            formSelezione.ShowDialog();
-
-
-        }
         // attiva il form per selezionare le foto
         private void ButSelezioneFoto_Click(object sender, EventArgs e)
         {
@@ -108,11 +96,6 @@ namespace GAlbum
                 groupBoxOperazioni.Enabled = false;
                 //ButSelezioneFoto.Enabled = false;
             }
-
-
-            butSelezione.Enabled = false;
-
-
         }
         /// <summary>
         /// Apre in exprorer l'archivio base
@@ -159,6 +142,16 @@ namespace GAlbum
             if(AreaArchivio.ArchivioAttivoOK)
                 ApreExplorer(AreaArchivio.PathArchivioAttivo);
 
+        }
+        /// <summary>
+        /// Attiva il form per acquisire foto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butAcquisire_Click(object sender, EventArgs e)
+        {
+            FormAcquisire dlg = new FormAcquisire();
+            dlg.ShowDialog();
         }
     }// fine class FormMain
 }// fine namespace GAlbum
