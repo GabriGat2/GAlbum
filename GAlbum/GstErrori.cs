@@ -163,6 +163,7 @@ namespace GAlbum
             E1385_FileArchivioCopiato,
             E1386_FileArchivioNonCancellato,
             E1387_FileArchivioCancellato,
+            E1388_FileArchivioNonCreato,
 
             //E1360_IstruzioneErrata,
             //E1360_IstruzioneSconosciuta,

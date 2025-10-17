@@ -33,18 +33,20 @@
             this.butAreaArchivio = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBoxAreaArchivio = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBoxAreaArchivioBase = new System.Windows.Forms.TextBox();
-            this.textBoxPathAreaArchivioBase = new System.Windows.Forms.TextBox();
             this.splitContainer1A2 = new System.Windows.Forms.SplitContainer();
             this.groupBoxArchivioBase = new System.Windows.Forms.GroupBox();
+            this.butExplorerArchvioBase = new System.Windows.Forms.Button();
+            this.textBoxPathAreaArchivioBase = new System.Windows.Forms.TextBox();
+            this.textBoxAreaArchivioBase = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBoxArchivioAttivo = new System.Windows.Forms.GroupBox();
             this.textBoxPathArchivioAttivo = new System.Windows.Forms.TextBox();
             this.textBoxArchivioAttivo = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBoxOperazioni = new System.Windows.Forms.GroupBox();
+            this.butExplorerArchvioAttivo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -117,40 +119,6 @@
             this.groupBoxAreaArchivio.TabIndex = 0;
             this.groupBoxAreaArchivio.TabStop = false;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 57);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Path Archivio Base";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 13);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Archivio Base";
-            // 
-            // textBoxAreaArchivioBase
-            // 
-            this.textBoxAreaArchivioBase.Location = new System.Drawing.Point(121, 19);
-            this.textBoxAreaArchivioBase.Name = "textBoxAreaArchivioBase";
-            this.textBoxAreaArchivioBase.ReadOnly = true;
-            this.textBoxAreaArchivioBase.Size = new System.Drawing.Size(664, 20);
-            this.textBoxAreaArchivioBase.TabIndex = 11;
-            // 
-            // textBoxPathAreaArchivioBase
-            // 
-            this.textBoxPathAreaArchivioBase.Location = new System.Drawing.Point(121, 54);
-            this.textBoxPathAreaArchivioBase.Name = "textBoxPathAreaArchivioBase";
-            this.textBoxPathAreaArchivioBase.ReadOnly = true;
-            this.textBoxPathAreaArchivioBase.Size = new System.Drawing.Size(664, 20);
-            this.textBoxPathAreaArchivioBase.TabIndex = 14;
-            // 
             // splitContainer1A2
             // 
             this.splitContainer1A2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -171,6 +139,7 @@
             // 
             // groupBoxArchivioBase
             // 
+            this.groupBoxArchivioBase.Controls.Add(this.butExplorerArchvioBase);
             this.groupBoxArchivioBase.Controls.Add(this.textBoxPathAreaArchivioBase);
             this.groupBoxArchivioBase.Controls.Add(this.textBoxAreaArchivioBase);
             this.groupBoxArchivioBase.Controls.Add(this.label1);
@@ -183,8 +152,53 @@
             this.groupBoxArchivioBase.TabStop = false;
             this.groupBoxArchivioBase.Text = "Archivio base";
             // 
+            // butExplorerArchvioBase
+            // 
+            this.butExplorerArchvioBase.Location = new System.Drawing.Point(768, 54);
+            this.butExplorerArchvioBase.Name = "butExplorerArchvioBase";
+            this.butExplorerArchvioBase.Size = new System.Drawing.Size(17, 23);
+            this.butExplorerArchvioBase.TabIndex = 15;
+            this.butExplorerArchvioBase.Text = "E";
+            this.butExplorerArchvioBase.UseVisualStyleBackColor = true;
+            this.butExplorerArchvioBase.Click += new System.EventHandler(this.butExplorerArchvioBase_Click);
+            // 
+            // textBoxPathAreaArchivioBase
+            // 
+            this.textBoxPathAreaArchivioBase.Location = new System.Drawing.Point(121, 54);
+            this.textBoxPathAreaArchivioBase.Name = "textBoxPathAreaArchivioBase";
+            this.textBoxPathAreaArchivioBase.ReadOnly = true;
+            this.textBoxPathAreaArchivioBase.Size = new System.Drawing.Size(628, 20);
+            this.textBoxPathAreaArchivioBase.TabIndex = 14;
+            // 
+            // textBoxAreaArchivioBase
+            // 
+            this.textBoxAreaArchivioBase.Location = new System.Drawing.Point(85, 15);
+            this.textBoxAreaArchivioBase.Name = "textBoxAreaArchivioBase";
+            this.textBoxAreaArchivioBase.ReadOnly = true;
+            this.textBoxAreaArchivioBase.Size = new System.Drawing.Size(664, 20);
+            this.textBoxAreaArchivioBase.TabIndex = 11;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(4, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Archivio Base";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(4, 57);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(97, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Path Archivio Base";
+            // 
             // groupBoxArchivioAttivo
             // 
+            this.groupBoxArchivioAttivo.Controls.Add(this.butExplorerArchvioAttivo);
             this.groupBoxArchivioAttivo.Controls.Add(this.butAreaArchivio);
             this.groupBoxArchivioAttivo.Controls.Add(this.textBoxPathArchivioAttivo);
             this.groupBoxArchivioAttivo.Controls.Add(this.textBoxArchivioAttivo);
@@ -203,7 +217,7 @@
             this.textBoxPathArchivioAttivo.Location = new System.Drawing.Point(121, 59);
             this.textBoxPathArchivioAttivo.Name = "textBoxPathArchivioAttivo";
             this.textBoxPathArchivioAttivo.ReadOnly = true;
-            this.textBoxPathArchivioAttivo.Size = new System.Drawing.Size(667, 20);
+            this.textBoxPathArchivioAttivo.Size = new System.Drawing.Size(628, 20);
             this.textBoxPathArchivioAttivo.TabIndex = 18;
             // 
             // textBoxArchivioAttivo
@@ -211,7 +225,7 @@
             this.textBoxArchivioAttivo.Location = new System.Drawing.Point(121, 24);
             this.textBoxArchivioAttivo.Name = "textBoxArchivioAttivo";
             this.textBoxArchivioAttivo.ReadOnly = true;
-            this.textBoxArchivioAttivo.Size = new System.Drawing.Size(667, 20);
+            this.textBoxArchivioAttivo.Size = new System.Drawing.Size(628, 20);
             this.textBoxArchivioAttivo.TabIndex = 15;
             // 
             // label3
@@ -243,6 +257,16 @@
             this.groupBoxOperazioni.TabIndex = 2;
             this.groupBoxOperazioni.TabStop = false;
             this.groupBoxOperazioni.Text = "groupBoxOperazioni";
+            // 
+            // butExplorerArchvioAttivo
+            // 
+            this.butExplorerArchvioAttivo.Location = new System.Drawing.Point(768, 62);
+            this.butExplorerArchvioAttivo.Name = "butExplorerArchvioAttivo";
+            this.butExplorerArchvioAttivo.Size = new System.Drawing.Size(17, 23);
+            this.butExplorerArchvioAttivo.TabIndex = 19;
+            this.butExplorerArchvioAttivo.Text = "E";
+            this.butExplorerArchvioAttivo.UseVisualStyleBackColor = true;
+            this.butExplorerArchvioAttivo.Click += new System.EventHandler(this.butExplorerArchvioAttivo_Click);
             // 
             // FormMain
             // 
@@ -289,6 +313,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBoxOperazioni;
+        private System.Windows.Forms.Button butExplorerArchvioBase;
+        private System.Windows.Forms.Button butExplorerArchvioAttivo;
     }
 }
 

@@ -97,14 +97,16 @@ namespace GAlbum
                 textBoxArchivioAttivo.BackColor = Color.LightGreen;
                 textBoxPathArchivioAttivo.BackColor = Color.LightGreen;
 
-                ButSelezioneFoto.Enabled = true;
+                groupBoxOperazioni.Enabled = true;
+                //ButSelezioneFoto.Enabled = true;
             }
             else
             {
                 textBoxArchivioAttivo.BackColor = Color.LightPink;
                 textBoxPathArchivioAttivo.BackColor = Color.LightPink;
 
-                ButSelezioneFoto.Enabled = false;
+                groupBoxOperazioni.Enabled = false;
+                //ButSelezioneFoto.Enabled = false;
             }
 
 
@@ -112,7 +114,52 @@ namespace GAlbum
 
 
         }
+        /// <summary>
+        /// Apre in exprorer l'archivio base
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butExplorerArchvioBase_Click(object sender, EventArgs e)
+        {
+            // recupera il path dell'escursione e avvia explore
+            if (AreaArchivio.ArchivioBaseOK)
+                ApreExplorer(AreaArchivio.PathArchivioBase);
+        }
+        /// <summary>
+        /// Avvia explorer dal path specificato
+        /// </summary>
+        /// <param name="path"></param>
+        private void ApreExplorer(string path)
+        {
+            string target = "Explorer";
 
+            try
+            {
+                System.Diagnostics.Process.Start(target, path);
+            }
+            catch (System.ComponentModel.Win32Exception noBrowser)
+            {
+                if (noBrowser.ErrorCode == -2147467259)
+                    MessageBox.Show(noBrowser.Message);
+            }
+            catch (System.Exception other)
+            {
+                MessageBox.Show(other.Message);
+            }
+
+        }
+        /// <summary>
+        /// Apre in exprorer l'archivio attivo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butExplorerArchvioAttivo_Click(object sender, EventArgs e)
+        {
+            // recupera il path dell'escursione e avvia explore
+            if(AreaArchivio.ArchivioAttivoOK)
+                ApreExplorer(AreaArchivio.PathArchivioAttivo);
+
+        }
     }// fine class FormMain
 }// fine namespace GAlbum
 

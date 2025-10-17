@@ -191,7 +191,7 @@ namespace GAlbum
                 return "";
 
             // compone il path dell'archivio attivo
-            string pathArchivioAttivo = PathArchivioBase + "//" + dirArchivioAttivo;
+            string pathArchivioAttivo = PathArchivioBase + "\\" + dirArchivioAttivo;
 
             // verifica che la directory esiste
             if (!Directory.Exists(pathArchivioAttivo))
@@ -208,7 +208,7 @@ namespace GAlbum
         protected string SetArchivioAttivo(string dirArchivio)
         {
             // verifica il nome dell Archivio
-            if (!VerificaNomeArchivio(dirArchivio))
+            if (!VerificaNomeArchivioSelezionato(dirArchivio))
                 return "";
 
             //// verifica che il nome dell'archivio attivo sia coerente
@@ -222,26 +222,26 @@ namespace GAlbum
             //if (!Directory.Exists(pathArchivioAttivo))
             //    return "";
 
-            // L'archivio attivo esiste rende il nome dell'archivio attivo
+            // L'archivio attivo esiste rende il nome dell'archivio attivo\
             return dirArchivio;
 
         }
         /// <summary>
-        /// Verifica il nome dell'archivio
+        /// Verifica il nome dell'archivio selezionato
         /// </summary>
-        /// <param name="dirArchivio"></param>
+        /// <param name="dirArchivioSelezionato"></param>
         /// <returns></returns>
-        public bool VerificaNomeArchivio(string dirArchivio)
+        public bool VerificaNomeArchivioSelezionato(string dirArchivioSelezionato)
         {
             // verifica che il nome dell'archivio attivo sia coerente
-            if (dirArchivio.Length < 1)
+            if (dirArchivioSelezionato.Length < 1)
                 return false;
 
-            // compone il path dell'archivio attivo
-            string pathArchivioAttivo = PathArchivioBase + "//" + dirArchivioAttivo;
+            // compone il path dell'archivio selezionato
+            string pathArchivioSelezionato = PathArchivioBase + "//" + dirArchivioSelezionato;
 
             // verifica che la directory esiste
-            if (!Directory.Exists(pathArchivioAttivo))
+            if (!Directory.Exists(pathArchivioSelezionato))
                 return false;
 
             return true;

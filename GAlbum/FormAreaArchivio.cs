@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms.VisualStyles;
 
 namespace GAlbum
@@ -87,7 +88,7 @@ namespace GAlbum
             string dirArchivio = textBoxArchivioSelezionato.Text;
 
             // verifica se esiste
-            if (AreaArchivio.VerificaNomeArchivio(dirArchivio))
+            if (AreaArchivio.VerificaNomeArchivioSelezionato(dirArchivio))
             {
                 // attiva l'archivio selezionato
                 AreaArchivio.DirArchivioAttivo = dirArchivio;
@@ -98,19 +99,27 @@ namespace GAlbum
                 return;
             }
 
+            //  l'Archivio non esiste chiede conferma per crearlo
+            string titolo = " Archivio non esiste";
+            string messaggio = "L'archivio " + dirArchivio + " NON esiste! \n\n Vuoi crearlo?";
+
+            var result = MessageBox.Show(messaggio, titolo, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+                return; //GstErrori.EErrore.E1388_FileArchivioNonCreato;
 
 
             GstErrori.EErrore esito;
 
-            // crea la classe 
+            // crea l'archivio
             esito = AreaArchivio.CreaAreaArchivio(textBoxArchivioSelezionato.Text);
             if (esito != GstErrori.EErrore.E0000_OK)
             {
                 GstErrori.StampaMessaggioErrore(esito);
             }
 
-            // Aggiorna la treeView
-            AggiornaTreeview();
+
+            // Aggiorna il form
+            AggiornaForm();
         }
         /// <summary>
         /// aggiorna la tree view delle aree archivio
@@ -290,7 +299,7 @@ namespace GAlbum
         private void AggiornaArchivioSelezionato()
         {
             // compone il path archvio
-            string pathArchivio = AreaArchivio.PathArchivioBase + "//" + textBoxArchivioSelezionato.Text;
+            string pathArchivio = AreaArchivio.PathArchivioBase + "\\" + textBoxArchivioSelezionato.Text;
 
             // verifica se esiste
             if (Directory.Exists(pathArchivio))
@@ -339,6 +348,76 @@ namespace GAlbum
 
             AggiornaTreeview();
 
+        }
+        /// <summary>
+        /// Apre area archivio base
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butExplorerArchvioBase_Click(object sender, EventArgs e)
+        {
+            // recupera il path dell'escursione e avvia explore
+            if (AreaArchivio.ArchivioBaseOK)
+                ApreExplorer(AreaArchivio.PathArchivioBase);
+        }
+        /// <summary>
+        /// Avvia explorer dal path specificato
+        /// </summary>
+        /// <param name="path"></param>
+        private void ApreExplorer(string path)
+        {
+            string target = "Explorer";
+
+            try
+            {
+                System.Diagnostics.Process.Start(target, path);
+            }
+            catch (System.ComponentModel.Win32Exception noBrowser)
+            {
+                if (noBrowser.ErrorCode == -2147467259)
+                    MessageBox.Show(noBrowser.Message);
+            }
+            catch (System.Exception other)
+            {
+                MessageBox.Show(other.Message);
+            }
+
+        }
+        /// <summary>
+        /// Apre in explorer archivio selezionato 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butExplorerArchvioSelezionato_Click(object sender, EventArgs e)
+        {
+            // recupera il path dell'archivio selezionato e avvia explore
+            if (AreaArchivio.ArchivioBaseOK)
+            {
+                // Verifica che dir Archivio Sellezionato non sia vuoto
+                string dirArchvioSelezionato = textBoxArchivioSelezionato.Text;
+                if (dirArchvioSelezionato.Length < 1)
+                    return;
+
+
+                // comporre il path dell'archivio selezionato
+                string pathArchivioSelezionato = AreaArchivio.PathArchivioBase + "\\" + dirArchvioSelezionato;    
+
+                // verifica che larchivio esiste
+                if (Directory.Exists(pathArchivioSelezionato))
+                    ApreExplorer(pathArchivioSelezionato);
+            }
+               
+        }
+        /// <summary>
+        /// Apre in explorer archivio attivo 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butExplorerArchvioAttivo_Click(object sender, EventArgs e)
+        {
+            // recupera il path dell'attivo e avvia explore
+            if (AreaArchivio.ArchivioAttivoOK)
+                ApreExplorer(AreaArchivio.PathArchivioAttivo);
         }
     }// fine class FormAreaArchivio
 }// fine namespace GAlbum
