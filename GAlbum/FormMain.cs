@@ -150,7 +150,7 @@ namespace GAlbum
         /// <param name="e"></param>
         private void butAcquisire_Click(object sender, EventArgs e)
         {
-            FormAcquisire dlg = new FormAcquisire();
+            FormAcquisire dlg = new FormAcquisire(ref this.AreaArchivio);
             dlg.ShowDialog();
         }
     }// fine class FormMain

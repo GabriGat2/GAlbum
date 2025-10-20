@@ -41,12 +41,12 @@
             treeNode5});
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBoxPath = new System.Windows.Forms.GroupBox();
-            this.textBoxDebug2 = new System.Windows.Forms.TextBox();
-            this.textBoxSorgente = new System.Windows.Forms.TextBox();
-            this.textBoxDestinazione = new System.Windows.Forms.TextBox();
-            this.butSorgente = new System.Windows.Forms.Button();
-            this.butApri = new System.Windows.Forms.Button();
-            this.butDestinazione = new System.Windows.Forms.Button();
+            this.textBoxSmistati = new System.Windows.Forms.TextBox();
+            this.butSmistati = new System.Windows.Forms.Button();
+            this.textBoxAcquisire = new System.Windows.Forms.TextBox();
+            this.textBoxSmistare = new System.Windows.Forms.TextBox();
+            this.butAcquisire = new System.Windows.Forms.Button();
+            this.butSmistare = new System.Windows.Forms.Button();
             this.splitContainer1B2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer1B2A3 = new System.Windows.Forms.SplitContainer();
             this.groupBoxSorgente = new System.Windows.Forms.GroupBox();
@@ -85,6 +85,7 @@
             // 
             // splitContainer1
             // 
+            this.splitContainer1.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
@@ -98,80 +99,81 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer1B2);
             this.splitContainer1.Size = new System.Drawing.Size(890, 726);
-            this.splitContainer1.SplitterDistance = 90;
+            this.splitContainer1.SplitterDistance = 130;
             this.splitContainer1.TabIndex = 0;
             // 
             // groupBoxPath
             // 
-            this.groupBoxPath.Controls.Add(this.textBoxDebug2);
-            this.groupBoxPath.Controls.Add(this.textBoxSorgente);
-            this.groupBoxPath.Controls.Add(this.textBoxDestinazione);
-            this.groupBoxPath.Controls.Add(this.butSorgente);
-            this.groupBoxPath.Controls.Add(this.butApri);
-            this.groupBoxPath.Controls.Add(this.butDestinazione);
+            this.groupBoxPath.Controls.Add(this.textBoxSmistati);
+            this.groupBoxPath.Controls.Add(this.butSmistati);
+            this.groupBoxPath.Controls.Add(this.textBoxAcquisire);
+            this.groupBoxPath.Controls.Add(this.textBoxSmistare);
+            this.groupBoxPath.Controls.Add(this.butAcquisire);
+            this.groupBoxPath.Controls.Add(this.butSmistare);
             this.groupBoxPath.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxPath.Location = new System.Drawing.Point(0, 0);
             this.groupBoxPath.Name = "groupBoxPath";
-            this.groupBoxPath.Size = new System.Drawing.Size(890, 90);
+            this.groupBoxPath.Size = new System.Drawing.Size(890, 130);
             this.groupBoxPath.TabIndex = 13;
             this.groupBoxPath.TabStop = false;
             this.groupBoxPath.Text = "Selezione di sorgente e destinazione";
             // 
-            // textBoxDebug2
+            // textBoxSmistati
             // 
-            this.textBoxDebug2.Location = new System.Drawing.Point(13, 60);
-            this.textBoxDebug2.Name = "textBoxDebug2";
-            this.textBoxDebug2.Size = new System.Drawing.Size(59, 20);
-            this.textBoxDebug2.TabIndex = 13;
+            this.textBoxSmistati.Location = new System.Drawing.Point(104, 87);
+            this.textBoxSmistati.Name = "textBoxSmistati";
+            this.textBoxSmistati.Size = new System.Drawing.Size(706, 20);
+            this.textBoxSmistati.TabIndex = 14;
             // 
-            // textBoxSorgente
+            // butSmistati
             // 
-            this.textBoxSorgente.Location = new System.Drawing.Point(172, 29);
-            this.textBoxSorgente.Name = "textBoxSorgente";
-            this.textBoxSorgente.Size = new System.Drawing.Size(706, 20);
-            this.textBoxSorgente.TabIndex = 10;
-            this.textBoxSorgente.TextChanged += new System.EventHandler(this.textBoxSorgente_TextChanged);
+            this.butSmistati.Location = new System.Drawing.Point(12, 85);
+            this.butSmistati.Name = "butSmistati";
+            this.butSmistati.Size = new System.Drawing.Size(86, 23);
+            this.butSmistati.TabIndex = 13;
+            this.butSmistati.Text = "Smistati";
+            this.butSmistati.UseVisualStyleBackColor = true;
+            this.butSmistati.Click += new System.EventHandler(this.butSmistati_Click);
             // 
-            // textBoxDestinazione
+            // textBoxAcquisire
             // 
-            this.textBoxDestinazione.Location = new System.Drawing.Point(172, 55);
-            this.textBoxDestinazione.Name = "textBoxDestinazione";
-            this.textBoxDestinazione.Size = new System.Drawing.Size(706, 20);
-            this.textBoxDestinazione.TabIndex = 12;
-            this.textBoxDestinazione.TextChanged += new System.EventHandler(this.textBoxDestinazione_TextChanged);
+            this.textBoxAcquisire.Location = new System.Drawing.Point(104, 29);
+            this.textBoxAcquisire.Name = "textBoxAcquisire";
+            this.textBoxAcquisire.Size = new System.Drawing.Size(706, 20);
+            this.textBoxAcquisire.TabIndex = 10;
+            this.textBoxAcquisire.TextChanged += new System.EventHandler(this.textBoxSorgente_TextChanged);
             // 
-            // butSorgente
+            // textBoxSmistare
             // 
-            this.butSorgente.Location = new System.Drawing.Point(80, 27);
-            this.butSorgente.Name = "butSorgente";
-            this.butSorgente.Size = new System.Drawing.Size(86, 23);
-            this.butSorgente.TabIndex = 9;
-            this.butSorgente.Text = "Sorgente";
-            this.butSorgente.UseVisualStyleBackColor = true;
-            this.butSorgente.Click += new System.EventHandler(this.butSorgente_Click);
+            this.textBoxSmistare.Location = new System.Drawing.Point(104, 58);
+            this.textBoxSmistare.Name = "textBoxSmistare";
+            this.textBoxSmistare.Size = new System.Drawing.Size(706, 20);
+            this.textBoxSmistare.TabIndex = 12;
+            this.textBoxSmistare.TextChanged += new System.EventHandler(this.textBoxDestinazione_TextChanged);
             // 
-            // butApri
+            // butAcquisire
             // 
-            this.butApri.Location = new System.Drawing.Point(10, 27);
-            this.butApri.Name = "butApri";
-            this.butApri.Size = new System.Drawing.Size(63, 23);
-            this.butApri.TabIndex = 5;
-            this.butApri.Text = "Apri";
-            this.butApri.UseVisualStyleBackColor = true;
-            this.butApri.Click += new System.EventHandler(this.butApri_Click);
+            this.butAcquisire.Location = new System.Drawing.Point(12, 27);
+            this.butAcquisire.Name = "butAcquisire";
+            this.butAcquisire.Size = new System.Drawing.Size(86, 23);
+            this.butAcquisire.TabIndex = 9;
+            this.butAcquisire.Text = "Acquisire";
+            this.butAcquisire.UseVisualStyleBackColor = true;
+            this.butAcquisire.Click += new System.EventHandler(this.butAcquisire_Click);
             // 
-            // butDestinazione
+            // butSmistare
             // 
-            this.butDestinazione.Location = new System.Drawing.Point(80, 56);
-            this.butDestinazione.Name = "butDestinazione";
-            this.butDestinazione.Size = new System.Drawing.Size(86, 23);
-            this.butDestinazione.TabIndex = 11;
-            this.butDestinazione.Text = "Destinazione";
-            this.butDestinazione.UseVisualStyleBackColor = true;
-            this.butDestinazione.Click += new System.EventHandler(this.butDestinazione_Click);
+            this.butSmistare.Location = new System.Drawing.Point(12, 56);
+            this.butSmistare.Name = "butSmistare";
+            this.butSmistare.Size = new System.Drawing.Size(86, 23);
+            this.butSmistare.TabIndex = 11;
+            this.butSmistare.Text = "Smistare";
+            this.butSmistare.UseVisualStyleBackColor = true;
+            this.butSmistare.Click += new System.EventHandler(this.butSmistare_Click);
             // 
             // splitContainer1B2
             // 
+            this.splitContainer1B2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer1B2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1B2.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1B2.Name = "splitContainer1B2";
@@ -183,7 +185,7 @@
             // splitContainer1B2.Panel2
             // 
             this.splitContainer1B2.Panel2.Controls.Add(this.splitContainer1B2B3);
-            this.splitContainer1B2.Size = new System.Drawing.Size(890, 632);
+            this.splitContainer1B2.Size = new System.Drawing.Size(890, 592);
             this.splitContainer1B2.SplitterDistance = 296;
             this.splitContainer1B2.TabIndex = 0;
             // 
@@ -200,7 +202,7 @@
             // splitContainer1B2A3.Panel2
             // 
             this.splitContainer1B2A3.Panel2.Controls.Add(this.groupBoxDestinazione);
-            this.splitContainer1B2A3.Size = new System.Drawing.Size(296, 632);
+            this.splitContainer1B2A3.Size = new System.Drawing.Size(296, 592);
             this.splitContainer1B2A3.SplitterDistance = 145;
             this.splitContainer1B2A3.TabIndex = 0;
             // 
@@ -210,7 +212,7 @@
             this.groupBoxSorgente.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxSorgente.Location = new System.Drawing.Point(0, 0);
             this.groupBoxSorgente.Name = "groupBoxSorgente";
-            this.groupBoxSorgente.Size = new System.Drawing.Size(145, 632);
+            this.groupBoxSorgente.Size = new System.Drawing.Size(145, 592);
             this.groupBoxSorgente.TabIndex = 0;
             this.groupBoxSorgente.TabStop = false;
             this.groupBoxSorgente.Text = "Sorgente";
@@ -220,7 +222,7 @@
             this.treeViewSorgente.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewSorgente.Location = new System.Drawing.Point(3, 16);
             this.treeViewSorgente.Name = "treeViewSorgente";
-            this.treeViewSorgente.Size = new System.Drawing.Size(139, 613);
+            this.treeViewSorgente.Size = new System.Drawing.Size(139, 573);
             this.treeViewSorgente.TabIndex = 0;
             this.treeViewSorgente.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewSorgente_AfterSelect);
             this.treeViewSorgente.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeViewSorgente_MouseDoubleClick);
@@ -231,7 +233,7 @@
             this.groupBoxDestinazione.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxDestinazione.Location = new System.Drawing.Point(0, 0);
             this.groupBoxDestinazione.Name = "groupBoxDestinazione";
-            this.groupBoxDestinazione.Size = new System.Drawing.Size(147, 632);
+            this.groupBoxDestinazione.Size = new System.Drawing.Size(147, 592);
             this.groupBoxDestinazione.TabIndex = 0;
             this.groupBoxDestinazione.TabStop = false;
             this.groupBoxDestinazione.Text = "Destinazione";
@@ -255,7 +257,7 @@
             treeNode6.Text = "Nodo0";
             this.treeViewDestinazione.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode6});
-            this.treeViewDestinazione.Size = new System.Drawing.Size(141, 613);
+            this.treeViewDestinazione.Size = new System.Drawing.Size(141, 573);
             this.treeViewDestinazione.TabIndex = 0;
             this.treeViewDestinazione.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDestinazione_AfterSelect);
             this.treeViewDestinazione.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeViewDestinazione_MouseDoubleClick);
@@ -279,8 +281,8 @@
             this.splitContainer1B2B3.Panel2.Controls.Add(this.textBoxPathFoto);
             this.splitContainer1B2B3.Panel2.Controls.Add(this.butPrecedente);
             this.splitContainer1B2B3.Panel2.Controls.Add(this.butSuccessiva);
-            this.splitContainer1B2B3.Size = new System.Drawing.Size(590, 632);
-            this.splitContainer1B2B3.SplitterDistance = 560;
+            this.splitContainer1B2B3.Size = new System.Drawing.Size(590, 592);
+            this.splitContainer1B2B3.SplitterDistance = 524;
             this.splitContainer1B2B3.TabIndex = 0;
             // 
             // pictureBox1
@@ -288,7 +290,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(590, 560);
+            this.pictureBox1.Size = new System.Drawing.Size(590, 524);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -385,16 +387,15 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TextBox textBoxDestinazione;
-        private System.Windows.Forms.Button butDestinazione;
-        private System.Windows.Forms.TextBox textBoxSorgente;
-        private System.Windows.Forms.Button butSorgente;
+        private System.Windows.Forms.TextBox textBoxSmistare;
+        private System.Windows.Forms.Button butSmistare;
+        private System.Windows.Forms.TextBox textBoxAcquisire;
+        private System.Windows.Forms.Button butAcquisire;
         private System.Windows.Forms.GroupBox groupBoxPath;
         private System.Windows.Forms.SplitContainer splitContainer1B2;
         private System.Windows.Forms.SplitContainer splitContainer1B2B3;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button butPrecedente;
-        private System.Windows.Forms.Button butApri;
         private System.Windows.Forms.Button butSuccessiva;
         private System.Windows.Forms.TextBox textBoxPathFoto;
         private System.Windows.Forms.SplitContainer splitContainer1B2A3;
@@ -403,10 +404,9 @@
         private System.Windows.Forms.TreeView treeViewDestinazione;
         private System.Windows.Forms.TextBox textBoxDebug;
         private System.Windows.Forms.TreeView treeViewSorgente;
-        private System.Windows.Forms.TextBox textBoxDebug2;
         private System.Windows.Forms.Button butNonAssegna;
         private System.Windows.Forms.Button butAssegna;
-
-
+        private System.Windows.Forms.TextBox textBoxSmistati;
+        private System.Windows.Forms.Button butSmistati;
     }
 }

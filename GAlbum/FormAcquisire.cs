@@ -18,6 +18,10 @@ namespace GAlbum
         // Proprietà
         // ==================================================================================================================
         /// <summary>
+        /// riferiemnto all'area archivio
+        /// </summary>
+        protected CAreaArchivio AreaArchivio = null;
+        /// <summary>
         /// lista delle foto sorgente
         /// </summary>
         private string[] fotoSrcList;
@@ -68,8 +72,11 @@ namespace GAlbum
         /// <summary>
         /// costruttore
         /// </summary>
-        public FormAcquisire()
+        public FormAcquisire(ref CAreaArchivio areaArchivio)
         {
+            // Assegna il riferimento a AreaArchivio
+            this.AreaArchivio = areaArchivio;
+
             InitializeComponent();
             InizializzaClasse();
         }
@@ -85,9 +92,10 @@ namespace GAlbum
             InfoTVSorgente = new CInfoTreeViewSorgente();
             InfoTVDestinazione = new CInfoTreeViewDestinazione();
 
-            // DEBUG
-            textBoxSorgente.Text = "E:\\Angelo\\Prj\\GAlbum\\Foto\\Sorgente";
-            textBoxDestinazione.Text = "E:\\Angelo\\Prj\\GAlbum\\Foto\\Destinazione";
+            // inizializza le text box
+            textBoxAcquisire.Text = AreaArchivio.PathDaAcquisire;
+            textBoxSmistare.Text = AreaArchivio.PathDaSmistare;
+            textBoxSmistati.Text = AreaArchivio.PathSmistati;
 
             // aggiorna la visualizzazione delle sub directory di destinazione
             //AggiornaDestinazione();
@@ -101,7 +109,7 @@ namespace GAlbum
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void butSorgente_Click(object sender, EventArgs e)
+        private void butAcquisire_Click(object sender, EventArgs e)
         {
 
             // definisci il path della directory delle foto da elaborare
@@ -111,25 +119,25 @@ namespace GAlbum
             FolderBrowserDialog dlg = new FolderBrowserDialog();
 
             // inizializza path @DEBUG
-            dlg.SelectedPath = textBoxSorgente.Text;
+            dlg.SelectedPath = textBoxAcquisire.Text;
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 path = dlg.SelectedPath;
             }
-            //// verifica se ha selezionato una directory
-            //if (path == string.Empty)
-            //    return;
+            // verifica se ha selezionato una directory
+            if (path == string.Empty)
+                return;
 
             // stampa il path della directory
-            textBoxSorgente.Text = path;
+            textBoxAcquisire.Text = path;
         }
         /// <summary>
         ///  Apre directory di destinazione 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void butDestinazione_Click(object sender, EventArgs e)
+        private void butSmistare_Click(object sender, EventArgs e)
         {
 
             // definisci il path della directory delle foto da elaborare
@@ -139,18 +147,18 @@ namespace GAlbum
             FolderBrowserDialog dlg = new FolderBrowserDialog();
 
             // inizializza path 
-            dlg.SelectedPath = textBoxDestinazione.Text;
+            dlg.SelectedPath = textBoxSmistare.Text;
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 path = dlg.SelectedPath;
             }
+            // verifica se ha selezionato una directory
+            if (path == string.Empty)
+                return;
 
             // stampa il path della directory
-            textBoxDestinazione.Text = path;
-
-            // aggiorna la visualizzazione delle sub directory di destinazione
-            AggiornaDestinazione();
+            textBoxSmistare.Text = path;
         }
         /// <summary>
         /// aggiorna le destinazioni, cioé visualizza le sotto directory contenute in destinazione
@@ -158,7 +166,7 @@ namespace GAlbum
         private void AggiornaDestinazione()
         {
             // assegna la directory di destinazione
-            PathDirDestinazione = textBoxDestinazione.Text;
+            PathDirDestinazione = textBoxSmistare.Text;
 
             // verifica che la directory esiste 
             if (!Directory.Exists(PathDirDestinazione))
@@ -259,51 +267,6 @@ namespace GAlbum
             AggiornaDestinazione();
         }
         /// <summary>
-        /// Carica le fotografie contenute nella directory specificata
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void butApri_Click(object sender, EventArgs e)
-        {
-            // commuta stato
-            AggiornaStato(!Stato);
-
-            // Verifica se c'è un nodo sorgente selezionato
-            if (InfoNodoSorgenteSelezionato == null)
-            {
-                return;
-            }
-
-            // stampa il path della directory
-            string pathSrc = InfoNodoSorgenteSelezionato.Path;
-            textBoxPathFoto.Text = pathSrc;
-
-            // Cancella, eventuale, dir TMP
-            CImmagine cImmagine = new CImmagine();
-            GstErrori.EErrore esito = cImmagine.CancellaDirTemporanea(pathSrc);
-
-            // Verifica che lo stato sia attivo
-            if (Stato)
-            {
-
-                // carica la lista dei file contenuti nella directory
-                fotoSrcList = Directory.GetFiles(pathSrc, "*.*");
-                if (fotoSrcList.Length == 0)
-                {
-                    // Rimette lo stato falso
-                    AggiornaStato(false);
-
-                    // Mostra codice di errore
-                    GstErrori.StampaMessaggioErrore(GstErrori.EErrore.E1315_DirectorySorgenteVuota, pathSrc);
-                    return;
-                }
-
-                idFotoSrcList = 0;
-
-                MostraFoto(fotoSrcList[0], ref butApri);
-            }
-        }
-        /// <summary>
         /// Mostra la foto selezionata
         /// </summary>
         /// <param name="pathFoto"></param>
@@ -402,7 +365,7 @@ namespace GAlbum
         private void AggiornaSorgente()
         {
             // assegna la directory sorgente
-            PathDirSorgente = textBoxSorgente.Text;
+            PathDirSorgente = textBoxAcquisire.Text;
 
             // verifica che la directory esiste 
             if (!Directory.Exists(PathDirSorgente))
@@ -508,25 +471,25 @@ namespace GAlbum
             this.Stato = newStato;
 
             // Debug: mostra stato
-            textBoxDebug2.Text = Stato.ToString();
+            //textBoxDebug2.Text = Stato.ToString();
 
-            // button Apri
-            if (Stato)
-            {
-                butApri.Text = "Chiudi";
-            }
-            else
-            {
-                butApri.Text = "Apri";
-            }
+            //// button Apri
+            //if (Stato)
+            //{
+            //    butApri.Text = "Chiudi";
+            //}
+            //else
+            //{
+            //    butApri.Text = "Apri";
+            //}
 
             // button Sorgente
-            butSorgente.Enabled = !Stato;
-            textBoxSorgente.ReadOnly = Stato;
+            butAcquisire.Enabled = !Stato;
+            textBoxAcquisire.ReadOnly = Stato;
 
             // button Detinazione
-            butDestinazione.Enabled = !Stato;
-            textBoxDestinazione.ReadOnly = Stato;
+            butSmistare.Enabled = !Stato;
+            textBoxSmistare.ReadOnly = Stato;
 
             // button Precedente
             butPrecedente.Enabled = Stato;
@@ -636,6 +599,33 @@ namespace GAlbum
 
 
 
+        }
+        /// <summary>
+        /// seleziona la directory degli smistati
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butSmistati_Click(object sender, EventArgs e)
+        {
+            // definisci il path della directory delle foto da elaborare
+            string path = string.Empty;
+
+            // seleziona la directory delle foto
+            FolderBrowserDialog dlg = new FolderBrowserDialog();
+
+            // inizializza path @DEBUG
+            dlg.SelectedPath = textBoxSmistati.Text;
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                path = dlg.SelectedPath;
+            }
+            // verifica se ha selezionato una directory
+            if (path == string.Empty)
+                return;
+
+            // stampa il path della directory
+            textBoxSmistati.Text = path;
         }
     }// fine class FormAcquisire
 }// fine namespace GAlbum

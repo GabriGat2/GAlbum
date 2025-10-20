@@ -45,12 +45,48 @@ namespace GAlbum
         /// Vero se l'archivio attivo é disponibile all'uso
         /// </summary>
         public bool ArchivioAttivoOK { get => TestPathArchivioAttivo(); /* set => archivioBaseOK = value; */ }
+        /// <summary>
+        /// Separa directory
+        /// </summary>
+        public const string SepDir = "\\";
+
+        // ------------------------------------------------------------------------------------------------------------------
+        // Archivio Attivo: Da acquisire
+        /// <summary>
+        /// Nome della dir: Da acquisire
+        /// </summary>
+        public const string DirDaAcquisire = "DaAcquisire";
+        /// <summary>
+        /// path della dir: Da acquisire
+        /// </summary>
+        public string PathDaAcquisire { get => PathArchivioAttivo + SepDir + DirDaAcquisire; /* set => pathDaAcquisire = value; */ }
+
+        // ------------------------------------------------------------------------------------------------------------------
+        // Archivio Attivo: Da Smistare
+        /// <summary>
+        /// Nome della dir: Da smistare
+        /// </summary>
+        public const string DirDaSmistare = "DaSmistare";
+        /// <summary>
+        /// path della dir: Da Smistare
+        /// </summary>
+        public string PathDaSmistare { get => PathArchivioAttivo + SepDir + DirDaSmistare; /* set => pathDaSmistare = value; */ }
+
+
+        // ------------------------------------------------------------------------------------------------------------------
+        // Archivio Attivo: Smistati
+        /// <summary>
+        /// Nome della dir: Smistati
+        /// </summary>
+        public const string DirSmistati = "Smistati";
+        /// <summary>
+        /// path della dir: Smistati
+        /// </summary>
+        public string PathSmistati { get => PathArchivioAttivo + SepDir + DirSmistati; /* set => pathSmistati = value; */ }
+
 
         //-------------------------------------------------------------------------------------------------------------------
         // Nomi delle directory
-        public const string DirDaAcquisire = "DaAcquisire";
-        public const string DirDaSmistare = "DaSmistare";
-        public const string DirSmistati = "Smistati";
 
         private const string DirArchivio = "_Archivio";
 
@@ -61,7 +97,7 @@ namespace GAlbum
         private bool mettiloQui;
         public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
 
-       
+
         // ==================================================================================================================
         // Metodi
         // ==================================================================================================================
