@@ -93,8 +93,8 @@ namespace GAlbum
             InfoTVDestinazione = new CInfoTreeViewDestinazione();
 
             // inizializza le text box
-            textBoxAcquisire.Text = AreaArchivio.PathDaAcquisire;
-            textBoxSmistare.Text = AreaArchivio.PathDaSmistare;
+            textBoxAcquisire.Text = AreaArchivio.PathAcquisire;
+            textBoxSmistare.Text = AreaArchivio.PathSmistare;
             textBoxSmistati.Text = AreaArchivio.PathSmistati;
 
             // aggiorna la visualizzazione delle sub directory di destinazione
@@ -626,6 +626,64 @@ namespace GAlbum
 
             // stampa il path della directory
             textBoxSmistati.Text = path;
+        }
+        /// <summary>
+        /// Avvia explorer dal path specificato
+        /// </summary>
+        /// <param name="path"></param>
+        private void ApreExplorer(string path)
+        {
+            string target = "Explorer";
+
+            try
+            {
+                System.Diagnostics.Process.Start(target, path);
+            }
+            catch (System.ComponentModel.Win32Exception noBrowser)
+            {
+                if (noBrowser.ErrorCode == -2147467259)
+                    MessageBox.Show(noBrowser.Message);
+            }
+            catch (System.Exception other)
+            {
+                MessageBox.Show(other.Message);
+            }
+        }
+
+        /// <summary>
+        /// Apre in exprorer Acquisire
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butExplorerAcquisire_Click(object sender, EventArgs e)
+        {
+          
+        
+            // recupera il path dell'archivio e avvia explore
+            if (AreaArchivio.ArchivioBaseOK)
+                ApreExplorer(AreaArchivio.PathAcquisire);
+        }
+        /// <summary>
+        /// Apre in exprorer Smistare
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butExplorerSmistare_Click(object sender, EventArgs e)
+        {
+            // recupera il path dell'archivio e avvia explore
+            if (AreaArchivio.ArchivioBaseOK)
+                ApreExplorer(AreaArchivio.PathSmistare);
+        }
+        /// <summary>
+        /// Apre in exprorer Smistati
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butExplorerSmistati_Click(object sender, EventArgs e)
+        {
+            // recupera il path dell'archivio e avvia explore
+            if (AreaArchivio.ArchivioBaseOK)
+                ApreExplorer(AreaArchivio.PathSmistati);
         }
     }// fine class FormAcquisire
 }// fine namespace GAlbum

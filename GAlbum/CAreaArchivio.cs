@@ -51,26 +51,26 @@ namespace GAlbum
         public const string SepDir = "\\";
 
         // ------------------------------------------------------------------------------------------------------------------
-        // Archivio Attivo: Da acquisire
+        // Archivio Attivo:  Acquisire
         /// <summary>
-        /// Nome della dir: Da acquisire
+        /// Nome della dir:  Acquisire
         /// </summary>
-        public const string DirDaAcquisire = "DaAcquisire";
+        public const string DirAcquisire = "Acquisire";
         /// <summary>
-        /// path della dir: Da acquisire
+        /// path della dir: Acquisire
         /// </summary>
-        public string PathDaAcquisire { get => PathArchivioAttivo + SepDir + DirDaAcquisire; /* set => pathDaAcquisire = value; */ }
+        public string PathAcquisire { get => PathArchivioAttivo + SepDir + DirAcquisire; /* set => pathDaAcquisire = value; */ }
 
         // ------------------------------------------------------------------------------------------------------------------
-        // Archivio Attivo: Da Smistare
+        // Archivio Attivo:  Smistare
         /// <summary>
-        /// Nome della dir: Da smistare
+        /// Nome della dir:  smistare
         /// </summary>
-        public const string DirDaSmistare = "DaSmistare";
+        public const string DirSmistare = "Smistare";
         /// <summary>
-        /// path della dir: Da Smistare
+        /// path della dir:  Smistare
         /// </summary>
-        public string PathDaSmistare { get => PathArchivioAttivo + SepDir + DirDaSmistare; /* set => pathDaSmistare = value; */ }
+        public string PathSmistare { get => PathArchivioAttivo + SepDir + DirSmistare; /* set => pathDaSmistare = value; */ }
 
 
         // ------------------------------------------------------------------------------------------------------------------
@@ -163,7 +163,7 @@ namespace GAlbum
             // ----------------------------------
 
             // compone il path della directory acquisire
-            string pathDaAcquisire = pathNomeArchivio + "\\" + DirDaAcquisire;
+            string pathDaAcquisire = pathNomeArchivio + "\\" + DirAcquisire;
 
             // crea directory acquisire
             try
@@ -176,7 +176,7 @@ namespace GAlbum
             }
 
             // compone il path della directory DaSmistare
-            string pathDaSmistare = pathNomeArchivio + "\\" + DirDaSmistare;
+            string pathDaSmistare = pathNomeArchivio + "\\" + DirSmistare;
 
             // crea directory DaSmistare
             try
