@@ -126,7 +126,7 @@ namespace GAlbum
         private void AggiornaTreeview()
         {
             //// assegna la directory sorgente
-            //PathDirSorgente = textBoxSorgente.Text;
+            //PathDirAcquisire = textBoxSorgente.Text;
 
             // verifica che la directory esiste 
             if (!Directory.Exists(AreaArchivio.PathArchivioBase))
@@ -157,7 +157,7 @@ namespace GAlbum
             // Aggiunge un nodo per ogni subdirectory
             foreach (var subDir in listaSubDir)
             {
-                AggiungiNodo(subDir, ref nodoBase, 1 /*, ref InfoTVSorgente */);
+                AggiungiNodo(subDir, ref nodoBase, 1 /*, ref InfoTVAcqusire */);
 
             }
 

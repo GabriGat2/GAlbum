@@ -36,7 +36,7 @@ namespace GAlbum
         /// <summary>
         /// Path della directory sorgente attiva 
         /// </summary>
-        private string PathDirSorgente = null;
+        private string PathDirAcquisire = null;
         /// <summary>
         /// Path della directory destinazione attiva 
         /// </summary>
@@ -52,9 +52,9 @@ namespace GAlbum
         /// </summary>
         private bool Stato;
         /// <summary>
-        /// Infro tree view Sorgente
+        /// Infro tree view Acquisire
         /// </summary>
-        private CInfoTreeView InfoTVSorgente;
+        private CInfoTreeView InfoTVAcqusire;
         /// <summary>
         /// Infro tree view Destinazione
         /// </summary>
@@ -89,7 +89,7 @@ namespace GAlbum
             AggiornaStato(false);
 
             // CRea info tree view
-            InfoTVSorgente = new CInfoTreeViewSorgente();
+            InfoTVAcqusire = new CInfoTreeViewAcquisire();
             InfoTVDestinazione = new CInfoTreeViewDestinazione();
 
             // inizializza le text box
@@ -99,7 +99,7 @@ namespace GAlbum
 
             // aggiorna la visualizzazione delle sub directory di destinazione
             //AggiornaDestinazione();
-            AggiornaSorgente();
+            AggiornaAcquisire();
 
 
 
@@ -360,52 +360,52 @@ namespace GAlbum
             info.CommutaSelezione();
         }
         /// <summary>
-        /// aggiorna Sorgenti, cioé visualizza le sotto directory contenute in sorgente
+        /// Aggiorna Acquisire, cioé visualizza le sotto directory contenute in Acquisire
         /// </summary>
-        private void AggiornaSorgente()
+        private void AggiornaAcquisire()
         {
-            // assegna la directory sorgente
-            PathDirSorgente = textBoxAcquisire.Text;
+            // assegna la directory Acquisire
+            PathDirAcquisire = textBoxAcquisire.Text;
 
             // verifica che la directory esiste 
-            if (!Directory.Exists(PathDirSorgente))
+            if (!Directory.Exists(PathDirAcquisire))
             {
-                PathDirSorgente = null;
+                PathDirAcquisire = null;
                 return;
             }
 
             // Crea la lista delle sub directory
-            string[] listaSubDir = Directory.GetDirectories(PathDirSorgente);
+            string[] listaSubDir = Directory.GetDirectories(PathDirAcquisire);
 
             // annulla riferimento InfoNodoSelezionato
             InfoNodoSorgenteSelezionato = null;
 
             // inizia aggiornamnto tree view
-            treeViewSorgente.BeginUpdate();
+            treeViewAcquisire.BeginUpdate();
 
             // Azzera Tree view
-            treeViewSorgente.Nodes.Clear();
+            treeViewAcquisire.Nodes.Clear();
 
             // crea classe info dir foto vuota
             CInfoDirFoto info = new CInfoDirFoto("");
 
             // creiamo il nodo base
-            TreeNode nodoBase = new TreeNode("Sorgente");
+            TreeNode nodoBase = new TreeNode("Acquisire");
             nodoBase.Tag = info;
-            treeViewSorgente.Nodes.Add(nodoBase);
+            treeViewAcquisire.Nodes.Add(nodoBase);
 
             // Aggiunge un nodo per ogni subdirectory
             foreach (var subDir in listaSubDir)
             {
-                AggiungiNodo(subDir, ref nodoBase, 1, ref InfoTVSorgente);
+                AggiungiNodo(subDir, ref nodoBase, 1, ref InfoTVAcqusire);
 
             }
 
             // Espandi il sommario
-            treeViewSorgente.ExpandAll();
+            treeViewAcquisire.ExpandAll();
 
             // termina aggiornamnto
-            treeViewSorgente.EndUpdate();
+            treeViewAcquisire.EndUpdate();
 
         }
         /// <summary>
@@ -416,21 +416,21 @@ namespace GAlbum
         private void textBoxSorgente_TextChanged(object sender, EventArgs e)
         {
             // aggiorna la visualizzazione delle sub directory sorgente
-            AggiornaSorgente();
+            AggiornaAcquisire();
         }
         /// <summary>
         ///  estrae nodo selezionato 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void treeViewSorgente_AfterSelect(object sender, TreeViewEventArgs e)
+        private void treeViewAcquisire_AfterSelect(object sender, TreeViewEventArgs e)
         {
             // verifica lo stato del form
             if (Stato)
                 return;
 
             // recuprea il nodo selezionato 
-            TreeNode nodo = treeViewSorgente.SelectedNode;
+            TreeNode nodo = treeViewAcquisire.SelectedNode;
 
             // Estrae le info della classe 
             CInfoDirFoto info = (CInfoDirFoto)nodo.Tag;
@@ -521,11 +521,11 @@ namespace GAlbum
 
         }
         /// <summary>
-        /// Doppio click suula tree view sorgente
+        /// Doppio click suula tree view Acquisire
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void treeViewSorgente_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void treeViewAcquisire_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             // verifica che sia in stato false
             if ((this.Stato))
@@ -534,11 +534,11 @@ namespace GAlbum
             // verifica se é stato premuto il tasto destro
             if (e.Button == MouseButtons.Right)
             {
-                FormConfigTreeView formConfigTreeView = new FormConfigTreeView(ref InfoTVSorgente);
+                FormConfigTreeView formConfigTreeView = new FormConfigTreeView(ref InfoTVAcqusire);
                 formConfigTreeView.ShowDialog();
 
                 // aggiorna la treeview
-                AggiornaSorgente();
+                AggiornaAcquisire();
 
             }
 
@@ -596,7 +596,7 @@ namespace GAlbum
             pictureBox1.Image = null;
 
             // Assegna la foto
-            archivia.Assegna(textBoxPathFoto.Text, pathDestinazioni, copia, InfoTVSorgente.CopiaParallela);
+            archivia.Assegna(textBoxPathFoto.Text, pathDestinazioni, copia, InfoTVAcqusire.CopiaParallela);
 
             // mostra la foto successiva
             FotoSuccessiva();

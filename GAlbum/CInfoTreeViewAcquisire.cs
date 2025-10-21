@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static GAlbum.CInfoTreeView;
 
 namespace GAlbum
 {
-    public class CInfoTreeViewSorgente : CInfoTreeView
-    { 
+    public class CInfoTreeViewAcquisire : CInfoTreeView
+    {
         // ==================================================================================================================
         // Proprietà
         // ==================================================================================================================
@@ -21,7 +20,7 @@ namespace GAlbum
         /// <summary>
         /// costruttore
         /// </summary>
-        public CInfoTreeViewSorgente()
+        public CInfoTreeViewAcquisire()
         {
             // Definisce il tipo della tree view
             tipoTreeView = ETipoTreeView.Sorgente;
@@ -38,8 +37,9 @@ namespace GAlbum
             base.RipristinaDefault();
 
             // Configurazione di default
+            MostraRami = true;
             MostraFoglie = true;
+            MostraRamiRiservati = true;
         }
-    }// fine class CInfoTreeViewSorgente
+    }// fine class CInfoTreeViewAcquisire
 }// fine namespace GAlbum
-

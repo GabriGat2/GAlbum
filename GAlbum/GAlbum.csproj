@@ -63,6 +63,7 @@
     <Compile Include="CImmagine.cs" />
     <Compile Include="CInfoDirFoto.cs" />
     <Compile Include="CInfoTreeView.cs" />
+    <Compile Include="CInfoTreeViewAcquisire.cs" />
     <Compile Include="CInfoTreeViewDestinazione.cs" />
     <Compile Include="CInfoTreeViewSorgente.cs" />
     <Compile Include="FormAcquisire.cs">
