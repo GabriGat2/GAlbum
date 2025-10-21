@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Nodo1");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Nodo2");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Nodo5");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Nodo4", new System.Windows.Forms.TreeNode[] {
-            treeNode9});
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Nodo3", new System.Windows.Forms.TreeNode[] {
-            treeNode10});
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Nodo0", new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode8,
-            treeNode11});
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Nodo1");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Nodo2");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Nodo5");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Nodo4", new System.Windows.Forms.TreeNode[] {
+            treeNode15});
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Nodo3", new System.Windows.Forms.TreeNode[] {
+            treeNode16});
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Nodo0", new System.Windows.Forms.TreeNode[] {
+            treeNode13,
+            treeNode14,
+            treeNode17});
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBoxPath = new System.Windows.Forms.GroupBox();
             this.textBoxSmistati = new System.Windows.Forms.TextBox();
@@ -145,6 +145,7 @@
             // 
             this.textBoxAcquisire.Location = new System.Drawing.Point(104, 29);
             this.textBoxAcquisire.Name = "textBoxAcquisire";
+            this.textBoxAcquisire.ReadOnly = true;
             this.textBoxAcquisire.Size = new System.Drawing.Size(706, 20);
             this.textBoxAcquisire.TabIndex = 10;
             this.textBoxAcquisire.TextChanged += new System.EventHandler(this.textBoxSorgente_TextChanged);
@@ -249,20 +250,20 @@
             this.treeViewDestinazione.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewDestinazione.Location = new System.Drawing.Point(3, 16);
             this.treeViewDestinazione.Name = "treeViewDestinazione";
-            treeNode7.Name = "Nodo1";
-            treeNode7.Text = "Nodo1";
-            treeNode8.Name = "Nodo2";
-            treeNode8.Text = "Nodo2";
-            treeNode9.Name = "Nodo5";
-            treeNode9.Text = "Nodo5";
-            treeNode10.Name = "Nodo4";
-            treeNode10.Text = "Nodo4";
-            treeNode11.Name = "Nodo3";
-            treeNode11.Text = "Nodo3";
-            treeNode12.Name = "Nodo0";
-            treeNode12.Text = "Nodo0";
+            treeNode13.Name = "Nodo1";
+            treeNode13.Text = "Nodo1";
+            treeNode14.Name = "Nodo2";
+            treeNode14.Text = "Nodo2";
+            treeNode15.Name = "Nodo5";
+            treeNode15.Text = "Nodo5";
+            treeNode16.Name = "Nodo4";
+            treeNode16.Text = "Nodo4";
+            treeNode17.Name = "Nodo3";
+            treeNode17.Text = "Nodo3";
+            treeNode18.Name = "Nodo0";
+            treeNode18.Text = "Nodo0";
             this.treeViewDestinazione.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode12});
+            treeNode18});
             this.treeViewDestinazione.Size = new System.Drawing.Size(141, 573);
             this.treeViewDestinazione.TabIndex = 0;
             this.treeViewDestinazione.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDestinazione_AfterSelect);

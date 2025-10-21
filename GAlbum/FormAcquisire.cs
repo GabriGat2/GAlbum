@@ -483,13 +483,17 @@ namespace GAlbum
             //    butApri.Text = "Apri";
             //}
 
-            // button Sorgente
-            butAcquisire.Enabled = !Stato;
-            textBoxAcquisire.ReadOnly = Stato;
+            // button Acquisire
+            butAcquisire.Enabled = false;
+            textBoxAcquisire.ReadOnly = true;
 
-            // button Detinazione
-            butSmistare.Enabled = !Stato;
-            textBoxSmistare.ReadOnly = Stato;
+            // button Smistare
+            butSmistare.Enabled = false;
+            textBoxSmistare.ReadOnly = true;
+
+            // button Smistati
+            butSmistati.Enabled = false;
+            textBoxSmistati.ReadOnly = true;
 
             // button Precedente
             butPrecedente.Enabled = Stato;
