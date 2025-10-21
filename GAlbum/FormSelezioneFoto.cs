@@ -94,7 +94,7 @@ namespace GAlbum
             textBoxDestinazione.Text = "E:\\Angelo\\Prj\\GAlbum\\Foto\\Destinazione";
 
             // aggiorna la visualizzazione delle sub directory di destinazione
-            //AggiornaDestinazione();
+            //AggiornaSmistare();
             AggiornaSorgente();
 
 

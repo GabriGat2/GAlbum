@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GAlbum
 {
-    public class CInfoTreeViewAcquisire : CInfoTreeView
+    public class CInfoTreeViewSmistare : CInfoTreeView
     {
         // ==================================================================================================================
         // Proprietà
@@ -20,7 +20,7 @@ namespace GAlbum
         /// <summary>
         /// costruttore
         /// </summary>
-        public CInfoTreeViewAcquisire()
+        public CInfoTreeViewSmistare()
         {
             // Definisce il tipo della tree view
             tipoTreeView = ETipoTreeView.Sorgente;
@@ -42,5 +42,5 @@ namespace GAlbum
             MostraRamiRiservati = true;
             MaxLivello = 10;
         }
-    }// fine class CInfoTreeViewAcquisire
+    }//fine class CInfoTreeViewSmistare
 }// fine namespace GAlbum

@@ -65,6 +65,7 @@
     <Compile Include="CInfoTreeView.cs" />
     <Compile Include="CInfoTreeViewAcquisire.cs" />
     <Compile Include="CInfoTreeViewDestinazione.cs" />
+    <Compile Include="CInfoTreeViewSmistare.cs" />
     <Compile Include="CInfoTreeViewSorgente.cs" />
     <Compile Include="FormAcquisire.cs">
       <SubType>Form</SubType>

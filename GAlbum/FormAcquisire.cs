@@ -34,13 +34,13 @@ namespace GAlbum
         /// </summary>
         private Bitmap MyImage;
         /// <summary>
-        /// Path della directory sorgente attiva 
+        /// Path della directory Acquisire
         /// </summary>
         private string PathDirAcquisire = null;
         /// <summary>
-        /// Path della directory destinazione attiva 
+        /// Path della directory Smistare
         /// </summary>
-        private string PathDirDestinazione = null;
+        private string PathDirSmistare = null;
         /// <summary>
         /// Nodo sorgente selezionato
         /// </summary>
@@ -56,9 +56,9 @@ namespace GAlbum
         /// </summary>
         private CInfoTreeView InfoTVAcqusire;
         /// <summary>
-        /// Infro tree view Destinazione
+        /// Infro tree view Smistare
         /// </summary>
-        private CInfoTreeView InfoTVDestinazione;
+        private CInfoTreeView InfoTVSmistare;
         // ==================================================================================================================
         /// <summary>
         /// Mette qui i refatoring generati automaticamente
@@ -88,19 +88,19 @@ namespace GAlbum
             // Inizializza lo stato del form
             AggiornaStato(false);
 
-            // CRea info tree view
+            // Crea info tree view
             InfoTVAcqusire = new CInfoTreeViewAcquisire();
-            InfoTVDestinazione = new CInfoTreeViewDestinazione();
+            InfoTVSmistare = new CInfoTreeViewSmistare();
 
             // inizializza le text box
             textBoxAcquisire.Text = AreaArchivio.PathAcquisire;
             textBoxSmistare.Text = AreaArchivio.PathSmistare;
             textBoxSmistati.Text = AreaArchivio.PathSmistati;
 
-            // aggiorna la visualizzazione delle sub directory di destinazione
-            //AggiornaDestinazione();
+            // aggiorna la visualizzazione delle tree view
+            
             AggiornaAcquisire();
-
+            AggiornaSmistare();
 
 
         }
@@ -161,23 +161,23 @@ namespace GAlbum
             textBoxSmistare.Text = path;
         }
         /// <summary>
-        /// aggiorna le destinazioni, cioé visualizza le sotto directory contenute in destinazione
+        /// Aggiorna Smistare, cioé visualizza le sotto directory contenute in Smistare
         /// </summary>
-        private void AggiornaDestinazione()
+        private void AggiornaSmistare()
         {
-            // assegna la directory di destinazione
-            PathDirDestinazione = textBoxSmistare.Text;
+            // assegna la directory SmistareSmistare
+            PathDirSmistare = textBoxSmistare.Text;
 
             // verifica che la directory esiste 
-            if (!Directory.Exists(PathDirDestinazione))
+            if (!Directory.Exists(PathDirSmistare))
             {
-                PathDirDestinazione = null;
+                PathDirSmistare = null;
                 return;
             }
 
 
             // Crea la lista delle sub directory
-            string[] listaSubDir = Directory.GetDirectories(PathDirDestinazione);
+            string[] listaSubDir = Directory.GetDirectories(PathDirSmistare);
 
 
             // inizia aggiornamnto tree view
@@ -190,14 +190,14 @@ namespace GAlbum
             CInfoDirFoto info = new CInfoDirFoto("");
 
             // creiamo il nodo base
-            TreeNode nodoBase = new TreeNode("Destinazione");
+            TreeNode nodoBase = new TreeNode("Smistare");
             nodoBase.Tag = info;
             treeViewDestinazione.Nodes.Add(nodoBase);
 
             // Aggiunge un nodo per ogni subdirectory
             foreach (var subDir in listaSubDir)
             {
-                AggiungiNodo(subDir, ref nodoBase, 1, ref InfoTVDestinazione);
+                AggiungiNodo(subDir, ref nodoBase, 1, ref InfoTVSmistare);
             }
 
             // Espandi il sommario
@@ -264,7 +264,7 @@ namespace GAlbum
         private void textBoxDestinazione_TextChanged(object sender, EventArgs e)
         {
             // aggiorna la visualizzazione delle sub directory di destinazione
-            AggiornaDestinazione();
+            AggiornaSmistare();
         }
         /// <summary>
         /// Mostra la foto selezionata
@@ -553,12 +553,12 @@ namespace GAlbum
             // verifica se é stato premuto il tasto destro
             if (e.Button == MouseButtons.Right)
             {
-                FormConfigTreeView formConfigTreeView = new FormConfigTreeView(ref InfoTVDestinazione);
+                FormConfigTreeView formConfigTreeView = new FormConfigTreeView(ref InfoTVSmistare);
                 formConfigTreeView.ShowDialog();
             }
 
             // aggiorna la treeview
-            AggiornaDestinazione();
+            AggiornaSmistare();
         }
         /// <summary>
         /// Assegna la foto e passa alla successiva
