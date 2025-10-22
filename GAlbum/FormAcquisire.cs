@@ -46,9 +46,9 @@ namespace GAlbum
         /// </summary>
         private string PathDirSmistati = null;
         /// <summary>
-        /// Nodo sorgente selezionato
+        /// Nodo Acqisire selezionato
         /// </summary>
-        private CInfoDirFoto InfoNodoSorgenteSelezionato;
+        private CInfoDirFoto InfoNodoAcquisireSelezionato;
         /// <summary>
         /// stato del form:
         /// False = Copia delle foto non attiva perchè, sta coonfigurando le operazioni da eseguire
@@ -114,7 +114,7 @@ namespace GAlbum
 
         }
         /// <summary>
-        /// Seleziona la directory sorgente 
+        /// Seleziona la directory Acquisire 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -142,7 +142,7 @@ namespace GAlbum
             textBoxAcquisire.Text = path;
         }
         /// <summary>
-        ///  Apre directory di destinazione 
+        ///  Apre directory Smistare
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -368,13 +368,13 @@ namespace GAlbum
 
 
         /// <summary>
-        /// il testo della destinazione é cambiato
+        /// il testo della Smistare é cambiato
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void textBoxDestinazione_TextChanged(object sender, EventArgs e)
+        private void textBoxSmistare_TextChanged(object sender, EventArgs e)
         {
-            // aggiorna la visualizzazione delle sub directory di destinazione
+            // aggiorna la visualizzazione delle sub directory di Smistare
             AggiornaSmistare();
         }
         /// <summary>
@@ -489,7 +489,7 @@ namespace GAlbum
             string[] listaSubDir = Directory.GetDirectories(PathDirAcquisire);
 
             // annulla riferimento InfoNodoSelezionato
-            InfoNodoSorgenteSelezionato = null;
+            InfoNodoAcquisireSelezionato = null;
 
             // inizia aggiornamnto tree view
             treeViewAcquisire.BeginUpdate();
@@ -520,13 +520,13 @@ namespace GAlbum
 
         }
         /// <summary>
-        /// cambiato il path di sorgente
+        /// cambiato il path di Acquisire
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void textBoxSorgente_TextChanged(object sender, EventArgs e)
+        private void textBoxAcquisire_TextChanged(object sender, EventArgs e)
         {
-            // aggiorna la visualizzazione delle sub directory sorgente
+            // aggiorna la visualizzazione delle sub directory Acquisire
             AggiornaAcquisire();
         }
         /// <summary>
@@ -546,29 +546,29 @@ namespace GAlbum
             // Estrae le info della classe 
             CInfoDirFoto info = (CInfoDirFoto)nodo.Tag;
 
-            // aggiorna nodo sorgente selezionato 
-            AggiornaNodoSorgenteSelezionato(ref info);
+            // aggiorna nodo Acquisire selezionato 
+            AggiornaNodoAcquisireSelezionato(ref info);
 
             //     // commuta la selezione
             //info.CommutaSelezione();
         }
         /// <summary>
-        /// Aggiorna il nodo sorgente selezionato 
+        /// Aggiorna il nodo Acquisire selezionato 
         /// </summary>
         /// <param name="infoNodo"></param>
-        private void AggiornaNodoSorgenteSelezionato(ref CInfoDirFoto infoNodo)
+        private void AggiornaNodoAcquisireSelezionato(ref CInfoDirFoto infoNodo)
         {
-            // Verifica se il nodo sorgente é assegnato
-            if (InfoNodoSorgenteSelezionato != null)
+            // Verifica se il nodocquisire é assegnato
+            if (InfoNodoAcquisireSelezionato != null)
             {
-                InfoNodoSorgenteSelezionato.Selezione = false;
+                InfoNodoAcquisireSelezionato.Selezione = false;
             }
 
-            // aggiona il nodo sorgente selezionato
-            InfoNodoSorgenteSelezionato = infoNodo;
+            // aggiona il nodo Acquisire selezionato
+            InfoNodoAcquisireSelezionato = infoNodo;
 
             // seleziona il nodo
-            InfoNodoSorgenteSelezionato.Selezione = true;
+            InfoNodoAcquisireSelezionato.Selezione = true;
 
 
         }
@@ -764,7 +764,6 @@ namespace GAlbum
                 MessageBox.Show(other.Message);
             }
         }
-
         /// <summary>
         /// Apre in exprorer Acquisire
         /// </summary>

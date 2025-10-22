@@ -197,7 +197,7 @@
             this.textBoxAcquisire.ReadOnly = true;
             this.textBoxAcquisire.Size = new System.Drawing.Size(706, 20);
             this.textBoxAcquisire.TabIndex = 10;
-            this.textBoxAcquisire.TextChanged += new System.EventHandler(this.textBoxSorgente_TextChanged);
+            this.textBoxAcquisire.TextChanged += new System.EventHandler(this.textBoxAcquisire_TextChanged);
             // 
             // textBoxSmistare
             // 
@@ -205,7 +205,7 @@
             this.textBoxSmistare.Name = "textBoxSmistare";
             this.textBoxSmistare.Size = new System.Drawing.Size(706, 20);
             this.textBoxSmistare.TabIndex = 12;
-            this.textBoxSmistare.TextChanged += new System.EventHandler(this.textBoxDestinazione_TextChanged);
+            this.textBoxSmistare.TextChanged += new System.EventHandler(this.textBoxSmistare_TextChanged);
             // 
             // butAcquisire
             // 
