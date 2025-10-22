@@ -67,9 +67,9 @@
             this.treeViewAcquisire = new System.Windows.Forms.TreeView();
             this.splitContainer1B2A3B4 = new System.Windows.Forms.SplitContainer();
             this.groupBoxSmistare = new System.Windows.Forms.GroupBox();
-            this.treeViewDestinazione = new System.Windows.Forms.TreeView();
+            this.treeViewSmistare = new System.Windows.Forms.TreeView();
             this.groupBoxSmistati = new System.Windows.Forms.GroupBox();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.treeViewSmistati = new System.Windows.Forms.TreeView();
             this.splitContainer1B2B3 = new System.Windows.Forms.SplitContainer();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.butNonAssegna = new System.Windows.Forms.Button();
@@ -303,7 +303,7 @@
             // 
             // groupBoxSmistare
             // 
-            this.groupBoxSmistare.Controls.Add(this.treeViewDestinazione);
+            this.groupBoxSmistare.Controls.Add(this.treeViewSmistare);
             this.groupBoxSmistare.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxSmistare.Location = new System.Drawing.Point(0, 0);
             this.groupBoxSmistare.Name = "groupBoxSmistare";
@@ -312,11 +312,11 @@
             this.groupBoxSmistare.TabStop = false;
             this.groupBoxSmistare.Text = "Smistare";
             // 
-            // treeViewDestinazione
+            // treeViewSmistare
             // 
-            this.treeViewDestinazione.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewDestinazione.Location = new System.Drawing.Point(3, 16);
-            this.treeViewDestinazione.Name = "treeViewDestinazione";
+            this.treeViewSmistare.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewSmistare.Location = new System.Drawing.Point(3, 16);
+            this.treeViewSmistare.Name = "treeViewSmistare";
             treeNode1.Name = "Nodo1";
             treeNode1.Text = "Nodo1";
             treeNode2.Name = "Nodo2";
@@ -329,16 +329,16 @@
             treeNode5.Text = "Nodo3";
             treeNode6.Name = "Nodo0";
             treeNode6.Text = "Nodo0";
-            this.treeViewDestinazione.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            this.treeViewSmistare.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode6});
-            this.treeViewDestinazione.Size = new System.Drawing.Size(144, 573);
-            this.treeViewDestinazione.TabIndex = 0;
-            this.treeViewDestinazione.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDestinazione_AfterSelect);
-            this.treeViewDestinazione.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeViewDestinazione_MouseDoubleClick);
+            this.treeViewSmistare.Size = new System.Drawing.Size(144, 573);
+            this.treeViewSmistare.TabIndex = 0;
+            this.treeViewSmistare.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewSmistare_AfterSelect);
+            this.treeViewSmistare.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeViewSmistare_MouseDoubleClick);
             // 
             // groupBoxSmistati
             // 
-            this.groupBoxSmistati.Controls.Add(this.treeView1);
+            this.groupBoxSmistati.Controls.Add(this.treeViewSmistati);
             this.groupBoxSmistati.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxSmistati.Location = new System.Drawing.Point(0, 0);
             this.groupBoxSmistati.Name = "groupBoxSmistati";
@@ -347,11 +347,11 @@
             this.groupBoxSmistati.TabStop = false;
             this.groupBoxSmistati.Text = "Smistati";
             // 
-            // treeView1
+            // treeViewSmistati
             // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.Location = new System.Drawing.Point(3, 16);
-            this.treeView1.Name = "treeView1";
+            this.treeViewSmistati.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewSmistati.Location = new System.Drawing.Point(3, 16);
+            this.treeViewSmistati.Name = "treeViewSmistati";
             treeNode7.Name = "Nodo1";
             treeNode7.Text = "Nodo1";
             treeNode8.Name = "Nodo2";
@@ -364,10 +364,12 @@
             treeNode11.Text = "Nodo3";
             treeNode12.Name = "Nodo0";
             treeNode12.Text = "Nodo0";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            this.treeViewSmistati.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode12});
-            this.treeView1.Size = new System.Drawing.Size(136, 573);
-            this.treeView1.TabIndex = 0;
+            this.treeViewSmistati.Size = new System.Drawing.Size(136, 573);
+            this.treeViewSmistati.TabIndex = 0;
+            this.treeViewSmistati.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewSmistati_AfterSelect);
+            this.treeViewSmistati.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeViewSmistati_MouseDoubleClick);
             // 
             // splitContainer1B2B3
             // 
@@ -513,7 +515,7 @@
         private System.Windows.Forms.SplitContainer splitContainer1B2A3;
         private System.Windows.Forms.GroupBox groupBoxSmistare;
         private System.Windows.Forms.GroupBox groupBoxAcquisire;
-        private System.Windows.Forms.TreeView treeViewDestinazione;
+        private System.Windows.Forms.TreeView treeViewSmistare;
         private System.Windows.Forms.TextBox textBoxDebug;
         private System.Windows.Forms.TreeView treeViewAcquisire;
         private System.Windows.Forms.Button butNonAssegna;
@@ -525,6 +527,6 @@
         private System.Windows.Forms.Button butExplorerSmistati;
         private System.Windows.Forms.SplitContainer splitContainer1B2A3B4;
         private System.Windows.Forms.GroupBox groupBoxSmistati;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView treeViewSmistati;
     }
 }

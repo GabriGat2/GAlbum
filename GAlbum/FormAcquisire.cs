@@ -42,6 +42,10 @@ namespace GAlbum
         /// </summary>
         private string PathDirSmistare = null;
         /// <summary>
+        /// Path della directory Smistati
+        /// </summary>
+        private string PathDirSmistati = null;
+        /// <summary>
         /// Nodo sorgente selezionato
         /// </summary>
         private CInfoDirFoto InfoNodoSorgenteSelezionato;
@@ -59,6 +63,10 @@ namespace GAlbum
         /// Infro tree view Smistare
         /// </summary>
         private CInfoTreeView InfoTVSmistare;
+        /// <summary>
+        /// Infro tree view Smistati
+        /// </summary>
+        private CInfoTreeView InfoTVSmistati;
         // ==================================================================================================================
         /// <summary>
         /// Mette qui i refatoring generati automaticamente
@@ -91,7 +99,7 @@ namespace GAlbum
             // Crea info tree view
             InfoTVAcqusire = new CInfoTreeViewAcquisire();
             InfoTVSmistare = new CInfoTreeViewSmistare();
-
+            InfoTVSmistati = new CInfoTreeViewSmistati();
             // inizializza le text box
             textBoxAcquisire.Text = AreaArchivio.PathAcquisire;
             textBoxSmistare.Text = AreaArchivio.PathSmistare;
@@ -101,6 +109,7 @@ namespace GAlbum
             
             AggiornaAcquisire();
             AggiornaSmistare();
+            AggiornaSmistati();
 
 
         }
@@ -165,7 +174,7 @@ namespace GAlbum
         /// </summary>
         private void AggiornaSmistare()
         {
-            // assegna la directory SmistareSmistare
+            // assegna la directory Smistare
             PathDirSmistare = textBoxSmistare.Text;
 
             // verifica che la directory esiste 
@@ -181,10 +190,10 @@ namespace GAlbum
 
 
             // inizia aggiornamnto tree view
-            treeViewDestinazione.BeginUpdate();
+            treeViewSmistare.BeginUpdate();
 
             // Azzera Tree view
-            treeViewDestinazione.Nodes.Clear();
+            treeViewSmistare.Nodes.Clear();
 
             // crea classe info dir foto vuota
             CInfoDirFoto info = new CInfoDirFoto("");
@@ -192,7 +201,7 @@ namespace GAlbum
             // creiamo il nodo base
             TreeNode nodoBase = new TreeNode("Smistare");
             nodoBase.Tag = info;
-            treeViewDestinazione.Nodes.Add(nodoBase);
+            treeViewSmistare.Nodes.Add(nodoBase);
 
             // Aggiunge un nodo per ogni subdirectory
             foreach (var subDir in listaSubDir)
@@ -201,12 +210,14 @@ namespace GAlbum
             }
 
             // Espandi il sommario
-            treeViewDestinazione.ExpandAll();
+            treeViewSmistare.ExpandAll();
 
             // termina aggiornamnto
-            treeViewDestinazione.EndUpdate();
+            treeViewSmistare.EndUpdate();
 
         }
+
+
         /// <summary>
         /// Aggiunge un nodo
         /// </summary>
@@ -256,6 +267,106 @@ namespace GAlbum
                 return;
             }
         }
+        /// <summary>
+        /// Aggiorna Smistati, cioé visualizza le sotto directory contenute in Smistati
+        /// </summary>
+        private void AggiornaSmistati()
+        {
+            // assegna la directory Smistati
+            PathDirSmistati = textBoxSmistati.Text;
+
+            // verifica che la directory esiste 
+            if (!Directory.Exists(PathDirSmistati))
+            {
+                PathDirSmistati = null;
+                return;
+            }
+
+
+            // Crea la lista delle sub directory
+            string[] listaSubDir = Directory.GetDirectories(PathDirSmistati);
+
+
+            // inizia aggiornamnto tree view
+            treeViewSmistati.BeginUpdate();
+
+            // Azzera Tree view
+            treeViewSmistati.Nodes.Clear();
+
+            // crea classe info dir foto vuota
+            CInfoDirFoto info = new CInfoDirFoto("");
+
+            // creiamo il nodo base
+            TreeNode nodoBase = new TreeNode("Smistati");
+            nodoBase.Tag = info;
+            treeViewSmistati.Nodes.Add(nodoBase);
+
+            // Aggiunge un nodo per ogni subdirectory
+            foreach (var subDir in listaSubDir)
+            {
+                AggiungiNodo(subDir, ref nodoBase, 1, ref InfoTVSmistati);
+            }
+
+            // Espandi il sommario
+            treeViewSmistati.ExpandAll();
+
+            // termina aggiornamnto
+            treeViewSmistati.EndUpdate();
+
+        }
+
+
+        ///// <summary>
+        ///// Aggiunge un nodo
+        ///// </summary>
+        ///// <param name="pathDir"></param>
+        ///// <param name="nodoBase"></param>
+        ///// <param name="livello"></param>
+        //private void AggiungiNodo(string pathDir, ref TreeNode nodoBase, int livello, ref CInfoTreeView infoTV)
+        //{
+        //    // crea classe info dir foto
+        //    CInfoDirFoto info = new CInfoDirFoto(pathDir);
+
+        //    // verifichiamo se può essere aggiunta all'albero della tree vie
+        //    if (!infoTV.NomeVisibile(info.Nome))
+        //        return;
+
+        //    // crea il nodo
+        //    TreeNode nodo = new TreeNode(info.Nome);
+        //    nodo.Tag = info;
+        //    nodoBase.Nodes.Add(nodo);
+
+        //    // Aggiungiamo il riferimento al nodo all'info
+        //    info.SetNodo(ref nodo);
+
+
+        //    // verifica se ha raggiunto il livello di massima indentazione
+        //    if (livello >= infoTV.MaxLivello)
+        //    {
+        //        return;
+        //    }
+
+
+        //    // Crea la lista delle sub directory
+        //    try
+        //    {
+        //        string[] listaSubDir = Directory.GetDirectories(pathDir);
+
+
+        //        // Aggiunge un nodo per ogni subdirectory
+        //        foreach (var subDir in listaSubDir)
+        //        {
+        //            AggiungiNodo(subDir, ref nodo, ++livello, ref infoTV);
+
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return;
+        //    }
+        //}
+
+
         /// <summary>
         /// il testo della destinazione é cambiato
         /// </summary>
@@ -344,10 +455,10 @@ namespace GAlbum
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void treeViewDestinazione_AfterSelect(object sender, TreeViewEventArgs e)
+        private void treeViewSmistare_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            // recuprea il nodo selezionato 
-            TreeNode nodo = treeViewDestinazione.SelectedNode;
+            // recuprea il nodo selezionato
+            TreeNode nodo = treeViewSmistare.SelectedNode;
 
             // Estrae le info della classe 
             CInfoDirFoto info = (CInfoDirFoto)nodo.Tag;
@@ -544,11 +655,11 @@ namespace GAlbum
 
         }
         /// <summary>
-        /// Doppio click suula tree view destinazione
+        /// Doppio click sulla tree view smistare
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void treeViewDestinazione_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void treeViewSmistare_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             // verifica se é stato premuto il tasto destro
             if (e.Button == MouseButtons.Right)
@@ -589,7 +700,7 @@ namespace GAlbum
 
             // crea la lista dei nodi selezionati
             List<String> pathDestinazioni;
-            TreeNode nodo = treeViewDestinazione.Nodes[0];
+            TreeNode nodo = treeViewSmistare.Nodes[0];
             archivia.EstraiNdodiSelezionati(ref nodo, out pathDestinazioni);
 
             // libera la risorsa della foto
@@ -688,6 +799,39 @@ namespace GAlbum
             // recupera il path dell'archivio e avvia explore
             if (AreaArchivio.ArchivioBaseOK)
                 ApreExplorer(AreaArchivio.PathSmistati);
+        }
+        ///Estrae il nodo selezionato
+        private void treeViewSmistati_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            // recuprea il nodo selezionato
+            TreeNode nodo = treeViewSmistati.SelectedNode;
+
+            // Estrae le info della classe 
+            CInfoDirFoto info = (CInfoDirFoto)nodo.Tag;
+
+            // stampa il path della directory 
+            String path = info.Path;
+            textBoxDebug.Text = path;
+
+            // commuta la selezione
+            info.CommutaSelezione();
+        }
+        /// <summary>
+        ///  Doppio click sulla tree view smistati
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeViewSmistati_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            // verifica se é stato premuto il tasto destro
+            if (e.Button == MouseButtons.Right)
+            {
+                FormConfigTreeView formConfigTreeView = new FormConfigTreeView(ref InfoTVSmistati);
+                formConfigTreeView.ShowDialog();
+            }
+
+            // aggiorna la treeview
+            AggiornaSmistati();
         }
     }// fine class FormAcquisire
 }// fine namespace GAlbum
