@@ -114,7 +114,7 @@ namespace GAlbum
         private void InizializzaClasse()
         {
             // DUBUG_GG 
-            //pathArchivioBase = "";
+            //pathArchivioAttivo = "";
             pathArchivioBase = "E:\\Angelo\\Prj\\GAlbum\\AreaArchivioBaseFoto";
             dirArchivioAttivo = "";
 

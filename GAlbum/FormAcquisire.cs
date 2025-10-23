@@ -551,6 +551,24 @@ namespace GAlbum
 
             //     // commuta la selezione
             //info.CommutaSelezione();
+
+            // DEBUG-GG
+
+            // estrae il path della directory
+            string pathSelezionato = info.Path;
+            string[] listaFile = Directory.GetFiles(pathSelezionato);
+            if (listaFile.Length > 0)
+            {
+                string pathNomeFile = listaFile[0];
+
+                CNomeFile nomefile = new CNomeFile(AreaArchivio.PathArchivioAttivo);
+                nomefile.SetPathNomeFile(pathNomeFile);
+
+            }    
+
+
+
+
         }
         /// <summary>
         /// Aggiorna il nodo Acquisire selezionato 
