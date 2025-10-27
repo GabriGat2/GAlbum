@@ -60,7 +60,84 @@ namespace GAlbum
         // ------------------------------------------------------------------------------------------------------------------
         // Path nome file = A + B + C + D + E + F + G + H
         //
-        private string pathNomeFile;        
+        private string pathNomeFile;
+        //
+        // ------------------------------------------------------------------------------------------------------------------
+        // Sezione
+        //
+        /// <summary>
+        /// Dir sezione
+        /// </summary>
+        public string DirSezione { get => dirSezione; set => dirSezione = value; }
+        /// <summary>
+        /// Path sezione = A + B
+        /// </summary>
+        public string PathSezione { get => pathSezione; set => pathSezione = value; }
+        private string pathSezione;
+
+        // ------------------------------------------------------------------------------------------------------------------
+        // Archivio
+        //
+        /// <summary>
+        /// Dir Archivio
+        /// </summary>
+        public string DirArchivio { get => dirArchivio; set => dirArchivio = value; }
+        /// <summary>
+        /// pathArchivio A + B + C 
+        /// </summary>
+        public string PathArchivio { get => pathArchivio; set => pathArchivio = value; }
+        private string pathArchivio;
+
+
+        // ------------------------------------------------------------------------------------------------------------------
+        // pathInterno
+        //
+        /// <summary>
+        /// pathInterno
+        /// </summary>
+        public string PathInterno { get => pathInterno; set => pathInterno = value; }
+
+        // ------------------------------------------------------------------------------------------------------------------
+        // Ramo
+        //
+        /// <summary>
+        /// DirRamo
+        /// </summary>
+        public string DirRamo { get => dirRamo; set => dirRamo = value; }
+
+        // ------------------------------------------------------------------------------------------------------------------
+        // Foglia
+        //
+        /// <summary>
+        /// DirFoglia
+        /// </summary>
+        public string DirFoglia { get => dirFoglia; set => dirFoglia = value; }
+
+        // ------------------------------------------------------------------------------------------------------------------
+        // Nome
+        //
+        /// <summary>
+        /// dirNome
+        /// </summary>
+        public string Nome { get => nome; set => nome = value; }
+
+        // ------------------------------------------------------------------------------------------------------------------
+        // Estensione
+        //
+        /// <summary>
+        /// DirEstensione
+        /// </summary>
+        public string Estensione { get => estensione; set => estensione = value; }
+
+        // ==================================================================================================================
+        /// <summary>
+        /// Mette qui i refatoring generati automaticamente
+        /// </summary>
+        private bool mettiloQui;
+        public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
+        
+
+
 
 
 
@@ -89,13 +166,13 @@ namespace GAlbum
         /// </summary>
         protected void AzzeraPorzioni()
         {
-            dirSezione = String.Empty;              // B
-            dirArchivio = String.Empty;             // C
-            pathInterno = String.Empty;             // D
-            dirRamo = String.Empty;                 // E
-            dirFoglia = String.Empty;               // F
-            nome = String.Empty;                    // G
-            estensione = String.Empty; ;            // H
+            DirSezione = String.Empty;              // B
+            DirArchivio = String.Empty;             // C
+            PathInterno = String.Empty;             // D
+            DirRamo = String.Empty;                 // E
+            DirFoglia = String.Empty;               // F
+            Nome = String.Empty;                    // G
+            Estensione = String.Empty; ;            // H
         }
 
 
@@ -107,7 +184,7 @@ namespace GAlbum
         public GstErrori.EErrore SetPathNomeFile(string pathNomeFile)
         {
 
-            // verifica che il path contenga il pathArchvioBase
+            // verifica che il path contenga il pathArchvioAttivo
             string locPathArchivioAttivo = pathNomeFile.Remove(pathArchivioAttivo.Length, pathNomeFile.Length - pathArchivioAttivo.Length);
             if (locPathArchivioAttivo.ToLower() != pathArchivioAttivo.ToLower())
             {
@@ -119,7 +196,7 @@ namespace GAlbum
             string pathNomeFileInterno = pathNomeFile.Substring(pathArchivioAttivo.Length + 1);
 
             // scompone il pathNomeFileInterno in campi e Verifica che ci siano i campi minimi
-            string[] campi = pathNomeFileInterno.Split(SD);
+            string [] campi = pathNomeFileInterno.Split(SD);
             if (campi.Length < 3)
             {
                 AzzeraPorzioni();
@@ -144,12 +221,44 @@ namespace GAlbum
             this.estensione = campiNome[1];
 
             // estrarre il nome della foglia
+            if (campi.Length < 4)
+            {
+                this.dirFoglia = string.Empty;
+                this.dirRamo = string.Empty; 
+                this.pathInterno = string.Empty;
+                return GstErrori.EErrore.E0000_OK;
+            }
+            else
+            {
+                this.dirFoglia = campi[campi.Length - 2];
+            }
 
+            // estrarre il nome del ramo 
+            if (campi.Length < 5)
+            {
+                this.dirRamo = string.Empty;
+                this.pathInterno = string.Empty;
+                return GstErrori.EErrore.E0000_OK;
+            }
+            else
+            {
+                this.dirRamo = campi[campi.Length - 3];
+            }
 
-
-
-
-
+            // estrarre il nome del path interno 
+            if (campi.Length < 6)
+            {
+                this.pathInterno = string.Empty;
+                return GstErrori.EErrore.E0000_OK;
+            }
+            else
+            {
+                this.pathInterno = campi[2];
+                for (int i = 3; i < campi.Length - 3; i++)
+                {
+                    this.pathInterno = this.pathInterno + SD + campi[i];
+                }
+            }
 
             return GstErrori.EErrore.E0001_NOK;
         }
