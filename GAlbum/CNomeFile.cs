@@ -72,7 +72,8 @@ namespace GAlbum
         /// <summary>
         /// Path sezione = A + B
         /// </summary>
-        public string PathSezione { get => pathSezione; set => pathSezione = value; }
+        //public string PathSezione { get => pathArchivioAttivo +  SD + dirSezione; /* set => pathSezione = value; */ }
+        public string PathSezione { get => pathSezione; /* set => pathSezione = value; */ }
         private string pathSezione;
 
         // ------------------------------------------------------------------------------------------------------------------
@@ -83,9 +84,9 @@ namespace GAlbum
         /// </summary>
         public string DirArchivio { get => dirArchivio; set => dirArchivio = value; }
         /// <summary>
-        /// pathArchivio A + B + C 
+        /// pathArchivio =  A + B + C 
         /// </summary>
-        public string PathArchivio { get => pathArchivio; set => pathArchivio = value; }
+        public string PathArchivio { get => pathArchivio; /*set => pathArchivio = value;*/ }
         private string pathArchivio;
 
 
@@ -96,6 +97,11 @@ namespace GAlbum
         /// pathInterno
         /// </summary>
         public string PathInterno { get => pathInterno; set => pathInterno = value; }
+        /// <summary>
+        ///  PathPathInterno =  A + B + C + D
+        /// </summary>
+        public string PathPathInterno { get => pathPathInterno; /*set => pathPathInterno = value;*/ }
+        private string pathPathInterno;
 
         // ------------------------------------------------------------------------------------------------------------------
         // Ramo
@@ -104,6 +110,11 @@ namespace GAlbum
         /// DirRamo
         /// </summary>
         public string DirRamo { get => dirRamo; set => dirRamo = value; }
+        /// <summary>
+        /// PathDirRamo = A + B + C + D + E
+        /// </summary>
+        public string PathDirRamo { get => pathDirRamo; /*set => pathDirRamo = value;*/ }
+        private string pathDirRamo;
 
         // ------------------------------------------------------------------------------------------------------------------
         // Foglia
@@ -112,12 +123,17 @@ namespace GAlbum
         /// DirFoglia
         /// </summary>
         public string DirFoglia { get => dirFoglia; set => dirFoglia = value; }
+        /// <summary>
+        /// pathDirFoglia= A + B + C + D + E + F
+        /// </summary>
+        public string PathDirFoglia { get => pathDirFoglia; /*set => pathDirFoglia = value;*/ }
+        private string pathDirFoglia;
 
         // ------------------------------------------------------------------------------------------------------------------
         // Nome
         //
         /// <summary>
-        /// dirNome
+        /// Nome
         /// </summary>
         public string Nome { get => nome; set => nome = value; }
 
@@ -125,9 +141,25 @@ namespace GAlbum
         // Estensione
         //
         /// <summary>
-        /// DirEstensione
+        /// Estensione
         /// </summary>
         public string Estensione { get => estensione; set => estensione = value; }
+
+        // ------------------------------------------------------------------------------------------------------------------
+        // Nome file = Nome + estensione = G  + H
+        //
+        /// <summary>
+        /// NomeFile
+        /// </summary>
+        /// 
+        public string NomeFile { get => nomeFile; set => nomeFile = value; }
+        private string nomeFile;
+        /// <summary>
+        /// pathnomeFile = A + B + C + D + E + F + G + H  
+        /// </summary>
+        public string PathnomeFile { get => pathnomeFile; /*set => pathnomeFile = value;*/ }
+        private string pathnomeFile;
+
 
         // ==================================================================================================================
         /// <summary>
@@ -136,6 +168,10 @@ namespace GAlbum
         private bool mettiloQui;
         public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
         
+
+
+
+
 
 
 
@@ -260,9 +296,32 @@ namespace GAlbum
                 }
             }
 
+            // Popola variabili derivate
+            Popola();
+
             return GstErrori.EErrore.E0001_NOK;
         }
+        /// <summary>
+        /// Popola tutte le variabili derivate 
+        /// </summary>
+        private void Popola()
+        {
+            // popola Sezione
+            if (dirSezione == string.Empty)
+            {
+                pathSezione = pathArchivioAttivo;
+            }
+            else 
+            {
+                pathSezione = pathArchivioAttivo + SD + dirSezione;
+            }
 
+
+        }
 
     }// fine class CNomeFile
+
+
+
+
 }// fine namespace GAlbum

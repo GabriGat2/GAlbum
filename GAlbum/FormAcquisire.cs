@@ -564,6 +564,24 @@ namespace GAlbum
                 CNomeFile nomefile = new CNomeFile(AreaArchivio.PathArchivioAttivo);
                 nomefile.SetPathNomeFile(pathNomeFile);
 
+
+                string sezione = nomefile.DirSezione;
+                string pathSezione = nomefile.PathSezione;
+
+                nomefile.DirSezione = string.Empty;
+
+                string sezione2 = nomefile.DirSezione;
+                string pathSezione2 = nomefile.PathSezione;
+
+
+
+
+
+                ;
+
+
+
+
             }    
 
 
