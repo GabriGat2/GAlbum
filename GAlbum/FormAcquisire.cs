@@ -567,12 +567,26 @@ namespace GAlbum
 
                 string sezione = nomefile.DirSezione;
                 string pathSezione = nomefile.PathSezione;
+                string archivio = nomefile.DirArchivio;
+                string patharchivio = nomefile.PathArchivio;
 
-                nomefile.DirSezione = string.Empty;
+
+                nomefile.DirSezione = "Pippo";
+                //nomefile.Popola();
 
                 string sezione2 = nomefile.DirSezione;
                 string pathSezione2 = nomefile.PathSezione;
+                string archivio2 = nomefile.DirArchivio;
+                string patharchivio2 = nomefile.PathArchivio;
 
+
+                nomefile.DirSezione = string.Empty;
+                //nomefile.Popola();
+
+                string sezione3 = nomefile.DirSezione;
+                string pathSezione3 = nomefile.PathSezione;
+                string archivio3 = nomefile.DirArchivio;
+                string patharchivio3 = nomefile.PathArchivio;
 
 
 

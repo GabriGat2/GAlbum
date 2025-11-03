@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace GAlbum
         // A = pathArchivioAttivo
         // B = dirSezione
         // C = dirArchivio
-        // D = pathInterno
+        // D = DirInterno anche se a tutti gli effetti è un dirInterno
         // E = dirRamo
         // F = dirFoglia
         // G = nome
@@ -51,7 +52,7 @@ namespace GAlbum
         private string pathArchivioAttivo;      // A
         private string dirSezione;              // B
         private string dirArchivio;             // C
-        private string pathInterno;             // D
+        private string dirInterno;             // D
         private string dirRamo;                 // E
         private string dirFoglia;               // F
         private string nome;                    // G
@@ -68,13 +69,18 @@ namespace GAlbum
         /// <summary>
         /// Dir sezione
         /// </summary>
-        public string DirSezione { get => dirSezione; set => dirSezione = value; }
+        public string DirSezione { get => dirSezione; set { dirSezione = value; Popola(); }}
         /// <summary>
         /// Path sezione = A + B
         /// </summary>
         //public string PathSezione { get => pathArchivioAttivo +  SD + dirSezione; /* set => pathSezione = value; */ }
         public string PathSezione { get => pathSezione; /* set => pathSezione = value; */ }
         private string pathSezione;
+        /// <summary>
+        /// Se conforme = TRUE significa che la il path è con forme alle regole stabilite
+        /// </summary>
+        public bool PathSezioneConforme { get => pathSezioneConforme; /* set => pathSzioneConforme = value;*/ }
+        private bool pathSezioneConforme;
 
         // ------------------------------------------------------------------------------------------------------------------
         // Archivio
@@ -88,20 +94,31 @@ namespace GAlbum
         /// </summary>
         public string PathArchivio { get => pathArchivio; /*set => pathArchivio = value;*/ }
         private string pathArchivio;
+        /// <summary>
+        /// Se conforme = TRUE significa che la il path è con forme alle regole stabilite
+        /// </summary>
+        public bool PathArchivioConforme { get => pathArchivioConforme; /* set => pathArchivioConforme = value;*/ }
+        private bool pathArchivioConforme;
 
 
         // ------------------------------------------------------------------------------------------------------------------
-        // pathInterno
+        // dirInterno anche se a tutti gli effetti è un path
         //
         /// <summary>
         /// pathInterno
         /// </summary>
-        public string PathInterno { get => pathInterno; set => pathInterno = value; }
+        public string DirInterno { get => dirInterno; set => dirInterno = value; }
         /// <summary>
-        ///  PathPathInterno =  A + B + C + D
+        ///  PathInterno =  A + B + C + D
         /// </summary>
-        public string PathPathInterno { get => pathPathInterno; /*set => pathPathInterno = value;*/ }
-        private string pathPathInterno;
+        public string PathInterno { get => pathInterno; /*set => pathInterno = value;*/
+        }
+        private string pathInterno;
+        /// <summary>
+        /// Se conforme = TRUE significa che la il path è con forme alle regole stabilite
+        /// </summary>
+        public bool PathInternoConforme { get => pathInternoConforme; /* set => pathInternoConforme = value; */}
+        private bool pathInternoConforme;
 
         // ------------------------------------------------------------------------------------------------------------------
         // Ramo
@@ -113,8 +130,13 @@ namespace GAlbum
         /// <summary>
         /// PathDirRamo = A + B + C + D + E
         /// </summary>
-        public string PathDirRamo { get => pathDirRamo; /*set => pathDirRamo = value;*/ }
-        private string pathDirRamo;
+        public string PathRamo { get => pathRamo; /*set => pathRamo = value;*/ }
+        private string pathRamo;
+        /// <summary>
+        /// Se conforme = TRUE significa che la il path è con forme alle regole stabilite
+        /// </summary>
+        public bool PathRamoConforme { get => pathRamoConforme; set => pathRamoConforme = value; }
+        private bool pathRamoConforme;
 
         // ------------------------------------------------------------------------------------------------------------------
         // Foglia
@@ -126,8 +148,8 @@ namespace GAlbum
         /// <summary>
         /// pathDirFoglia= A + B + C + D + E + F
         /// </summary>
-        public string PathDirFoglia { get => pathDirFoglia; /*set => pathDirFoglia = value;*/ }
-        private string pathDirFoglia;
+        public string PathFoglia { get => pathFoglia; /*set => pathDirFoglia = value;*/ }
+        private string pathFoglia;
 
         // ------------------------------------------------------------------------------------------------------------------
         // Nome
@@ -180,6 +202,8 @@ namespace GAlbum
 
 
 
+
+
         // ==================================================================================================================
         // Metodi
         // ==================================================================================================================
@@ -204,7 +228,7 @@ namespace GAlbum
         {
             DirSezione = String.Empty;              // B
             DirArchivio = String.Empty;             // C
-            PathInterno = String.Empty;             // D
+            DirInterno = String.Empty;             // D
             DirRamo = String.Empty;                 // E
             DirFoglia = String.Empty;               // F
             Nome = String.Empty;                    // G
@@ -261,7 +285,7 @@ namespace GAlbum
             {
                 this.dirFoglia = string.Empty;
                 this.dirRamo = string.Empty; 
-                this.pathInterno = string.Empty;
+                this.dirInterno = string.Empty;
                 return GstErrori.EErrore.E0000_OK;
             }
             else
@@ -273,7 +297,7 @@ namespace GAlbum
             if (campi.Length < 5)
             {
                 this.dirRamo = string.Empty;
-                this.pathInterno = string.Empty;
+                this.dirInterno = string.Empty;
                 return GstErrori.EErrore.E0000_OK;
             }
             else
@@ -284,15 +308,15 @@ namespace GAlbum
             // estrarre il nome del path interno 
             if (campi.Length < 6)
             {
-                this.pathInterno = string.Empty;
+                this.dirInterno = string.Empty;
                 return GstErrori.EErrore.E0000_OK;
             }
             else
             {
-                this.pathInterno = campi[2];
+                this.dirInterno = campi[2];
                 for (int i = 3; i < campi.Length - 3; i++)
                 {
-                    this.pathInterno = this.pathInterno + SD + campi[i];
+                    this.dirInterno = this.dirInterno + SD + campi[i];
                 }
             }
 
@@ -310,10 +334,48 @@ namespace GAlbum
             if (dirSezione == string.Empty)
             {
                 pathSezione = pathArchivioAttivo;
+                pathSezioneConforme = false;
             }
             else 
             {
                 pathSezione = pathArchivioAttivo + SD + dirSezione;
+                pathSezioneConforme = true; ;
+            }
+
+            // popola Archivio
+            if (dirArchivio == string.Empty)
+            {
+                pathArchivio = PathSezione;
+                pathArchivioConforme = false;
+            }
+            else
+            {
+                pathArchivio = PathSezione + SD + dirArchivio;
+                pathArchivioConforme = pathSezioneConforme;
+            }
+
+            // popola dirInterno
+            if (dirInterno == string.Empty)
+            {
+                pathInterno = pathArchivio;
+                pathInternoConforme = false;
+            }
+            else
+            {
+                pathInterno = pathArchivio + SD + dirInterno;
+                pathInternoConforme = pathArchivioConforme;
+            }
+
+            // popola dirRamo
+            if (dirRamo == string.Empty)
+            {
+                pathRamo = pathInterno;
+                pathRamoConforme = false;
+            }
+            else
+            {
+                pathRamo = pathInterno  + SD + pathRamo ;
+                pathRamoConforme = pathInternoConforme;
             }
 
 
