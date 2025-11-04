@@ -882,6 +882,30 @@ namespace GAlbum
             // aggiorna la treeview
             AggiornaSmistati();
         }
+        /// <summary>
+        /// esegue l'acquisizione di un archivio
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butEsegui_Click(object sender, EventArgs e)
+        {
+            // recupera il path dell'archivio acquisito
+
+
+            // Verifica se c'è un nodo sorgente selezionato
+            if (InfoNodoAcquisireSelezionato == null)
+            {
+                return;
+            }
+
+            // stampa il path della directory
+            string pathSrc = InfoNodoAcquisireSelezionato.Path;
+            textBoxPathFoto.Text = pathSrc;
+
+            // Eseguire l'aquisizione
+            GstErrori.EErrore esito = AreaArchivio.Acquisire(pathSrc);
+
+        }
     }// fine class FormAcquisire
 }// fine namespace GAlbum
 

@@ -78,6 +78,7 @@
             this.textBoxPathFoto = new System.Windows.Forms.TextBox();
             this.butPrecedente = new System.Windows.Forms.Button();
             this.butSuccessiva = new System.Windows.Forms.Button();
+            this.butEsegui = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -126,6 +127,7 @@
             // 
             // groupBoxPath
             // 
+            this.groupBoxPath.Controls.Add(this.butEsegui);
             this.groupBoxPath.Controls.Add(this.butExplorerSmistati);
             this.groupBoxPath.Controls.Add(this.butExplorerSmistare);
             this.groupBoxPath.Controls.Add(this.butExplorerAcquisire);
@@ -145,7 +147,7 @@
             // 
             // butExplorerSmistati
             // 
-            this.butExplorerSmistati.Location = new System.Drawing.Point(816, 87);
+            this.butExplorerSmistati.Location = new System.Drawing.Point(863, 77);
             this.butExplorerSmistati.Name = "butExplorerSmistati";
             this.butExplorerSmistati.Size = new System.Drawing.Size(17, 23);
             this.butExplorerSmistati.TabIndex = 18;
@@ -155,7 +157,7 @@
             // 
             // butExplorerSmistare
             // 
-            this.butExplorerSmistare.Location = new System.Drawing.Point(816, 58);
+            this.butExplorerSmistare.Location = new System.Drawing.Point(863, 47);
             this.butExplorerSmistare.Name = "butExplorerSmistare";
             this.butExplorerSmistare.Size = new System.Drawing.Size(17, 23);
             this.butExplorerSmistare.TabIndex = 17;
@@ -165,7 +167,7 @@
             // 
             // butExplorerAcquisire
             // 
-            this.butExplorerAcquisire.Location = new System.Drawing.Point(816, 29);
+            this.butExplorerAcquisire.Location = new System.Drawing.Point(863, 21);
             this.butExplorerAcquisire.Name = "butExplorerAcquisire";
             this.butExplorerAcquisire.Size = new System.Drawing.Size(17, 23);
             this.butExplorerAcquisire.TabIndex = 16;
@@ -175,14 +177,15 @@
             // 
             // textBoxSmistati
             // 
-            this.textBoxSmistati.Location = new System.Drawing.Point(104, 87);
+            this.textBoxSmistati.Location = new System.Drawing.Point(193, 79);
             this.textBoxSmistati.Name = "textBoxSmistati";
-            this.textBoxSmistati.Size = new System.Drawing.Size(706, 20);
+            this.textBoxSmistati.ReadOnly = true;
+            this.textBoxSmistati.Size = new System.Drawing.Size(664, 20);
             this.textBoxSmistati.TabIndex = 14;
             // 
             // butSmistati
             // 
-            this.butSmistati.Location = new System.Drawing.Point(12, 85);
+            this.butSmistati.Location = new System.Drawing.Point(101, 77);
             this.butSmistati.Name = "butSmistati";
             this.butSmistati.Size = new System.Drawing.Size(86, 23);
             this.butSmistati.TabIndex = 13;
@@ -192,24 +195,25 @@
             // 
             // textBoxAcquisire
             // 
-            this.textBoxAcquisire.Location = new System.Drawing.Point(104, 29);
+            this.textBoxAcquisire.Location = new System.Drawing.Point(193, 21);
             this.textBoxAcquisire.Name = "textBoxAcquisire";
             this.textBoxAcquisire.ReadOnly = true;
-            this.textBoxAcquisire.Size = new System.Drawing.Size(706, 20);
+            this.textBoxAcquisire.Size = new System.Drawing.Size(664, 20);
             this.textBoxAcquisire.TabIndex = 10;
             this.textBoxAcquisire.TextChanged += new System.EventHandler(this.textBoxAcquisire_TextChanged);
             // 
             // textBoxSmistare
             // 
-            this.textBoxSmistare.Location = new System.Drawing.Point(104, 58);
+            this.textBoxSmistare.Location = new System.Drawing.Point(193, 50);
             this.textBoxSmistare.Name = "textBoxSmistare";
-            this.textBoxSmistare.Size = new System.Drawing.Size(706, 20);
+            this.textBoxSmistare.ReadOnly = true;
+            this.textBoxSmistare.Size = new System.Drawing.Size(664, 20);
             this.textBoxSmistare.TabIndex = 12;
             this.textBoxSmistare.TextChanged += new System.EventHandler(this.textBoxSmistare_TextChanged);
             // 
             // butAcquisire
             // 
-            this.butAcquisire.Location = new System.Drawing.Point(12, 27);
+            this.butAcquisire.Location = new System.Drawing.Point(101, 19);
             this.butAcquisire.Name = "butAcquisire";
             this.butAcquisire.Size = new System.Drawing.Size(86, 23);
             this.butAcquisire.TabIndex = 9;
@@ -219,7 +223,7 @@
             // 
             // butSmistare
             // 
-            this.butSmistare.Location = new System.Drawing.Point(12, 56);
+            this.butSmistare.Location = new System.Drawing.Point(101, 48);
             this.butSmistare.Name = "butSmistare";
             this.butSmistare.Size = new System.Drawing.Size(86, 23);
             this.butSmistare.TabIndex = 11;
@@ -459,6 +463,16 @@
             this.butSuccessiva.UseVisualStyleBackColor = true;
             this.butSuccessiva.Click += new System.EventHandler(this.butSuccessiva_Click);
             // 
+            // butEsegui
+            // 
+            this.butEsegui.Location = new System.Drawing.Point(6, 21);
+            this.butEsegui.Name = "butEsegui";
+            this.butEsegui.Size = new System.Drawing.Size(86, 23);
+            this.butEsegui.TabIndex = 19;
+            this.butEsegui.Text = "Esegui";
+            this.butEsegui.UseVisualStyleBackColor = true;
+            this.butEsegui.Click += new System.EventHandler(this.butEsegui_Click);
+            // 
             // FormAcquisire
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -528,5 +542,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1B2A3B4;
         private System.Windows.Forms.GroupBox groupBoxSmistati;
         private System.Windows.Forms.TreeView treeViewSmistati;
+        private System.Windows.Forms.Button butEsegui;
     }
 }

@@ -85,6 +85,13 @@ namespace GAlbum
         public string PathSmistati { get => PathArchivioAttivo + SepDir + DirSmistati; /* set => pathSmistati = value; */ }
 
 
+        // ------------------------------------------------------------------------------------------------------------------
+        // Prefissi
+        private const string prefissoCopia = "_C_";
+        private const string prefissoDuplica = "_D_";
+
+
+
         //-------------------------------------------------------------------------------------------------------------------
         // Nomi delle directory
 
@@ -344,7 +351,86 @@ namespace GAlbum
             string[] campi = pathArchivioBase.Split('\\');
             return campi[campi.Length - 1];
         }
+        /// <summary>
+        ///  Esegue l'acquisizione di un archivio
+        /// </summary>
+        /// <param name="pathArchivio"></param>
+        /// <returns></returns>
+         public GstErrori.EErrore Acquisire(string pathArchivio)
+         {
+            GstErrori.EErrore esito;
+            bool acquisito;
 
+            // recupera il path di tutti i file contenuti in questa directory e le sue subdirerectory
+            string [] listaPathFile = Directory.GetFiles(pathArchivio, "*.*", SearchOption.AllDirectories);
+
+            // Crea le classi per gestire la copia dei file
+            CNomeFile fileSrc = new CNomeFile(PathArchivioAttivo);
+            CNomeFile fileDst = new CNomeFile(PathArchivioAttivo);
+            CNomeFile fileCopia = new CNomeFile(PathArchivioAttivo);
+            CNomeFile fileDuplica = new CNomeFile(PathArchivioAttivo);
+
+            // Elabola ogni file contenuto nella lista
+            foreach (var pathFile in listaPathFile)
+            {
+                // inizializza le classi per la gestioen del file
+                esito = fileSrc.SetPathNomeFile(pathFile);
+                if (esito != GstErrori.EErrore.E0000_OK)
+                    return esito;
+                esito = fileDst.SetPathNomeFile(pathFile);
+                esito = fileCopia.SetPathNomeFile(pathFile);
+                esito = fileDuplica.SetPathNomeFile(pathFile);
+
+                // Aggiusta destinazione
+                fileDst.DirSezione = DirSmistare;
+
+                // Prepara per copia
+                fileCopia.DirArchivio = prefissoCopia + fileCopia.DirArchivio;
+
+                // Prepara per duplica
+                fileDuplica.DirArchivio = prefissoDuplica + fileDuplica.DirArchivio;
+
+                // Verifica s il file è già stato acquisito
+
+                // DA FARE ...
+                acquisito = false;
+
+
+                // archivia il file dopo l'aquisizione
+                if (acquisito)
+                {
+                    // Sposta il file sorgente nei file copiati
+                    fileCopia.SpostaFile(fileSrc.PathNomeFile);
+
+
+                }
+                else
+                {
+                    // sposta il file sorgente nei file duplicati
+                    fileDuplica.SpostaFile(fileSrc.PathNomeFile);
+
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+            return GstErrori.EErrore.E0000_OK;        
+         }
 
     }// fine class CAreaArchivio
 }// fine namespace CAreaArchivio

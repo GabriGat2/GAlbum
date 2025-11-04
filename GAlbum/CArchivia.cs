@@ -321,7 +321,7 @@ namespace GAlbum
 
             // ----------------------------------------------------------------------------------------
 
-            // comporre path archivio
+            // compone path archivio
             string pathArchivio = campiSrc[0];
             for (int i = 1; i < campiSrc.Length - 3; i++)
             {

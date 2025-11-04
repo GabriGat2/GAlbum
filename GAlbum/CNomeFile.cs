@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,9 +60,6 @@ namespace GAlbum
         private string estensione;              // H
         //
         // ------------------------------------------------------------------------------------------------------------------
-        // Path nome file = A + B + C + D + E + F + G + H
-        //
-        private string pathNomeFile;
         //
         // ------------------------------------------------------------------------------------------------------------------
         // Sezione
@@ -162,7 +160,8 @@ namespace GAlbum
         /// <summary>
         /// Nome
         /// </summary>
-        public string Nome { get => nome; set  { nome = value; Popola(); } }
+        public 
+            string Nome { get => nome; set  { nome = value; Popola(); } }
 
         // ------------------------------------------------------------------------------------------------------------------
         // Estensione
@@ -182,10 +181,10 @@ namespace GAlbum
         public string NomeFile { get => nomeFile; set => SetNomeFile(value); }
         private string nomeFile;
         /// <summary>
-        /// pathnomeFile = A + B + C + D + E + F + G + H  
+        /// pathNomeFile = A + B + C + D + E + F + G + H  
         /// </summary>
-        public string PathnomeFile { get => pathnomeFile; /*set => pathnomeFile = value;*/ }
-        private string pathnomeFile;
+        public string PathNomeFile { get => pathNomeFile; /*set => pathNomeFile = value;*/ }
+        private string pathNomeFile;
         /// <summary>
         /// NomeFileOk = true quando esiste none e estensione
         /// </summary>
@@ -330,7 +329,7 @@ namespace GAlbum
             // Popola variabili derivate
             Popola();
 
-            return GstErrori.EErrore.E0001_NOK;
+            return GstErrori.EErrore.E0000_OK;
         }
         /// <summary>
         /// Popola tutte le variabili derivate 
@@ -352,12 +351,12 @@ namespace GAlbum
             // popola Archivio
             if (dirArchivio == string.Empty)
             {
-                pathArchivio = PathSezione;
+                pathArchivio = pathSezione;
                 pathArchivioConforme = false;
             }
             else
             {
-                pathArchivio = PathSezione + SD + dirArchivio;
+                pathArchivio = pathSezione + SD + dirArchivio;
                 pathArchivioConforme = pathSezioneConforme;
             }
 
@@ -381,7 +380,7 @@ namespace GAlbum
             }
             else
             {
-                pathRamo = pathInterno  + SD + pathRamo ;
+                pathRamo = pathInterno  + SD + dirRamo ;
                 pathRamoConforme = pathInternoConforme;
             }
 
@@ -393,7 +392,7 @@ namespace GAlbum
             }
             else
             {
-                pathFoglia = pathRamo  + SD + pathFoglia;
+                pathFoglia = pathRamo  + SD + dirFoglia;
                 pathFogliaConforme = pathRamoConforme;
             }
 
@@ -409,7 +408,7 @@ namespace GAlbum
             else
             {
                 nomeFile = nome + "." + estensione;
-                nomeFileOK = true; ;
+                nomeFileOK = true; 
 
 
                 pathNomeFile = pathFoglia + SD + nomeFile;
@@ -441,6 +440,37 @@ namespace GAlbum
 
             return GstErrori.EErrore.E0000_OK;
         }
+        /// <summary>
+        /// Sposta un file
+        /// </summary>
+        /// <param name="pathNomeFilesSrc"></param>
+        /// <returns></returns>
+        public GstErrori.EErrore SpostaFile(string pathNomeFileSrc)
+        {
+            // crea le directory di destinazione se non esistono
+            try
+            {
+                Directory.CreateDirectory(pathFoglia);
+            }
+            catch (IOException errore)
+            {
+                return GstErrori.EErrore.E0001_NOK;
+            }
+
+
+            // Esegue lo spostamento del file
+            try
+            {
+                File.Move(pathNomeFileSrc, pathNomeFile);
+            }
+            catch (IOException errore)
+            {
+                return GstErrori.EErrore.E0001_NOK;
+            }
+
+            return GstErrori.EErrore.E0000_OK;
+        }
+
 
 
     }// fine class CNomeFile
