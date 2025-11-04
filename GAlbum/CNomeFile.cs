@@ -88,7 +88,7 @@ namespace GAlbum
         /// <summary>
         /// Dir Archivio
         /// </summary>
-        public string DirArchivio { get => dirArchivio; set => dirArchivio = value; }
+        public string DirArchivio { get => dirArchivio; set { dirArchivio = value; Popola(); }}
         /// <summary>
         /// pathArchivio =  A + B + C 
         /// </summary>
@@ -107,7 +107,7 @@ namespace GAlbum
         /// <summary>
         /// pathInterno
         /// </summary>
-        public string DirInterno { get => dirInterno; set => dirInterno = value; }
+        public string DirInterno { get => dirInterno; set{ dirInterno = value; Popola(); } }
         /// <summary>
         ///  PathInterno =  A + B + C + D
         /// </summary>
@@ -126,7 +126,7 @@ namespace GAlbum
         /// <summary>
         /// DirRamo
         /// </summary>
-        public string DirRamo { get => dirRamo; set => dirRamo = value; }
+        public string DirRamo { get => dirRamo; set { dirRamo = value; Popola(); } }
         /// <summary>
         /// PathDirRamo = A + B + C + D + E
         /// </summary>
@@ -144,12 +144,17 @@ namespace GAlbum
         /// <summary>
         /// DirFoglia
         /// </summary>
-        public string DirFoglia { get => dirFoglia; set => dirFoglia = value; }
+        public string DirFoglia { get => dirFoglia; set { dirFoglia = value; Popola(); } }
         /// <summary>
         /// pathDirFoglia= A + B + C + D + E + F
         /// </summary>
         public string PathFoglia { get => pathFoglia; /*set => pathDirFoglia = value;*/ }
         private string pathFoglia;
+        /// <summary>
+        ///  se conforme = TRUE significa che la il path è con forme alle regole stabilite
+        /// </summary>
+        public bool PathFogliaConforme { get => pathFogliaConforme; /*set => pathFogliaConforme = value;*/ }
+        private bool pathFogliaConforme;
 
         // ------------------------------------------------------------------------------------------------------------------
         // Nome
@@ -157,7 +162,7 @@ namespace GAlbum
         /// <summary>
         /// Nome
         /// </summary>
-        public string Nome { get => nome; set => nome = value; }
+        public string Nome { get => nome; set  { nome = value; Popola(); } }
 
         // ------------------------------------------------------------------------------------------------------------------
         // Estensione
@@ -165,7 +170,7 @@ namespace GAlbum
         /// <summary>
         /// Estensione
         /// </summary>
-        public string Estensione { get => estensione; set => estensione = value; }
+        public string Estensione { get => estensione; set { estensione = value; Popola(); } }
 
         // ------------------------------------------------------------------------------------------------------------------
         // Nome file = Nome + estensione = G  + H
@@ -174,14 +179,23 @@ namespace GAlbum
         /// NomeFile
         /// </summary>
         /// 
-        public string NomeFile { get => nomeFile; set => nomeFile = value; }
+        public string NomeFile { get => nomeFile; set => SetNomeFile(value); }
         private string nomeFile;
         /// <summary>
         /// pathnomeFile = A + B + C + D + E + F + G + H  
         /// </summary>
         public string PathnomeFile { get => pathnomeFile; /*set => pathnomeFile = value;*/ }
         private string pathnomeFile;
-
+        /// <summary>
+        /// NomeFileOk = true quando esiste none e estensione
+        /// </summary>
+        public bool NomeFileOK { get => nomeFileOK; set => nomeFileOK = value; }
+        private bool nomeFileOK;
+        /// <summary>
+        ///  se conforme = TRUE significa che la il path è con forme alle regole stabilite
+        /// </summary>
+        public bool PathNomeFileConforme { get => pathNomeFileConforme; /*set => pathNomeFileConforme = value;*/ }
+        private bool pathNomeFileConforme;
 
         // ==================================================================================================================
         /// <summary>
@@ -190,13 +204,6 @@ namespace GAlbum
         private bool mettiloQui;
         public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
         
-
-
-
-
-
-
-
 
 
 
@@ -228,14 +235,14 @@ namespace GAlbum
         {
             DirSezione = String.Empty;              // B
             DirArchivio = String.Empty;             // C
-            DirInterno = String.Empty;             // D
+            DirInterno = String.Empty;              // D
             DirRamo = String.Empty;                 // E
             DirFoglia = String.Empty;               // F
             Nome = String.Empty;                    // G
             Estensione = String.Empty; ;            // H
+
+            Popola();
         }
-
-
         /// <summary>
         /// Set del pathNomeFile
         /// </summary>
@@ -358,7 +365,7 @@ namespace GAlbum
             if (dirInterno == string.Empty)
             {
                 pathInterno = pathArchivio;
-                pathInternoConforme = false;
+                pathInternoConforme = pathArchivioConforme; /* false; */
             }
             else
             {
@@ -370,7 +377,7 @@ namespace GAlbum
             if (dirRamo == string.Empty)
             {
                 pathRamo = pathInterno;
-                pathRamoConforme = false;
+                pathRamoConforme = pathInternoConforme;  /* false ; */
             }
             else
             {
@@ -378,12 +385,63 @@ namespace GAlbum
                 pathRamoConforme = pathInternoConforme;
             }
 
+            // popola  DirFoglia
+            if (dirFoglia == string.Empty)
+            {
+                pathFoglia = pathRamo;
+                pathFogliaConforme = false;
+            }
+            else
+            {
+                pathFoglia = pathRamo  + SD + pathFoglia;
+                pathFogliaConforme = pathRamoConforme;
+            }
+
+            // popola nome file
+            if ((nome == string.Empty) || (estensione == string.Empty))
+            {
+                nomeFile = string.Empty;
+                nomeFileOK = false;
+
+                pathNomeFile = pathFoglia;
+                pathNomeFileConforme = false;
+            }
+            else
+            {
+                nomeFile = nome + "." + estensione;
+                nomeFileOK = true; ;
+
+
+                pathNomeFile = pathFoglia + SD + nomeFile;
+                pathNomeFileConforme = pathFogliaConforme;
+            }
 
         }
+        /// <summary>
+        /// imposta il nome del file
+        /// </summary>
+        /// <param name="nomeFile"></param>
+        /// <returns></returns>
+        public GstErrori.EErrore SetNomeFile(String nomeDelFile)
+        {
+            // estrae nome e estensione 
+            string[] campiNome = nomeDelFile.Split('.');
+            if (campiNome.Length != 2)
+            {
+                AzzeraPorzioni();
+                return GstErrori.EErrore.E0001_NOK;
+            }
+
+            // Assegna nome ed estensione
+            this.nome = campiNome[0];
+            this.estensione = campiNome[1];
+
+            // Ripopola tutto
+            Popola();
+
+            return GstErrori.EErrore.E0000_OK;
+        }
+
 
     }// fine class CNomeFile
-
-
-
-
 }// fine namespace GAlbum
