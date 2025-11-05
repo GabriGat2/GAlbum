@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.VisualStyles;
 using static GAlbum.CInfoTreeView;
 
 namespace GAlbum
@@ -195,6 +197,10 @@ namespace GAlbum
         /// </summary>
         public bool PathNomeFileConforme { get => pathNomeFileConforme; /*set => pathNomeFileConforme = value;*/ }
         private bool pathNomeFileConforme;
+        /// <summary>
+        /// rende true se il file esiste
+        /// </summary>
+        public bool PathNomeFileEsiste { get => File.Exists(pathNomeFile); /* set => pathNomeFileEsiste = value; */ }
 
         // ==================================================================================================================
         /// <summary>
@@ -202,7 +208,8 @@ namespace GAlbum
         /// </summary>
         private bool mettiloQui;
         public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
-        
+
+
 
 
 
@@ -470,7 +477,86 @@ namespace GAlbum
 
             return GstErrori.EErrore.E0000_OK;
         }
+        /// <summary>
+        /// confronta file con i file contenuti nella sezione
+        /// </summary>
+        /// <param name="fileCercato"></param>
+        /// <returns></returns>
+        public GstErrori.EErrore ConfrontaInSezione(CNomeFile fileCercato)
+        {
+            // recupera il path di tutti i file contenuti in questa directory e le sue subdirerectory
+            string [] listaPathFile = Directory.GetFiles(pathSezione, fileCercato.nomeFile, SearchOption.AllDirectories);
 
+            // verifica la dimensione della lista, se uguale a 0 il file non esiste nella sezione 
+            if (listaPathFile.Length == 0 )
+            {
+                return GstErrori.EErrore.E0000_OK;
+            }
+
+
+            return GstErrori.EErrore.E0000_OK;
+        }
+
+        /// <summary>
+        /// copia il file specificato
+        /// </summary>
+        /// <param name="fileCercato"></param>
+        /// <returns></returns>
+        public GstErrori.EErrore CopiaFile(CNomeFile fileSrc)
+        {
+            GstErrori.EErrore esito = GstErrori.EErrore.E0001_NOK; 
+            
+            // verica che il file sorgente esista 
+            if (! fileSrc.PathNomeFileEsiste)
+            {
+                return GstErrori.EErrore.E1360_FileSorgenteNonEsiste;
+            }
+
+            // crea la directory destinazione
+            esito = CreaDirectory(pathFoglia);
+            if (esito != GstErrori.EErrore.E0000_OK)
+            {
+                return esito; 
+            }
+
+            // verifica se il file destinazione esiste gia 
+            if (PathNomeFileEsiste)
+            {
+                return GstErrori.EErrore.E1371_FileDestinazioneEsiste; 
+            }
+
+            // esegue la copia 
+            try
+            {
+                File.Copy(fileSrc.PathNomeFile, PathNomeFile);
+            }
+            catch (IOException errore)
+            {
+                return GstErrori.EErrore.E1364_FileSorgenteNonCopiato;
+            }
+
+
+            return GstErrori.EErrore.E0000_OK;
+        }
+        /// <summary>
+        /// crea le directtory 
+        /// </summary>
+        /// <param name="pathDir"></param>
+        /// <returns></returns>
+        public GstErrori.EErrore CreaDirectory (string pathDir)
+        {
+            // crea la directory specificata se non esiste
+            try
+            {
+                Directory.CreateDirectory(pathDir);
+            }
+            catch (IOException errore)
+            {
+                return GstErrori.EErrore.E1300_DirectoryNonEsiste;
+            }
+
+            return GstErrori.EErrore.E0000_OK;
+        }
 
 
     }// fine class CNomeFile

@@ -364,7 +364,7 @@ namespace GAlbum
             // recupera il path di tutti i file contenuti in questa directory e le sue subdirerectory
             string [] listaPathFile = Directory.GetFiles(pathArchivio, "*.*", SearchOption.AllDirectories);
 
-            // Crea le classi per gestire la copia dei file
+            // Crea gli oggetti per gestire la copia dei file
             CNomeFile fileSrc = new CNomeFile(PathArchivioAttivo);
             CNomeFile fileDst = new CNomeFile(PathArchivioAttivo);
             CNomeFile fileCopia = new CNomeFile(PathArchivioAttivo);
@@ -373,7 +373,7 @@ namespace GAlbum
             // Elabola ogni file contenuto nella lista
             foreach (var pathFile in listaPathFile)
             {
-                // inizializza le classi per la gestioen del file
+                // inizializza le classi per la gestione del file
                 esito = fileSrc.SetPathNomeFile(pathFile);
                 if (esito != GstErrori.EErrore.E0000_OK)
                     return esito;
@@ -390,11 +390,19 @@ namespace GAlbum
                 // Prepara per duplica
                 fileDuplica.DirArchivio = prefissoDuplica + fileDuplica.DirArchivio;
 
-                // Verifica s il file è già stato acquisito
+                // Verifica se il file è già stato acquisito
+                esito = fileDst.ConfrontaInSezione(fileSrc);
+                acquisito = (esito == GstErrori.EErrore.E0000_OK);
 
-                // DA FARE ...
-                acquisito = false;
-
+                // esegue la copia 
+                if (acquisito)
+                {
+                    esito = fileDst.CopiaFile(fileSrc);
+                    if (esito != GstErrori.EErrore.E0000_OK)
+                    {
+                        return esito;   
+                    }
+                }
 
                 // archivia il file dopo l'aquisizione
                 if (acquisito)
@@ -408,19 +416,7 @@ namespace GAlbum
                 {
                     // sposta il file sorgente nei file duplicati
                     fileDuplica.SpostaFile(fileSrc.PathNomeFile);
-
-
                 }
-
-
-
-
-
-
-
-
-
-
 
 
             }
