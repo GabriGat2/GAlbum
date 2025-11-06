@@ -478,11 +478,11 @@ namespace GAlbum
             return GstErrori.EErrore.E0000_OK;
         }
         /// <summary>
-        /// confronta file con i file contenuti nella sezione
+        /// Verifica che non ci sia un file uguale a quello specificato  a partire dalla directory sezione 
         /// </summary>
         /// <param name="fileCercato"></param>
         /// <returns></returns>
-        public GstErrori.EErrore ConfrontaInSezione(CNomeFile fileCercato)
+        public GstErrori.EErrore VerificaFileAssenteInSezione(CNomeFile fileCercato, bool confrontaFoglia = true)
         {
             // recupera il path di tutti i file contenuti in questa directory e le sue subdirerectory
             string [] listaPathFile = Directory.GetFiles(pathSezione, fileCercato.nomeFile, SearchOption.AllDirectories);
@@ -493,6 +493,65 @@ namespace GAlbum
                 return GstErrori.EErrore.E0000_OK;
             }
 
+            // Estrae le dimensioni di file cercato
+            FileInfo fileCercatoInfo = new FileInfo(fileCercato.PathNomeFile);
+            long fileCercatoLength = fileCercatoInfo.Length;
+
+            // Estrae la data di ultimo accesso del file cercato
+            DateTime fileCercatoData = File.GetLastWriteTime(fileCercato.PathNomeFile);
+            DateTime fileCercatoDataUTC = File.GetLastWriteTimeUtc(fileCercato.PathNomeFile);
+
+            // Estrae la foglia del file cercato
+            string fileCercatoFoglia = fileCercato.DirFoglia.ToUpper();
+
+            // Crea la classe per il file trovato
+            CNomeFile CFileTrovato = new CNomeFile(pathArchivioAttivo);
+
+            // definizione variabili condizioni
+            bool ugualeNome = true;
+            bool ugualeDimensione = false;
+            bool ugualeData = false;
+            bool ugualeFoglia = false;
+
+
+            // analizza i file della lista 
+            foreach (var fileTrovato in listaPathFile)
+            {
+                // Estrae la dimensione del file trovato
+                FileInfo fileTrovatoInfo = new FileInfo(fileTrovato);
+                long fileTrovatoLength = fileTrovatoInfo.Length;
+                // esegue il confronto delle dimensioni del file
+                ugualeDimensione = (fileCercatoLength == fileTrovatoLength);
+
+
+                // Estrae la data di ultimo accesso del file trovato
+                DateTime fileTrovatoData = File.GetLastWriteTime(fileTrovato);
+                DateTime fileTrovatoDataUTC = File.GetLastWriteTimeUtc(fileTrovato);
+                // esegue il confronto tra le date dei file
+                int resoConfrontoData = fileCercatoData.CompareTo(fileTrovatoData);
+                ugualeData = (resoConfrontoData == 0);
+
+                // controla se deve valutare la foglia
+                if (confrontaFoglia)
+                {
+                    // Estrae la foglia del file trovato
+                    CFileTrovato.SetPathNomeFile(fileTrovato);
+                    string fileTrovatoFoglia = CFileTrovato.DirFoglia.ToUpper();
+                    // Confronta le foglie dei file
+                    ugualeFoglia = (fileCercatoFoglia == fileTrovatoFoglia);
+                }
+                else
+                {
+                    ugualeFoglia = true;
+                }
+
+                // verifica le condizioni di confronto cioè, se i file sono uguali
+                if (ugualeNome && ugualeDimensione && ugualeData && ugualeFoglia)
+                {
+                    // se arriva qui significa che i file sono uguali 
+                    return GstErrori.EErrore.E0001_NOK;
+                }
+            }
 
             return GstErrori.EErrore.E0000_OK;
         }

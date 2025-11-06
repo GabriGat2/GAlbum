@@ -391,7 +391,7 @@ namespace GAlbum
                 fileDuplica.DirArchivio = prefissoDuplica + fileDuplica.DirArchivio;
 
                 // Verifica se il file è già stato acquisito
-                esito = fileDst.ConfrontaInSezione(fileSrc);
+                esito = fileDst.VerificaFileAssenteInSezione(fileSrc);
                 acquisito = (esito == GstErrori.EErrore.E0000_OK);
 
                 // esegue la copia 
