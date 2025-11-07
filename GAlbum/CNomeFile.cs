@@ -69,7 +69,7 @@ namespace GAlbum
         /// <summary>
         /// Dir sezione
         /// </summary>
-        public string DirSezione { get => dirSezione; set { dirSezione = value; Popola(); }}
+        public string DirSezione { get => dirSezione; set { dirSezione = value; Popola(); } }
         /// <summary>
         /// Path sezione = A + B
         /// </summary>
@@ -88,7 +88,7 @@ namespace GAlbum
         /// <summary>
         /// Dir Archivio
         /// </summary>
-        public string DirArchivio { get => dirArchivio; set { dirArchivio = value; Popola(); }}
+        public string DirArchivio { get => dirArchivio; set { dirArchivio = value; Popola(); } }
         /// <summary>
         /// pathArchivio =  A + B + C 
         /// </summary>
@@ -107,7 +107,7 @@ namespace GAlbum
         /// <summary>
         /// pathInterno
         /// </summary>
-        public string DirInterno { get => dirInterno; set{ dirInterno = value; Popola(); } }
+        public string DirInterno { get => dirInterno; set { dirInterno = value; Popola(); } }
         /// <summary>
         ///  PathInterno =  A + B + C + D
         /// </summary>
@@ -162,8 +162,8 @@ namespace GAlbum
         /// <summary>
         /// Nome
         /// </summary>
-        public 
-            string Nome { get => nome; set  { nome = value; Popola(); } }
+        public
+            string Nome { get => nome; set { nome = value; Popola(); } }
 
         // ------------------------------------------------------------------------------------------------------------------
         // Estensione
@@ -232,7 +232,7 @@ namespace GAlbum
 
             // inizializzare le porzioni del path nome file
             AzzeraPorzioni();
-            
+
         }
         /// <summary>
         /// Azzera tutte le porzioni del path nome file ad eccezione del pathArchivioAttivo
@@ -269,7 +269,7 @@ namespace GAlbum
             string pathNomeFileInterno = pathNomeFile.Substring(pathArchivioAttivo.Length + 1);
 
             // scompone il pathNomeFileInterno in campi e Verifica che ci siano i campi minimi
-            string [] campi = pathNomeFileInterno.Split(SD);
+            string[] campi = pathNomeFileInterno.Split(SD);
             if (campi.Length < 3)
             {
                 AzzeraPorzioni();
@@ -297,7 +297,7 @@ namespace GAlbum
             if (campi.Length < 4)
             {
                 this.dirFoglia = string.Empty;
-                this.dirRamo = string.Empty; 
+                this.dirRamo = string.Empty;
                 this.dirInterno = string.Empty;
                 return GstErrori.EErrore.E0000_OK;
             }
@@ -349,7 +349,7 @@ namespace GAlbum
                 pathSezione = pathArchivioAttivo;
                 pathSezioneConforme = false;
             }
-            else 
+            else
             {
                 pathSezione = pathArchivioAttivo + SD + dirSezione;
                 pathSezioneConforme = true; ;
@@ -387,7 +387,7 @@ namespace GAlbum
             }
             else
             {
-                pathRamo = pathInterno  + SD + dirRamo ;
+                pathRamo = pathInterno + SD + dirRamo;
                 pathRamoConforme = pathInternoConforme;
             }
 
@@ -399,7 +399,7 @@ namespace GAlbum
             }
             else
             {
-                pathFoglia = pathRamo  + SD + dirFoglia;
+                pathFoglia = pathRamo + SD + dirFoglia;
                 pathFogliaConforme = pathRamoConforme;
             }
 
@@ -415,7 +415,7 @@ namespace GAlbum
             else
             {
                 nomeFile = nome + "." + estensione;
-                nomeFileOK = true; 
+                nomeFileOK = true;
 
 
                 pathNomeFile = pathFoglia + SD + nomeFile;
@@ -452,16 +452,28 @@ namespace GAlbum
         /// </summary>
         /// <param name="pathNomeFilesSrc"></param>
         /// <returns></returns>
-        public GstErrori.EErrore SpostaFile(string pathNomeFileSrc)
+        public GstErrori.EErrore SpostaFile(string pathNomeFileSrc, bool cercaNuovoNome = true)
         {
-            // crea le directory di destinazione se non esistono
-            try
+
+            // crea la directory destinazione
+            GstErrori.EErrore esito = CreaDirectory(pathFoglia);
+            if (esito != GstErrori.EErrore.E0000_OK)
             {
-                Directory.CreateDirectory(pathFoglia);
+                return esito;
             }
-            catch (IOException errore)
+
+            // verificare che non esista il file nella destinazione
+            if (PathNomeFileEsiste)
             {
-                return GstErrori.EErrore.E0001_NOK;
+                // verifica se deve cercare un nuovo nome
+                if (cercaNuovoNome)
+                {
+                    esito = NumeraNome();
+                    if (esito != GstErrori.EErrore.E0000_OK)
+                        return esito;
+                }
+                else
+                    return GstErrori.EErrore.E1371_FileDestinazioneEsiste;
             }
 
 
@@ -485,10 +497,10 @@ namespace GAlbum
         public GstErrori.EErrore VerificaFileAssenteInSezione(CNomeFile fileCercato, bool confrontaFoglia = true)
         {
             // recupera il path di tutti i file contenuti in questa directory e le sue subdirerectory
-            string [] listaPathFile = Directory.GetFiles(pathSezione, fileCercato.nomeFile, SearchOption.AllDirectories);
+            string[] listaPathFile = Directory.GetFiles(pathSezione, fileCercato.nomeFile, SearchOption.AllDirectories);
 
             // verifica la dimensione della lista, se uguale a 0 il file non esiste nella sezione 
-            if (listaPathFile.Length == 0 )
+            if (listaPathFile.Length == 0)
             {
                 return GstErrori.EErrore.E0000_OK;
             }
@@ -555,7 +567,6 @@ namespace GAlbum
 
             return GstErrori.EErrore.E0000_OK;
         }
-
         /// <summary>
         /// copia il file specificato
         /// </summary>
@@ -563,10 +574,10 @@ namespace GAlbum
         /// <returns></returns>
         public GstErrori.EErrore CopiaFile(CNomeFile fileSrc)
         {
-            GstErrori.EErrore esito = GstErrori.EErrore.E0001_NOK; 
-            
+            GstErrori.EErrore esito = GstErrori.EErrore.E0001_NOK;
+
             // verica che il file sorgente esista 
-            if (! fileSrc.PathNomeFileEsiste)
+            if (!fileSrc.PathNomeFileEsiste)
             {
                 return GstErrori.EErrore.E1360_FileSorgenteNonEsiste;
             }
@@ -575,13 +586,13 @@ namespace GAlbum
             esito = CreaDirectory(pathFoglia);
             if (esito != GstErrori.EErrore.E0000_OK)
             {
-                return esito; 
+                return esito;
             }
 
             // verifica se il file destinazione esiste gia 
             if (PathNomeFileEsiste)
             {
-                return GstErrori.EErrore.E1371_FileDestinazioneEsiste; 
+                return GstErrori.EErrore.E1371_FileDestinazioneEsiste;
             }
 
             // esegue la copia 
@@ -602,7 +613,7 @@ namespace GAlbum
         /// </summary>
         /// <param name="pathDir"></param>
         /// <returns></returns>
-        public GstErrori.EErrore CreaDirectory (string pathDir)
+        public GstErrori.EErrore CreaDirectory(string pathDir)
         {
             // crea la directory specificata se non esiste
             try
@@ -615,6 +626,46 @@ namespace GAlbum
             }
 
             return GstErrori.EErrore.E0000_OK;
+        }
+        /// <summary>
+        /// modifica il nome aggiungendo un post fisso numerico, finche trova un nome che non esiste 
+        /// </summary>
+        /// <returns></returns>
+        private GstErrori.EErrore NumeraNome()
+        {
+            // salva il valore originale di nome
+            string salvaNome = nome;
+
+            // numero del posfisso
+            int numero = 2;
+
+            int numeroCicli = 1000;
+            while (numeroCicli > 0)
+            {
+                numeroCicli--;
+
+                //  compone il nome nuovo 
+                Nome = salvaNome + "(" + numero + ")";
+
+                // verica se il file esiste 
+                if (PathNomeFileEsiste)
+                {
+                    // il file esiste ne cerco un altro 
+                    numero++;
+                }
+                else
+                {   // il file  non esiste,  esce
+                    return GstErrori.EErrore.E0000_OK;
+                } 
+
+            }
+
+
+            // rimette le cose come all'originale 
+            Nome = salvaNome;
+
+
+            return GstErrori.EErrore.E0001_NOK;
         }
 
 

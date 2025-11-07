@@ -359,7 +359,7 @@ namespace GAlbum
          public GstErrori.EErrore Acquisire(string pathArchivio)
          {
             GstErrori.EErrore esito;
-            bool acquisito;
+            bool assente;
 
             // recupera il path di tutti i file contenuti in questa directory e le sue subdirerectory
             string [] listaPathFile = Directory.GetFiles(pathArchivio, "*.*", SearchOption.AllDirectories);
@@ -390,12 +390,12 @@ namespace GAlbum
                 // Prepara per duplica
                 fileDuplica.DirArchivio = prefissoDuplica + fileDuplica.DirArchivio;
 
-                // Verifica se il file è già stato acquisito
+                // Verifica se il file è già stato assente
                 esito = fileDst.VerificaFileAssenteInSezione(fileSrc);
-                acquisito = (esito == GstErrori.EErrore.E0000_OK);
+                assente = (esito == GstErrori.EErrore.E0000_OK);
 
                 // esegue la copia 
-                if (acquisito)
+                if (assente)
                 {
                     esito = fileDst.CopiaFile(fileSrc);
                     if (esito != GstErrori.EErrore.E0000_OK)
@@ -405,7 +405,7 @@ namespace GAlbum
                 }
 
                 // archivia il file dopo l'aquisizione
-                if (acquisito)
+                if (assente)
                 {
                     // Sposta il file sorgente nei file copiati
                     fileCopia.SpostaFile(fileSrc.PathNomeFile);
