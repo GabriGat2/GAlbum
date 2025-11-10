@@ -381,6 +381,23 @@ namespace GAlbum
                 else
                 {
                     FormStatisticaAcquisire formStatisticaAcquisire = new FormStatisticaAcquisire();
+
+                    // formStatisticaAcquisire.labelNumeroFile.Text = "Numero file : " + statisticaAcquisire_NumeroFile.ToString();
+
+                    //string pippo = "Numero file : " + statisticaAcquisire_NumeroFile.ToString();
+                    //formStatisticaAcquisire.labelNumeroFile.Text = pippo;
+
+                    //formStatisticaAcquisire.labelNumeroFileValore.Text = statisticaAcquisire_NumeroFile.ToString();
+
+
+
+                    formStatisticaAcquisire.StatisticaAcquisire_NumeroFile = statisticaAcquisire_NumeroFile;
+                    formStatisticaAcquisire.StatisticaAcquisire_NumeroFileAssegnati = statisticaAcquisire_NumeroFileAssegnati;
+
+
+                    //formStatisticaAcquisire.labelNumeroFile.Text = statisticaAcquisire_NumeroFile.ToString();
+                    //string StatisticaAcquisireNumeroFile = "Numero file" + formStatisticaAcquisire.labelNumeroFile.Text;
+
                     formStatisticaAcquisire.ShowDialog();
                 }
                     //GstErrori.StampaMessaggioErrore(GstErrori.EErrore.E0001_NOK, "Acquisire OK", true, false);
@@ -493,4 +510,4 @@ namespace GAlbum
 
 
     }// fine class CAreaArchivio
-}// fine namespace CAreaArchivio
+}// fine namespace GAlbum

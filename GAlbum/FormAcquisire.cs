@@ -554,49 +554,49 @@ namespace GAlbum
 
             // DEBUG-GG
 
-            // estrae il path della directory
-            string pathSelezionato = info.Path;
-            string[] listaFile = Directory.GetFiles(pathSelezionato);
-            if (listaFile.Length > 0)
-            {
-                string pathNomeFile = listaFile[0];
+            //// estrae il path della directory
+            //string pathSelezionato = info.Path;
+            //string[] listaFile = Directory.GetFiles(pathSelezionato);
+            //if (listaFile.Length > 0)
+            //{
+            //    string pathNomeFile = listaFile[0];
 
-                CNomeFile nomefile = new CNomeFile(AreaArchivio.PathArchivioAttivo);
-                nomefile.SetPathNomeFile(pathNomeFile);
-
-
-                string sezione = nomefile.DirSezione;
-                string pathSezione = nomefile.PathSezione;
-                string archivio = nomefile.DirArchivio;
-                string patharchivio = nomefile.PathArchivio;
+            //    CNomeFile nomefile = new CNomeFile(AreaArchivio.PathArchivioAttivo);
+            //    nomefile.SetPathNomeFile(pathNomeFile);
 
 
-                nomefile.DirSezione = "Pippo";
-                //nomefile.Popola();
-
-                string sezione2 = nomefile.DirSezione;
-                string pathSezione2 = nomefile.PathSezione;
-                string archivio2 = nomefile.DirArchivio;
-                string patharchivio2 = nomefile.PathArchivio;
+            //    string sezione = nomefile.DirSezione;
+            //    string pathSezione = nomefile.PathSezione;
+            //    string archivio = nomefile.DirArchivio;
+            //    string patharchivio = nomefile.PathArchivio;
 
 
-                nomefile.DirSezione = string.Empty;
-                //nomefile.Popola();
+            //    nomefile.DirSezione = "Pippo";
+            //    //nomefile.Popola();
 
-                string sezione3 = nomefile.DirSezione;
-                string pathSezione3 = nomefile.PathSezione;
-                string archivio3 = nomefile.DirArchivio;
-                string patharchivio3 = nomefile.PathArchivio;
-
-
+            //    string sezione2 = nomefile.DirSezione;
+            //    string pathSezione2 = nomefile.PathSezione;
+            //    string archivio2 = nomefile.DirArchivio;
+            //    string patharchivio2 = nomefile.PathArchivio;
 
 
-                ;
+            //    nomefile.DirSezione = string.Empty;
+            //    //nomefile.Popola();
+
+            //    string sezione3 = nomefile.DirSezione;
+            //    string pathSezione3 = nomefile.PathSezione;
+            //    string archivio3 = nomefile.DirArchivio;
+            //    string patharchivio3 = nomefile.PathArchivio;
 
 
 
 
-            }    
+            //    ;
+
+
+
+
+            //}    
 
 
 
