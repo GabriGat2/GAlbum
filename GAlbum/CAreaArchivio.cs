@@ -45,10 +45,17 @@ namespace GAlbum
         /// Vero se l'archivio attivo é disponibile all'uso
         /// </summary>
         public bool ArchivioAttivoOK { get => TestPathArchivioAttivo(); /* set => archivioBaseOK = value; */ }
+
+        // ------------------------------------------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// Separa directory
         /// </summary>
         public const string SepDir = "\\";
+        /// <summary>
+        /// A capo linea
+        /// </summary>
+        public const string ACapo = "\n";
 
         // ------------------------------------------------------------------------------------------------------------------
         // Archivio Attivo:  Acquisire
@@ -378,6 +385,21 @@ namespace GAlbum
             {
                 if (esito != GstErrori.EErrore.E0000_OK)
                     GstErrori.StampaMessaggioErrore(esito, "Acquisire");
+
+                else if (true)
+                {
+                    FormLog formLog = new FormLog();
+
+                    formLog.Log = "Messaggio 1" + ACapo;
+                    formLog.Log = "Messaggio 2" + ACapo; 
+                    formLog.Log = "Messaggio 3" + ACapo;
+
+                    formLog.Log = "Numero file : " + statisticaAcquisire_NumeroFile.ToString();
+
+
+                    formLog.Show();
+
+                }
                 else
                 {
                     FormStatisticaAcquisire formStatisticaAcquisire = new FormStatisticaAcquisire();
@@ -390,19 +412,15 @@ namespace GAlbum
                     //formStatisticaAcquisire.labelNumeroFileValore.Text = statisticaAcquisire_NumeroFile.ToString();
 
 
-
                     formStatisticaAcquisire.StatisticaAcquisire_NumeroFile = statisticaAcquisire_NumeroFile;
                     formStatisticaAcquisire.StatisticaAcquisire_NumeroFileAssegnati = statisticaAcquisire_NumeroFileAssegnati;
                     formStatisticaAcquisire.StatisticaAcquisire_NumeroFileCopiati = statisticaAcquisire_NumeroFileCopiati;
                     formStatisticaAcquisire.StatisticaAcquisire_NumeroFileDuplicati = statisticaAcquisire_NumeroFileDuplicati;
                     formStatisticaAcquisire.StatisticaAcquisire_NumeroFileCopiati_Rinomintati = statisticaAcquisire_NumeroFileCopiati_Rinomintati;
                     formStatisticaAcquisire.StatisticaAcquisire_NumeroFileDuplicati_Rinomintati = statisticaAcquisire_NumeroFileDuplicati_Rinomintati;
-                    //formStatisticaAcquisire.labelNumeroFile.Text = statisticaAcquisire_NumeroFile.ToString();
-                    //string StatisticaAcquisireNumeroFile = "Numero file" + formStatisticaAcquisire.labelNumeroFile.Text;
 
                     formStatisticaAcquisire.ShowDialog();
                 }
-                    //GstErrori.StampaMessaggioErrore(GstErrori.EErrore.E0001_NOK, "Acquisire OK", true, false);
             }
 
             return esito;
