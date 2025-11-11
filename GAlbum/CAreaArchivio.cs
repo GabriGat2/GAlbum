@@ -393,8 +393,10 @@ namespace GAlbum
 
                     formStatisticaAcquisire.StatisticaAcquisire_NumeroFile = statisticaAcquisire_NumeroFile;
                     formStatisticaAcquisire.StatisticaAcquisire_NumeroFileAssegnati = statisticaAcquisire_NumeroFileAssegnati;
-
-
+                    formStatisticaAcquisire.StatisticaAcquisire_NumeroFileCopiati = statisticaAcquisire_NumeroFileCopiati;
+                    formStatisticaAcquisire.StatisticaAcquisire_NumeroFileDuplicati = statisticaAcquisire_NumeroFileDuplicati;
+                    formStatisticaAcquisire.StatisticaAcquisire_NumeroFileCopiati_Rinomintati = statisticaAcquisire_NumeroFileCopiati_Rinomintati;
+                    formStatisticaAcquisire.StatisticaAcquisire_NumeroFileDuplicati_Rinomintati = statisticaAcquisire_NumeroFileDuplicati_Rinomintati;
                     //formStatisticaAcquisire.labelNumeroFile.Text = statisticaAcquisire_NumeroFile.ToString();
                     //string StatisticaAcquisireNumeroFile = "Numero file" + formStatisticaAcquisire.labelNumeroFile.Text;
 
