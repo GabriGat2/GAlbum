@@ -107,6 +107,7 @@ namespace GAlbum
         //-------------------------------------------------------------------------------------------------------------------
         // Statistica operazione Acquisire
         private UInt32 statisticaAcquisire_NumeroFile;
+        private UInt32 statisticaAcquisire_NumeroFileElaborati;
         private UInt32 statisticaAcquisire_NumeroFileAssegnati;
         private UInt32 statisticaAcquisire_NumeroFileCopiati;
         private UInt32 statisticaAcquisire_NumeroFileDuplicati;
@@ -377,6 +378,7 @@ namespace GAlbum
             // Azzera tutti i dati statistici di acquisire
             AzzeraStatisticaAcquisire();
 
+
             // Chiama Acquisire2
             GstErrori.EErrore esito = Acquisire2(pathArchivio);
 
@@ -390,13 +392,12 @@ namespace GAlbum
                 {
                     FormLog formLog = new FormLog();
 
-                    formLog.Log = "Messaggio 1" + ACapo;
-                    formLog.Log = "Messaggio 2" + ACapo; 
-                    formLog.Log = "Messaggio 3" + ACapo;
-
-                    formLog.Log = "Numero file : " + statisticaAcquisire_NumeroFile.ToString();
-
-
+                    formLog.Log = "Numero file : " + statisticaAcquisire_NumeroFile.ToString() + ACapo;
+                    formLog.Log = "NumeroFileAssegnati :" + statisticaAcquisire_NumeroFileAssegnati.ToString() + ACapo;
+                    formLog.Log = "NumeroFileCopiati :" + statisticaAcquisire_NumeroFileCopiati.ToString() + ACapo;
+                    formLog.Log = "NumeroFileDuplicati :" + statisticaAcquisire_NumeroFileDuplicati.ToString() + ACapo;
+                    formLog.Log = "NumeroFileCopiati_Rinomintati :" + statisticaAcquisire_NumeroFileCopiati_Rinomintati.ToString() + ACapo;
+                    formLog.Log = "NumeroFileDuplicati_Rinomintati :" + statisticaAcquisire_NumeroFileDuplicati_Rinomintati.ToString() + ACapo;
                     formLog.Show();
 
                 }
@@ -449,6 +450,9 @@ namespace GAlbum
             // Elabola ogni file contenuto nella lista
             foreach (var pathFile in listaPathFile)
             {
+                // Incrementa file elaborati
+                statisticaAcquisire_NumeroFileElaborati++;
+
                 // inizializza le classi per la gestione del file
                 esito = fileSrc.SetPathNomeFile(pathFile);
                 if (esito != GstErrori.EErrore.E0000_OK)
@@ -521,6 +525,7 @@ namespace GAlbum
         private void AzzeraStatisticaAcquisire()
         {
             statisticaAcquisire_NumeroFile = 0;
+            statisticaAcquisire_NumeroFileElaborati = 0;
             statisticaAcquisire_NumeroFileAssegnati = 0;
             statisticaAcquisire_NumeroFileCopiati = 0;
             statisticaAcquisire_NumeroFileDuplicati = 0;

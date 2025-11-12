@@ -902,8 +902,29 @@ namespace GAlbum
             string pathSrc = InfoNodoAcquisireSelezionato.Path;
             textBoxPathFoto.Text = pathSrc;
 
+
+            // disabilta i gruppi del form
+            this.groupBoxPath.Enabled = false;
+            this.groupBoxAcquisire.Enabled = false;
+            this.groupBoxSmistare.Enabled = false;
+            this.groupBoxSmistati.Enabled = false;
+
+            Cursor.Current = Cursors.WaitCursor;
+
+            //System.Windows.Forms.Cursor saveCursor = this.Cursor;
+            //Cursor.Current = Cursors.WaitCursor;
+
             // Eseguire l'aquisizione
             GstErrori.EErrore esito = AreaArchivio.Acquisire(pathSrc);
+
+            // riabilita i gruppi del form
+            this.groupBoxPath.Enabled = true;
+            this.groupBoxAcquisire.Enabled = true;
+            this.groupBoxSmistare.Enabled = true;
+            this.groupBoxSmistati.Enabled = true;
+
+            //Cursor.Current = Cursors.Default;
+
 
         }
     }// fine class FormAcquisire

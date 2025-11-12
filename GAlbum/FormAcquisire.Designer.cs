@@ -52,6 +52,7 @@
             treeNode11});
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBoxPath = new System.Windows.Forms.GroupBox();
+            this.butEsegui = new System.Windows.Forms.Button();
             this.butExplorerSmistati = new System.Windows.Forms.Button();
             this.butExplorerSmistare = new System.Windows.Forms.Button();
             this.butExplorerAcquisire = new System.Windows.Forms.Button();
@@ -78,7 +79,7 @@
             this.textBoxPathFoto = new System.Windows.Forms.TextBox();
             this.butPrecedente = new System.Windows.Forms.Button();
             this.butSuccessiva = new System.Windows.Forms.Button();
-            this.butEsegui = new System.Windows.Forms.Button();
+            this.labelConteggio = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -127,6 +128,7 @@
             // 
             // groupBoxPath
             // 
+            this.groupBoxPath.Controls.Add(this.labelConteggio);
             this.groupBoxPath.Controls.Add(this.butEsegui);
             this.groupBoxPath.Controls.Add(this.butExplorerSmistati);
             this.groupBoxPath.Controls.Add(this.butExplorerSmistare);
@@ -144,6 +146,16 @@
             this.groupBoxPath.TabIndex = 13;
             this.groupBoxPath.TabStop = false;
             this.groupBoxPath.Text = "Selezione di sorgente e destinazione";
+            // 
+            // butEsegui
+            // 
+            this.butEsegui.Location = new System.Drawing.Point(6, 21);
+            this.butEsegui.Name = "butEsegui";
+            this.butEsegui.Size = new System.Drawing.Size(86, 23);
+            this.butEsegui.TabIndex = 19;
+            this.butEsegui.Text = "Esegui";
+            this.butEsegui.UseVisualStyleBackColor = true;
+            this.butEsegui.Click += new System.EventHandler(this.butEsegui_Click);
             // 
             // butExplorerSmistati
             // 
@@ -463,15 +475,14 @@
             this.butSuccessiva.UseVisualStyleBackColor = true;
             this.butSuccessiva.Click += new System.EventHandler(this.butSuccessiva_Click);
             // 
-            // butEsegui
+            // labelConteggio
             // 
-            this.butEsegui.Location = new System.Drawing.Point(6, 21);
-            this.butEsegui.Name = "butEsegui";
-            this.butEsegui.Size = new System.Drawing.Size(86, 23);
-            this.butEsegui.TabIndex = 19;
-            this.butEsegui.Text = "Esegui";
-            this.butEsegui.UseVisualStyleBackColor = true;
-            this.butEsegui.Click += new System.EventHandler(this.butEsegui_Click);
+            this.labelConteggio.AutoSize = true;
+            this.labelConteggio.Location = new System.Drawing.Point(7, 57);
+            this.labelConteggio.Name = "labelConteggio";
+            this.labelConteggio.Size = new System.Drawing.Size(55, 13);
+            this.labelConteggio.TabIndex = 20;
+            this.labelConteggio.Text = "Conteggio";
             // 
             // FormAcquisire
             // 
@@ -543,5 +554,6 @@
         private System.Windows.Forms.GroupBox groupBoxSmistati;
         private System.Windows.Forms.TreeView treeViewSmistati;
         private System.Windows.Forms.Button butEsegui;
+        private System.Windows.Forms.Label labelConteggio;
     }
 }
