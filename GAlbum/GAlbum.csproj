@@ -99,6 +99,12 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSelezionaPerData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSelezionaPerData.Designer.cs">
+      <DependentUpon>FormSelezionaPerData.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSelezioneFoto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSelezionaPerData.resx">
+      <DependentUpon>FormSelezionaPerData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSelezioneFoto.resx">
       <DependentUpon>FormSelezioneFoto.cs</DependentUpon>
