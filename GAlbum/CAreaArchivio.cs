@@ -402,16 +402,6 @@ namespace GAlbum
                 {
                     FormLog formLog = new FormLog();
                     formLog.Log = statisticaAcquisire.GetLog();
-
-                    //formLog.Log = "Numero file : " + statisticaAcquisire.NumeroFile.ToString() + ACapo;
-                    //formLog.Log = "NumeroFileAssegnati :" + statisticaAcquisire.NumeroFileAssegnati.ToString() + ACapo;
-                    //formLog.Log = "NumeroFileCopiati :" + statisticaAcquisire.NumeroFileCopiati.ToString() + ACapo;
-                    //formLog.Log = "NumeroFileDuplicati :" + statisticaAcquisire.NumeroFileDuplicati.ToString() + ACapo;
-                    //formLog.Log = "NumeroFileCopiati_Rinomintati :" + statisticaAcquisire.NumeroFileCopiati_Rinomintati.ToString() + ACapo;
-                    //formLog.Log = "NumeroFileDuplicati_Rinomintati :" + statisticaAcquisire.NumeroFileDuplicati_Rinomintati.ToString() + ACapo;
-
-
-
                     formLog.Show();
 
                 }
