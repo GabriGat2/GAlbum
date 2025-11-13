@@ -226,7 +226,7 @@ namespace GAlbum
         private void treeViewAreeArchivio_AfterSelect(object sender, TreeViewEventArgs e)
         {
             // verifica lo stato del form
-            //if (Stato)
+            //if (StatoInEsecuzione)
             //    return;
 
             // recuprea il nodo selezionato 

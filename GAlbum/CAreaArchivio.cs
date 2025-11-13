@@ -103,16 +103,13 @@ namespace GAlbum
         // Nomi delle directory
 
         private const string DirArchivio = "_Archivio";
+        private const string DirCronologiaFoto = "CronologiaFoto";
 
         //-------------------------------------------------------------------------------------------------------------------
-        // Statistica operazione Acquisire
-        private UInt32 statisticaAcquisire_NumeroFile;
-        private UInt32 statisticaAcquisire_NumeroFileElaborati;
-        private UInt32 statisticaAcquisire_NumeroFileAssegnati;
-        private UInt32 statisticaAcquisire_NumeroFileCopiati;
-        private UInt32 statisticaAcquisire_NumeroFileDuplicati;
-        private UInt32 statisticaAcquisire_NumeroFileCopiati_Rinomintati;
-        private UInt32 statisticaAcquisire_NumeroFileDuplicati_Rinomintati;
+        // Statistica operazioni
+        private CStatisticaOperazioni statisticaAcquisire = new CStatisticaOperazioni();
+        private CStatisticaOperazioni statisticaSelezionaPerData = new CStatisticaOperazioni();
+
 
         // ==================================================================================================================
         /// <summary>
@@ -237,6 +234,20 @@ namespace GAlbum
             {
                 return GstErrori.EErrore.E1353_NonPuoCreareArchivio;
             }
+
+            // compone il path della directory CronologiaFoto
+            string path_CronologiaFoto = pathSmistati + "\\" + DirCronologiaFoto;
+
+            // crea directory CronologiaFoto in Smistati
+            try
+            {
+                Directory.CreateDirectory(path_CronologiaFoto);
+            }
+            catch (Exception e)
+            {
+                return GstErrori.EErrore.E1353_NonPuoCreareArchivio;
+            }
+
 
             return GstErrori.EErrore.E0000_OK;
         }
@@ -376,8 +387,7 @@ namespace GAlbum
         public GstErrori.EErrore Acquisire(string pathArchivio, bool stampaEsito = true)
         {
             // Azzera tutti i dati statistici di acquisire
-            AzzeraStatisticaAcquisire();
-
+            statisticaAcquisire.Azzera();
 
             // Chiama Acquisire2
             GstErrori.EErrore esito = Acquisire2(pathArchivio);
@@ -392,12 +402,12 @@ namespace GAlbum
                 {
                     FormLog formLog = new FormLog();
 
-                    formLog.Log = "Numero file : " + statisticaAcquisire_NumeroFile.ToString() + ACapo;
-                    formLog.Log = "NumeroFileAssegnati :" + statisticaAcquisire_NumeroFileAssegnati.ToString() + ACapo;
-                    formLog.Log = "NumeroFileCopiati :" + statisticaAcquisire_NumeroFileCopiati.ToString() + ACapo;
-                    formLog.Log = "NumeroFileDuplicati :" + statisticaAcquisire_NumeroFileDuplicati.ToString() + ACapo;
-                    formLog.Log = "NumeroFileCopiati_Rinomintati :" + statisticaAcquisire_NumeroFileCopiati_Rinomintati.ToString() + ACapo;
-                    formLog.Log = "NumeroFileDuplicati_Rinomintati :" + statisticaAcquisire_NumeroFileDuplicati_Rinomintati.ToString() + ACapo;
+                    formLog.Log = "Numero file : " + statisticaAcquisire.NumeroFile.ToString() + ACapo;
+                    formLog.Log = "NumeroFileAssegnati :" + statisticaAcquisire.NumeroFileAssegnati.ToString() + ACapo;
+                    formLog.Log = "NumeroFileCopiati :" + statisticaAcquisire.NumeroFileCopiati.ToString() + ACapo;
+                    formLog.Log = "NumeroFileDuplicati :" + statisticaAcquisire.NumeroFileDuplicati.ToString() + ACapo;
+                    formLog.Log = "NumeroFileCopiati_Rinomintati :" + statisticaAcquisire.NumeroFileCopiati_Rinomintati.ToString() + ACapo;
+                    formLog.Log = "NumeroFileDuplicati_Rinomintati :" + statisticaAcquisire.NumeroFileDuplicati_Rinomintati.ToString() + ACapo;
                     formLog.Show();
 
                 }
@@ -413,12 +423,12 @@ namespace GAlbum
                     //formStatisticaAcquisire.labelNumeroFileValore.Text = statisticaAcquisire_NumeroFile.ToString();
 
 
-                    formStatisticaAcquisire.StatisticaAcquisire_NumeroFile = statisticaAcquisire_NumeroFile;
-                    formStatisticaAcquisire.StatisticaAcquisire_NumeroFileAssegnati = statisticaAcquisire_NumeroFileAssegnati;
-                    formStatisticaAcquisire.StatisticaAcquisire_NumeroFileCopiati = statisticaAcquisire_NumeroFileCopiati;
-                    formStatisticaAcquisire.StatisticaAcquisire_NumeroFileDuplicati = statisticaAcquisire_NumeroFileDuplicati;
-                    formStatisticaAcquisire.StatisticaAcquisire_NumeroFileCopiati_Rinomintati = statisticaAcquisire_NumeroFileCopiati_Rinomintati;
-                    formStatisticaAcquisire.StatisticaAcquisire_NumeroFileDuplicati_Rinomintati = statisticaAcquisire_NumeroFileDuplicati_Rinomintati;
+                    formStatisticaAcquisire.StatisticaAcquisire_NumeroFile = statisticaAcquisire.NumeroFile;
+                    formStatisticaAcquisire.StatisticaAcquisire_NumeroFileAssegnati = statisticaAcquisire.NumeroFileAssegnati;
+                    formStatisticaAcquisire.StatisticaAcquisire_NumeroFileCopiati = statisticaAcquisire.NumeroFileCopiati;
+                    formStatisticaAcquisire.StatisticaAcquisire_NumeroFileDuplicati = statisticaAcquisire.NumeroFileDuplicati;
+                    formStatisticaAcquisire.StatisticaAcquisire_NumeroFileCopiati_Rinomintati = statisticaAcquisire.NumeroFileCopiati_Rinomintati;
+                    formStatisticaAcquisire.StatisticaAcquisire_NumeroFileDuplicati_Rinomintati = statisticaAcquisire.NumeroFileDuplicati_Rinomintati;
 
                     formStatisticaAcquisire.ShowDialog();
                 }
@@ -439,7 +449,7 @@ namespace GAlbum
             // recupera il path di tutti i file contenuti in questa directory e le sue subdirerectory
             string[] listaPathFile = Directory.GetFiles(pathArchivio, "*.*", SearchOption.AllDirectories);
             // aggiorna dati statistici
-            statisticaAcquisire_NumeroFile = (UInt32) listaPathFile.Length;
+            statisticaAcquisire.NumeroFile = (UInt32) listaPathFile.Length;
 
             // Crea gli oggetti per gestire la copia dei file
             CNomeFile fileSrc = new CNomeFile(PathArchivioAttivo);
@@ -451,7 +461,7 @@ namespace GAlbum
             foreach (var pathFile in listaPathFile)
             {
                 // Incrementa file elaborati
-                statisticaAcquisire_NumeroFileElaborati++;
+                statisticaAcquisire.NumeroFileElaborati++;
 
                 // inizializza le classi per la gestione del file
                 esito = fileSrc.SetPathNomeFile(pathFile);
@@ -482,7 +492,7 @@ namespace GAlbum
                         return esito;
 
                     // aggiorna dati statistici
-                    statisticaAcquisire_NumeroFileAssegnati++;
+                    statisticaAcquisire.NumeroFileAssegnati++;
                 }
 
                 // archivia il file dopo l'aquisizione
@@ -494,11 +504,11 @@ namespace GAlbum
                         return esito;
 
                     // aggiorna dati statistici
-                    statisticaAcquisire_NumeroFileCopiati++;
+                    statisticaAcquisire.NumeroFileCopiati++;
 
                     // controlla se ha rimonato il file prima di spostarlo in copiati
                     if (fileCopia.Nome != fileSrc.Nome)
-                        statisticaAcquisire_NumeroFileCopiati_Rinomintati++;
+                        statisticaAcquisire.NumeroFileCopiati_Rinomintati++;
                 }
                 else
                 {
@@ -508,31 +518,79 @@ namespace GAlbum
                         return esito;
 
                     // aggiorna dati statistici
-                    statisticaAcquisire_NumeroFileDuplicati++;
+                    statisticaAcquisire.NumeroFileDuplicati++;
 
                     // controlla se ha rimonato il file prima di spostarlo in duplicati
                     if (fileDuplica.Nome != fileSrc.Nome)
-                        statisticaAcquisire_NumeroFileDuplicati_Rinomintati++;
+                        statisticaAcquisire.NumeroFileDuplicati_Rinomintati++;
 
                 }
             }
 
             return GstErrori.EErrore.E0000_OK;
         }
-        /// <summary>
-        /// Azzera tutti i dati di statistica di Acquisire
+         /// <summary>
+        /// Ordina le foto in funzione della data
         /// </summary>
-        private void AzzeraStatisticaAcquisire()
+        /// <param name="pathArchivioSrc"></param>
+        /// <param name="pathArchivioDst"></param>
+        /// <param name="stampaEsito"></param>
+        /// <returns></returns>
+        public GstErrori.EErrore SelezionePerData(string pathArchivioSrc, string pathArchivioDst, bool stampaEsito = true)
         {
-            statisticaAcquisire_NumeroFile = 0;
-            statisticaAcquisire_NumeroFileElaborati = 0;
-            statisticaAcquisire_NumeroFileAssegnati = 0;
-            statisticaAcquisire_NumeroFileCopiati = 0;
-            statisticaAcquisire_NumeroFileDuplicati = 0;
-            statisticaAcquisire_NumeroFileCopiati_Rinomintati = 0;
-            statisticaAcquisire_NumeroFileDuplicati_Rinomintati = 0;
-        }
+            // Azzera tutti i dati statistici di acquisire
+            statisticaSelezionaPerData.Azzera();
 
+
+            //// Chiama Acquisire2
+            //GstErrori.EErrore esito = Acquisire2(pathArchivio);
+
+            //// Verifica se deve stampare l'esito
+            //if (stampaEsito)
+            //{
+            //    if (esito != GstErrori.EErrore.E0000_OK)
+            //        GstErrori.StampaMessaggioErrore(esito, "Acquisire");
+
+            //    else if (true)
+            //    {
+            //        FormLog formLog = new FormLog();
+
+            //        formLog.Log = "Numero file : " + statisticaAcquisire_NumeroFile.ToString() + ACapo;
+            //        formLog.Log = "NumeroFileAssegnati :" + statisticaAcquisire_NumeroFileAssegnati.ToString() + ACapo;
+            //        formLog.Log = "NumeroFileCopiati :" + statisticaAcquisire_NumeroFileCopiati.ToString() + ACapo;
+            //        formLog.Log = "NumeroFileDuplicati :" + statisticaAcquisire_NumeroFileDuplicati.ToString() + ACapo;
+            //        formLog.Log = "NumeroFileCopiati_Rinomintati :" + statisticaAcquisire_NumeroFileCopiati_Rinomintati.ToString() + ACapo;
+            //        formLog.Log = "NumeroFileDuplicati_Rinomintati :" + statisticaAcquisire_NumeroFileDuplicati_Rinomintati.ToString() + ACapo;
+            //        formLog.Show();
+
+            //    }
+            //    else
+            //    {
+            //        FormStatisticaAcquisire formStatisticaAcquisire = new FormStatisticaAcquisire();
+
+            //        // formStatisticaAcquisire.labelNumeroFile.Text = "Numero file : " + statisticaAcquisire_NumeroFile.ToString();
+
+            //        //string pippo = "Numero file : " + statisticaAcquisire_NumeroFile.ToString();
+            //        //formStatisticaAcquisire.labelNumeroFile.Text = pippo;
+
+            //        //formStatisticaAcquisire.labelNumeroFileValore.Text = statisticaAcquisire_NumeroFile.ToString();
+
+
+            //        formStatisticaAcquisire.StatisticaAcquisire_NumeroFile = statisticaAcquisire_NumeroFile;
+            //        formStatisticaAcquisire.StatisticaAcquisire_NumeroFileAssegnati = statisticaAcquisire_NumeroFileAssegnati;
+            //        formStatisticaAcquisire.StatisticaAcquisire_NumeroFileCopiati = statisticaAcquisire_NumeroFileCopiati;
+            //        formStatisticaAcquisire.StatisticaAcquisire_NumeroFileDuplicati = statisticaAcquisire_NumeroFileDuplicati;
+            //        formStatisticaAcquisire.StatisticaAcquisire_NumeroFileCopiati_Rinomintati = statisticaAcquisire_NumeroFileCopiati_Rinomintati;
+            //        formStatisticaAcquisire.StatisticaAcquisire_NumeroFileDuplicati_Rinomintati = statisticaAcquisire_NumeroFileDuplicati_Rinomintati;
+
+            //        formStatisticaAcquisire.ShowDialog();
+            //    }
+            //}
+
+            //return esito;
+            return GstErrori.EErrore.E0000_OK;
+
+        }
 
     }// fine class CAreaArchivio
 }// fine namespace GAlbum

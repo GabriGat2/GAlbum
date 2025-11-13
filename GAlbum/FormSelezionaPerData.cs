@@ -45,16 +45,30 @@ namespace GAlbum
         /// Path della directory Smistati
         /// </summary>
         private string PathDirSmistati = null;
+
+        // -----------------------------------------------------------------------------------------------------------------
+        // Info treeView Nodi selezionati
         /// <summary>
-        /// Nodo Acqisire selezionato
+        /// Nodo Acquisire selezionato
         /// </summary>
         private CInfoDirFoto InfoNodoAcquisireSelezionato;
+        /// <summary>
+        /// Nodo Smistare selezionato
+        /// </summary>
+        private CInfoDirFoto InfoNodoSmistareSelezionato;
+        /// <summary>
+        /// Nodo Smistati selezionato
+        /// </summary>
+        private CInfoDirFoto InfoNodoSmistatiSelezionato;
+
+        // -----------------------------------------------------------------------------------------------------------------
+        // 
         /// <summary>
         /// stato del form:
         /// False = Copia delle foto non attiva perchè, sta coonfigurando le operazioni da eseguire
         /// true = Copia delle foto  attiva, perchè esegue l'operazione richiesta
         /// </summary>
-        private bool Stato;
+        private bool StatoInEsecuzione;
         /// <summary>
         /// Infro tree view Acquisire
         /// </summary>
@@ -110,6 +124,9 @@ namespace GAlbum
             AggiornaAcquisire();
             AggiornaSmistare();
             AggiornaSmistati();
+
+            // Abilita controlli
+            AbilitaControlli(true);
 
 
         }
@@ -457,11 +474,18 @@ namespace GAlbum
         /// <param name="e"></param>
         private void treeViewSmistare_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            // verifica lo stato del form
+            if (StatoInEsecuzione)
+                return;
+
             // recuprea il nodo selezionato
             TreeNode nodo = treeViewSmistare.SelectedNode;
 
             // Estrae le info della classe 
             CInfoDirFoto info = (CInfoDirFoto)nodo.Tag;
+
+            // aggiorna nodo Acquisire selezionato 
+            AggiornaNodoSelezionato(ref info, ref InfoNodoSmistareSelezionato);
 
             // stampa il path della directory 
             String path = info.Path;
@@ -490,6 +514,8 @@ namespace GAlbum
 
             // annulla riferimento InfoNodoSelezionato
             InfoNodoAcquisireSelezionato = null;
+            InfoNodoSmistareSelezionato = null;
+            InfoNodoSmistatiSelezionato = null;
 
             // inizia aggiornamnto tree view
             treeViewAcquisire.BeginUpdate();
@@ -537,7 +563,7 @@ namespace GAlbum
         private void treeViewAcquisire_AfterSelect(object sender, TreeViewEventArgs e)
         {
             // verifica lo stato del form
-            if (Stato)
+            if (StatoInEsecuzione)
                 return;
 
             // recuprea il nodo selezionato 
@@ -547,80 +573,30 @@ namespace GAlbum
             CInfoDirFoto info = (CInfoDirFoto)nodo.Tag;
 
             // aggiorna nodo Acquisire selezionato 
-            AggiornaNodoAcquisireSelezionato(ref info);
+            AggiornaNodoSelezionato(ref info, ref InfoNodoAcquisireSelezionato);
 
             //     // commuta la selezione
             //info.CommutaSelezione();
 
-            // DEBUG-GG
-
-            //// estrae il path della directory
-            //string pathSelezionato = info.Path;
-            //string[] listaFile = Directory.GetFiles(pathSelezionato);
-            //if (listaFile.Length > 0)
-            //{
-            //    string pathNomeFile = listaFile[0];
-
-            //    CNomeFile nomefile = new CNomeFile(AreaArchivio.PathArchivioAttivo);
-            //    nomefile.SetPathNomeFile(pathNomeFile);
-
-
-            //    string sezione = nomefile.DirSezione;
-            //    string pathSezione = nomefile.PathSezione;
-            //    string archivio = nomefile.DirArchivio;
-            //    string patharchivio = nomefile.PathArchivio;
-
-
-            //    nomefile.DirSezione = "Pippo";
-            //    //nomefile.Popola();
-
-            //    string sezione2 = nomefile.DirSezione;
-            //    string pathSezione2 = nomefile.PathSezione;
-            //    string archivio2 = nomefile.DirArchivio;
-            //    string patharchivio2 = nomefile.PathArchivio;
-
-
-            //    nomefile.DirSezione = string.Empty;
-            //    //nomefile.Popola();
-
-            //    string sezione3 = nomefile.DirSezione;
-            //    string pathSezione3 = nomefile.PathSezione;
-            //    string archivio3 = nomefile.DirArchivio;
-            //    string patharchivio3 = nomefile.PathArchivio;
-
-
-
-
-            //    ;
-
-
-
-
-            //}    
-
-
-
-
         }
         /// <summary>
-        /// Aggiorna il nodo Acquisire selezionato 
+        /// Aggiorna il nodo selezionato 
         /// </summary>
         /// <param name="infoNodo"></param>
-        private void AggiornaNodoAcquisireSelezionato(ref CInfoDirFoto infoNodo)
+        /// <param name="InfoNodoSelezionato"></param>
+        private void AggiornaNodoSelezionato(ref CInfoDirFoto infoNodo, ref CInfoDirFoto InfoNodoSelezionato)
         {
-            // Verifica se il nodocquisire é assegnato
-            if (InfoNodoAcquisireSelezionato != null)
+            // Verifica se il nodo é assegnato
+            if (InfoNodoSelezionato != null)
             {
-                InfoNodoAcquisireSelezionato.Selezione = false;
+                InfoNodoSelezionato.Selezione = false;
             }
 
             // aggiona il nodo Acquisire selezionato
-            InfoNodoAcquisireSelezionato = infoNodo;
+            InfoNodoSelezionato = infoNodo;
 
             // seleziona il nodo
-            InfoNodoAcquisireSelezionato.Selezione = true;
-
-
+            InfoNodoSelezionato.Selezione = true;
         }
         /// <summary>
         /// aggiorna lo stato del form e gli oggetti ad esso collegati 
@@ -629,13 +605,13 @@ namespace GAlbum
         private void AggiornaStato(bool newStato)
         {
             //aggiorna lo stato del form
-            this.Stato = newStato;
+            this.StatoInEsecuzione = newStato;
 
             // Debug: mostra stato
-            //textBoxDebug2.Text = Stato.ToString();
+            //textBoxDebug2.Text = StatoInEsecuzione.ToString();
 
             //// button Apri
-            //if (Stato)
+            //if (StatoInEsecuzione)
             //{
             //    butApri.Text = "Chiudi";
             //}
@@ -657,19 +633,19 @@ namespace GAlbum
             textBoxSmistati.ReadOnly = true;
 
             // button Precedente
-            butPrecedente.Enabled = Stato;
+            butPrecedente.Enabled = StatoInEsecuzione;
 
             // button Successiva
-            butSuccessiva.Enabled = Stato;
+            butSuccessiva.Enabled = StatoInEsecuzione;
 
             // button Assegna
-            butAssegna.Enabled = Stato;
+            butAssegna.Enabled = StatoInEsecuzione;
 
             // button NonAssegna
-            butNonAssegna.Enabled = Stato;
+            butNonAssegna.Enabled = StatoInEsecuzione;
 
             //pictureBox1
-            if (!Stato)
+            if (!StatoInEsecuzione)
             {
                 if (pictureBox1.Image != null)
                     pictureBox1.Image.Dispose();
@@ -689,7 +665,7 @@ namespace GAlbum
         private void treeViewAcquisire_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             // verifica che sia in stato false
-            if ((this.Stato))
+            if ((this.StatoInEsecuzione))
                 return;
 
             // verifica se é stato premuto il tasto destro
@@ -852,11 +828,18 @@ namespace GAlbum
         ///Estrae il nodo selezionato
         private void treeViewSmistati_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            // verifica lo stato del form
+            if (StatoInEsecuzione)
+                return;
+
             // recuprea il nodo selezionato
             TreeNode nodo = treeViewSmistati.SelectedNode;
 
             // Estrae le info della classe 
             CInfoDirFoto info = (CInfoDirFoto)nodo.Tag;
+
+            // aggiorna nodo Acquisire selezionato 
+            AggiornaNodoSelezionato(ref info, ref InfoNodoSmistatiSelezionato);
 
             // stampa il path della directory 
             String path = info.Path;
@@ -889,28 +872,42 @@ namespace GAlbum
         /// <param name="e"></param>
         private void butEsegui_Click(object sender, EventArgs e)
         {
-            // recupera il path dell'archivio acquisito
-
-
+            // recupera il path dell'archivio sorgente in Smistare 
+            // ---------------------------------------------------
+            
             // Verifica se c'è un nodo sorgente selezionato
-            if (InfoNodoAcquisireSelezionato == null)
+            if (InfoNodoSmistareSelezionato == null)
             {
                 return;
             }
 
-            // stampa il path della directory
-            string pathSrc = InfoNodoAcquisireSelezionato.Path;
-            textBoxPathFoto.Text = pathSrc;
+            // recupera il path dell'archivio destinazione in Smistati
+            // ---------------------------------------------------
+
+            // Verifica se c'è un nodo sorgente selezionato
+            if (InfoNodoSmistatiSelezionato == null)
+            {
+                return;
+            }
+
+
+
+            //// stampa il path della directory
+            //string pathSrc = InfoNodoAcquisireSelezionato.Path;
+            //textBoxPathFoto.Text = pathSrc;
+
+
+
 
 
             // disabilta i gruppi del form
-            AbilitaControlli (false);
+            AbilitaControlli(false);
 
             // Cambia il cursore in clessidra
             Cursor.Current = Cursors.WaitCursor;
 
             // Eseguire l'aquisizione
-            GstErrori.EErrore esito = AreaArchivio.Acquisire(pathSrc);
+            //GstErrori.EErrore esito = AreaArchivio.Acquisire(pathSrc);
 
             // riabilita i gruppi del form
             AbilitaControlli(true);
@@ -926,7 +923,7 @@ namespace GAlbum
         {
             // disabilta i gruppi del form
             this.groupBoxPath.Enabled = abilita;
-            this.groupBoxAcquisire.Enabled = abilita;
+            this.groupBoxAcquisire.Enabled = abilita && false;
             this.groupBoxSmistare.Enabled = abilita;
             this.groupBoxSmistati.Enabled = abilita;
         }

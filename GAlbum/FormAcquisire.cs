@@ -632,10 +632,10 @@ namespace GAlbum
             this.Stato = newStato;
 
             // Debug: mostra stato
-            //textBoxDebug2.Text = Stato.ToString();
+            //textBoxDebug2.Text = StatoInEsecuzione.ToString();
 
             //// button Apri
-            //if (Stato)
+            //if (StatoInEsecuzione)
             //{
             //    butApri.Text = "Chiudi";
             //}

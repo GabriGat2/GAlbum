@@ -47,6 +47,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.groupBoxOperazioni = new System.Windows.Forms.GroupBox();
             this.butAcquisire = new System.Windows.Forms.Button();
+            this.butSelezioneData = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -63,7 +64,7 @@
             // 
             // ButSelezioneFoto
             // 
-            this.ButSelezioneFoto.Location = new System.Drawing.Point(9, 126);
+            this.ButSelezioneFoto.Location = new System.Drawing.Point(9, 132);
             this.ButSelezioneFoto.Name = "ButSelezioneFoto";
             this.ButSelezioneFoto.Size = new System.Drawing.Size(103, 23);
             this.ButSelezioneFoto.TabIndex = 1;
@@ -248,6 +249,7 @@
             // 
             // groupBoxOperazioni
             // 
+            this.groupBoxOperazioni.Controls.Add(this.butSelezioneData);
             this.groupBoxOperazioni.Controls.Add(this.butAcquisire);
             this.groupBoxOperazioni.Controls.Add(this.ButSelezioneFoto);
             this.groupBoxOperazioni.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -260,13 +262,23 @@
             // 
             // butAcquisire
             // 
-            this.butAcquisire.Location = new System.Drawing.Point(13, 42);
+            this.butAcquisire.Location = new System.Drawing.Point(9, 45);
             this.butAcquisire.Name = "butAcquisire";
             this.butAcquisire.Size = new System.Drawing.Size(103, 23);
             this.butAcquisire.TabIndex = 2;
             this.butAcquisire.Text = "Acquisire";
             this.butAcquisire.UseVisualStyleBackColor = true;
             this.butAcquisire.Click += new System.EventHandler(this.butAcquisire_Click);
+            // 
+            // butSelezioneData
+            // 
+            this.butSelezioneData.Location = new System.Drawing.Point(9, 92);
+            this.butSelezioneData.Name = "butSelezioneData";
+            this.butSelezioneData.Size = new System.Drawing.Size(103, 23);
+            this.butSelezioneData.TabIndex = 3;
+            this.butSelezioneData.Text = "Selezione data";
+            this.butSelezioneData.UseVisualStyleBackColor = true;
+            this.butSelezioneData.Click += new System.EventHandler(this.butSelezioneData_Click);
             // 
             // FormMain
             // 
@@ -314,6 +326,7 @@
         private System.Windows.Forms.Button butExplorerArchvioBase;
         private System.Windows.Forms.Button butExplorerArchvioAttivo;
         private System.Windows.Forms.Button butAcquisire;
+        private System.Windows.Forms.Button butSelezioneData;
     }
 }
 
