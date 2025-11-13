@@ -1,6 +1,6 @@
 ﻿namespace GAlbum
 {
-    partial class FormAcquisire
+    partial class FormSelezionaPerData
     {
         /// <summary>
         /// Required designer variable.
@@ -52,7 +52,6 @@
             treeNode11});
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBoxPath = new System.Windows.Forms.GroupBox();
-            this.labelConteggio = new System.Windows.Forms.Label();
             this.butEsegui = new System.Windows.Forms.Button();
             this.butExplorerSmistati = new System.Windows.Forms.Button();
             this.butExplorerSmistare = new System.Windows.Forms.Button();
@@ -80,6 +79,7 @@
             this.textBoxPathFoto = new System.Windows.Forms.TextBox();
             this.butPrecedente = new System.Windows.Forms.Button();
             this.butSuccessiva = new System.Windows.Forms.Button();
+            this.labelConteggio = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -146,15 +146,6 @@
             this.groupBoxPath.TabIndex = 13;
             this.groupBoxPath.TabStop = false;
             this.groupBoxPath.Text = "Selezione di sorgente e destinazione";
-            // 
-            // labelConteggio
-            // 
-            this.labelConteggio.AutoSize = true;
-            this.labelConteggio.Location = new System.Drawing.Point(7, 57);
-            this.labelConteggio.Name = "labelConteggio";
-            this.labelConteggio.Size = new System.Drawing.Size(55, 13);
-            this.labelConteggio.TabIndex = 20;
-            this.labelConteggio.Text = "Conteggio";
             // 
             // butEsegui
             // 
@@ -483,6 +474,15 @@
             this.butSuccessiva.Text = "Successiva";
             this.butSuccessiva.UseVisualStyleBackColor = true;
             this.butSuccessiva.Click += new System.EventHandler(this.butSuccessiva_Click);
+            // 
+            // labelConteggio
+            // 
+            this.labelConteggio.AutoSize = true;
+            this.labelConteggio.Location = new System.Drawing.Point(7, 57);
+            this.labelConteggio.Name = "labelConteggio";
+            this.labelConteggio.Size = new System.Drawing.Size(55, 13);
+            this.labelConteggio.TabIndex = 20;
+            this.labelConteggio.Text = "Conteggio";
             // 
             // FormAcquisire
             // 

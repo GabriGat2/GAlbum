@@ -12,7 +12,7 @@ using static GAlbum.GstErrori;
 
 namespace GAlbum
 {
-    public partial class FormAcquisire : Form
+    public partial class FormSelezionaPerData : Form
     {
         // ==================================================================================================================
         // Proprietà
@@ -80,7 +80,7 @@ namespace GAlbum
         /// <summary>
         /// costruttore
         /// </summary>
-        public FormAcquisire(ref CAreaArchivio areaArchivio)
+        public FormSelezionaPerData(ref CAreaArchivio areaArchivio)
         {
             // Assegna il riferimento a AreaArchivio
             this.AreaArchivio = areaArchivio;
@@ -932,6 +932,6 @@ namespace GAlbum
         }
 
 
-    }// fine class FormAcquisire
+    }// fine class FormSelezionaPerData
 }// fine namespace GAlbum
 

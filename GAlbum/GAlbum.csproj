@@ -69,6 +69,12 @@
     <Compile Include="CInfoTreeViewSmistati.cs" />
     <Compile Include="CInfoTreeViewSorgente.cs" />
     <Compile Include="CNomeFile.cs" />
+    <Compile Include="FormSelezionaPerData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSelezionaPerData.Designer.cs">
+      <DependentUpon>FormSelezionaPerData.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormAcquisire.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +120,9 @@
     <Compile Include="GstErrori.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormSelezionaPerData.resx">
+      <DependentUpon>FormSelezionaPerData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAcquisire.resx">
       <DependentUpon>FormAcquisire.cs</DependentUpon>
     </EmbeddedResource>
