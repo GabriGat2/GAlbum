@@ -20,6 +20,14 @@ namespace GAlbum
         public UInt32 NumeroFileCopiati_Rinomintati;
         public UInt32 NumeroFileDuplicati_Rinomintati;
 
+        // ------------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// A capo linea
+        /// </summary>
+        public const string ACapo = "\n";
+
+
+
         // ==================================================================================================================
         /// <summary>
         /// Mette qui i refatoring generati automaticamente
@@ -51,6 +59,24 @@ namespace GAlbum
             NumeroFileDuplicati = 0;
             NumeroFileCopiati_Rinomintati = 0;
             NumeroFileDuplicati_Rinomintati = 0;
+        }
+        /// <summary>
+        /// rende il log della statistica 
+        /// </summary>
+        /// <returns></returns>
+        public string GetLog()
+        {
+            string log = string.Empty;
+
+            log = "Numero file : " + NumeroFile.ToString() + ACapo;
+            log += "NumeroFileAssegnati :" + NumeroFileAssegnati.ToString() + ACapo;
+            log += "NumeroFileCopiati :" + NumeroFileCopiati.ToString() + ACapo;
+            log += "NumeroFileDuplicati :" + NumeroFileDuplicati.ToString() + ACapo;
+            log += "NumeroFileCopiati_Rinomintati :" + NumeroFileCopiati_Rinomintati.ToString() + ACapo;
+            log += "NumeroFileDuplicati_Rinomintati :" + NumeroFileDuplicati_Rinomintati.ToString() + ACapo;
+            log += "Generato dalla classe" + ACapo;
+
+            return log;
         }
 
     }// fine class CStatisticaOperazioni
