@@ -904,29 +904,34 @@ namespace GAlbum
 
 
             // disabilta i gruppi del form
-            this.groupBoxPath.Enabled = false;
-            this.groupBoxAcquisire.Enabled = false;
-            this.groupBoxSmistare.Enabled = false;
-            this.groupBoxSmistati.Enabled = false;
+            AbilitaControlli (false);
 
+            // Cambia il cursore in clessidra
             Cursor.Current = Cursors.WaitCursor;
-
-            //System.Windows.Forms.Cursor saveCursor = this.Cursor;
-            //Cursor.Current = Cursors.WaitCursor;
 
             // Eseguire l'aquisizione
             GstErrori.EErrore esito = AreaArchivio.Acquisire(pathSrc);
 
             // riabilita i gruppi del form
-            this.groupBoxPath.Enabled = true;
-            this.groupBoxAcquisire.Enabled = true;
-            this.groupBoxSmistare.Enabled = true;
-            this.groupBoxSmistati.Enabled = true;
+            AbilitaControlli(true);
 
-            //Cursor.Current = Cursors.Default;
-
-
+            // ripristina il cursore originale
+            Cursor.Current = Cursors.Default;
         }
+        /// <summary>
+        /// Abilita disabibilita i controlli del form 
+        /// </summary>
+        /// <param name="abilita"></param>
+        private void AbilitaControlli(bool abilita) 
+        {
+            // disabilta i gruppi del form
+            this.groupBoxPath.Enabled = abilita;
+            this.groupBoxAcquisire.Enabled = abilita;
+            this.groupBoxSmistare.Enabled = abilita;
+            this.groupBoxSmistati.Enabled = abilita;
+        }
+        
+
     }// fine class FormAcquisire
 }// fine namespace GAlbum
 
