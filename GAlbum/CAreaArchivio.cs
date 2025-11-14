@@ -651,7 +651,6 @@ namespace GAlbum
 
                 return GstErrori.EErrore.E0001_NOK;
 
-
                 // Verifica se il file è già stato assente
                 esito = fileDst.VerificaFileAssenteInSezione(fileSrc);
                 assente = (esito == GstErrori.EErrore.E0000_OK);
