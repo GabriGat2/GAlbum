@@ -492,7 +492,7 @@ namespace GAlbum
             textBoxDebug.Text = path;
 
             // commuta la selezione
-            info.CommutaSelezione();
+            //info.CommutaSelezione();
         }
         /// <summary>
         /// Aggiorna Acquisire, cioé visualizza le sotto directory contenute in Acquisire
@@ -846,7 +846,7 @@ namespace GAlbum
             textBoxDebug.Text = path;
 
             // commuta la selezione
-            info.CommutaSelezione();
+            //info.CommutaSelezione();
         }
         /// <summary>
         ///  Doppio click sulla tree view smistati
@@ -880,25 +880,17 @@ namespace GAlbum
             {
                 return;
             }
+            string pathArchivioSrc = InfoNodoSmistareSelezionato.Path;
 
             // recupera il path dell'archivio destinazione in Smistati
             // ---------------------------------------------------
 
-            // Verifica se c'è un nodo sorgente selezionato
+            // Verifica se c'è un nodo destinazione in smistati
             if (InfoNodoSmistatiSelezionato == null)
             {
                 return;
             }
-
-
-
-            //// stampa il path della directory
-            //string pathSrc = InfoNodoAcquisireSelezionato.Path;
-            //textBoxPathFoto.Text = pathSrc;
-
-
-
-
+            string pathArchivioDst = InfoNodoSmistatiSelezionato.Path;
 
             // disabilta i gruppi del form
             AbilitaControlli(false);
@@ -907,7 +899,7 @@ namespace GAlbum
             Cursor.Current = Cursors.WaitCursor;
 
             // Eseguire l'aquisizione
-            //GstErrori.EErrore esito = AreaArchivio.Acquisire(pathSrc);
+            GstErrori.EErrore esito = AreaArchivio.SelezionePerData(pathArchivioSrc, pathArchivioDst);   
 
             // riabilita i gruppi del form
             AbilitaControlli(true);
