@@ -15,6 +15,7 @@ namespace GAlbum
         public UInt32 NumeroFile;
         public UInt32 NumeroFileElaborati;
         public UInt32 NumeroFileAssegnati;
+        public UInt32 NumeroFileArchiviati;
         public UInt32 NumeroFileCopiati;
         public UInt32 NumeroFileDuplicati;
         public UInt32 NumeroFileCopiati_Rinomintati;
@@ -55,6 +56,7 @@ namespace GAlbum
             NumeroFile = 0;
             NumeroFileElaborati = 0;
             NumeroFileAssegnati = 0;
+            NumeroFileArchiviati = 0;
             NumeroFileCopiati = 0;
             NumeroFileDuplicati = 0;
             NumeroFileCopiati_Rinomintati = 0;
@@ -70,11 +72,13 @@ namespace GAlbum
 
             log = "Numero file : " + NumeroFile.ToString() + ACapo;
             log += "NumeroFileAssegnati :" + NumeroFileAssegnati.ToString() + ACapo;
+            log += "NumeroFileArchiviati :" + NumeroFileCopiati.ToString() + ACapo;
+            log += ACapo;
             log += "NumeroFileCopiati :" + NumeroFileCopiati.ToString() + ACapo;
-            log += "NumeroFileDuplicati :" + NumeroFileDuplicati.ToString() + ACapo;
             log += "NumeroFileCopiati_Rinomintati :" + NumeroFileCopiati_Rinomintati.ToString() + ACapo;
+            log += ACapo;
+            log += "NumeroFileDuplicati :" + NumeroFileDuplicati.ToString() + ACapo;
             log += "NumeroFileDuplicati_Rinomintati :" + NumeroFileDuplicati_Rinomintati.ToString() + ACapo;
-            log += "Generato dalla classe" + ACapo;
 
             return log;
         }
