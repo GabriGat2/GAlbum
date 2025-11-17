@@ -153,6 +153,16 @@ namespace GAlbum
             FormAcquisire dlg = new FormAcquisire(ref this.AreaArchivio);
             dlg.ShowDialog();
         }
+        /// <summary>
+        /// Attiva il form per selezione data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butSelezioneData_Click(object sender, EventArgs e)
+        {
+            FormSelezionaPerData formSelezionaPerData = new FormSelezionaPerData(ref this.AreaArchivio);
+            formSelezionaPerData.ShowDialog();
+        }
     }// fine class FormMain
 }// fine namespace GAlbum
 

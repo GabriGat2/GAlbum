@@ -1,6 +1,6 @@
 ﻿namespace GAlbum
 {
-    partial class FormAcquisire
+    partial class FormSelezionaPerData
     {
         /// <summary>
         /// Required designer variable.
@@ -484,14 +484,14 @@
             this.butSuccessiva.UseVisualStyleBackColor = true;
             this.butSuccessiva.Click += new System.EventHandler(this.butSuccessiva_Click);
             // 
-            // FormAcquisire
+            // FormSelezionaPerData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(890, 726);
             this.Controls.Add(this.splitContainer1);
-            this.Name = "FormAcquisire";
-            this.Text = "Acquisizione Archivi Foto";
+            this.Name = "FormSelezionaPerData";
+            this.Text = "Seleziona per data";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

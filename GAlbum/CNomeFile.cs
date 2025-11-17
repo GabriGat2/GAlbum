@@ -339,6 +339,46 @@ namespace GAlbum
             return GstErrori.EErrore.E0000_OK;
         }
         /// <summary>
+        /// Set del pathArchivio
+        /// </summary>
+        /// <param name="pathNomeFile"></param>
+        /// <returns></returns>
+        public GstErrori.EErrore SetPathArchivio(string pathArchivio)
+        {
+            // Azzera le pozioni di path
+            AzzeraPorzioni();
+
+            // verifica che il path contenga il pathArchvioAttivo
+            string locPathArchivioAttivo = pathNomeFile.Remove(pathArchivioAttivo.Length, pathNomeFile.Length - pathArchivioAttivo.Length);
+            if (locPathArchivioAttivo.ToLower() != pathArchivioAttivo.ToLower())
+            {
+                //AzzeraPorzioni();
+                return GstErrori.EErrore.E0001_NOK;
+            }
+
+            // Estrae la porzione di archivio a valle dell'archvio attivo
+            string pathArchivioInterno = pathArchivio.Substring(pathArchivioAttivo.Length + 1);
+
+            // scompone il pathNomeFileInterno in campi e Verifica che ci siano i campi minimi
+            string[] campi = pathArchivioInterno.Split(SD);
+            if (campi.Length != 2)
+            {
+                //AzzeraPorzioni();
+                return GstErrori.EErrore.E0001_NOK;
+            }
+
+            // Estrae il nome della sezione
+            this.dirSezione = campi[0];
+
+            // Estrae il nome dell' archivio 
+            this.dirArchivio = campi[1];
+
+            // Popola variabili derivate
+            Popola();
+
+            return GstErrori.EErrore.E0000_OK;
+        }
+        /// <summary>
         /// Popola tutte le variabili derivate 
         /// </summary>
         private void Popola()
@@ -589,7 +629,7 @@ namespace GAlbum
                 return esito;
             }
 
-            // verifica se il file destinazione esiste gia 
+            // verifica se il file destinazione esiste già
             if (PathNomeFileEsiste)
             {
                 return GstErrori.EErrore.E1371_FileDestinazioneEsiste;
