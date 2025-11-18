@@ -28,31 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Nodo1");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Nodo2");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Nodo5");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Nodo4", new System.Windows.Forms.TreeNode[] {
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Nodo3", new System.Windows.Forms.TreeNode[] {
-            treeNode4});
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Nodo0", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode5});
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Nodo1");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Nodo2");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Nodo5");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Nodo4", new System.Windows.Forms.TreeNode[] {
-            treeNode9});
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Nodo3", new System.Windows.Forms.TreeNode[] {
-            treeNode10});
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Nodo0", new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode8,
-            treeNode11});
+            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Nodo1");
+            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Nodo2");
+            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Nodo5");
+            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Nodo4", new System.Windows.Forms.TreeNode[] {
+            treeNode27});
+            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Nodo3", new System.Windows.Forms.TreeNode[] {
+            treeNode28});
+            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Nodo0", new System.Windows.Forms.TreeNode[] {
+            treeNode25,
+            treeNode26,
+            treeNode29});
+            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Nodo1");
+            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Nodo2");
+            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Nodo5");
+            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Nodo4", new System.Windows.Forms.TreeNode[] {
+            treeNode33});
+            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("Nodo3", new System.Windows.Forms.TreeNode[] {
+            treeNode34});
+            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("Nodo0", new System.Windows.Forms.TreeNode[] {
+            treeNode31,
+            treeNode32,
+            treeNode35});
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBoxPath = new System.Windows.Forms.GroupBox();
-            this.labelConteggio = new System.Windows.Forms.Label();
             this.butEsegui = new System.Windows.Forms.Button();
             this.butExplorerSmistati = new System.Windows.Forms.Button();
             this.butExplorerSmistare = new System.Windows.Forms.Button();
@@ -80,6 +79,7 @@
             this.textBoxPathFoto = new System.Windows.Forms.TextBox();
             this.butPrecedente = new System.Windows.Forms.Button();
             this.butSuccessiva = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -128,7 +128,7 @@
             // 
             // groupBoxPath
             // 
-            this.groupBoxPath.Controls.Add(this.labelConteggio);
+            this.groupBoxPath.Controls.Add(this.progressBar1);
             this.groupBoxPath.Controls.Add(this.butEsegui);
             this.groupBoxPath.Controls.Add(this.butExplorerSmistati);
             this.groupBoxPath.Controls.Add(this.butExplorerSmistare);
@@ -146,15 +146,6 @@
             this.groupBoxPath.TabIndex = 13;
             this.groupBoxPath.TabStop = false;
             this.groupBoxPath.Text = "Selezione di sorgente e destinazione";
-            // 
-            // labelConteggio
-            // 
-            this.labelConteggio.AutoSize = true;
-            this.labelConteggio.Location = new System.Drawing.Point(7, 57);
-            this.labelConteggio.Name = "labelConteggio";
-            this.labelConteggio.Size = new System.Drawing.Size(55, 13);
-            this.labelConteggio.TabIndex = 20;
-            this.labelConteggio.Text = "Conteggio";
             // 
             // butEsegui
             // 
@@ -342,20 +333,20 @@
             this.treeViewSmistare.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewSmistare.Location = new System.Drawing.Point(3, 16);
             this.treeViewSmistare.Name = "treeViewSmistare";
-            treeNode1.Name = "Nodo1";
-            treeNode1.Text = "Nodo1";
-            treeNode2.Name = "Nodo2";
-            treeNode2.Text = "Nodo2";
-            treeNode3.Name = "Nodo5";
-            treeNode3.Text = "Nodo5";
-            treeNode4.Name = "Nodo4";
-            treeNode4.Text = "Nodo4";
-            treeNode5.Name = "Nodo3";
-            treeNode5.Text = "Nodo3";
-            treeNode6.Name = "Nodo0";
-            treeNode6.Text = "Nodo0";
+            treeNode25.Name = "Nodo1";
+            treeNode25.Text = "Nodo1";
+            treeNode26.Name = "Nodo2";
+            treeNode26.Text = "Nodo2";
+            treeNode27.Name = "Nodo5";
+            treeNode27.Text = "Nodo5";
+            treeNode28.Name = "Nodo4";
+            treeNode28.Text = "Nodo4";
+            treeNode29.Name = "Nodo3";
+            treeNode29.Text = "Nodo3";
+            treeNode30.Name = "Nodo0";
+            treeNode30.Text = "Nodo0";
             this.treeViewSmistare.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6});
+            treeNode30});
             this.treeViewSmistare.Size = new System.Drawing.Size(144, 573);
             this.treeViewSmistare.TabIndex = 0;
             this.treeViewSmistare.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewSmistare_AfterSelect);
@@ -377,20 +368,20 @@
             this.treeViewSmistati.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewSmistati.Location = new System.Drawing.Point(3, 16);
             this.treeViewSmistati.Name = "treeViewSmistati";
-            treeNode7.Name = "Nodo1";
-            treeNode7.Text = "Nodo1";
-            treeNode8.Name = "Nodo2";
-            treeNode8.Text = "Nodo2";
-            treeNode9.Name = "Nodo5";
-            treeNode9.Text = "Nodo5";
-            treeNode10.Name = "Nodo4";
-            treeNode10.Text = "Nodo4";
-            treeNode11.Name = "Nodo3";
-            treeNode11.Text = "Nodo3";
-            treeNode12.Name = "Nodo0";
-            treeNode12.Text = "Nodo0";
+            treeNode31.Name = "Nodo1";
+            treeNode31.Text = "Nodo1";
+            treeNode32.Name = "Nodo2";
+            treeNode32.Text = "Nodo2";
+            treeNode33.Name = "Nodo5";
+            treeNode33.Text = "Nodo5";
+            treeNode34.Name = "Nodo4";
+            treeNode34.Text = "Nodo4";
+            treeNode35.Name = "Nodo3";
+            treeNode35.Text = "Nodo3";
+            treeNode36.Name = "Nodo0";
+            treeNode36.Text = "Nodo0";
             this.treeViewSmistati.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode12});
+            treeNode36});
             this.treeViewSmistati.Size = new System.Drawing.Size(136, 573);
             this.treeViewSmistati.TabIndex = 0;
             this.treeViewSmistati.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewSmistati_AfterSelect);
@@ -484,6 +475,14 @@
             this.butSuccessiva.UseVisualStyleBackColor = true;
             this.butSuccessiva.Click += new System.EventHandler(this.butSuccessiva_Click);
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(10, 105);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(847, 19);
+            this.progressBar1.TabIndex = 21;
+            this.progressBar1.Visible = false;
+            // 
             // FormSelezionaPerData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -554,6 +553,6 @@
         private System.Windows.Forms.GroupBox groupBoxSmistati;
         private System.Windows.Forms.TreeView treeViewSmistati;
         private System.Windows.Forms.Button butEsegui;
-        private System.Windows.Forms.Label labelConteggio;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }

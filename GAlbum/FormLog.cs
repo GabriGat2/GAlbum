@@ -41,10 +41,14 @@ namespace GAlbum
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        ///  Chiudel la dialog
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buOK_Click(object sender, EventArgs e)
         {
-
+            Close();
         }
     } // fine class FormLog
 } // fine namespace GAlbum

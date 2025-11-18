@@ -517,13 +517,18 @@ namespace GAlbum
         /// <param name="pathArchivioDst"></param>
         /// <param name="stampaEsito"></param>
         /// <returns></returns>
-        public GstErrori.EErrore SelezionePerData(string pathArchivioSrc, string pathArchivioDst, bool stampaEsito = true)
+        public GstErrori.EErrore SelezionePerData(string pathArchivioSrc, string pathArchivioDst, ref System.Windows.Forms.ProgressBar progressBar, bool stampaEsito = true)
         {
             // Azzera tutti i dati statistici di acquisire
             statisticaSelezionaPerData.Azzera();
 
+            // Inizilizza progressBar
+            progressBar.Value = 0;
+            progressBar.Visible = true;
+
+
             // Chiama SelezionePerData2
-            GstErrori.EErrore esito = SelezionePerData2(pathArchivioSrc, pathArchivioDst);
+            GstErrori.EErrore esito = SelezionePerData2(pathArchivioSrc, pathArchivioDst, ref progressBar);
 
             // Verifica se deve stampare l'esito
             if (stampaEsito)
@@ -548,6 +553,9 @@ namespace GAlbum
 
             }
 
+            // nasconde progressBar
+            progressBar.Visible = false;
+
             return esito;
 
         }
@@ -557,7 +565,7 @@ namespace GAlbum
         /// <param name="pathArchivioSrc"></param>
         /// <param name="pathArchivioDst"></param>
         /// <returns></returns>
-        public GstErrori.EErrore SelezionePerData2(string pathArchivioSrc, string pathArchivioDst)
+        public GstErrori.EErrore SelezionePerData2(string pathArchivioSrc, string pathArchivioDst, ref System.Windows.Forms.ProgressBar progressBar)
         {
             GstErrori.EErrore esito;
             bool duplica;
@@ -589,6 +597,7 @@ namespace GAlbum
             {
                 // Incrementa file elaborati
                 statisticaSelezionaPerData.NumeroFileElaborati++;
+                progressBar.Value = statisticaSelezionaPerData.AvanzamentoLavoro;
 
                 // inizializza fileSrc
                 esito = fileSrc.SetPathNomeFile(pathFile);

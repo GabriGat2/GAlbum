@@ -877,9 +877,9 @@ namespace GAlbum
             
             // Verifica se c'è un nodo sorgente selezionato
             if (InfoNodoSmistareSelezionato == null)
-            {
                 return;
-            }
+            if (InfoNodoSmistareSelezionato.Path == string.Empty)
+                return;
             string pathArchivioSrc = InfoNodoSmistareSelezionato.Path;
 
             // recupera il path dell'archivio destinazione in Smistati
@@ -887,9 +887,9 @@ namespace GAlbum
 
             // Verifica se c'è un nodo destinazione in smistati
             if (InfoNodoSmistatiSelezionato == null)
-            {
                 return;
-            }
+            if (InfoNodoSmistatiSelezionato.Path == string.Empty)
+                return;
             string pathArchivioDst = InfoNodoSmistatiSelezionato.Path;
 
             // disabilta i gruppi del form
@@ -899,7 +899,7 @@ namespace GAlbum
             Cursor.Current = Cursors.WaitCursor;
 
             // Eseguire l'aquisizione
-            GstErrori.EErrore esito = AreaArchivio.SelezionePerData(pathArchivioSrc, pathArchivioDst);   
+            GstErrori.EErrore esito = AreaArchivio.SelezionePerData(pathArchivioSrc, pathArchivioDst, ref progressBar1);   
 
             // riabilita i gruppi del form
             AbilitaControlli(true);
