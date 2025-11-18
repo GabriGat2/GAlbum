@@ -894,9 +894,9 @@ namespace GAlbum
 
             // Verifica se c'è un nodo sorgente selezionato
             if (InfoNodoAcquisireSelezionato == null)
-            {
                 return;
-            }
+            if (InfoNodoAcquisireSelezionato.Path == string.Empty)
+                return;
 
             // stampa il path della directory
             string pathSrc = InfoNodoAcquisireSelezionato.Path;
@@ -910,7 +910,7 @@ namespace GAlbum
             Cursor.Current = Cursors.WaitCursor;
 
             // Eseguire l'aquisizione
-            GstErrori.EErrore esito = AreaArchivio.Acquisire(pathSrc);
+            GstErrori.EErrore esito = AreaArchivio.Acquisire(pathSrc, ref progressBar1);
 
             // riabilita i gruppi del form
             AbilitaControlli(true);

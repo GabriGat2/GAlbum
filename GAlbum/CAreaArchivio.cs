@@ -384,13 +384,17 @@ namespace GAlbum
         /// </summary>
         /// <param name="pathArchivio"></param>
         /// <returns></returns>
-        public GstErrori.EErrore Acquisire(string pathArchivio, bool stampaEsito = true)
+        public GstErrori.EErrore Acquisire(string pathArchivio, ref System.Windows.Forms.ProgressBar progressBar, bool stampaEsito = true)
         {
             // Azzera tutti i dati statistici di acquisire
             statisticaAcquisire.Azzera();
-
+            
+            // Inizilizza progressBar
+            progressBar.Value = 0;
+            progressBar.Visible = true;
+            
             // Chiama Acquisire2
-            GstErrori.EErrore esito = Acquisire2(pathArchivio);
+            GstErrori.EErrore esito = Acquisire2(pathArchivio, ref progressBar);
 
             // Verifica se deve stampare l'esito
             if (stampaEsito)
@@ -415,6 +419,9 @@ namespace GAlbum
 
             }
 
+            // nasconde progressBar
+            progressBar.Visible = false;
+
             return esito;
         }
         /// <summary>
@@ -422,7 +429,7 @@ namespace GAlbum
         /// </summary>
         /// <param name="pathArchivio"></param>
         /// <returns></returns>
-        public GstErrori.EErrore Acquisire2(string pathArchivio)
+        public GstErrori.EErrore Acquisire2(string pathArchivio, ref System.Windows.Forms.ProgressBar progressBar)
         {
             GstErrori.EErrore esito;
             bool assente;
@@ -431,6 +438,7 @@ namespace GAlbum
             string[] listaPathFile = Directory.GetFiles(pathArchivio, "*.*", SearchOption.AllDirectories);
             // aggiorna dati statistici
             statisticaAcquisire.NumeroFile = (UInt32) listaPathFile.Length;
+
 
             // Crea gli oggetti per gestire la copia dei file
             CNomeFile fileSrc = new CNomeFile(PathArchivioAttivo);
@@ -443,6 +451,7 @@ namespace GAlbum
             {
                 // Incrementa file elaborati
                 statisticaAcquisire.NumeroFileElaborati++;
+                progressBar.Value = statisticaAcquisire.AvanzamentoLavoro;
 
                 // inizializza le classi per la gestione del file
                 esito = fileSrc.SetPathNomeFile(pathFile);
@@ -517,13 +526,18 @@ namespace GAlbum
         /// <param name="pathArchivioDst"></param>
         /// <param name="stampaEsito"></param>
         /// <returns></returns>
-        public GstErrori.EErrore SelezionePerData(string pathArchivioSrc, string pathArchivioDst, bool stampaEsito = true)
+        public GstErrori.EErrore SelezionePerData(string pathArchivioSrc, string pathArchivioDst, ref System.Windows.Forms.ProgressBar progressBar, bool stampaEsito = true)
         {
             // Azzera tutti i dati statistici di acquisire
             statisticaSelezionaPerData.Azzera();
 
+            // Inizilizza progressBar
+            progressBar.Value = 0;
+            progressBar.Visible = true;
+
+
             // Chiama SelezionePerData2
-            GstErrori.EErrore esito = SelezionePerData2(pathArchivioSrc, pathArchivioDst);
+            GstErrori.EErrore esito = SelezionePerData2(pathArchivioSrc, pathArchivioDst, ref progressBar);
 
             // Verifica se deve stampare l'esito
             if (stampaEsito)
@@ -548,6 +562,9 @@ namespace GAlbum
 
             }
 
+            // nasconde progressBar
+            progressBar.Visible = false;
+
             return esito;
 
         }
@@ -557,7 +574,7 @@ namespace GAlbum
         /// <param name="pathArchivioSrc"></param>
         /// <param name="pathArchivioDst"></param>
         /// <returns></returns>
-        public GstErrori.EErrore SelezionePerData2(string pathArchivioSrc, string pathArchivioDst)
+        public GstErrori.EErrore SelezionePerData2(string pathArchivioSrc, string pathArchivioDst, ref System.Windows.Forms.ProgressBar progressBar)
         {
             GstErrori.EErrore esito;
             bool duplica;
@@ -589,6 +606,7 @@ namespace GAlbum
             {
                 // Incrementa file elaborati
                 statisticaSelezionaPerData.NumeroFileElaborati++;
+                progressBar.Value = statisticaSelezionaPerData.AvanzamentoLavoro;
 
                 // inizializza fileSrc
                 esito = fileSrc.SetPathNomeFile(pathFile);

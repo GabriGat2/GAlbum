@@ -21,6 +21,12 @@ namespace GAlbum
         public UInt32 NumeroFileCopiati_Rinomintati;
         public UInt32 NumeroFileDuplicati_Rinomintati;
 
+        /// <summary>
+        /// Rende la percentuale di avanzamento lavoro, con un valore compreso tra 1 e 100
+        /// </summary>
+        public int AvanzamentoLavoro { get => CalcolaAvanzamentoLavoro(); }
+     
+ 
         // ------------------------------------------------------------------------------------------------------------------
         /// <summary>
         /// A capo linea
@@ -35,6 +41,7 @@ namespace GAlbum
         /// </summary>
         private bool mettiloQui;
         public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
+
 
 
         // ==================================================================================================================
@@ -81,6 +88,18 @@ namespace GAlbum
             log += "NumeroFileDuplicati_Rinomintati :" + NumeroFileDuplicati_Rinomintati.ToString() + ACapo;
 
             return log;
+        }
+
+        /// <summary>
+        /// Calcola Avanzamento Lavoro
+        /// </summary>
+        /// <returns></returns>
+        private int CalcolaAvanzamentoLavoro()
+        {
+            double parziale = NumeroFileElaborati;
+            double totale = NumeroFile;
+            double percentuale = parziale / totale * 100.0;
+            return (int)percentuale;
         }
 
     }// fine class CStatisticaOperazioni
