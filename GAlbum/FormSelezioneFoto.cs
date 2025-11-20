@@ -22,6 +22,10 @@ namespace GAlbum
         // Proprietà
         // ==================================================================================================================
         /// <summary>
+        /// riferiemnto all'area archivio
+        /// </summary>
+        protected CAreaArchivio AreaArchivio = null;
+        /// <summary>
         /// lista delle foto sorgente
         /// </summary>
         private string[] fotoSrcList;
@@ -72,8 +76,11 @@ namespace GAlbum
         /// <summary>
         /// costruttore
         /// </summary>
-        public FormSelezioneFoto()
+        public FormSelezioneFoto(ref CAreaArchivio areaArchivio)
         {
+            // Assegna il riferimento a AreaArchivio
+            this.AreaArchivio = areaArchivio;
+
             InitializeComponent();
             InizializzaClasse();
         }
@@ -89,16 +96,14 @@ namespace GAlbum
             InfoTVSorgente = new CInfoTreeViewSorgente ();
             InfoTVDestinazione = new CInfoTreeViewDestinazione();
 
-            // DEBUG
-            textBoxSorgente.Text = "E:\\Angelo\\Prj\\GAlbum\\Foto\\Sorgente";
-            textBoxDestinazione.Text = "E:\\Angelo\\Prj\\GAlbum\\Foto\\Destinazione";
+            // Inizializza le text box
+            textBoxSorgente.Text = AreaArchivio.PathSmistare;
+            textBoxDestinazione.Text = AreaArchivio.PathSmistati;
 
             // aggiorna la visualizzazione delle sub directory di destinazione
             //AggiornaSmistare();
             AggiornaSorgente();
 
-
-            
         }
         /// <summary>
         /// Seleziona la directory sorgente 
@@ -604,7 +609,7 @@ namespace GAlbum
         /// <param name="e"></param>
         private void butAssegna_Click(object sender, EventArgs e)
         {
-            EseguiAssegna((true));
+            EseguiAssegnaNuova((true));
         }
         /// <summary>
         ///  Non Assegna la foto e passa alla successiva
@@ -613,7 +618,7 @@ namespace GAlbum
         /// <param name="e"></param>
         private void butNonAssegna_Click(object sender, EventArgs e)
         {
-            EseguiAssegna(false);
+            EseguiAssegnaNuova(false);
         }
         /// <summary>
         /// Attiva l'assegnazione
@@ -634,6 +639,29 @@ namespace GAlbum
 
             // Assegna la foto
             archivia.Assegna(textBoxPathFoto.Text, pathDestinazioni, copia, InfoTVSorgente.CopiaParallela);
+
+            // mostra la foto successiva
+            FotoSuccessiva();
+        }
+        /// <summary>
+        /// Nuova gestione di Esegui assegna
+        /// </summary>
+        /// <param name="copia"></param>
+        protected void EseguiAssegnaNuova(bool copia)
+        {
+            // Crea l'archivo per movimentare le foto
+            CArchivia archivia = new CArchivia();
+
+            // crea la lista dei nodi selezionati
+            List<String> pathDestinazioni;
+            TreeNode nodo = treeViewDestinazione.Nodes[0];
+            archivia.EstraiNdodiSelezionati(ref nodo, out pathDestinazioni);
+
+            // libera la risorsa della foto
+            pictureBox1.Image = null;
+
+            // Assegna la foto
+            AreaArchivio.Assegna(textBoxPathFoto.Text, pathDestinazioni, copia, InfoTVSorgente.CopiaParallela, ref this.progressBar1);
 
             // mostra la foto successiva
             FotoSuccessiva();

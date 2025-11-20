@@ -74,7 +74,7 @@ namespace GAlbum
             return esito;
         }
         /// <summary>
-        /// Assena un file a varie destinazioni
+        /// Assegna un file a varie destinazioni
         /// </summary>
         /// <param name="pathSrc"> path + nome del file sorgente </param>
         /// <param name="pathDestinazioni"> Lista dei path di destinazione senza il nome del file </param>

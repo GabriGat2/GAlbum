@@ -41,7 +41,7 @@ namespace GAlbum
         // attiva il form per selezionare le foto
         private void ButSelezioneFoto_Click(object sender, EventArgs e)
         {
-            FormSelezioneFoto dlg = new FormSelezioneFoto();
+            FormSelezioneFoto dlg = new FormSelezioneFoto(ref this.AreaArchivio);
             dlg.ShowDialog();           
         }
         /// <summary>

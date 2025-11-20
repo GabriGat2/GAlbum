@@ -311,7 +311,7 @@ namespace GAlbum
             {
                 this.dirRamo = string.Empty;
                 this.dirInterno = string.Empty;
-                return GstErrori.EErrore.E0000_OK;
+                //return GstErrori.EErrore.E0000_OK;
             }
             else
             {
@@ -322,7 +322,7 @@ namespace GAlbum
             if (campi.Length < 6)
             {
                 this.dirInterno = string.Empty;
-                return GstErrori.EErrore.E0000_OK;
+                //return GstErrori.EErrore.E0000_OK;
             }
             else
             {

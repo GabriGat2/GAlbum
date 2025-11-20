@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static GAlbum.GstErrori;
 
 namespace GAlbum
 {
@@ -109,6 +110,7 @@ namespace GAlbum
         // Statistica operazioni
         private CStatisticaOperazioni statisticaAcquisire = new CStatisticaOperazioni();
         private CStatisticaOperazioni statisticaSelezionaPerData = new CStatisticaOperazioni();
+        private CStatisticaOperazioni statisticaAssegna = new CStatisticaOperazioni();
 
 
         // ==================================================================================================================
@@ -701,5 +703,246 @@ namespace GAlbum
 
             return GstErrori.EErrore.E0000_OK;
         }
+        /// <summary>
+        /// Asegue l'assegnazione di un file negli archivi specificati
+        /// </summary>
+        /// <param name="pathSrc"></param>
+        /// <param name="pathDestinazioni"></param>
+        /// <param name="copia"></param>
+        /// <param name="copiaParallelo"></param>
+        /// <param name="progressBar"></param>
+        /// <param name="stampaEsito"></param>
+        /// <returns></returns>
+        public GstErrori.EErrore Assegna(   string pathSrc, 
+                                            List<String> pathDestinazioni, 
+                                            bool copia, 
+                                            bool copiaParallelo,
+                                            ref System.Windows.Forms.ProgressBar progressBar,
+                                            bool stampaEsito = true)
+        {
+            // Azzera tutti i dati statistici di acquisire
+            statisticaAssegna.Azzera();
+
+            // Inizilizza progressBar
+            progressBar.Value = 0;
+            progressBar.Visible = true;
+
+
+            // Chiama SelezionePerData2
+            GstErrori.EErrore esito = AssegnaInterna(pathSrc, pathDestinazioni, copia, copiaParallelo, ref progressBar);
+
+            // Verifica se deve stampare l'esito
+            if (stampaEsito && (esito != GstErrori.EErrore.E0000_OK))
+            {
+                FormLog formLog = new FormLog();
+
+                // Messaggio di intestazione
+                formLog.Log = "Assegna" + ACapo;
+                formLog.Log = "====================================================================" + ACapo;
+                formLog.Log = ACapo;
+                formLog.Log = ACapo;
+
+                formLog.Log = "L'operazione Assegna si è conclusa con il seguente esito:" + ACapo;
+                formLog.Log = GstErrori.RestultToSting(esito) + ACapo;
+                formLog.Log = ACapo;
+                formLog.Log = ACapo;
+                formLog.Log = "I dati statistici dell'operazione sono i seguenti:" + ACapo;
+                formLog.Log = statisticaSelezionaPerData.GetLog();
+
+                // Stampa il risultato
+                formLog.ShowDialog();
+
+            }
+
+            // nasconde progressBar
+            progressBar.Visible = false;
+
+            return esito;
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pathSrc"></param>
+        /// <param name="pathDestinazioni"></param>
+        /// <param name="copia"></param>
+        /// <param name="copiaParallelo"></param>
+        /// <param name="progressBar"></param>
+        /// <returns></returns>
+        public GstErrori.EErrore AssegnaInterna(string pathSrc,
+                                            List<String> pathDestinazioni,
+                                            bool copia,
+                                            bool copiaParallelo,
+                                            ref System.Windows.Forms.ProgressBar progressBar)
+        {
+            // Assegna il file specificato
+            EErrore esito = Assegna2(pathSrc, pathDestinazioni, copia);
+            if (esito != EErrore.E0000_OK)
+            {
+                GstErrori.StampaMessaggioErrore(esito, pathSrc);
+            }
+
+            // copia parallela: cerca nelle altre foglie il file specificato e lo assegna
+            if (copiaParallelo)
+            {
+                esito = AssegnaInParallelo(pathSrc, pathDestinazioni, copia);
+                if (esito != EErrore.E0000_OK)
+                {
+                    GstErrori.StampaMessaggioErrore(esito, pathSrc);
+                }
+            }
+
+
+            return esito;
+        }
+        /// <summary>
+        /// Assegna un file a varie destinazioni
+        /// </summary>
+        /// <param name="pathSrc"> path + nome del file sorgente </param>
+        /// <param name="pathDestinazioni"> Lista dei path di destinazione senza il nome del file </param>
+        /// <returns></returns>
+        public GstErrori.EErrore Assegna2(string pathSrc, List<String> pathDestinazioni, bool copia)
+        {
+            GstErrori.EErrore esito = GstErrori.EErrore.E0001_NOK;
+
+            // Dichiara gli oggetti file nome
+            CNomeFile fileSrc = new CNomeFile(PathArchivioAttivo);
+            CNomeFile fileDst = new CNomeFile(PathArchivioAttivo);
+            CNomeFile fileArchiviato = new CNomeFile(PathArchivioAttivo);
+
+
+            // inizializza fileSrc
+            esito = fileSrc.SetPathNomeFile(pathSrc);
+            if (esito != GstErrori.EErrore.E0000_OK)
+                return esito;
+            //  verifica che fileSrc esiste
+            if (!fileSrc.PathNomeFileEsiste)
+                return GstErrori.EErrore.E1360_FileSorgenteNonEsiste;
+
+            // inizializza parzialmente il path del file archiviato 
+            fileArchiviato.DirSezione = DirSmistare;
+            fileArchiviato.DirArchivio = DirArchivio;
+
+
+            // Esegue le copie nel numero specificato dalla lista destinazioni
+            if (copia)
+            {
+                foreach (var pathDst in pathDestinazioni)
+                {
+                    // compone il path di destinazione
+                    string pathNomeFileDst = pathDst + SepDir + fileSrc.DirFoglia + SepDir + fileSrc.NomeFile;
+                    esito = fileDst.SetPathNomeFile(pathNomeFileDst);
+                    if (esito != GstErrori.EErrore.E0000_OK)
+                        return esito;
+
+                    // Esegue la copia
+                    esito = fileDst.CopiaFile(fileSrc);
+                    if (esito != GstErrori.EErrore.E0000_OK)
+                        return esito;
+                    else if (esito == GstErrori.EErrore.E0000_OK)
+                    {
+                        // aggiorna dati statistici
+                        statisticaAssegna.NumeroFileAssegnati++;
+                    }
+                }
+            }
+
+
+            // prepara archiviato 
+            fileArchiviato.DirFoglia = fileSrc.DirFoglia;
+            fileArchiviato.NomeFile = fileSrc.NomeFile;
+
+            // esegue la copia in _Archivio
+            esito = fileArchiviato.CopiaFile(fileSrc);
+            if (esito != GstErrori.EErrore.E0000_OK)
+            {
+                return esito;
+            }
+            else
+            {
+                // aggiorna dati statistici
+                statisticaAssegna.NumeroFileArchiviati++;
+            }
+
+            return GstErrori.EErrore.E0000_OK;
+        }
+        /// <summary>
+        /// Esegue la copia in parallelo: assena un file, prelevato da tutte le foglie, a varie destinazioni
+        /// </summary>
+        /// <param name="pathSrc"></param>
+        /// <param name="pathDestinazioni"></param>
+        /// <returns></returns>
+        private GstErrori.EErrore AssegnaInParallelo(string pathSrc, List<String> pathDestinazioni, bool copia)
+        {
+            GstErrori.EErrore esito = GstErrori.EErrore.E0001_NOK;
+
+            // Dichiara gli oggetti file nome
+            CNomeFile fileSrc = new CNomeFile(PathArchivioAttivo);
+            CNomeFile fileDst = new CNomeFile(PathArchivioAttivo);
+            CNomeFile fileSrcFoglia = new CNomeFile(PathArchivioAttivo);
+
+            // inizializza fileSrc
+            esito = fileSrc.SetPathNomeFile(pathSrc);
+            if (esito != GstErrori.EErrore.E0000_OK)
+                return esito;
+            //  verifica che fileSrc esiste
+            if (!fileSrc.PathNomeFileEsiste)
+                return GstErrori.EErrore.E1360_FileSorgenteNonEsiste;
+
+
+
+
+            //// scompone il file sorgente e ricava le sue caratteristiche
+            //string pathBase;
+            //string ramo;
+            //string foglia;
+            //string nome;
+            //esito = ScomponePath(pathSrc, out pathBase, out ramo, out foglia, out nome);
+            //if (esito != EErrore.E0000_OK)
+            //    return esito;
+
+            //// Scompone il nome del file
+            //string nomeSE;
+            //string estensione;
+            //esito = ScomponeNome(nome, out nomeSE, out estensione);
+
+            //// compone il path del ramo
+            //string pathRamo = pathBase + "\\" + ramo;
+
+            // compone la lista delle foglie 
+            string[] pathFoglie = Directory.GetDirectories(fileSrc.PathRamo);
+            //string[] pathFoglie = Directory.GetDirectories(pathRamo);
+
+            foreach (var pathFoglia in pathFoglie)
+            {
+                // estrae nome foglia 
+                string[] campiFoglia = pathFoglia.Split('\\');
+                if (campiFoglia.Length < 2)
+                {
+                    return GstErrori.EErrore.E1312_DirectorySorgenteCampiMinimiNonPresenti;
+                }
+                string nomeFoglia = campiFoglia[campiFoglia.Length - 1];
+
+                // verifica che non sia la foglia sorgente 
+                if (nomeFoglia.ToUpper() == fileSrc.DirFoglia.ToUpper())
+                    continue;
+
+                // compone la lista dei file 
+                string[] pathNomi = Directory.GetFiles(pathFoglia, fileSrc.Nome + ".*");
+
+                // esamina i file nella lista 
+                foreach (var pathNuovoNome in pathNomi)
+                {
+                    esito = Assegna2(pathNuovoNome, pathDestinazioni, copia);
+                    if (esito != EErrore.E0000_OK)
+                        return esito;
+                }
+            }
+
+            return GstErrori.EErrore.E0000_OK;
+        }
+
+
     }// fine class CAreaArchivio
+
 }// fine namespace GAlbum
