@@ -29,7 +29,10 @@ namespace GAlbum
         /// nome del file di log
         /// </summary>
         private string NomeFile;
-
+        /// <summary>
+        /// indentazione
+        /// </summary>
+        private int Indentazione;
 
         // ------------------------------------------------------------------------------------------------------------------
         /// <summary>
@@ -111,6 +114,9 @@ namespace GAlbum
             // Aggiuge a stroria
             Storia = frase;
 
+            // Inizializza indentazione
+            Indentazione = 0;
+
             // Attivo la registrazione
             Attiva = true;
 
@@ -140,6 +146,38 @@ namespace GAlbum
                 
         }
         /// <summary>
+        /// Aggiunge un istruzione : titolo
+        /// </summary>
+        /// <param name="titolo"></param>
+        public void InizioIstruzione(string titolo)
+        {
+            // aggiorna indentazione
+            Indentazione++;
+            String sIndentazione = CalcolaIndentazione();
+
+            // prepara una frase
+            string frase = sIndentazione + "----- inizio: " + titolo + ACapo;
+
+            // Aggiuge a stroria
+            Storia += frase;
+        }
+        public void FineIstruzione()
+        {
+            // recupera indentazione
+            String sIndentazione = CalcolaIndentazione();
+
+            // prepara una frase
+            string frase = sIndentazione + "----- Fine ------------------------------------------------------------" + ACapo;
+
+            // aggiorna indentazione
+            Indentazione--;
+
+            // Aggiuge a stroria
+            Storia += frase;
+        }
+
+
+        /// <summary>
         /// Scrive il file log
         /// </summary>
         /// <returns></returns>
@@ -168,8 +206,21 @@ namespace GAlbum
             }
             return GstErrori.EErrore.E0000_OK;
         }   
+        /// <summary>
+        ///  calcola gli spazi di indentazione
+        /// </summary>
+        /// <returns></returns>
+        private string CalcolaIndentazione()
+        {
+            string sIndentazione = string.Empty;
 
-
+            for (int i = 0; i < Indentazione; i++)
+            {
+                sIndentazione += "    ";
+            }
+            return sIndentazione;
+            
+        }
 
     }// fine classe CScatolaNera
 }// fine namespace GAlbum

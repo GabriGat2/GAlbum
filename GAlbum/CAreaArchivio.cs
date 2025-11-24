@@ -417,7 +417,8 @@ namespace GAlbum
         /// </summary>
         /// <param name="pathArchivio"></param>
         /// <returns></returns>
-        public GstErrori.EErrore Acquisire(string pathArchivio, ref System.Windows.Forms.ProgressBar progressBar, bool stampaEsito = true)
+        public GstErrori.EErrore 
+            Acquisire(string pathArchivio, ref System.Windows.Forms.ProgressBar progressBar, bool stampaEsito = true)
         {
             // Azzera tutti i dati statistici di acquisire
             statisticaAcquisire.Azzera();
@@ -482,6 +483,9 @@ namespace GAlbum
             // Elabola ogni file contenuto nella lista
             foreach (var pathFile in listaPathFile)
             {
+                // Aggiorna scatola nera
+                SNera.InizioIstruzione("Acquisizione" + pathFile);
+
                 // Incrementa file elaborati
                 statisticaAcquisire.NumeroFileElaborati++;
                 progressBar.Value = statisticaAcquisire.AvanzamentoLavoro;
@@ -548,6 +552,9 @@ namespace GAlbum
                         statisticaAcquisire.NumeroFileDuplicati_Rinomintati++;
 
                 }
+
+                // Aggiorna scatola nera
+                SNera.FineIstruzione();
             }
 
             return GstErrori.EErrore.E0000_OK;
