@@ -38,11 +38,11 @@ namespace GAlbum
         /// </summary>
         private Bitmap MyImage;
         /// <summary>
-        /// Path della directory sorgente attiva 
+        /// Path della directory sorgente Attiva 
         /// </summary>
         private string PathDirSorgente = null;
         /// <summary>
-        /// Path della directory destinazione attiva 
+        /// Path della directory destinazione Attiva 
         /// </summary>
         private string PathDirDestinazione = null;
         /// <summary>
@@ -51,8 +51,8 @@ namespace GAlbum
         private CInfoDirFoto InfoNodoSorgenteSelezionato;
         /// <summary>
         /// stato del form:
-        /// False = Copia delle foto non attiva perchè, sta coonfigurando le operazioni da eseguire
-        /// true = Copia delle foto  attiva, perchè esegue l'operazione richiesta
+        /// False = Copia delle foto non Attiva perchè, sta coonfigurando le operazioni da eseguire
+        /// true = Copia delle foto  Attiva, perchè esegue l'operazione richiesta
         /// </summary>
         private bool Stato;
         /// <summary>

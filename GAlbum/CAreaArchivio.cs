@@ -94,6 +94,18 @@ namespace GAlbum
 
 
         // ------------------------------------------------------------------------------------------------------------------
+        // Archivio Attivo: LOG
+        /// <summary>
+        /// Nome della dir: LOG
+        /// </summary>
+        public const string DirLOG = "_LOG";
+        /// <summary>
+        /// path della dir: LOG
+        /// </summary>
+        public string PathLOG { get => PathArchivioAttivo + SepDir + DirLOG; /* set => pathSmistati = value; */ }
+
+
+        // ------------------------------------------------------------------------------------------------------------------
         // Prefissi
         private const string prefissoCopia = "_C_";
         private const string prefissoDuplica = "_D_";
@@ -111,6 +123,10 @@ namespace GAlbum
         private CStatisticaOperazioni statisticaAcquisire = new CStatisticaOperazioni();
         private CStatisticaOperazioni statisticaSelezionaPerData = new CStatisticaOperazioni();
         private CStatisticaOperazioni statisticaAssegna = new CStatisticaOperazioni();
+        /// <summary>
+        /// scatola nera
+        /// </summary>
+        public CScatolaNera SNera;
 
 
         // ==================================================================================================================
@@ -140,7 +156,6 @@ namespace GAlbum
             //pathArchivioAttivo = "";
             pathArchivioBase = "E:\\Angelo\\Prj\\GAlbum\\AreaArchivioBaseFoto";
             dirArchivioAttivo = "";
-
 
         }
         /// <summary>
@@ -224,10 +239,24 @@ namespace GAlbum
                 return GstErrori.EErrore.E1353_NonPuoCreareArchivio;
             }
 
+            // compone il path della directory LOG
+            string pathLOG = pathNomeArchivio + "\\" + DirLOG;
+
+            // crea directory LOGF
+            try
+            {
+                Directory.CreateDirectory(pathLOG);
+            }
+            catch (Exception e)
+            {
+                return GstErrori.EErrore.E1353_NonPuoCreareArchivio;
+            }
+
+
             // compone il path della directory _Archivio
             string path_Archivio = pathDaSmistare + "\\" + DirArchivio;
 
-            // crea directory _Archivio in DaSmistare
+            // crea directory _Archivio in Smistare
             try
             {
                 Directory.CreateDirectory(path_Archivio);
@@ -249,6 +278,8 @@ namespace GAlbum
             {
                 return GstErrori.EErrore.E1353_NonPuoCreareArchivio;
             }
+
+
 
 
             return GstErrori.EErrore.E0000_OK;

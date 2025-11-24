@@ -36,9 +36,12 @@ namespace GAlbum
         /// </summary>
         private void InizializzaClasse()
         {
+            // crea la scatola Nera
+            AreaArchivio.SNera = new CScatolaNera(ref AreaArchivio);
+            
             AggiornaForm();
         }
-        // attiva il form per selezionare le foto
+        // Attiva il form per selezionare le foto
         private void ButSelezioneFoto_Click(object sender, EventArgs e)
         {
             FormSelezioneFoto dlg = new FormSelezioneFoto(ref this.AreaArchivio);

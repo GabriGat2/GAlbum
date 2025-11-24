@@ -11,7 +11,7 @@ using static GAlbum.CInfoTreeView;
 
 namespace GAlbum
 {
-    internal class CNomeFile
+    public class CNomeFile
     {
         // ==================================================================================================================
         // Descrizione della classe CNome File

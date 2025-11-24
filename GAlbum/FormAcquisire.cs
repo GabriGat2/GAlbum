@@ -51,8 +51,8 @@ namespace GAlbum
         private CInfoDirFoto InfoNodoAcquisireSelezionato;
         /// <summary>
         /// stato del form:
-        /// False = Copia delle foto non attiva perchè, sta coonfigurando le operazioni da eseguire
-        /// true = Copia delle foto  attiva, perchè esegue l'operazione richiesta
+        /// False = Copia delle foto non Attiva perchè, sta coonfigurando le operazioni da eseguire
+        /// true = Copia delle foto  Attiva, perchè esegue l'operazione richiesta
         /// </summary>
         private bool Stato;
         /// <summary>
@@ -889,14 +889,39 @@ namespace GAlbum
         /// <param name="e"></param>
         private void butEsegui_Click(object sender, EventArgs e)
         {
+            GstErrori.EErrore esito = EseguiAcquisireLog();
+        }
+        /// <summary>
+        /// Attiva la funzione acquisire e il log
+        /// </summary>
+        /// <returns></returns>
+        private GstErrori.EErrore EseguiAcquisireLog() 
+        {
+            // attiva scatola nera 
+            AreaArchivio.SNera.Inizio("Acquisire");
+
+            // esegue acquisire 
+            GstErrori.EErrore esito = EseguiAcquisire();
+
+            // disattiva scatola nera 
+            AreaArchivio.SNera.Fine(esito);
+
+            return esito;
+        }
+        /// <summary>
+        /// Attiva la funzione acquisire
+        /// </summary>
+        /// <returns></returns>
+        private GstErrori.EErrore EseguiAcquisire()
+        {
             // recupera il path dell'archivio acquisito
 
 
             // Verifica se c'è un nodo sorgente selezionato
             if (InfoNodoAcquisireSelezionato == null)
-                return;
+                return GstErrori.EErrore.E0001_NOK;
             if (InfoNodoAcquisireSelezionato.Path == string.Empty)
-                return;
+                return GstErrori.EErrore.E0001_NOK;
 
             // stampa il path della directory
             string pathSrc = InfoNodoAcquisireSelezionato.Path;
@@ -917,6 +942,9 @@ namespace GAlbum
 
             // ripristina il cursore originale
             Cursor.Current = Cursors.Default;
+
+            return esito;
+
         }
         /// <summary>
         /// Abilita disabibilita i controlli del form 

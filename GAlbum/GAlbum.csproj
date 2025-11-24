@@ -69,6 +69,7 @@
     <Compile Include="CInfoTreeViewSmistati.cs" />
     <Compile Include="CInfoTreeViewSorgente.cs" />
     <Compile Include="CNomeFile.cs" />
+    <Compile Include="CScatolaNera.cs" />
     <Compile Include="CStatisticaOperazioni.cs" />
     <Compile Include="FormSelezionaPerData.cs">
       <SubType>Form</SubType>
