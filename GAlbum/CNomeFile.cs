@@ -707,6 +707,27 @@ namespace GAlbum
 
             return GstErrori.EErrore.E0001_NOK;
         }
+        /// <summary>
+        /// rimuove da path indicato il path dell'archivio base
+        /// </summary>
+        /// <param name="pathTotale"></param>
+        /// <returns></returns>
+        public string GetPathRelativo(string pathTotale)
+        {
+            // verifica che il path contenga il pathArchvioAttivo
+            string locPathArchivioAttivo = pathTotale.Remove(pathArchivioAttivo.Length, pathTotale.Length - pathArchivioAttivo.Length);
+            if (locPathArchivioAttivo.ToLower() != pathArchivioAttivo.ToLower())
+            {
+                return "???";
+            }
+
+            // Estrae la porzione di archivio a valle dell'archvio attivo
+            string pathRelativo = pathTotale.Substring(pathArchivioAttivo.Length + 1);
+
+
+            return pathRelativo;
+        }
+
 
 
     }// fine class CNomeFile

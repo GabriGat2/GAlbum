@@ -484,7 +484,7 @@ namespace GAlbum
             foreach (var pathFile in listaPathFile)
             {
                 // Aggiorna scatola nera
-                SNera.InizioIstruzione("Acquisizione" + pathFile);
+                SNera.InizioIstruzione("Acquisizione", pathFile);
 
                 // Incrementa file elaborati
                 statisticaAcquisire.NumeroFileElaborati++;
@@ -515,6 +515,7 @@ namespace GAlbum
                 if (assente)
                 {
                     esito = fileDst.CopiaFile(fileSrc);
+                    SNera.InizioIstruzione("Copia: ", fileSrc, fileDst, esito);
                     if (esito != GstErrori.EErrore.E0000_OK)
                         return esito;
 
@@ -527,6 +528,7 @@ namespace GAlbum
                 {
                     // Sposta il file sorgente nei file copiati
                     esito = fileCopia.SpostaFile(fileSrc.PathNomeFile);
+                    SNera.InizioIstruzione("Sposta in copiati: ", fileSrc, fileCopia, esito);
                     if (esito != GstErrori.EErrore.E0000_OK)
                         return esito;
 
@@ -541,6 +543,7 @@ namespace GAlbum
                 {
                     // sposta il file sorgente nei file duplicati
                     esito = fileDuplica.SpostaFile(fileSrc.PathNomeFile);
+                    SNera.InizioIstruzione("Sposta in duplicati: ", fileSrc, fileDuplica, esito);
                     if (esito != GstErrori.EErrore.E0000_OK)
                         return esito;
 
@@ -554,7 +557,7 @@ namespace GAlbum
                 }
 
                 // Aggiorna scatola nera
-                SNera.FineIstruzione();
+                SNera.FineIstruzione(GstErrori.EErrore.E0000_OK);
             }
 
             return GstErrori.EErrore.E0000_OK;

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace GAlbum
@@ -105,8 +106,8 @@ namespace GAlbum
                             dataAttuale.Day.ToString("00") + "/" +
                             dataAttuale.Month.ToString("00") + "/" +
                             dataAttuale.Year.ToString("00") + " " +
-                            dataAttuale.Hour.ToString("00") + "/" +
-                            dataAttuale.Minute.ToString("00") + "/" +
+                            dataAttuale.Hour.ToString("00") + ":" +
+                            dataAttuale.Minute.ToString("00") + ":" +
                             dataAttuale.Second.ToString("00") + ACapo;
             frase += "================================================================================" + ACapo;
 
@@ -155,19 +156,111 @@ namespace GAlbum
             Indentazione++;
             String sIndentazione = CalcolaIndentazione();
 
+            // prepara titolo
+            string sTitolo = "----- Inizio: " + titolo +  " ";
+            sTitolo = sTitolo.PadRight(80, '-');
+
+
+
             // prepara una frase
-            string frase = sIndentazione + "----- inizio: " + titolo + ACapo;
+            string frase = sIndentazione + sTitolo + ACapo;
+            frase += sIndentazione + ACapo;
 
             // Aggiuge a stroria
             Storia += frase;
         }
-        public void FineIstruzione()
+        /// <summary>
+        /// Aggiunge un istruzione : titolo + path nome file
+        /// </summary>
+        /// <param name="titolo"></param>
+        /// <param name="pathNomeFile"></param>
+        public void InizioIstruzione(string titolo, string pathNomeFile)
+        {
+            // aggiorna indentazione
+            Indentazione++;
+            String sIndentazione = CalcolaIndentazione();
+
+            // incaplsula pathNomeFile
+            CNomeFile fileSrc = new CNomeFile(AreaArchivio.PathArchivioAttivo);
+            GstErrori.EErrore esito = fileSrc.SetPathNomeFile(pathNomeFile);
+
+            // prepara titolo
+            string sTitolo = "----- Inizio: " + titolo + "   " + fileSrc.NomeFile + " ";
+            sTitolo = sTitolo.PadRight(80, '-');
+
+
+            // prepara una frase
+            string frase = sIndentazione + sTitolo + ACapo;
+            frase += sIndentazione + "Path relativo: " + fileSrc.GetPathRelativo(fileSrc.PathFoglia) + ACapo;
+            frase += sIndentazione + "Path Totale  : " + fileSrc.PathFoglia + ACapo;
+            frase += sIndentazione + "--------------------------------------------------------------------------------" + ACapo;
+            frase += sIndentazione + ACapo;
+
+            // Aggiuge a stroria
+            Storia += frase;
+        }
+        /// <summary>
+        /// Aggiunge un istruzione : titolo + fileSrc + fileDst + esito
+        /// </summary>
+        /// <param name="titolo"></param>
+        /// <param name="fileSrc"></param>
+        /// <param name="fileDst"></param>
+        /// <param name="esito"></param>
+        public void InizioIstruzione(string titolo, CNomeFile fileSrc, CNomeFile fileDst, GstErrori.EErrore esito)
+        {
+            // aggiorna indentazione
+            Indentazione++;
+            String sIndentazione = CalcolaIndentazione();
+
+            // prepara titolo inizio\
+            string sTitolo = "----- Inizio: " + titolo + "   " + fileSrc.NomeFile + " ";
+            sTitolo = sTitolo.PadRight(80, '-');
+
+            // prepara titolo fine
+            string sTitoloFine = "----- Fine ";
+            sTitoloFine = sTitoloFine.PadRight(80, '-');
+
+            // prepara una frase
+            string frase = sIndentazione + sTitolo + ACapo;
+            frase += sIndentazione + "NomeFileSrc     : " + fileSrc.NomeFile + ACapo;
+            frase += sIndentazione + "PathSrc relativo: " + fileSrc.GetPathRelativo(fileSrc.PathFoglia) + ACapo;
+            frase += sIndentazione + "PathSrc Totale  : " + fileSrc.PathFoglia + ACapo;
+            frase += sIndentazione + ACapo;
+            frase += sIndentazione + "NomeFileDst     : " + fileDst.NomeFile + ACapo;
+            frase += sIndentazione + "PathDst relativo: " + fileDst.GetPathRelativo(fileDst.PathFoglia) + ACapo;
+            frase += sIndentazione + "PathDst Totale  : " + fileDst.PathFoglia + ACapo;
+            frase += sIndentazione + ACapo;
+            frase += sIndentazione + "Esito           : " + GstErrori.RestultToSting(esito) + ACapo;
+            frase += sIndentazione + ACapo;
+            frase += sIndentazione + sTitoloFine + ACapo;
+            frase += sIndentazione + ACapo;
+
+            // Aggiuge a stroria
+            Storia += frase;
+
+            // aggiorna indentazione
+            Indentazione--;
+
+        }
+        /// <summary>
+        /// Chiude un istruzione
+        /// </summary>
+        public void FineIstruzione(GstErrori.EErrore esito)
         {
             // recupera indentazione
             String sIndentazione = CalcolaIndentazione();
 
+            // estrae la stringa dell'esito
+            string sEsito = GstErrori.RestultToSting(esito);
+
+
+            // prepara titolo
+            string sTitolo = "----- Fine: " + sEsito + " ";
+            sTitolo = sTitolo.PadRight(80, '-');
+
             // prepara una frase
-            string frase = sIndentazione + "----- Fine ------------------------------------------------------------" + ACapo;
+            string frase = sIndentazione + sTitolo + ACapo;
+            frase += sIndentazione + ACapo;
 
             // aggiorna indentazione
             Indentazione--;
