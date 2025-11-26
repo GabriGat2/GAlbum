@@ -32,10 +32,14 @@ namespace GAlbum
         /// </summary>
         private string NomeFile;
         /// <summary>
+        /// Data inizio operazioni
+        /// </summary>
+        private DateTime DataInizio;
+        /// <summary>
         ///Indentazione
         /// </summary>
-        private int Indentazione { get => lIndentazione; set => CalcolaIndentazione(value); }
-        private int lIndentazione;
+        private int Indentazione { get => LIndentazione; set => CalcolaIndentazione(value); }
+        private int LIndentazione;
         /// <summary>
         /// Stringa di indentazione
         /// </summary>
@@ -47,7 +51,7 @@ namespace GAlbum
         /// <summary>
         /// Penultima data-ora rilevata
         /// </summary>
-        private DateTime dataPrecedente;
+        private DateTime DataPrecedente;
         /// <summary>
         /// Massimo tempo trascorso tra due istruzioni
         /// </summary>
@@ -107,9 +111,10 @@ namespace GAlbum
         {
             // Estrae la data attuale
             DateTime dataAttuale = DateTime.Now;
+            DataInizio = dataAttuale;
 
             // Assegna a penultima
-            dataPrecedente = dataAttuale;
+            DataPrecedente = dataAttuale;
             MaxTempoTrascorso = new TimeSpan(0);
 
             // compone nomefile
@@ -153,6 +158,10 @@ namespace GAlbum
         /// </summary>
         public void Fine(GstErrori.EErrore esito)
         {
+            // calcola il tempo impiegato
+            TimeSpan tempoImpiegato = DateTime.Now - DataInizio;
+
+
 
             // prepara una frase
             AggiungiLinea("================================================================================");
@@ -160,6 +169,8 @@ namespace GAlbum
             AggiungiLinea("");
             AggiungiLinea("L'operazione è stata conclusa con esito:");
             AggiungiLinea(GstErrori.RestultToSting(esito));
+            AggiungiLinea("");
+            AggiungiLinea("Tempo impiegato: " + tempoImpiegato);
             AggiungiLinea("");
             AggiungiLinea("Massimo tempo impiegato da una istruzione: " + MaxTempoTrascorso.TotalMilliseconds.ToString() + " ms" + " alla linea " + LineaMaxTempoTrascorso.ToString());
             AggiungiLinea("================================================================================");
@@ -216,6 +227,41 @@ namespace GAlbum
             AggiungiLinea(GetDataAttuale());
             AggiungiLinea("--------------------------------------------------------------------------------");
             AggiungiLinea("");
+
+        }
+        /// <summary>
+        /// Aggiunge un istruzione : titolo + fileSrc + esito
+        /// </summary>
+        /// <param name="titolo"></param>
+        /// <param name="fileSrc"></param>
+        /// <param name="esito"></param>
+        public void InizioIstruzione(string titolo, CNomeFile fileSrc, GstErrori.EErrore esito)
+        {
+            // aggiorna indentazione
+            Indentazione++;
+
+            // prepara titolo inizio\
+            string sTitolo = "----- Inizio: " + titolo + "   " + fileSrc.NomeFile + " ";
+            sTitolo = sTitolo.PadRight(80, '-');
+
+            // prepara titolo fine
+            string sTitoloFine = "----- Fine ";
+            sTitoloFine = sTitoloFine.PadRight(80, '-');
+
+            // prepara una frase
+            AggiungiLinea(sTitolo);
+            AggiungiLinea("NomeFileSrc     : " + fileSrc.NomeFile);
+            AggiungiLinea("PathSrc relativo: " + fileSrc.GetPathRelativo(fileSrc.PathFoglia));
+            AggiungiLinea("PathSrc Totale  : " + fileSrc.PathFoglia);
+            AggiungiLinea("");
+            AggiungiLinea("Esito           : " + GstErrori.RestultToSting(esito));
+            AggiungiLinea(GetDataAttuale());
+            AggiungiLinea("");
+            AggiungiLinea(sTitoloFine);
+            AggiungiLinea("");
+
+            // aggiorna indentazione
+            Indentazione--;
 
         }
         /// <summary>
@@ -316,9 +362,9 @@ namespace GAlbum
         /// <returns></returns>
         private void CalcolaIndentazione(int nuovaIndentazione)
         {
-            lIndentazione = nuovaIndentazione;
+            LIndentazione = nuovaIndentazione;
             SIndentazione = string.Empty;
-            SIndentazione = SIndentazione.PadLeft(lIndentazione * 4, ' ');
+            SIndentazione = SIndentazione.PadLeft(LIndentazione * 4, ' ');
         }
         /// <summary>
         /// Rende data e ora attuale
@@ -340,7 +386,7 @@ namespace GAlbum
                             dataAttuale.Millisecond.ToString("000");
 
             // calcola il tempo trascorso
-            TimeSpan tempoTrascorso = dataAttuale - dataPrecedente;
+            TimeSpan tempoTrascorso = dataAttuale - DataPrecedente;
 
             // aggiorna massimo tempo trascorso
             if (tempoTrascorso.TotalMilliseconds > MaxTempoTrascorso.TotalMilliseconds)
@@ -353,7 +399,7 @@ namespace GAlbum
             string sTempoTrascorso = "Tempo trascorso:" + tempoTrascorso.TotalMilliseconds.ToString() + " ms";
 
                         // Aggiornate il tempo precedente
-            dataPrecedente = dataAttuale;
+            DataPrecedente = dataAttuale;
 
 
             return sData + "    " + sTempoTrascorso;

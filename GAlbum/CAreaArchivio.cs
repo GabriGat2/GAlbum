@@ -485,7 +485,7 @@ namespace GAlbum
 
                 // Incrementa file elaborati
                 statisticaAcquisire.NumeroFileElaborati++;
-                //progressBar.Value = statisticaAcquisire.AvanzamentoLavoro;
+                progressBar.Value = statisticaAcquisire.AvanzamentoLavoro;
 
                 // inizializza le classi per la gestione del file
                 esito = fileSrc.SetPathNomeFile(pathFile);
@@ -506,6 +506,7 @@ namespace GAlbum
 
                 // Verifica se il file è già stato assente
                 esito = fileDst.VerificaFileAssenteInSezione(fileSrc);
+                SNera.InizioIstruzione("Verifica assenza: ", fileSrc, esito);
                 assente = (esito == GstErrori.EErrore.E0000_OK);
 
                 // esegue la copia 
