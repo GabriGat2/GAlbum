@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -31,9 +32,31 @@ namespace GAlbum
         /// </summary>
         private string NomeFile;
         /// <summary>
-        /// indentazione
+        ///Indentazione
         /// </summary>
-        private int Indentazione;
+        private int Indentazione { get => lIndentazione; set => CalcolaIndentazione(value); }
+        private int lIndentazione;
+        /// <summary>
+        /// Stringa di indentazione
+        /// </summary>
+        private string SIndentazione;
+        /// <summary>
+        /// Numero della linea attuale
+        /// </summary>
+        private uint NumeroLinea;
+        /// <summary>
+        /// Penultima data-ora rilevata
+        /// </summary>
+        private DateTime dataPrecedente;
+        /// <summary>
+        /// Massimo tempo trascorso tra due istruzioni
+        /// </summary>
+        private TimeSpan MaxTempoTrascorso;
+        /// <summary>
+        /// Linea dell'istruzione dove si è registrato il massimo tempo di esecuzione
+        /// </summary>
+        private uint LineaMaxTempoTrascorso;
+
 
         // ------------------------------------------------------------------------------------------------------------------
         /// <summary>
@@ -52,9 +75,7 @@ namespace GAlbum
         /// </summary>
         private bool mettiloQui;
         public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
-
-
-
+ 
 
         // ==================================================================================================================
         // Metodi
@@ -87,6 +108,10 @@ namespace GAlbum
             // Estrae la data attuale
             DateTime dataAttuale = DateTime.Now;
 
+            // Assegna a penultima
+            dataPrecedente = dataAttuale;
+            MaxTempoTrascorso = new TimeSpan(0);
+
             // compone nomefile
             this.NomeFile = dataAttuale.Year.ToString("00") + "-" + 
                             dataAttuale.Month.ToString("00") + "-" + 
@@ -96,31 +121,32 @@ namespace GAlbum
                             dataAttuale.Second.ToString("00") + "_" + 
                             titolo + ".txt";
 
+            // Inizializza Storia
+            Storia = string.Empty;
 
-            // prepara una frase
-            String frase = "Operazione: " + titolo + ACapo;
-            frase += "================================================================================" + ACapo;
-            frase += ACapo;
-            frase += "GAlbum" + ACapo;
-            frase += "Data:" +
+            // Inizializza indentazione
+            Indentazione = 0;
+
+            // Inizializza numero linea
+            NumeroLinea = 0;
+            LineaMaxTempoTrascorso = 0;
+
+            // Attivo la registrazione
+            Attiva = true;
+
+            // Aggiunge una frase
+            AggiungiLinea("Operazione: " + titolo);
+            AggiungiLinea("================================================================================");
+            AggiungiLinea("");
+            AggiungiLinea("GAlbum");
+            AggiungiLinea("Data:" +
                             dataAttuale.Day.ToString("00") + "/" +
                             dataAttuale.Month.ToString("00") + "/" +
                             dataAttuale.Year.ToString("00") + " " +
                             dataAttuale.Hour.ToString("00") + ":" +
                             dataAttuale.Minute.ToString("00") + ":" +
-                            dataAttuale.Second.ToString("00") + ACapo;
-            frase += "================================================================================" + ACapo;
-
-
-            // Aggiuge a stroria
-            Storia = frase;
-
-            // Inizializza indentazione
-            Indentazione = 0;
-
-            // Attivo la registrazione
-            Attiva = true;
-
+                            dataAttuale.Second.ToString("00"));
+            AggiungiLinea("================================================================================");
         }
         /// <summary>
         /// disttiva la registrazione
@@ -129,15 +155,14 @@ namespace GAlbum
         {
 
             // prepara una frase
-            string frase = "================================================================================" + ACapo;
-            frase += "Fine Operazione: " + ACapo;
-            frase += ACapo;
-            frase += "L'operazione è stata conclusa con esito:" + ACapo;
-            frase += GstErrori.RestultToSting(esito) + ACapo;
-            frase += "================================================================================" + ACapo;
-
-            // Aggiuge a stroria
-            Storia += frase;
+            AggiungiLinea("================================================================================");
+            AggiungiLinea("Fine Operazione: ");
+            AggiungiLinea("");
+            AggiungiLinea("L'operazione è stata conclusa con esito:");
+            AggiungiLinea(GstErrori.RestultToSting(esito));
+            AggiungiLinea("");
+            AggiungiLinea("Massimo tempo impiegato da una istruzione: " + MaxTempoTrascorso.TotalMilliseconds.ToString() + " ms" + " alla linea " + LineaMaxTempoTrascorso.ToString());
+            AggiungiLinea("================================================================================");
 
 
             // scrive il file storia
@@ -154,20 +179,15 @@ namespace GAlbum
         {
             // aggiorna indentazione
             Indentazione++;
-            String sIndentazione = CalcolaIndentazione();
 
             // prepara titolo
             string sTitolo = "----- Inizio: " + titolo +  " ";
             sTitolo = sTitolo.PadRight(80, '-');
 
-
-
             // prepara una frase
-            string frase = sIndentazione + sTitolo + ACapo;
-            frase += sIndentazione + ACapo;
+            AggiungiLinea(sTitolo);
+            AggiungiLinea("");
 
-            // Aggiuge a stroria
-            Storia += frase;
         }
         /// <summary>
         /// Aggiunge un istruzione : titolo + path nome file
@@ -178,7 +198,6 @@ namespace GAlbum
         {
             // aggiorna indentazione
             Indentazione++;
-            String sIndentazione = CalcolaIndentazione();
 
             // incaplsula pathNomeFile
             CNomeFile fileSrc = new CNomeFile(AreaArchivio.PathArchivioAttivo);
@@ -190,14 +209,14 @@ namespace GAlbum
 
 
             // prepara una frase
-            string frase = sIndentazione + sTitolo + ACapo;
-            frase += sIndentazione + "Path relativo: " + fileSrc.GetPathRelativo(fileSrc.PathFoglia) + ACapo;
-            frase += sIndentazione + "Path Totale  : " + fileSrc.PathFoglia + ACapo;
-            frase += sIndentazione + "--------------------------------------------------------------------------------" + ACapo;
-            frase += sIndentazione + ACapo;
+            AggiungiLinea(sTitolo);
+            AggiungiLinea(GetDataAttuale());
+            AggiungiLinea("Path relativo: " + fileSrc.GetPathRelativo(fileSrc.PathFoglia));
+            AggiungiLinea("Path Totale  : " + fileSrc.PathFoglia);
+            AggiungiLinea(GetDataAttuale());
+            AggiungiLinea("--------------------------------------------------------------------------------");
+            AggiungiLinea("");
 
-            // Aggiuge a stroria
-            Storia += frase;
         }
         /// <summary>
         /// Aggiunge un istruzione : titolo + fileSrc + fileDst + esito
@@ -210,7 +229,6 @@ namespace GAlbum
         {
             // aggiorna indentazione
             Indentazione++;
-            String sIndentazione = CalcolaIndentazione();
 
             // prepara titolo inizio\
             string sTitolo = "----- Inizio: " + titolo + "   " + fileSrc.NomeFile + " ";
@@ -221,22 +239,20 @@ namespace GAlbum
             sTitoloFine = sTitoloFine.PadRight(80, '-');
 
             // prepara una frase
-            string frase = sIndentazione + sTitolo + ACapo;
-            frase += sIndentazione + "NomeFileSrc     : " + fileSrc.NomeFile + ACapo;
-            frase += sIndentazione + "PathSrc relativo: " + fileSrc.GetPathRelativo(fileSrc.PathFoglia) + ACapo;
-            frase += sIndentazione + "PathSrc Totale  : " + fileSrc.PathFoglia + ACapo;
-            frase += sIndentazione + ACapo;
-            frase += sIndentazione + "NomeFileDst     : " + fileDst.NomeFile + ACapo;
-            frase += sIndentazione + "PathDst relativo: " + fileDst.GetPathRelativo(fileDst.PathFoglia) + ACapo;
-            frase += sIndentazione + "PathDst Totale  : " + fileDst.PathFoglia + ACapo;
-            frase += sIndentazione + ACapo;
-            frase += sIndentazione + "Esito           : " + GstErrori.RestultToSting(esito) + ACapo;
-            frase += sIndentazione + ACapo;
-            frase += sIndentazione + sTitoloFine + ACapo;
-            frase += sIndentazione + ACapo;
-
-            // Aggiuge a stroria
-            Storia += frase;
+            AggiungiLinea(sTitolo);
+            AggiungiLinea("NomeFileSrc     : " + fileSrc.NomeFile);
+            AggiungiLinea("PathSrc relativo: " + fileSrc.GetPathRelativo(fileSrc.PathFoglia));
+            AggiungiLinea("PathSrc Totale  : " + fileSrc.PathFoglia);
+            AggiungiLinea("");
+            AggiungiLinea("NomeFileDst     : " + fileDst.NomeFile);
+            AggiungiLinea("PathDst relativo: " + fileDst.GetPathRelativo(fileDst.PathFoglia));
+            AggiungiLinea("PathDst Totale  : " + fileDst.PathFoglia);
+            AggiungiLinea("");
+            AggiungiLinea("Esito           : " + GstErrori.RestultToSting(esito));
+            AggiungiLinea(GetDataAttuale());
+            AggiungiLinea("");
+            AggiungiLinea(sTitoloFine);
+            AggiungiLinea("");
 
             // aggiorna indentazione
             Indentazione--;
@@ -247,26 +263,21 @@ namespace GAlbum
         /// </summary>
         public void FineIstruzione(GstErrori.EErrore esito)
         {
-            // recupera indentazione
-            String sIndentazione = CalcolaIndentazione();
 
             // estrae la stringa dell'esito
             string sEsito = GstErrori.RestultToSting(esito);
-
 
             // prepara titolo
             string sTitolo = "----- Fine: " + sEsito + " ";
             sTitolo = sTitolo.PadRight(80, '-');
 
             // prepara una frase
-            string frase = sIndentazione + sTitolo + ACapo;
-            frase += sIndentazione + ACapo;
+            AggiungiLinea(sTitolo);
+            AggiungiLinea("");
 
             // aggiorna indentazione
             Indentazione--;
 
-            // Aggiuge a stroria
-            Storia += frase;
         }
 
 
@@ -303,16 +314,63 @@ namespace GAlbum
         ///  calcola gli spazi di indentazione
         /// </summary>
         /// <returns></returns>
-        private string CalcolaIndentazione()
+        private void CalcolaIndentazione(int nuovaIndentazione)
         {
-            string sIndentazione = string.Empty;
+            lIndentazione = nuovaIndentazione;
+            SIndentazione = string.Empty;
+            SIndentazione = SIndentazione.PadLeft(lIndentazione * 4, ' ');
+        }
+        /// <summary>
+        /// Rende data e ora attuale
+        /// </summary>
+        /// <returns></returns>
+        private string GetDataAttuale()
+        {
+            // Estrae la data attuale
+            DateTime dataAttuale = DateTime.Now;
 
-            for (int i = 0; i < Indentazione; i++)
+            // compone stringa data
+            string sData = "Data:" +
+                            dataAttuale.Day.ToString("00") + "/" +
+                            dataAttuale.Month.ToString("00") + "/" +
+                            dataAttuale.Year.ToString("00") + " " +
+                            dataAttuale.Hour.ToString("00") + ":" +
+                            dataAttuale.Minute.ToString("00") + ":" +
+                            dataAttuale.Second.ToString("00") + ":" +
+                            dataAttuale.Millisecond.ToString("000");
+
+            // calcola il tempo trascorso
+            TimeSpan tempoTrascorso = dataAttuale - dataPrecedente;
+
+            // aggiorna massimo tempo trascorso
+            if (tempoTrascorso.TotalMilliseconds > MaxTempoTrascorso.TotalMilliseconds)
             {
-                sIndentazione += "    ";
+                MaxTempoTrascorso = tempoTrascorso;
+                LineaMaxTempoTrascorso = NumeroLinea;
             }
-            return sIndentazione;
-            
+
+            // compone stringa tempo trascorso
+            string sTempoTrascorso = "Tempo trascorso:" + tempoTrascorso.TotalMilliseconds.ToString() + " ms";
+
+                        // Aggiornate il tempo precedente
+            dataPrecedente = dataAttuale;
+
+
+            return sData + "    " + sTempoTrascorso;
+        }
+
+        /// <summary>
+        /// Aggiunge una  linea a  storia 
+        /// </summary>
+        /// <param name="linea"></param>
+        private void AggiungiLinea(string linea)
+        {
+            // incrementa il numero di linea
+            NumeroLinea++;
+
+
+            // Aggiunge la linea a storia
+            Storia += NumeroLinea.ToString("00000") + "   " + SIndentazione + linea + ACapo;
         }
 
     }// fine classe CScatolaNera

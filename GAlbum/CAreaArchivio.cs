@@ -279,9 +279,6 @@ namespace GAlbum
                 return GstErrori.EErrore.E1353_NonPuoCreareArchivio;
             }
 
-
-
-
             return GstErrori.EErrore.E0000_OK;
         }
         /// <summary>
@@ -488,7 +485,7 @@ namespace GAlbum
 
                 // Incrementa file elaborati
                 statisticaAcquisire.NumeroFileElaborati++;
-                progressBar.Value = statisticaAcquisire.AvanzamentoLavoro;
+                //progressBar.Value = statisticaAcquisire.AvanzamentoLavoro;
 
                 // inizializza le classi per la gestione del file
                 esito = fileSrc.SetPathNomeFile(pathFile);
