@@ -872,14 +872,40 @@ namespace GAlbum
         /// <param name="e"></param>
         private void butEsegui_Click(object sender, EventArgs e)
         {
+            EseguiSelezionaPerDataLog();
+        }
+        /// <summary>
+        /// Esegue selezione per data con log
+        /// </summary>
+        /// <returns></returns>
+        private GstErrori.EErrore EseguiSelezionaPerDataLog()
+        {
+            // attiva scatola nera 
+            AreaArchivio.SNera.Inizio("Seleziona per data");
+
+            // esegue acquisire 
+            GstErrori.EErrore esito = EseguiSelezionaPerData();
+
+            // disattiva scatola nera 
+            AreaArchivio.SNera.Fine(esito);
+
+            return esito;
+
+        }
+        /// <summary>
+        /// Esegue selezione per data
+        /// </summary>
+        /// <returns></returns>
+        private GstErrori.EErrore EseguiSelezionaPerData()
+        {
             // recupera il path dell'archivio sorgente in Smistare 
             // ---------------------------------------------------
-            
+
             // Verifica se c'è un nodo sorgente selezionato
             if (InfoNodoSmistareSelezionato == null)
-                return;
+                return EErrore.E0001_NOK;
             if (InfoNodoSmistareSelezionato.Path == string.Empty)
-                return;
+                return EErrore.E0001_NOK;
             string pathArchivioSrc = InfoNodoSmistareSelezionato.Path;
 
             // recupera il path dell'archivio destinazione in Smistati
@@ -887,9 +913,9 @@ namespace GAlbum
 
             // Verifica se c'è un nodo destinazione in smistati
             if (InfoNodoSmistatiSelezionato == null)
-                return;
+                return EErrore.E0001_NOK;
             if (InfoNodoSmistatiSelezionato.Path == string.Empty)
-                return;
+                return EErrore.E0001_NOK;
             string pathArchivioDst = InfoNodoSmistatiSelezionato.Path;
 
             // disabilta i gruppi del form
@@ -899,14 +925,17 @@ namespace GAlbum
             Cursor.Current = Cursors.WaitCursor;
 
             // Eseguire l'aquisizione
-            GstErrori.EErrore esito = AreaArchivio.SelezionePerData(pathArchivioSrc, pathArchivioDst, ref progressBar1);   
+            GstErrori.EErrore esito = AreaArchivio.SelezionePerData(pathArchivioSrc, pathArchivioDst, ref progressBar1);
 
             // riabilita i gruppi del form
             AbilitaControlli(true);
 
             // ripristina il cursore originale
             Cursor.Current = Cursors.Default;
+
+            return EErrore.E0000_OK;
         }
+
         /// <summary>
         /// Abilita disabibilita i controlli del form 
         /// </summary>

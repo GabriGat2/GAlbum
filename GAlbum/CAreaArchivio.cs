@@ -649,6 +649,9 @@ namespace GAlbum
                 statisticaSelezionaPerData.NumeroFileElaborati++;
                 progressBar.Value = statisticaSelezionaPerData.AvanzamentoLavoro;
 
+                // Aggiorna scatola nera
+                SNera.InizioIstruzione("Seleziona file per data", pathFile);
+
                 // inizializza fileSrc
                 esito = fileSrc.SetPathNomeFile(pathFile);
                 if (esito != GstErrori.EErrore.E0000_OK)
@@ -681,6 +684,7 @@ namespace GAlbum
                 // esegue la copia in destinazione
                 duplica = false;
                 esito = fileDst.CopiaFile(fileSrc);
+                SNera.InizioIstruzione("Copia: ", fileSrc, fileDst, esito);
                 if (esito == GstErrori.EErrore.E1371_FileDestinazioneEsiste)
                 {
                     // richiede la duplicazione
@@ -696,6 +700,7 @@ namespace GAlbum
 
                 // esegue la copia in _Archivio
                 esito = fileArchiviato.CopiaFile(fileSrc);
+                SNera.InizioIstruzione("Copia in _archivio: ", fileSrc, fileArchiviato, esito);
                 if (esito != GstErrori.EErrore.E0000_OK)
                 {
                     if (!duplica)
@@ -713,6 +718,7 @@ namespace GAlbum
                 {
                     // Sposta il file sorgente nei file copiati
                     esito = fileCopia.SpostaFile(fileSrc.PathNomeFile);
+                    SNera.InizioIstruzione("Sposta in copie: ", fileSrc, fileCopia, esito);
                     if (esito != GstErrori.EErrore.E0000_OK)
                         return esito;
 
@@ -727,17 +733,21 @@ namespace GAlbum
                 {
                     // sposta il file sorgente nei file duplicati
                     esito = fileDuplica.SpostaFile(fileSrc.PathNomeFile);
+                    SNera.InizioIstruzione("Sposta in duplicati: ", fileSrc, fileDuplica, esito);
                     if (esito != GstErrori.EErrore.E0000_OK)
                         return esito;
 
                     // aggiorna dati statistici
                     statisticaSelezionaPerData.NumeroFileDuplicati++;
 
-                    // controlla se ha rimonato il file prima di spostarlo in duplicati
+                    // controlla se ha rinominato il file prima di spostarlo in duplicati
                     if (fileDuplica.Nome != fileSrc.Nome)
                         statisticaSelezionaPerData.NumeroFileDuplicati_Rinomintati++;
 
                 }
+
+                // aggiorna scatola nera
+                SNera.FineIstruzione(GstErrori.EErrore.E0000_OK);
             }
 
             return GstErrori.EErrore.E0000_OK;
