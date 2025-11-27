@@ -761,14 +761,17 @@ namespace GAlbum
         {
             // Azzera tutti i dati statistici di acquisire
             statisticaAssegna.Azzera();
-
+           
             // Inizilizza progressBar
             progressBar.Value = 0;
             progressBar.Visible = true;
 
-
             // Chiama SelezionePerData2
+            SNera.InizioIstruzione("Assegna", pathSrc, pathDestinazioni);
             GstErrori.EErrore esito = AssegnaInterna(pathSrc, pathDestinazioni, copia, copiaParallelo, ref progressBar);
+            SNera.FineIstruzione(esito);
+
+
 
             // Verifica se deve stampare l'esito
             if (stampaEsito && (esito != GstErrori.EErrore.E0000_OK))
@@ -824,7 +827,9 @@ namespace GAlbum
             // copia parallela: cerca nelle altre foglie il file specificato e lo assegna
             if (copiaParallelo)
             {
+                SNera.InizioIstruzione("Assegna in parallelo", pathSrc, pathDestinazioni);
                 esito = AssegnaInParallelo(pathSrc, pathDestinazioni, copia);
+                SNera.FineIstruzione(esito);
                 if (esito != EErrore.E0000_OK)
                 {
                     GstErrori.StampaMessaggioErrore(esito, pathSrc);
@@ -876,6 +881,7 @@ namespace GAlbum
 
                     // Esegue la copia
                     esito = fileDst.CopiaFile(fileSrc);
+                    SNera.InizioIstruzione("Copia file", fileSrc, fileDst, esito);
                     if (esito != GstErrori.EErrore.E0000_OK)
                         return esito;
                     else if (esito == GstErrori.EErrore.E0000_OK)
@@ -891,11 +897,12 @@ namespace GAlbum
             fileArchiviato.DirFoglia = fileSrc.DirFoglia;
             fileArchiviato.NomeFile = fileSrc.NomeFile;
 
-            // esegue la copia in _Archivio
-            esito = fileArchiviato.CopiaFile(fileSrc);
+            // sposta in _Archivio
+            esito = fileArchiviato.SpostaFile(fileSrc.PathNomeFile);
+            SNera.InizioIstruzione("Sposta file", fileSrc, fileArchiviato, esito);
             if (esito != GstErrori.EErrore.E0000_OK)
             {
-                return esito;
+                ;// return esito;
             }
             else
             {
@@ -925,28 +932,10 @@ namespace GAlbum
             if (esito != GstErrori.EErrore.E0000_OK)
                 return esito;
             //  verifica che fileSrc esiste
-            if (!fileSrc.PathNomeFileEsiste)
-                return GstErrori.EErrore.E1360_FileSorgenteNonEsiste;
+            //if (!fileSrc.PathNomeFileEsiste)
+            //    return GstErrori.EErrore.E1360_FileSorgenteNonEsiste;
 
 
-
-
-            //// scompone il file sorgente e ricava le sue caratteristiche
-            //string pathBase;
-            //string ramo;
-            //string foglia;
-            //string nome;
-            //esito = ScomponePath(pathSrc, out pathBase, out ramo, out foglia, out nome);
-            //if (esito != EErrore.E0000_OK)
-            //    return esito;
-
-            //// Scompone il nome del file
-            //string nomeSE;
-            //string estensione;
-            //esito = ScomponeNome(nome, out nomeSE, out estensione);
-
-            //// compone il path del ramo
-            //string pathRamo = pathBase + "\\" + ramo;
 
             // compone la lista delle foglie 
             string[] pathFoglie = Directory.GetDirectories(fileSrc.PathRamo);

@@ -158,10 +158,12 @@ namespace GAlbum
         /// </summary>
         public void Fine(GstErrori.EErrore esito)
         {
+            // verifica che la scatola nera sia attiva
+            if (!Attiva)
+                return;
+
             // calcola il tempo impiegato
             TimeSpan tempoImpiegato = DateTime.Now - DataInizio;
-
-
 
             // prepara una frase
             AggiungiLinea("================================================================================");
@@ -225,6 +227,43 @@ namespace GAlbum
             AggiungiLinea("Path relativo: " + fileSrc.GetPathRelativo(fileSrc.PathFoglia));
             AggiungiLinea("Path Totale  : " + fileSrc.PathFoglia);
             AggiungiLinea(GetDataAttuale());
+            AggiungiLinea("--------------------------------------------------------------------------------");
+            AggiungiLinea("");
+
+        }
+        /// <summary>
+        /// Aggiunge un istruzione : titolo + path sorgente + lista destinazioni
+        /// </summary>
+        /// <param name="titolo"></param>
+        /// <param name="pathNomeFile"></param>
+        public void InizioIstruzione(string titolo, string pathNomeFileSrc, List<String> pathDestinazioni)
+        {
+            // aggiorna indentazione
+            Indentazione++;
+
+            // incaplsula pathNomeFile
+            CNomeFile fileSrc = new CNomeFile(AreaArchivio.PathArchivioAttivo);
+            GstErrori.EErrore esito = fileSrc.SetPathNomeFile(pathNomeFileSrc);
+
+            // prepara titolo
+            string sTitolo = "----- Inizio: " + titolo + "   " + fileSrc.NomeFile + " ";
+            sTitolo = sTitolo.PadRight(80, '-');
+
+
+            // prepara una frase
+            AggiungiLinea(sTitolo);
+            AggiungiLinea(GetDataAttuale());
+            AggiungiLinea("Path relativo: " + fileSrc.GetPathRelativo(fileSrc.PathFoglia));
+            AggiungiLinea("Path Totale  : " + fileSrc.PathFoglia);
+            AggiungiLinea(GetDataAttuale());
+            AggiungiLinea("");
+
+            AggiungiLinea("Lista path destinazione");
+            foreach (var pathDst in pathDestinazioni)
+            {
+                AggiungiLinea(pathDst);
+            }
+
             AggiungiLinea("--------------------------------------------------------------------------------");
             AggiungiLinea("");
 

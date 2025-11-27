@@ -53,6 +53,7 @@ namespace GAlbum
                                             bool copia, 
                                             bool copiaParallelo)
         {
+            // scatola nera
             // Assegna il file specificato
             EErrore esito = Assegna2(pathSrc, pathDestinazioni, copia);
             if (esito != EErrore.E0000_OK)

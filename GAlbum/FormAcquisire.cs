@@ -761,9 +761,6 @@ namespace GAlbum
 
             // mostra la foto successiva
             FotoSuccessiva();
-
-
-
         }
         /// <summary>
         /// seleziona la directory degli smistati

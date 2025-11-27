@@ -54,7 +54,7 @@ namespace GAlbum
         /// False = Copia delle foto non Attiva perchè, sta coonfigurando le operazioni da eseguire
         /// true = Copia delle foto  Attiva, perchè esegue l'operazione richiesta
         /// </summary>
-        private bool Stato;
+        private bool StatoSelezioneFoto;
         /// <summary>
         /// Infro tree view Sorgente
         /// </summary>
@@ -274,13 +274,18 @@ namespace GAlbum
         /// <param name="e"></param>
         private void butApri_Click(object sender, EventArgs e)
         {
-            // commuta stato
-            AggiornaStato(!Stato);
+            EseguiSelezioneLog();
 
+        }
+        /// <summary>
+        /// Esergue la selezione delle foto attivando la scatola nera
+        /// </summary>
+        private GstErrori.EErrore EseguiSelezioneLog()
+        {
             // Verifica se c'è un nodo sorgente selezionato
             if (InfoNodoSorgenteSelezionato == null)
             {
-                return;
+                return GstErrori.EErrore.E0001_NOK;
             }
 
             // stampa il path della directory
@@ -291,8 +296,43 @@ namespace GAlbum
             CImmagine cImmagine = new CImmagine();
             GstErrori.EErrore esito = cImmagine.CancellaDirTemporanea(pathSrc);
 
+
+            // gestione della scatola nera in funzione di Stato slezione foto
+            if (!StatoSelezioneFoto)
+            {
+                // attiva scatola nera 
+                AreaArchivio.SNera.Inizio("Selezione Foto");
+            }
+            else
+            {
+                // disattiva scatola nera 
+                AreaArchivio.SNera.Fine(esito);
+            }
+
+            // esegue acquisire 
+            esito = EseguiSelezione();
+            if (esito != EErrore.E0000_OK)
+            {
+                // disattiva scatola nera 
+                AreaArchivio.SNera.Fine(esito);
+            }
+
+            return esito;
+
+        }
+        /// <summary>
+        /// Esergue la selezione delle foto 
+        /// </summary>
+        private GstErrori.EErrore EseguiSelezione()
+        {
+            // commuta stato
+            AggiornaStato(!StatoSelezioneFoto);
+
+            // stampa il path della directory
+            string pathSrc = InfoNodoSorgenteSelezionato.Path;
+
             // Verifica che lo stato sia attivo
-            if (Stato)
+            if (StatoSelezioneFoto)
             {
 
                 // carica la lista dei file contenuti nella directory
@@ -304,13 +344,15 @@ namespace GAlbum
 
                     // Mostra codice di errore
                     GstErrori.StampaMessaggioErrore(GstErrori.EErrore.E1315_DirectorySorgenteVuota, pathSrc);
-                    return;
+                    return GstErrori.EErrore.E0001_NOK;
                 }
 
                 idFotoSrcList = 0;
 
                 MostraFoto(fotoSrcList[0], ref butApri);
             }
+
+            return EErrore.E0000_OK;
         }
         /// <summary>
         /// Mostra la foto selezionata
@@ -472,7 +514,7 @@ namespace GAlbum
         private void treeViewSorgente_AfterSelect(object sender, TreeViewEventArgs e)
         {
             // verifica lo stato del form
-            if (Stato)
+            if (StatoSelezioneFoto)
                 return;
 
             // recuprea il nodo selezionato 
@@ -514,13 +556,13 @@ namespace GAlbum
         private void AggiornaStato(bool newStato)
         {
             //aggiorna lo stato del form
-            this.Stato = newStato;
+            this.StatoSelezioneFoto = newStato;
 
             // Debug: mostra stato
-            textBoxDebug2.Text = Stato.ToString();
+            textBoxDebug2.Text = StatoSelezioneFoto.ToString();
 
             // button Apri
-            if (Stato)
+            if (StatoSelezioneFoto)
             {
                 butApri.Text = "Chiudi";
             }
@@ -530,27 +572,27 @@ namespace GAlbum
             }
 
             // button Sorgente
-            butSorgente.Enabled = !Stato;
-            textBoxSorgente.ReadOnly = Stato;
+            butSorgente.Enabled = !StatoSelezioneFoto;
+            textBoxSorgente.ReadOnly = StatoSelezioneFoto;
 
             // button Detinazione
-            butDestinazione.Enabled = !Stato;
-            textBoxDestinazione .ReadOnly = Stato;
+            butDestinazione.Enabled = !StatoSelezioneFoto;
+            textBoxDestinazione .ReadOnly = StatoSelezioneFoto;
 
             // button Precedente
-            butPrecedente.Enabled = Stato;
+            butPrecedente.Enabled = StatoSelezioneFoto;
 
             // button Successiva
-            butSuccessiva.Enabled = Stato;
+            butSuccessiva.Enabled = StatoSelezioneFoto;
 
             // button Assegna
-            butAssegna.Enabled = Stato;
+            butAssegna.Enabled = StatoSelezioneFoto;
 
             // button NonAssegna
-            butNonAssegna.Enabled = Stato;
+            butNonAssegna.Enabled = StatoSelezioneFoto;
 
             //pictureBox1
-            if (!Stato)
+            if (!StatoSelezioneFoto)
             {
                 if (pictureBox1.Image != null)
                     pictureBox1.Image.Dispose();
@@ -570,7 +612,7 @@ namespace GAlbum
         private void treeViewSorgente_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             // verifica che sia in stato false
-            if ((this.Stato))
+            if ((this.StatoSelezioneFoto))
                 return;
             
             // verifica se é stato premuto il tasto destro
@@ -624,25 +666,25 @@ namespace GAlbum
         /// Attiva l'assegnazione
         /// </summary>
         /// <param name="copia"></param>
-        protected void EseguiAssegna(bool copia)
-        {
-            // Crea l'archivo per movimentare le foto
-            CArchivia archivia = new CArchivia();
+        //protected void EseguiAssegna(bool copia)
+        //{
+        //    // Crea l'archivo per movimentare le foto
+        //    CArchivia archivia = new CArchivia();
 
-            // crea la lista dei nodi selezionati
-            List<String> pathDestinazioni;
-            TreeNode nodo = treeViewDestinazione.Nodes[0];
-            archivia.EstraiNdodiSelezionati(ref nodo, out pathDestinazioni);
+        //    // crea la lista dei nodi selezionati
+        //    List<String> pathDestinazioni;
+        //    TreeNode nodo = treeViewDestinazione.Nodes[0];
+        //    archivia.EstraiNdodiSelezionati(ref nodo, out pathDestinazioni);
 
-            // libera la risorsa della foto
-            pictureBox1.Image = null;
+        //    // libera la risorsa della foto
+        //    pictureBox1.Image = null;
 
-            // Assegna la foto
-            archivia.Assegna(textBoxPathFoto.Text, pathDestinazioni, copia, InfoTVSorgente.CopiaParallela);
+        //    // Assegna la foto
+        //    archivia.Assegna(textBoxPathFoto.Text, pathDestinazioni, copia, InfoTVSorgente.CopiaParallela);
 
-            // mostra la foto successiva
-            FotoSuccessiva();
-        }
+        //    // mostra la foto successiva
+        //    FotoSuccessiva();
+        //}
         /// <summary>
         /// Nuova gestione di Esegui assegna
         /// </summary>
