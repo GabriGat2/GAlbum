@@ -62,6 +62,7 @@
             this.textBoxPathFoto = new System.Windows.Forms.TextBox();
             this.butPrecedente = new System.Windows.Forms.Button();
             this.butSuccessiva = new System.Windows.Forms.Button();
+            this.butLibro = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -283,6 +284,7 @@
             // 
             // splitContainer1B2B3.Panel2
             // 
+            this.splitContainer1B2B3.Panel2.Controls.Add(this.butLibro);
             this.splitContainer1B2B3.Panel2.Controls.Add(this.butNonAssegna);
             this.splitContainer1B2B3.Panel2.Controls.Add(this.butAssegna);
             this.splitContainer1B2B3.Panel2.Controls.Add(this.textBoxDebug);
@@ -358,6 +360,16 @@
             this.butSuccessiva.UseVisualStyleBackColor = true;
             this.butSuccessiva.Click += new System.EventHandler(this.butSuccessiva_Click);
             // 
+            // butLibro
+            // 
+            this.butLibro.Location = new System.Drawing.Point(382, 34);
+            this.butLibro.Name = "butLibro";
+            this.butLibro.Size = new System.Drawing.Size(75, 23);
+            this.butLibro.TabIndex = 12;
+            this.butLibro.Text = "Libro";
+            this.butLibro.UseVisualStyleBackColor = true;
+            this.butLibro.Click += new System.EventHandler(this.butLibro_Click);
+            // 
             // FormSelezioneLibro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -417,5 +429,6 @@
         private System.Windows.Forms.Button butNonAssegna;
         private System.Windows.Forms.Button butAssegna;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button butLibro;
     }
 }

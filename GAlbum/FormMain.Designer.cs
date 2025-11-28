@@ -46,8 +46,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBoxOperazioni = new System.Windows.Forms.GroupBox();
-            this.butAcquisire = new System.Windows.Forms.Button();
+            this.butSelezioneLibro = new System.Windows.Forms.Button();
             this.butSelezioneData = new System.Windows.Forms.Button();
+            this.butAcquisire = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -64,7 +65,7 @@
             // 
             // ButSelezioneFoto
             // 
-            this.ButSelezioneFoto.Location = new System.Drawing.Point(9, 132);
+            this.ButSelezioneFoto.Location = new System.Drawing.Point(7, 103);
             this.ButSelezioneFoto.Name = "ButSelezioneFoto";
             this.ButSelezioneFoto.Size = new System.Drawing.Size(103, 23);
             this.ButSelezioneFoto.TabIndex = 1;
@@ -249,6 +250,7 @@
             // 
             // groupBoxOperazioni
             // 
+            this.groupBoxOperazioni.Controls.Add(this.butSelezioneLibro);
             this.groupBoxOperazioni.Controls.Add(this.butSelezioneData);
             this.groupBoxOperazioni.Controls.Add(this.butAcquisire);
             this.groupBoxOperazioni.Controls.Add(this.ButSelezioneFoto);
@@ -260,6 +262,26 @@
             this.groupBoxOperazioni.TabStop = false;
             this.groupBoxOperazioni.Text = "groupBoxOperazioni";
             // 
+            // butSelezioneLibro
+            // 
+            this.butSelezioneLibro.Location = new System.Drawing.Point(6, 132);
+            this.butSelezioneLibro.Name = "butSelezioneLibro";
+            this.butSelezioneLibro.Size = new System.Drawing.Size(103, 23);
+            this.butSelezioneLibro.TabIndex = 4;
+            this.butSelezioneLibro.Text = "Selezione Libro";
+            this.butSelezioneLibro.UseVisualStyleBackColor = true;
+            this.butSelezioneLibro.Click += new System.EventHandler(this.butSelezioneLibro_Click);
+            // 
+            // butSelezioneData
+            // 
+            this.butSelezioneData.Location = new System.Drawing.Point(9, 74);
+            this.butSelezioneData.Name = "butSelezioneData";
+            this.butSelezioneData.Size = new System.Drawing.Size(103, 23);
+            this.butSelezioneData.TabIndex = 3;
+            this.butSelezioneData.Text = "Selezione data";
+            this.butSelezioneData.UseVisualStyleBackColor = true;
+            this.butSelezioneData.Click += new System.EventHandler(this.butSelezioneData_Click);
+            // 
             // butAcquisire
             // 
             this.butAcquisire.Location = new System.Drawing.Point(9, 45);
@@ -269,16 +291,6 @@
             this.butAcquisire.Text = "Acquisire";
             this.butAcquisire.UseVisualStyleBackColor = true;
             this.butAcquisire.Click += new System.EventHandler(this.butAcquisire_Click);
-            // 
-            // butSelezioneData
-            // 
-            this.butSelezioneData.Location = new System.Drawing.Point(9, 92);
-            this.butSelezioneData.Name = "butSelezioneData";
-            this.butSelezioneData.Size = new System.Drawing.Size(103, 23);
-            this.butSelezioneData.TabIndex = 3;
-            this.butSelezioneData.Text = "Selezione data";
-            this.butSelezioneData.UseVisualStyleBackColor = true;
-            this.butSelezioneData.Click += new System.EventHandler(this.butSelezioneData_Click);
             // 
             // FormMain
             // 
@@ -327,6 +339,7 @@
         private System.Windows.Forms.Button butExplorerArchvioAttivo;
         private System.Windows.Forms.Button butAcquisire;
         private System.Windows.Forms.Button butSelezioneData;
+        private System.Windows.Forms.Button butSelezioneLibro;
     }
 }
 

@@ -166,6 +166,12 @@ namespace GAlbum
             FormSelezionaPerData formSelezionaPerData = new FormSelezionaPerData(ref this.AreaArchivio);
             formSelezionaPerData.ShowDialog();
         }
+        // Attiva il form per selezionare i libri
+        private void butSelezioneLibro_Click(object sender, EventArgs e)
+        {
+            FormSelezioneLibro dlg = new FormSelezioneLibro (ref this.AreaArchivio);
+            dlg.ShowDialog();
+        }
     }// fine class FormMain
 }// fine namespace GAlbum
 

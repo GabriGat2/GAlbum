@@ -71,6 +71,12 @@
     <Compile Include="CNomeFile.cs" />
     <Compile Include="CScatolaNera.cs" />
     <Compile Include="CStatisticaOperazioni.cs" />
+    <Compile Include="FormNomeLibro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNomeLibro.Designer.cs">
+      <DependentUpon>FormNomeLibro.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSelezionaPerData.cs">
       <SubType>Form</SubType>
     </Compile>

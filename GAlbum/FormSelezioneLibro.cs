@@ -708,5 +708,11 @@ namespace GAlbum
             // mostra la foto successiva
             FotoSuccessiva();
         }
+        // attiva la dialogue nome libro 
+        private void butLibro_Click(object sender, EventArgs e)
+        {
+            FormNomeLibro dlg = new FormNomeLibro();
+            dlg.ShowDialog();
+        }
     } // fine della classe FormSelezioneLibro
 }// fine del name scope
