@@ -711,7 +711,7 @@ namespace GAlbum
         // attiva la dialogue nome libro 
         private void butLibro_Click(object sender, EventArgs e)
         {
-            FormNomeLibro dlg = new FormNomeLibro();
+            FormNomeLibro dlg = new FormNomeLibro(ref AreaArchivio);
             dlg.ShowDialog();
         }
     } // fine della classe FormSelezioneLibro
