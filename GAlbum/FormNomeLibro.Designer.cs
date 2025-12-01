@@ -31,17 +31,17 @@
             this.butAssegna = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxNomeFileSrc = new System.Windows.Forms.TextBox();
-            this.textBoxCognome = new System.Windows.Forms.TextBox();
+            this.textBoxAutore1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBoxNome = new System.Windows.Forms.TextBox();
+            this.textBoxAutore2 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBoxAltroNome = new System.Windows.Forms.TextBox();
+            this.textBoxAutore3 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxTotVolumi = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxVolumi = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.checkBoxVolume = new System.Windows.Forms.CheckBox();
+            this.checkBoxVolumi = new System.Windows.Forms.CheckBox();
             this.textBoxDataLettura = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBoxFileSorgente = new System.Windows.Forms.GroupBox();
@@ -52,23 +52,36 @@
             this.groupBoxDataLettura = new System.Windows.Forms.GroupBox();
             this.dateTimePickerDataLettura = new System.Windows.Forms.DateTimePicker();
             this.checkBoxDataLettura = new System.Windows.Forms.CheckBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxVolumi = new System.Windows.Forms.GroupBox();
+            this.groupBoxDestinazione = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.textBoxPathDst = new System.Windows.Forms.TextBox();
             this.textBoxNomeFileDst = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.groupBoxSupporto = new System.Windows.Forms.GroupBox();
+            this.checkBoxSupporto = new System.Windows.Forms.CheckBox();
+            this.textBoxSupporto = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.groupBoxTitoli = new System.Windows.Forms.GroupBox();
+            this.textBoxTitolo2 = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBoxTitolo1 = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBoxTitolo3 = new System.Windows.Forms.TextBox();
             this.groupBoxFileSorgente.SuspendLayout();
             this.groupBoxAutore.SuspendLayout();
             this.groupBoxDataLettura.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxVolumi.SuspendLayout();
+            this.groupBoxDestinazione.SuspendLayout();
+            this.groupBoxSupporto.SuspendLayout();
+            this.groupBoxTitoli.SuspendLayout();
             this.SuspendLayout();
             // 
             // butAssegna
             // 
-            this.butAssegna.Location = new System.Drawing.Point(682, 394);
+            this.butAssegna.Location = new System.Drawing.Point(813, 691);
             this.butAssegna.Name = "butAssegna";
             this.butAssegna.Size = new System.Drawing.Size(75, 23);
             this.butAssegna.TabIndex = 0;
@@ -90,56 +103,56 @@
             this.textBoxNomeFileSrc.Location = new System.Drawing.Point(120, 45);
             this.textBoxNomeFileSrc.Name = "textBoxNomeFileSrc";
             this.textBoxNomeFileSrc.ReadOnly = true;
-            this.textBoxNomeFileSrc.Size = new System.Drawing.Size(628, 20);
+            this.textBoxNomeFileSrc.Size = new System.Drawing.Size(730, 20);
             this.textBoxNomeFileSrc.TabIndex = 2;
             // 
-            // textBoxCognome
+            // textBoxAutore1
             // 
-            this.textBoxCognome.Location = new System.Drawing.Point(120, 21);
-            this.textBoxCognome.Name = "textBoxCognome";
-            this.textBoxCognome.Size = new System.Drawing.Size(144, 20);
-            this.textBoxCognome.TabIndex = 4;
+            this.textBoxAutore1.Location = new System.Drawing.Point(120, 21);
+            this.textBoxAutore1.Name = "textBoxAutore1";
+            this.textBoxAutore1.Size = new System.Drawing.Size(730, 20);
+            this.textBoxAutore1.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(62, 28);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 13);
+            this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Cognome";
+            this.label2.Text = "Autore 1";
             // 
-            // textBoxNome
+            // textBoxAutore2
             // 
-            this.textBoxNome.Location = new System.Drawing.Point(351, 21);
-            this.textBoxNome.Name = "textBoxNome";
-            this.textBoxNome.Size = new System.Drawing.Size(144, 20);
-            this.textBoxNome.TabIndex = 6;
+            this.textBoxAutore2.Location = new System.Drawing.Point(121, 47);
+            this.textBoxAutore2.Name = "textBoxAutore2";
+            this.textBoxAutore2.Size = new System.Drawing.Size(730, 20);
+            this.textBoxAutore2.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(310, 28);
+            this.label3.Location = new System.Drawing.Point(62, 54);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.Size = new System.Drawing.Size(47, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Nome";
+            this.label3.Text = "Autore 2";
             // 
-            // textBoxAltroNome
+            // textBoxAutore3
             // 
-            this.textBoxAltroNome.Location = new System.Drawing.Point(606, 21);
-            this.textBoxAltroNome.Name = "textBoxAltroNome";
-            this.textBoxAltroNome.Size = new System.Drawing.Size(144, 20);
-            this.textBoxAltroNome.TabIndex = 8;
+            this.textBoxAutore3.Location = new System.Drawing.Point(120, 73);
+            this.textBoxAutore3.Name = "textBoxAutore3";
+            this.textBoxAutore3.Size = new System.Drawing.Size(730, 20);
+            this.textBoxAutore3.TabIndex = 8;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(541, 28);
+            this.label4.Location = new System.Drawing.Point(61, 80);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 13);
+            this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 7;
-            this.label4.Text = "Altro Nome";
+            this.label4.Text = "Autore 3";
             // 
             // textBoxTotVolumi
             // 
@@ -173,14 +186,14 @@
             this.label7.TabIndex = 13;
             this.label7.Text = "Volume";
             // 
-            // checkBoxVolume
+            // checkBoxVolumi
             // 
-            this.checkBoxVolume.AutoSize = true;
-            this.checkBoxVolume.Location = new System.Drawing.Point(10, 29);
-            this.checkBoxVolume.Name = "checkBoxVolume";
-            this.checkBoxVolume.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxVolume.TabIndex = 15;
-            this.checkBoxVolume.UseVisualStyleBackColor = true;
+            this.checkBoxVolumi.AutoSize = true;
+            this.checkBoxVolumi.Location = new System.Drawing.Point(10, 29);
+            this.checkBoxVolumi.Name = "checkBoxVolumi";
+            this.checkBoxVolumi.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxVolumi.TabIndex = 15;
+            this.checkBoxVolumi.UseVisualStyleBackColor = true;
             // 
             // textBoxDataLettura
             // 
@@ -207,7 +220,7 @@
             this.groupBoxFileSorgente.Controls.Add(this.label1);
             this.groupBoxFileSorgente.Location = new System.Drawing.Point(9, 13);
             this.groupBoxFileSorgente.Name = "groupBoxFileSorgente";
-            this.groupBoxFileSorgente.Size = new System.Drawing.Size(779, 79);
+            this.groupBoxFileSorgente.Size = new System.Drawing.Size(869, 79);
             this.groupBoxFileSorgente.TabIndex = 19;
             this.groupBoxFileSorgente.TabStop = false;
             this.groupBoxFileSorgente.Text = "File Sorgente";
@@ -223,7 +236,7 @@
             // 
             // butExplorerAcquisire
             // 
-            this.butExplorerAcquisire.Location = new System.Drawing.Point(756, 17);
+            this.butExplorerAcquisire.Location = new System.Drawing.Point(833, 20);
             this.butExplorerAcquisire.Name = "butExplorerAcquisire";
             this.butExplorerAcquisire.Size = new System.Drawing.Size(17, 23);
             this.butExplorerAcquisire.TabIndex = 18;
@@ -235,23 +248,23 @@
             this.textBoxPathSrc.Location = new System.Drawing.Point(120, 19);
             this.textBoxPathSrc.Name = "textBoxPathSrc";
             this.textBoxPathSrc.ReadOnly = true;
-            this.textBoxPathSrc.Size = new System.Drawing.Size(628, 20);
+            this.textBoxPathSrc.Size = new System.Drawing.Size(707, 20);
             this.textBoxPathSrc.TabIndex = 17;
             // 
             // groupBoxAutore
             // 
-            this.groupBoxAutore.Controls.Add(this.textBoxNome);
+            this.groupBoxAutore.Controls.Add(this.textBoxAutore2);
             this.groupBoxAutore.Controls.Add(this.label2);
-            this.groupBoxAutore.Controls.Add(this.textBoxCognome);
+            this.groupBoxAutore.Controls.Add(this.textBoxAutore1);
             this.groupBoxAutore.Controls.Add(this.label3);
             this.groupBoxAutore.Controls.Add(this.label4);
-            this.groupBoxAutore.Controls.Add(this.textBoxAltroNome);
+            this.groupBoxAutore.Controls.Add(this.textBoxAutore3);
             this.groupBoxAutore.Location = new System.Drawing.Point(9, 98);
             this.groupBoxAutore.Name = "groupBoxAutore";
-            this.groupBoxAutore.Size = new System.Drawing.Size(778, 55);
+            this.groupBoxAutore.Size = new System.Drawing.Size(869, 118);
             this.groupBoxAutore.TabIndex = 20;
             this.groupBoxAutore.TabStop = false;
-            this.groupBoxAutore.Text = "Autore";
+            this.groupBoxAutore.Text = "Autori e titoli";
             // 
             // groupBoxDataLettura
             // 
@@ -259,9 +272,9 @@
             this.groupBoxDataLettura.Controls.Add(this.checkBoxDataLettura);
             this.groupBoxDataLettura.Controls.Add(this.textBoxDataLettura);
             this.groupBoxDataLettura.Controls.Add(this.label8);
-            this.groupBoxDataLettura.Location = new System.Drawing.Point(10, 159);
+            this.groupBoxDataLettura.Location = new System.Drawing.Point(9, 346);
             this.groupBoxDataLettura.Name = "groupBoxDataLettura";
-            this.groupBoxDataLettura.Size = new System.Drawing.Size(778, 55);
+            this.groupBoxDataLettura.Size = new System.Drawing.Size(868, 55);
             this.groupBoxDataLettura.TabIndex = 21;
             this.groupBoxDataLettura.TabStop = false;
             this.groupBoxDataLettura.Text = "DataLettura";
@@ -282,33 +295,33 @@
             this.checkBoxDataLettura.TabIndex = 19;
             this.checkBoxDataLettura.UseVisualStyleBackColor = true;
             // 
-            // groupBox4
+            // groupBoxVolumi
             // 
-            this.groupBox4.Controls.Add(this.checkBoxVolume);
-            this.groupBox4.Controls.Add(this.textBoxVolumi);
-            this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.textBoxTotVolumi);
-            this.groupBox4.Controls.Add(this.label6);
-            this.groupBox4.Location = new System.Drawing.Point(9, 220);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(778, 55);
-            this.groupBox4.TabIndex = 22;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Volumi";
+            this.groupBoxVolumi.Controls.Add(this.checkBoxVolumi);
+            this.groupBoxVolumi.Controls.Add(this.textBoxVolumi);
+            this.groupBoxVolumi.Controls.Add(this.label7);
+            this.groupBoxVolumi.Controls.Add(this.textBoxTotVolumi);
+            this.groupBoxVolumi.Controls.Add(this.label6);
+            this.groupBoxVolumi.Location = new System.Drawing.Point(8, 407);
+            this.groupBoxVolumi.Name = "groupBoxVolumi";
+            this.groupBoxVolumi.Size = new System.Drawing.Size(869, 55);
+            this.groupBoxVolumi.TabIndex = 22;
+            this.groupBoxVolumi.TabStop = false;
+            this.groupBoxVolumi.Text = "Volumi";
             // 
-            // groupBox1
+            // groupBoxDestinazione
             // 
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.textBoxPathDst);
-            this.groupBox1.Controls.Add(this.textBoxNomeFileDst);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Location = new System.Drawing.Point(8, 281);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(779, 79);
-            this.groupBox1.TabIndex = 20;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "File destinazione";
+            this.groupBoxDestinazione.Controls.Add(this.label5);
+            this.groupBoxDestinazione.Controls.Add(this.button1);
+            this.groupBoxDestinazione.Controls.Add(this.textBoxPathDst);
+            this.groupBoxDestinazione.Controls.Add(this.textBoxNomeFileDst);
+            this.groupBoxDestinazione.Controls.Add(this.label10);
+            this.groupBoxDestinazione.Location = new System.Drawing.Point(10, 555);
+            this.groupBoxDestinazione.Name = "groupBoxDestinazione";
+            this.groupBoxDestinazione.Size = new System.Drawing.Size(868, 79);
+            this.groupBoxDestinazione.TabIndex = 20;
+            this.groupBoxDestinazione.TabStop = false;
+            this.groupBoxDestinazione.Text = "File destinazione";
             // 
             // label5
             // 
@@ -321,7 +334,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(756, 17);
+            this.button1.Location = new System.Drawing.Point(834, 19);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(17, 23);
             this.button1.TabIndex = 18;
@@ -333,7 +346,7 @@
             this.textBoxPathDst.Location = new System.Drawing.Point(120, 19);
             this.textBoxPathDst.Name = "textBoxPathDst";
             this.textBoxPathDst.ReadOnly = true;
-            this.textBoxPathDst.Size = new System.Drawing.Size(628, 20);
+            this.textBoxPathDst.Size = new System.Drawing.Size(708, 20);
             this.textBoxPathDst.TabIndex = 17;
             // 
             // textBoxNomeFileDst
@@ -341,7 +354,7 @@
             this.textBoxNomeFileDst.Location = new System.Drawing.Point(120, 45);
             this.textBoxNomeFileDst.Name = "textBoxNomeFileDst";
             this.textBoxNomeFileDst.ReadOnly = true;
-            this.textBoxNomeFileDst.Size = new System.Drawing.Size(628, 20);
+            this.textBoxNomeFileDst.Size = new System.Drawing.Size(731, 20);
             this.textBoxNomeFileDst.TabIndex = 2;
             // 
             // label10
@@ -353,29 +366,136 @@
             this.label10.TabIndex = 1;
             this.label10.Text = "NomeFile";
             // 
+            // groupBoxSupporto
+            // 
+            this.groupBoxSupporto.Controls.Add(this.checkBoxSupporto);
+            this.groupBoxSupporto.Controls.Add(this.textBoxSupporto);
+            this.groupBoxSupporto.Controls.Add(this.label11);
+            this.groupBoxSupporto.Location = new System.Drawing.Point(8, 468);
+            this.groupBoxSupporto.Name = "groupBoxSupporto";
+            this.groupBoxSupporto.Size = new System.Drawing.Size(869, 55);
+            this.groupBoxSupporto.TabIndex = 23;
+            this.groupBoxSupporto.TabStop = false;
+            this.groupBoxSupporto.Text = "Supporto";
+            // 
+            // checkBoxSupporto
+            // 
+            this.checkBoxSupporto.AutoSize = true;
+            this.checkBoxSupporto.Location = new System.Drawing.Point(10, 29);
+            this.checkBoxSupporto.Name = "checkBoxSupporto";
+            this.checkBoxSupporto.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxSupporto.TabIndex = 15;
+            this.checkBoxSupporto.UseVisualStyleBackColor = true;
+            // 
+            // textBoxSupporto
+            // 
+            this.textBoxSupporto.Location = new System.Drawing.Point(120, 22);
+            this.textBoxSupporto.Name = "textBoxSupporto";
+            this.textBoxSupporto.Size = new System.Drawing.Size(144, 20);
+            this.textBoxSupporto.TabIndex = 14;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(62, 29);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(50, 13);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "Supporto";
+            // 
+            // groupBoxTitoli
+            // 
+            this.groupBoxTitoli.Controls.Add(this.textBoxTitolo2);
+            this.groupBoxTitoli.Controls.Add(this.label16);
+            this.groupBoxTitoli.Controls.Add(this.textBoxTitolo1);
+            this.groupBoxTitoli.Controls.Add(this.label17);
+            this.groupBoxTitoli.Controls.Add(this.label18);
+            this.groupBoxTitoli.Controls.Add(this.textBoxTitolo3);
+            this.groupBoxTitoli.Location = new System.Drawing.Point(9, 222);
+            this.groupBoxTitoli.Name = "groupBoxTitoli";
+            this.groupBoxTitoli.Size = new System.Drawing.Size(869, 118);
+            this.groupBoxTitoli.TabIndex = 21;
+            this.groupBoxTitoli.TabStop = false;
+            this.groupBoxTitoli.Text = "Titoli";
+            // 
+            // textBoxTitolo2
+            // 
+            this.textBoxTitolo2.Location = new System.Drawing.Point(121, 47);
+            this.textBoxTitolo2.Name = "textBoxTitolo2";
+            this.textBoxTitolo2.Size = new System.Drawing.Size(730, 20);
+            this.textBoxTitolo2.TabIndex = 6;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(62, 28);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(42, 13);
+            this.label16.TabIndex = 3;
+            this.label16.Text = "Titolo 1";
+            // 
+            // textBoxTitolo1
+            // 
+            this.textBoxTitolo1.Location = new System.Drawing.Point(120, 21);
+            this.textBoxTitolo1.Name = "textBoxTitolo1";
+            this.textBoxTitolo1.Size = new System.Drawing.Size(730, 20);
+            this.textBoxTitolo1.TabIndex = 4;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(62, 54);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(42, 13);
+            this.label17.TabIndex = 5;
+            this.label17.Text = "Titolo 2";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(61, 80);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(42, 13);
+            this.label18.TabIndex = 7;
+            this.label18.Text = "Titolo 3";
+            // 
+            // textBoxTitolo3
+            // 
+            this.textBoxTitolo3.Location = new System.Drawing.Point(120, 73);
+            this.textBoxTitolo3.Name = "textBoxTitolo3";
+            this.textBoxTitolo3.Size = new System.Drawing.Size(730, 20);
+            this.textBoxTitolo3.TabIndex = 8;
+            // 
             // FormNomeLibro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.groupBox4);
+            this.ClientSize = new System.Drawing.Size(890, 726);
+            this.Controls.Add(this.groupBoxTitoli);
+            this.Controls.Add(this.groupBoxSupporto);
+            this.Controls.Add(this.groupBoxDestinazione);
+            this.Controls.Add(this.groupBoxVolumi);
             this.Controls.Add(this.groupBoxDataLettura);
             this.Controls.Add(this.groupBoxAutore);
             this.Controls.Add(this.groupBoxFileSorgente);
             this.Controls.Add(this.butAssegna);
             this.Name = "FormNomeLibro";
             this.Text = "FormNomeLibro";
+            this.Load += new System.EventHandler(this.FormNomeLibro_Load);
             this.groupBoxFileSorgente.ResumeLayout(false);
             this.groupBoxFileSorgente.PerformLayout();
             this.groupBoxAutore.ResumeLayout(false);
             this.groupBoxAutore.PerformLayout();
             this.groupBoxDataLettura.ResumeLayout(false);
             this.groupBoxDataLettura.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBoxVolumi.ResumeLayout(false);
+            this.groupBoxVolumi.PerformLayout();
+            this.groupBoxDestinazione.ResumeLayout(false);
+            this.groupBoxDestinazione.PerformLayout();
+            this.groupBoxSupporto.ResumeLayout(false);
+            this.groupBoxSupporto.PerformLayout();
+            this.groupBoxTitoli.ResumeLayout(false);
+            this.groupBoxTitoli.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -385,17 +505,17 @@
         private System.Windows.Forms.Button butAssegna;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxNomeFileSrc;
-        private System.Windows.Forms.TextBox textBoxCognome;
+        private System.Windows.Forms.TextBox textBoxAutore1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBoxNome;
+        private System.Windows.Forms.TextBox textBoxAutore2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxAltroNome;
+        private System.Windows.Forms.TextBox textBoxAutore3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxTotVolumi;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxVolumi;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.CheckBox checkBoxVolume;
+        private System.Windows.Forms.CheckBox checkBoxVolumi;
         private System.Windows.Forms.TextBox textBoxDataLettura;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBoxFileSorgente;
@@ -405,13 +525,24 @@
         private System.Windows.Forms.GroupBox groupBoxAutore;
         private System.Windows.Forms.GroupBox groupBoxDataLettura;
         private System.Windows.Forms.CheckBox checkBoxDataLettura;
-        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBoxVolumi;
         private System.Windows.Forms.DateTimePicker dateTimePickerDataLettura;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxDestinazione;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBoxPathDst;
         private System.Windows.Forms.TextBox textBoxNomeFileDst;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.GroupBox groupBoxSupporto;
+        private System.Windows.Forms.CheckBox checkBoxSupporto;
+        private System.Windows.Forms.TextBox textBoxSupporto;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.GroupBox groupBoxTitoli;
+        private System.Windows.Forms.TextBox textBoxTitolo2;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox textBoxTitolo1;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox textBoxTitolo3;
     }
 }

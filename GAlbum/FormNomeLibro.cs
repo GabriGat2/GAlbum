@@ -75,6 +75,11 @@ namespace GAlbum
         {
 
         }
+
+        private void FormNomeLibro_Load(object sender, EventArgs e)
+        {
+
+        }
     }//fine della classe  FormNomeLibro
 }// fine del name scope
 
