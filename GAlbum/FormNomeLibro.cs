@@ -69,16 +69,22 @@ namespace GAlbum
             FileSrc = new CNomeFile(AreaArchivio.PathArchivioAttivo);
             FileDst = new CNomeFile(AreaArchivio.PathArchivioAttivo);
         }
+        /// <summary>
+        /// Autore 1 modificato
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
-
-        private void butAssegna_Click(object sender, EventArgs e)
+        private void textBoxAutore1_TextChanged(object sender, EventArgs e)
         {
 
-        }
+            AreaArchivio.NLibro.Autore1 = textBoxAutore1.Text;
 
-        private void FormNomeLibro_Load(object sender, EventArgs e)
-        {
+            textBoxAutore2.Text = AreaArchivio.NLibro.NomeFileLibro; 
 
+            textBoxNomeFileDst.Text = AreaArchivio.NLibro.NomeFileLibro;
+
+            //textBoxNomeFileDst.Text = textBoxAutore1.Text; 
         }
     }//fine della classe  FormNomeLibro
 }// fine del name scope

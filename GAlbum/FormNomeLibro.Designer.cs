@@ -87,7 +87,6 @@
             this.butAssegna.TabIndex = 0;
             this.butAssegna.Text = "Assegna";
             this.butAssegna.UseVisualStyleBackColor = true;
-            this.butAssegna.Click += new System.EventHandler(this.butAssegna_Click);
             // 
             // label1
             // 
@@ -112,6 +111,7 @@
             this.textBoxAutore1.Name = "textBoxAutore1";
             this.textBoxAutore1.Size = new System.Drawing.Size(730, 20);
             this.textBoxAutore1.TabIndex = 4;
+            this.textBoxAutore1.TextChanged += new System.EventHandler(this.textBoxAutore1_TextChanged);
             // 
             // label2
             // 
@@ -481,7 +481,6 @@
             this.Controls.Add(this.butAssegna);
             this.Name = "FormNomeLibro";
             this.Text = "FormNomeLibro";
-            this.Load += new System.EventHandler(this.FormNomeLibro_Load);
             this.groupBoxFileSorgente.ResumeLayout(false);
             this.groupBoxFileSorgente.PerformLayout();
             this.groupBoxAutore.ResumeLayout(false);

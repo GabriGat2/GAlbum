@@ -128,6 +128,10 @@ namespace GAlbum
         /// </summary>
         public CScatolaNera SNera;
 
+        //-------------------------------------------------------------------------------------------------------------------
+        // Gestione nome libro 
+        public CNomeLibro NLibro;
+
 
         // ==================================================================================================================
         /// <summary>
@@ -156,6 +160,9 @@ namespace GAlbum
             //pathArchivioAttivo = "";
             pathArchivioBase = "E:\\Angelo\\Prj\\GAlbum\\AreaArchivioBaseFoto";
             dirArchivioAttivo = "";
+
+            // Gestione nome libro 
+            NLibro = new CNomeLibro();
 
         }
         /// <summary>
