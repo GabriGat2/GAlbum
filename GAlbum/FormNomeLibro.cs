@@ -80,11 +80,42 @@ namespace GAlbum
 
             AreaArchivio.NLibro.Autore1 = textBoxAutore1.Text;
 
-            textBoxAutore2.Text = AreaArchivio.NLibro.NomeFileLibro; 
 
+            AggiornaForm();
+
+        }
+        /// <summary>
+        /// Autore 2 modificato
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxAutore2_TextChanged(object sender, EventArgs e)
+        {
+            // Assegna autore 2 
+            AreaArchivio.NLibro.Autore2 = textBoxAutore2.Text;
+
+
+            AggiornaForm();
+        }
+        /// <summary>
+        /// aggiorna il form
+        /// </summary>
+        private void AggiornaForm()
+        {
             textBoxNomeFileDst.Text = AreaArchivio.NLibro.NomeFileLibro;
+        }
+        /// <summary>
+        /// Autore 3 modificato
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxAutore3_TextChanged(object sender, EventArgs e)
+        {
+            // Assegna autore 3
+            AreaArchivio.NLibro.Autore3 = textBoxAutore3.Text;
 
-            //textBoxNomeFileDst.Text = textBoxAutore1.Text; 
+
+            AggiornaForm();
         }
     }//fine della classe  FormNomeLibro
 }// fine del name scope

@@ -17,13 +17,34 @@ namespace GAlbum
         /// <summary>
         /// Nome esplicito autore 1
         /// </summary>
-        //public string Autore1 { get => autore1; set =>  SetAutore1 (value); }
         public string Autore1 { get => autore1; set => autore1 = SetNome(value, ref Autore1Cmp); }
-        private string autore1;
+        private string autore1 = string.Empty;
         /// <summary>
         ///  nome compresso autore 1 
         /// </summary>
-        private string Autore1Cmp;
+        private string Autore1Cmp = string.Empty;
+        // ------------------------------------------------------------------------------------------------------------------
+        // Autore 2
+        /// <summary>
+        /// Nome esplicito autore 2
+        /// </summary>
+        public string Autore2 { get => autore2; set => autore2 = SetNome(value, ref Autore2Cmp); }
+        private string autore2 = string.Empty;
+        /// <summary>
+        ///  nome compresso autore 2 
+        /// </summary>
+        private string Autore2Cmp = string.Empty;
+        // ------------------------------------------------------------------------------------------------------------------
+        // Autore 3
+        /// <summary>
+        /// Nome esplicito autore 3
+        /// </summary>
+        public string Autore3 { get => autore3; set => autore3 = SetNome(value, ref Autore3Cmp); }
+        private string autore3 = string.Empty;
+        /// <summary>
+        ///  nome compresso autore 3 
+        /// </summary>
+        private string Autore3Cmp = string.Empty;
 
         // ------------------------------------------------------------------------------------------------------------------
         // Nome file libro
@@ -79,23 +100,10 @@ namespace GAlbum
         /// </summary>
         public void AzzeraTutto()
         {
-            autore1 = string.Empty;
+            Autore1 = string.Empty;
+            Autore2 = string.Empty;
+            Autore3 = string.Empty;
             nomeFileLibro = string.Empty;
-        }
-        /// <summary>
-        ///  Aggiorna autore 1 
-        /// </summary>
-        /// <param name="nome"></param>
-        private void SetAutore1(string nome)
-        {
-            // salva il nome esplicito dell'autore 
-            autore1 = nome;
-
-            // Comprime autore 1
-            Autore1Cmp = ComprimiNome(autore1);
-
-
-            nomeFileLibro = "==>" + Autore1Cmp + "<==";
         }
         /// <summary>
         /// Assegna il nome e il nome compresso
@@ -118,7 +126,36 @@ namespace GAlbum
         /// </summary>
         private void ComponeNomeFileLibro()
         {
-            nomeFileLibro = "==>" + Autore1Cmp + "<==";
+            bool trattino = false;
+
+            //nomeFileLibro = "==>" + Autore1Cmp + "-" + Autore2Cmp+ "-" + Autore3Cmp + "<==";
+            nomeFileLibro = "==>";
+
+
+            if (Autore1Cmp.Length > 0)
+            {
+                nomeFileLibro += Autore1Cmp;
+                trattino = true;
+            }
+
+            if (Autore2Cmp.Length > 0)
+            {
+                if (trattino)
+                    nomeFileLibro += "-";
+                nomeFileLibro += Autore2Cmp;
+                trattino = true;
+            }
+
+            if (Autore3Cmp.Length > 0)
+            {
+                if (trattino)
+                    nomeFileLibro += "-";
+                nomeFileLibro += Autore3Cmp;
+                trattino = true;
+            }
+
+            nomeFileLibro += "<==";
+
         }
         /// <summary>
         /// comprime il nome 

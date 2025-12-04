@@ -128,6 +128,7 @@
             this.textBoxAutore2.Name = "textBoxAutore2";
             this.textBoxAutore2.Size = new System.Drawing.Size(730, 20);
             this.textBoxAutore2.TabIndex = 6;
+            this.textBoxAutore2.TextChanged += new System.EventHandler(this.textBoxAutore2_TextChanged);
             // 
             // label3
             // 
@@ -144,6 +145,7 @@
             this.textBoxAutore3.Name = "textBoxAutore3";
             this.textBoxAutore3.Size = new System.Drawing.Size(730, 20);
             this.textBoxAutore3.TabIndex = 8;
+            this.textBoxAutore3.TextChanged += new System.EventHandler(this.textBoxAutore3_TextChanged);
             // 
             // label4
             // 
