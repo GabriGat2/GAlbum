@@ -117,6 +117,27 @@ namespace GAlbum
 
             AggiornaForm();
         }
+
+        private void textBoxTitolo1_TextChanged(object sender, EventArgs e)
+        {
+            // Assegna titolo 1
+            AreaArchivio.NLibro.Titolo1 = textBoxTitolo1.Text;
+            AggiornaForm();
+        }
+
+        private void textBoxTitolo2_TextChanged(object sender, EventArgs e)
+        {
+            // Assegna titolo 2
+            AreaArchivio.NLibro.Titolo2 = textBoxTitolo2.Text;
+            AggiornaForm();
+        }
+
+        private void textBoxTitolo3_TextChanged(object sender, EventArgs e)
+        {
+            // Assegna titolo 3
+            AreaArchivio.NLibro.Titolo3 = textBoxTitolo3.Text;
+            AggiornaForm();
+        }
     }//fine della classe  FormNomeLibro
 }// fine del name scope
 

@@ -426,6 +426,7 @@
             this.textBoxTitolo2.Name = "textBoxTitolo2";
             this.textBoxTitolo2.Size = new System.Drawing.Size(730, 20);
             this.textBoxTitolo2.TabIndex = 6;
+            this.textBoxTitolo2.TextChanged += new System.EventHandler(this.textBoxTitolo2_TextChanged);
             // 
             // label16
             // 
@@ -442,6 +443,7 @@
             this.textBoxTitolo1.Name = "textBoxTitolo1";
             this.textBoxTitolo1.Size = new System.Drawing.Size(730, 20);
             this.textBoxTitolo1.TabIndex = 4;
+            this.textBoxTitolo1.TextChanged += new System.EventHandler(this.textBoxTitolo1_TextChanged);
             // 
             // label17
             // 
@@ -467,6 +469,7 @@
             this.textBoxTitolo3.Name = "textBoxTitolo3";
             this.textBoxTitolo3.Size = new System.Drawing.Size(730, 20);
             this.textBoxTitolo3.TabIndex = 8;
+            this.textBoxTitolo3.TextChanged += new System.EventHandler(this.textBoxTitolo3_TextChanged);
             // 
             // FormNomeLibro
             // 

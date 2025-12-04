@@ -45,6 +45,39 @@ namespace GAlbum
         ///  nome compresso autore 3 
         /// </summary>
         private string Autore3Cmp = string.Empty;
+        // ------------------------------------------------------------------------------------------------------------------
+        // Titolo 1
+        /// <summary>
+        /// Nome esplicito Titolo 1
+        /// </summary>
+        public string Titolo1 { get => titolo1; set => titolo1 = SetNome(value, ref Titolo1Cmp); }
+        private string titolo1 = string.Empty;
+        /// <summary>
+        ///  nome compresso titolo 1 
+        /// </summary>
+        private string Titolo1Cmp = string.Empty;
+        // ------------------------------------------------------------------------------------------------------------------
+        // Titolo 2
+        /// <summary>
+        /// Nome esplicito Titolo 2
+        /// </summary>
+        public string Titolo2 { get => titolo2; set => titolo2 = SetNome(value, ref Titolo2Cmp); }
+        private string titolo2 = string.Empty;
+        /// <summary>
+        ///  nome compresso titolo 2
+        /// </summary>
+        private string Titolo2Cmp = string.Empty;
+        // ------------------------------------------------------------------------------------------------------------------
+        // Titolo 3
+        /// <summary>
+        /// Nome esplicito Titolo 3
+        /// </summary>
+        public string Titolo3 { get => titolo3; set => titolo3 = SetNome(value, ref Titolo3Cmp); }
+        private string titolo3 = string.Empty;
+        /// <summary>
+        ///  nome compresso titolo 3
+        /// </summary>
+        private string Titolo3Cmp = string.Empty;
 
         // ------------------------------------------------------------------------------------------------------------------
         // Nome file libro
@@ -103,7 +136,11 @@ namespace GAlbum
             Autore1 = string.Empty;
             Autore2 = string.Empty;
             Autore3 = string.Empty;
+            Titolo1= string.Empty;
+            Titolo2= string.Empty;
+            Titolo3 = string.Empty;
             nomeFileLibro = string.Empty;
+            
         }
         /// <summary>
         /// Assegna il nome e il nome compresso
@@ -126,11 +163,12 @@ namespace GAlbum
         /// </summary>
         private void ComponeNomeFileLibro()
         {
-            bool trattino = false;
-
-            //nomeFileLibro = "==>" + Autore1Cmp + "-" + Autore2Cmp+ "-" + Autore3Cmp + "<==";
+            // inizio composizione nome titolo 
             nomeFileLibro = "==>";
 
+            // Aggiunge AUTORI
+            // ----------------------------------------------------------------------------------
+            bool trattino = false;
 
             if (Autore1Cmp.Length > 0)
             {
@@ -154,6 +192,36 @@ namespace GAlbum
                 trattino = true;
             }
 
+
+
+            // Aggiunge Titoli
+            // ----------------------------------------------------------------------------------
+            nomeFileLibro += "_";
+            trattino = false;
+
+            if (Titolo1Cmp.Length > 0)
+            {
+                nomeFileLibro += Titolo1Cmp;
+                trattino = true;
+            }
+            if (Titolo2Cmp.Length > 0)
+            {
+                if (trattino)
+                    nomeFileLibro += "-";
+                nomeFileLibro += Titolo2Cmp;
+                trattino = true;
+            }
+
+            if (Titolo3Cmp.Length > 0)
+            {
+                if (trattino)
+                    nomeFileLibro += "-";
+                nomeFileLibro += Titolo3Cmp;
+                trattino = true;
+            }
+
+
+            // fine composizione nome titolo 
             nomeFileLibro += "<==";
 
         }
