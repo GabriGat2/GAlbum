@@ -162,6 +162,7 @@
             this.textBoxTotVolumi.Name = "textBoxTotVolumi";
             this.textBoxTotVolumi.Size = new System.Drawing.Size(144, 20);
             this.textBoxTotVolumi.TabIndex = 12;
+            this.textBoxTotVolumi.TextChanged += new System.EventHandler(this.textBoxTotVolumi_TextChanged);
             // 
             // label6
             // 
@@ -178,6 +179,7 @@
             this.textBoxVolumi.Name = "textBoxVolumi";
             this.textBoxVolumi.Size = new System.Drawing.Size(144, 20);
             this.textBoxVolumi.TabIndex = 14;
+            this.textBoxVolumi.TextChanged += new System.EventHandler(this.textBoxVolumi_TextChanged);
             // 
             // label7
             // 

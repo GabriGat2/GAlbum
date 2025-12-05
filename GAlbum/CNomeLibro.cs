@@ -78,6 +78,32 @@ namespace GAlbum
         ///  nome compresso titolo 3
         /// </summary>
         private string Titolo3Cmp = string.Empty;
+        // ------------------------------------------------------------------------------------------------------------------
+        // Volume
+        /// <summary>
+        /// Nome esplicito Volume
+        /// </summary>
+        public string Volume { get => volume; set => volume = SetNome(value, ref VolumeCmp, true); }
+        private string volume = string.Empty;
+        /// <summary>
+        ///  nome compresso Volume
+        /// </summary>
+        private string VolumeCmp = string.Empty;
+        // ------------------------------------------------------------------------------------------------------------------
+        // Volumi
+        /// <summary>
+        /// Nome esplicito Volumi
+        /// </summary>
+        public string Volumi { get => volumi; set => volumi = SetNome(value, ref VolumiCmp, true); }
+        private string volumi = string.Empty;
+        /// <summary>
+        ///  nome compresso Volumi
+        /// </summary>
+        private string VolumiCmp = string.Empty;
+
+
+
+
 
         // ------------------------------------------------------------------------------------------------------------------
         // Nome file libro
@@ -108,7 +134,7 @@ namespace GAlbum
         /// </summary>
         private bool mettiloQui;
         public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
-        
+       
 
 
         // ==================================================================================================================
@@ -136,11 +162,15 @@ namespace GAlbum
             Autore1 = string.Empty;
             Autore2 = string.Empty;
             Autore3 = string.Empty;
+
             Titolo1= string.Empty;
             Titolo2= string.Empty;
             Titolo3 = string.Empty;
-            nomeFileLibro = string.Empty;
-            
+
+            Volume = string.Empty;
+            Volumi = string.Empty;
+
+            nomeFileLibro = string.Empty;            
         }
         /// <summary>
         /// Assegna il nome e il nome compresso
@@ -148,10 +178,20 @@ namespace GAlbum
         /// <param name="nome"></param>
         /// <param name="nomeCMP"></param>
         /// <returns></returns>
-        private string SetNome(string nome, ref string nomeCmp)
+        private string SetNome(string nome, ref string nomeCmp, bool soloNumeri = false)
         {
-            // Comprime nome
-            nomeCmp = ComprimiNome(nome);
+            if (soloNumeri)
+            {
+                // Comprime numero
+                nomeCmp = ComprimiNumero(nome);
+            }
+            else
+            {
+                // Comprime nome
+                nomeCmp = ComprimiNome(nome);
+            }
+
+            
 
             // Compone nome file libro 
             ComponeNomeFileLibro();
@@ -219,7 +259,23 @@ namespace GAlbum
                 nomeFileLibro += Titolo3Cmp;
                 trattino = true;
             }
+            // Aggiunge i volumi 
+            // ----------------------------------------------------------------------------------
+            nomeFileLibro += "_#";
+            trattino = false;
 
+            if (VolumeCmp.Length > 0)
+            {
+                nomeFileLibro += VolumeCmp;
+                trattino = true;
+            }
+            if (VolumiCmp.Length > 0)
+            {
+                if (trattino)
+                    nomeFileLibro += "-";
+                nomeFileLibro += VolumiCmp;
+                trattino = true;
+            }
 
             // fine composizione nome titolo 
             nomeFileLibro += "<==";
@@ -361,8 +417,38 @@ namespace GAlbum
 
             return nomeCmp;
         }
+        /// <summary>
+        /// scrive solo il numero  
+        /// </summary>
+        /// <param name="nome"></param>
+        /// <returns></returns>
+        private string ComprimiNumero(string nome)
+        {
+            // rimuove gli spazi alle estremità
+            string nome1 = nome.Trim();
 
+             // Inizializza nome compresso 
+            string nomeCmp = string.Empty;
 
+            // Analiza i caratteri di nome 1 
+            foreach (char c in nome1)
+            {
+                // analizza i numeri
+                if ((c >= '0') && (c <= '9'))
+                {
+                    nomeCmp += c;
+                }
+                // carattere sconosciuto 
+                else
+                {
+                    nomeCmp += '°';
+
+                }
+
+            }
+
+            return nomeCmp;
+        }
     }// fine class  CNomeLibro
 }// fine namespace GAlbum
 

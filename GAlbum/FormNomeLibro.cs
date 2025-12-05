@@ -138,6 +138,20 @@ namespace GAlbum
             AreaArchivio.NLibro.Titolo3 = textBoxTitolo3.Text;
             AggiornaForm();
         }
+
+        private void textBoxVolumi_TextChanged(object sender, EventArgs e)
+        {
+            // Assegna Voulume
+            AreaArchivio.NLibro.Volume = textBoxVolumi.Text;
+            AggiornaForm();
+        }
+
+        private void textBoxTotVolumi_TextChanged(object sender, EventArgs e)
+        {
+            // Assegna Voulume
+            AreaArchivio.NLibro.Volumi = textBoxTotVolumi.Text;
+            AggiornaForm();
+        }
     }//fine della classe  FormNomeLibro
 }// fine del name scope
 
