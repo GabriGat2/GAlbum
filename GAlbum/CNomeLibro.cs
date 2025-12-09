@@ -115,6 +115,11 @@ namespace GAlbum
         ///  Data in formato rovesciato
         /// </summary
         private string DataCmp = string.Empty;
+        /// <summary>
+        /// Abilita la gestione della data nella composizione del nome del file del libro
+        /// </summary>
+        public bool AbilitaData { get => abilitaData; set { abilitaData = value; ComponeNomeFileLibro(); } }
+        private bool abilitaData;
         // ------------------------------------------------------------------------------------------------------------------
         // Supporto
         /// <summary>
@@ -303,15 +308,18 @@ namespace GAlbum
 
             // Aggiunge LA DATA
             // ----------------------------------------------------------------------------------
-            nomeFileLibro += "_";
-            trattino = false;
-
-            if (DataCmp.Length > 0)
+            if (AbilitaData)
             {
-                nomeFileLibro += DataCmp;
-                trattino = true;
-            }
+                nomeFileLibro += "_";
+                trattino = false;
 
+                if (DataCmp.Length > 0)
+                {
+                    nomeFileLibro += DataCmp;
+                    trattino = true;
+                }
+            }
+          
             // Aggiunge supporto
             // ----------------------------------------------------------------------------------
             nomeFileLibro += "_§";

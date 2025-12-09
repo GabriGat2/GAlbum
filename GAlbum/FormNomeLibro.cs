@@ -273,6 +273,16 @@ namespace GAlbum
             AreaArchivio.NLibro.AbilitaVolume = checkBoxVolumi.Checked;
             AggiornaForm();
         }
+        /// <summary>
+        /// L'abiltazione della data è cambiata
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxDataLettura_CheckedChanged(object sender, EventArgs e)
+        {
+            AreaArchivio.NLibro.AbilitaData = checkBoxDataLettura.Checked;
+            AggiornaForm();
+        }
     }//fine della classe  FormNomeLibro
 }// fine del name scope
 

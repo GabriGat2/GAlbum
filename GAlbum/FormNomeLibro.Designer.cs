@@ -293,6 +293,7 @@
             this.checkBoxDataLettura.Size = new System.Drawing.Size(15, 14);
             this.checkBoxDataLettura.TabIndex = 19;
             this.checkBoxDataLettura.UseVisualStyleBackColor = true;
+            this.checkBoxDataLettura.CheckedChanged += new System.EventHandler(this.checkBoxDataLettura_CheckedChanged);
             // 
             // groupBoxVolumi
             // 
