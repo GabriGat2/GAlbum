@@ -408,6 +408,7 @@
             this.checkBoxSupporto.Size = new System.Drawing.Size(15, 14);
             this.checkBoxSupporto.TabIndex = 15;
             this.checkBoxSupporto.UseVisualStyleBackColor = true;
+            this.checkBoxSupporto.CheckedChanged += new System.EventHandler(this.checkBoxSupporto_CheckedChanged);
             // 
             // textBoxSupporto
             // 

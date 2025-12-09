@@ -131,7 +131,11 @@ namespace GAlbum
         ///  nome compresso supporto
         /// </summary
         private string SupportoCmp = string.Empty;
-
+        /// <summary>
+        /// Abilita la gestione del supporto  nella composizione del nome del file del libro
+        /// </summary>
+        public bool AbilitaSupporto { get => abilitaSupporto; set { abilitaSupporto = value; ComponeNomeFileLibro(); } }
+        private bool abilitaSupporto;
         // ------------------------------------------------------------------------------------------------------------------
         // Nome file libro
         /// <summary>
@@ -319,20 +323,23 @@ namespace GAlbum
                     trattino = true;
                 }
             }
-          
+
             // Aggiunge supporto
             // ----------------------------------------------------------------------------------
-            nomeFileLibro += "_§";
-            trattino = false;
 
-            if (SupportoCmp.Length > 0)
+            if (AbilitaSupporto)
             {
-                nomeFileLibro += SupportoCmp;
-                trattino = true;
-            }
+                nomeFileLibro += "_§";
+                trattino = false;
 
-            // fine composizione nome titolo 
-            nomeFileLibro += "<==";
+                if (SupportoCmp.Length > 0)
+                {
+                    nomeFileLibro += SupportoCmp;
+                    trattino = true;
+                }
+            }
+               
+           
 
         }
         /// <summary>
