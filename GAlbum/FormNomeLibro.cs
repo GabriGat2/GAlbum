@@ -253,6 +253,22 @@ namespace GAlbum
             AreaArchivio.NLibro.Supporto = textBoxSupporto.Text;
             AggiornaForm();
         }
+        /// <summary>
+        /// la data è stata cambiata;
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dateTimePickerDataLettura_ValueChanged(object sender, EventArgs e)
+        {
+            // Assegna Voulume
+            //DateTime pippo = dateTimePickerDataLettura.Value;
+            //textBoxDataLettura.Text = pippo.ToString();
+
+            AreaArchivio.NLibro.Data = dateTimePickerDataLettura.Value;
+            textBoxDataLettura.Text = AreaArchivio.NLibro.DataCmp;
+            AggiornaForm();
+
+        }
     }//fine della classe  FormNomeLibro
 }// fine del name scope
 

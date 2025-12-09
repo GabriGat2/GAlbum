@@ -101,6 +101,16 @@ namespace GAlbum
         /// </summary>
         private string VolumiCmp = string.Empty;
         // ------------------------------------------------------------------------------------------------------------------
+        // Data
+        /// <summary>
+        /// Data inizio lettura libro (presunta)
+        /// </summary>
+        public DateTime Data { get => data; set => data = SetData(value, ref DataCmp); }
+        private DateTime data;
+        ///  Data in formato rovesciato
+        /// </summary
+        public string DataCmp = string.Empty;
+        // ------------------------------------------------------------------------------------------------------------------
         // Supporto
         /// <summary>
         ///  Nome esplicito Supporto
@@ -141,8 +151,6 @@ namespace GAlbum
         /// </summary>
         private bool mettiloQui;
         public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
-       
-
 
 
         // ==================================================================================================================
@@ -240,8 +248,6 @@ namespace GAlbum
                 trattino = true;
             }
 
-
-
             // Aggiunge Titoli
             // ----------------------------------------------------------------------------------
             nomeFileLibro += "_";
@@ -267,6 +273,7 @@ namespace GAlbum
                 nomeFileLibro += Titolo3Cmp;
                 trattino = true;
             }
+
             // Aggiunge i volumi 
             // ----------------------------------------------------------------------------------
             nomeFileLibro += "_#";
@@ -284,6 +291,18 @@ namespace GAlbum
                 nomeFileLibro += VolumiCmp;
                 trattino = true;
             }
+
+            // Aggiunge LA DATA
+            // ----------------------------------------------------------------------------------
+            nomeFileLibro += "_";
+            trattino = false;
+
+            if (DataCmp.Length > 0)
+            {
+                nomeFileLibro += DataCmp;
+                trattino = true;
+            }
+
             // Aggiunge supporto
             // ----------------------------------------------------------------------------------
             nomeFileLibro += "_§";
@@ -466,6 +485,22 @@ namespace GAlbum
             }
 
             return nomeCmp;
+        }
+        /// <summary>
+        /// Aggiorna la data di lettura e compone la stringa rovesciata
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="dataCmp"></param>
+        /// <returns></returns>
+        private DateTime SetData(DateTime data, ref string dataCmp)
+        {
+            // compone dataCmp
+            dataCmp = data.Year.ToString("0000") + "-" + data.Month.ToString("00") + "-" + data.Day.ToString("00");
+
+            // Compone nome file libro 
+            ComponeNomeFileLibro();
+
+            return data;
         }
     }// fine class  CNomeLibro
 }// fine namespace GAlbum

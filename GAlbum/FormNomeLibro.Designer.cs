@@ -203,7 +203,7 @@
             // 
             // textBoxDataLettura
             // 
-            this.textBoxDataLettura.Location = new System.Drawing.Point(119, 19);
+            this.textBoxDataLettura.Location = new System.Drawing.Point(596, 19);
             this.textBoxDataLettura.Name = "textBoxDataLettura";
             this.textBoxDataLettura.Size = new System.Drawing.Size(144, 20);
             this.textBoxDataLettura.TabIndex = 17;
@@ -278,7 +278,7 @@
             this.groupBoxDataLettura.Controls.Add(this.checkBoxDataLettura);
             this.groupBoxDataLettura.Controls.Add(this.textBoxDataLettura);
             this.groupBoxDataLettura.Controls.Add(this.label8);
-            this.groupBoxDataLettura.Location = new System.Drawing.Point(9, 346);
+            this.groupBoxDataLettura.Location = new System.Drawing.Point(10, 407);
             this.groupBoxDataLettura.Name = "groupBoxDataLettura";
             this.groupBoxDataLettura.Size = new System.Drawing.Size(868, 55);
             this.groupBoxDataLettura.TabIndex = 21;
@@ -287,10 +287,11 @@
             // 
             // dateTimePickerDataLettura
             // 
-            this.dateTimePickerDataLettura.Location = new System.Drawing.Point(312, 18);
+            this.dateTimePickerDataLettura.Location = new System.Drawing.Point(121, 16);
             this.dateTimePickerDataLettura.Name = "dateTimePickerDataLettura";
             this.dateTimePickerDataLettura.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerDataLettura.TabIndex = 20;
+            this.dateTimePickerDataLettura.ValueChanged += new System.EventHandler(this.dateTimePickerDataLettura_ValueChanged);
             // 
             // checkBoxDataLettura
             // 
@@ -308,7 +309,7 @@
             this.groupBoxVolumi.Controls.Add(this.label7);
             this.groupBoxVolumi.Controls.Add(this.textBoxTotVolumi);
             this.groupBoxVolumi.Controls.Add(this.label6);
-            this.groupBoxVolumi.Location = new System.Drawing.Point(8, 407);
+            this.groupBoxVolumi.Location = new System.Drawing.Point(9, 346);
             this.groupBoxVolumi.Name = "groupBoxVolumi";
             this.groupBoxVolumi.Size = new System.Drawing.Size(869, 55);
             this.groupBoxVolumi.TabIndex = 22;
