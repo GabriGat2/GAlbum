@@ -38,7 +38,9 @@ namespace GAlbum
         /// </summary>
         private CNomeFile FileDst;
 
-
+        /// <summary>
+        /// limite minimo di cancellazione delle voci della combobox del supporto 
+        /// </summary>
         private int limiteMinimo;
 
 
@@ -199,8 +201,13 @@ namespace GAlbum
         {
             //textBoxSupporto.Text = comboBoxSupporto.SelectedIndex.ToString();
             textBoxSupporto.Text = comboBoxSupporto.Text;
-        }
 
+        }
+        /// <summary>
+        /// gestione combobox supporto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxSupporto_KeyUp(object sender, KeyEventArgs e)
         {
             // Verifca se è un tanto di enter
@@ -219,10 +226,12 @@ namespace GAlbum
                 textBoxSupporto.Text = nuovaVoce;
             }
 
-
-
         }
-
+        /// <summary>
+        /// Cancella una voce dalla combo box del supporto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void butDelete_Click(object sender, EventArgs e)
         {
             // estrae l'indice della vode selezionata
@@ -233,6 +242,16 @@ namespace GAlbum
             }
 
 
+        }
+        /// <summary>
+        /// supporto mmodificato
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxSupporto_TextChanged(object sender, EventArgs e)
+        {
+            AreaArchivio.NLibro.Supporto = textBoxSupporto.Text;
+            AggiornaForm();
         }
     }//fine della classe  FormNomeLibro
 }// fine del name scope

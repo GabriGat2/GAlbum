@@ -100,10 +100,17 @@ namespace GAlbum
         ///  nome compresso Volumi
         /// </summary>
         private string VolumiCmp = string.Empty;
-
-
-
-
+        // ------------------------------------------------------------------------------------------------------------------
+        // Supporto
+        /// <summary>
+        ///  Nome esplicito Supporto
+        /// </summary>
+        private string supporto = string.Empty;
+        public string Supporto { get => supporto; set => supporto = SetNome(value, ref SupportoCmp); }
+        /// <summary>
+        ///  nome compresso supporto
+        /// </summary
+        private string SupportoCmp = string.Empty;
 
         // ------------------------------------------------------------------------------------------------------------------
         // Nome file libro
@@ -135,6 +142,7 @@ namespace GAlbum
         private bool mettiloQui;
         public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
        
+
 
 
         // ==================================================================================================================
@@ -274,6 +282,16 @@ namespace GAlbum
                 if (trattino)
                     nomeFileLibro += "-";
                 nomeFileLibro += VolumiCmp;
+                trattino = true;
+            }
+            // Aggiunge supporto
+            // ----------------------------------------------------------------------------------
+            nomeFileLibro += "_§";
+            trattino = false;
+
+            if (SupportoCmp.Length > 0)
+            {
+                nomeFileLibro += SupportoCmp;
                 trattino = true;
             }
 

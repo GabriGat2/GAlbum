@@ -60,6 +60,7 @@
             this.textBoxNomeFileDst = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBoxSupporto = new System.Windows.Forms.GroupBox();
+            this.butDelete = new System.Windows.Forms.Button();
             this.comboBoxSupporto = new System.Windows.Forms.ComboBox();
             this.checkBoxSupporto = new System.Windows.Forms.CheckBox();
             this.textBoxSupporto = new System.Windows.Forms.TextBox();
@@ -71,7 +72,6 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.textBoxTitolo3 = new System.Windows.Forms.TextBox();
-            this.butDelete = new System.Windows.Forms.Button();
             this.groupBoxFileSorgente.SuspendLayout();
             this.groupBoxAutore.SuspendLayout();
             this.groupBoxDataLettura.SuspendLayout();
@@ -386,12 +386,22 @@
             this.groupBoxSupporto.TabStop = false;
             this.groupBoxSupporto.Text = "Supporto";
             // 
+            // butDelete
+            // 
+            this.butDelete.Location = new System.Drawing.Point(748, 22);
+            this.butDelete.Name = "butDelete";
+            this.butDelete.Size = new System.Drawing.Size(104, 23);
+            this.butDelete.TabIndex = 17;
+            this.butDelete.Text = "Cancella";
+            this.butDelete.UseVisualStyleBackColor = true;
+            this.butDelete.Click += new System.EventHandler(this.butDelete_Click);
+            // 
             // comboBoxSupporto
             // 
             this.comboBoxSupporto.FormattingEnabled = true;
-            this.comboBoxSupporto.Location = new System.Drawing.Point(391, 22);
+            this.comboBoxSupporto.Location = new System.Drawing.Point(122, 22);
             this.comboBoxSupporto.Name = "comboBoxSupporto";
-            this.comboBoxSupporto.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxSupporto.Size = new System.Drawing.Size(142, 21);
             this.comboBoxSupporto.TabIndex = 16;
             this.comboBoxSupporto.SelectedIndexChanged += new System.EventHandler(this.comboBoxSupporto_SelectedIndexChanged);
             this.comboBoxSupporto.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBoxSupporto_KeyUp);
@@ -407,11 +417,13 @@
             // 
             // textBoxSupporto
             // 
-            this.textBoxSupporto.Location = new System.Drawing.Point(120, 22);
+            this.textBoxSupporto.Location = new System.Drawing.Point(313, 23);
             this.textBoxSupporto.Name = "textBoxSupporto";
-            this.textBoxSupporto.Size = new System.Drawing.Size(144, 20);
+            this.textBoxSupporto.ReadOnly = true;
+            this.textBoxSupporto.Size = new System.Drawing.Size(182, 20);
             this.textBoxSupporto.TabIndex = 14;
             this.textBoxSupporto.Text = "gdfg";
+            this.textBoxSupporto.TextChanged += new System.EventHandler(this.textBoxSupporto_TextChanged);
             // 
             // label11
             // 
@@ -487,16 +499,6 @@
             this.textBoxTitolo3.Size = new System.Drawing.Size(730, 20);
             this.textBoxTitolo3.TabIndex = 8;
             this.textBoxTitolo3.TextChanged += new System.EventHandler(this.textBoxTitolo3_TextChanged);
-            // 
-            // butDelete
-            // 
-            this.butDelete.Location = new System.Drawing.Point(528, 19);
-            this.butDelete.Name = "butDelete";
-            this.butDelete.Size = new System.Drawing.Size(104, 23);
-            this.butDelete.TabIndex = 17;
-            this.butDelete.Text = "Cancella";
-            this.butDelete.UseVisualStyleBackColor = true;
-            this.butDelete.Click += new System.EventHandler(this.butDelete_Click);
             // 
             // FormNomeLibro
             // 
