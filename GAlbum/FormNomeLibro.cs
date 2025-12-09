@@ -260,14 +260,18 @@ namespace GAlbum
         /// <param name="e"></param>
         private void dateTimePickerDataLettura_ValueChanged(object sender, EventArgs e)
         {
-            // Assegna Voulume
-            //DateTime pippo = dateTimePickerDataLettura.Value;
-            //textBoxDataLettura.Text = pippo.ToString();
-
             AreaArchivio.NLibro.Data = dateTimePickerDataLettura.Value;
-            textBoxDataLettura.Text = AreaArchivio.NLibro.DataCmp;
             AggiornaForm();
-
+        }
+        /// <summary>
+        /// L'abiltazione del volume è cambiata
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxVolumi_CheckedChanged(object sender, EventArgs e)
+        {
+            AreaArchivio.NLibro.AbilitaVolume = checkBoxVolumi.Checked;
+            AggiornaForm();
         }
     }//fine della classe  FormNomeLibro
 }// fine del name scope

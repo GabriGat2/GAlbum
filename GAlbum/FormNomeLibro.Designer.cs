@@ -42,7 +42,6 @@
             this.textBoxVolumi = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.checkBoxVolumi = new System.Windows.Forms.CheckBox();
-            this.textBoxDataLettura = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBoxFileSorgente = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -200,13 +199,7 @@
             this.checkBoxVolumi.Size = new System.Drawing.Size(15, 14);
             this.checkBoxVolumi.TabIndex = 15;
             this.checkBoxVolumi.UseVisualStyleBackColor = true;
-            // 
-            // textBoxDataLettura
-            // 
-            this.textBoxDataLettura.Location = new System.Drawing.Point(596, 19);
-            this.textBoxDataLettura.Name = "textBoxDataLettura";
-            this.textBoxDataLettura.Size = new System.Drawing.Size(144, 20);
-            this.textBoxDataLettura.TabIndex = 17;
+            this.checkBoxVolumi.CheckedChanged += new System.EventHandler(this.checkBoxVolumi_CheckedChanged);
             // 
             // label8
             // 
@@ -276,7 +269,6 @@
             // 
             this.groupBoxDataLettura.Controls.Add(this.dateTimePickerDataLettura);
             this.groupBoxDataLettura.Controls.Add(this.checkBoxDataLettura);
-            this.groupBoxDataLettura.Controls.Add(this.textBoxDataLettura);
             this.groupBoxDataLettura.Controls.Add(this.label8);
             this.groupBoxDataLettura.Location = new System.Drawing.Point(10, 407);
             this.groupBoxDataLettura.Name = "groupBoxDataLettura";
@@ -550,7 +542,6 @@
         private System.Windows.Forms.TextBox textBoxVolumi;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox checkBoxVolumi;
-        private System.Windows.Forms.TextBox textBoxDataLettura;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBoxFileSorgente;
         private System.Windows.Forms.Label label9;

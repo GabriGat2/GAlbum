@@ -89,6 +89,11 @@ namespace GAlbum
         ///  nome compresso Volume
         /// </summary>
         private string VolumeCmp = string.Empty;
+        /// <summary>
+        /// Abilita la gestione del volume nella composizione del nome del file del libro
+        /// </summary>
+        public bool AbilitaVolume { get => abilitaVolume; set  { abilitaVolume = value; ComponeNomeFileLibro(); } }
+        private bool abilitaVolume;
         // ------------------------------------------------------------------------------------------------------------------
         // Volumi
         /// <summary>
@@ -109,7 +114,7 @@ namespace GAlbum
         private DateTime data;
         ///  Data in formato rovesciato
         /// </summary
-        public string DataCmp = string.Empty;
+        private string DataCmp = string.Empty;
         // ------------------------------------------------------------------------------------------------------------------
         // Supporto
         /// <summary>
@@ -151,6 +156,7 @@ namespace GAlbum
         /// </summary>
         private bool mettiloQui;
         public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
+        
 
 
         // ==================================================================================================================
@@ -276,20 +282,23 @@ namespace GAlbum
 
             // Aggiunge i volumi 
             // ----------------------------------------------------------------------------------
-            nomeFileLibro += "_#";
-            trattino = false;
+            if (AbilitaVolume)
+            {
+                nomeFileLibro += "_#";
+                trattino = false;
 
-            if (VolumeCmp.Length > 0)
-            {
-                nomeFileLibro += VolumeCmp;
-                trattino = true;
-            }
-            if (VolumiCmp.Length > 0)
-            {
-                if (trattino)
-                    nomeFileLibro += "-";
-                nomeFileLibro += VolumiCmp;
-                trattino = true;
+                if (VolumeCmp.Length > 0)
+                {
+                    nomeFileLibro += VolumeCmp;
+                    trattino = true;
+                }
+                if (VolumiCmp.Length > 0)
+                {
+                    if (trattino)
+                        nomeFileLibro += "-";
+                    nomeFileLibro += VolumiCmp;
+                    trattino = true;
+                }
             }
 
             // Aggiunge LA DATA
