@@ -88,6 +88,7 @@ namespace GAlbum
             comboBoxSupporto.Items.Add("Video");
             limiteMinimo++;
 
+            AggiornaForm();
         }
         /// <summary>
         /// Autore 1 modificato
@@ -122,6 +123,16 @@ namespace GAlbum
         /// </summary>
         private void AggiornaForm()
         {
+            // Aggiorna il path sorgente
+            textBoxPathSrc.Text = AreaArchivio.NLibro.FileSrc.PathFoglia;
+
+            // aggiorna il nome del file sorgente
+            textBoxNomeFileSrc.Text = AreaArchivio.NLibro.FileSrc.NomeFile;
+
+            // aggiorna il path destinazione
+            textBoxPathDst.Text = AreaArchivio.NLibro.FileDst.PathNomeFile;
+
+            // aggiona il nome del file destinazione 
             textBoxNomeFileDst.Text = AreaArchivio.NLibro.NomeFileLibro;
         }
         /// <summary>

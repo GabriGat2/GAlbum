@@ -13,6 +13,22 @@ namespace GAlbum
         // ==================================================================================================================
 
         // ------------------------------------------------------------------------------------------------------------------
+        // File sorgente 
+        /// <summary>
+        /// File sorgente
+        /// </summary>
+        public CNomeFile FileSrc { get => fileSrc; set => fileSrc = value; }
+        private CNomeFile fileSrc;
+
+        // ------------------------------------------------------------------------------------------------------------------
+        // File destinazione
+        /// <summary>
+        /// File destinazione
+        /// </summary>
+        public CNomeFile FileDst { get => fileDst; set => fileDst = value; }
+        private CNomeFile fileDst;
+
+        // ------------------------------------------------------------------------------------------------------------------
         // Autore 1
         /// <summary>
         /// Nome esplicito autore 1
@@ -165,7 +181,8 @@ namespace GAlbum
         /// </summary>
         private bool mettiloQui;
         public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
-        
+       
+
 
 
         // ==================================================================================================================
@@ -235,7 +252,7 @@ namespace GAlbum
         private void ComponeNomeFileLibro()
         {
             // inizio composizione nome titolo 
-            nomeFileLibro = "==>";
+            string lNomeFileLibro = "";
 
             // Aggiunge AUTORI
             // ----------------------------------------------------------------------------------
@@ -243,49 +260,49 @@ namespace GAlbum
 
             if (Autore1Cmp.Length > 0)
             {
-                nomeFileLibro += Autore1Cmp;
+                lNomeFileLibro += Autore1Cmp;
                 trattino = true;
             }
 
             if (Autore2Cmp.Length > 0)
             {
                 if (trattino)
-                    nomeFileLibro += "-";
-                nomeFileLibro += Autore2Cmp;
+                    lNomeFileLibro += "-";
+                lNomeFileLibro += Autore2Cmp;
                 trattino = true;
             }
 
             if (Autore3Cmp.Length > 0)
             {
                 if (trattino)
-                    nomeFileLibro += "-";
-                nomeFileLibro += Autore3Cmp;
+                    lNomeFileLibro += "-";
+                lNomeFileLibro += Autore3Cmp;
                 trattino = true;
             }
 
             // Aggiunge Titoli
             // ----------------------------------------------------------------------------------
-            nomeFileLibro += "_";
+            lNomeFileLibro += "_";
             trattino = false;
 
             if (Titolo1Cmp.Length > 0)
             {
-                nomeFileLibro += Titolo1Cmp;
+                lNomeFileLibro += Titolo1Cmp;
                 trattino = true;
             }
             if (Titolo2Cmp.Length > 0)
             {
                 if (trattino)
-                    nomeFileLibro += "-";
-                nomeFileLibro += Titolo2Cmp;
+                    lNomeFileLibro += "-";
+                lNomeFileLibro += Titolo2Cmp;
                 trattino = true;
             }
 
             if (Titolo3Cmp.Length > 0)
             {
                 if (trattino)
-                    nomeFileLibro += "-";
-                nomeFileLibro += Titolo3Cmp;
+                    lNomeFileLibro += "-";
+                lNomeFileLibro += Titolo3Cmp;
                 trattino = true;
             }
 
@@ -293,19 +310,19 @@ namespace GAlbum
             // ----------------------------------------------------------------------------------
             if (AbilitaVolume)
             {
-                nomeFileLibro += "_#";
+                lNomeFileLibro += "_#";
                 trattino = false;
 
                 if (VolumeCmp.Length > 0)
                 {
-                    nomeFileLibro += VolumeCmp;
+                    lNomeFileLibro += VolumeCmp;
                     trattino = true;
                 }
                 if (VolumiCmp.Length > 0)
                 {
                     if (trattino)
-                        nomeFileLibro += "-";
-                    nomeFileLibro += VolumiCmp;
+                        lNomeFileLibro += "-";
+                    lNomeFileLibro += VolumiCmp;
                     trattino = true;
                 }
             }
@@ -314,12 +331,12 @@ namespace GAlbum
             // ----------------------------------------------------------------------------------
             if (AbilitaData)
             {
-                nomeFileLibro += "_";
+                lNomeFileLibro += "_";
                 trattino = false;
 
                 if (DataCmp.Length > 0)
                 {
-                    nomeFileLibro += DataCmp;
+                    lNomeFileLibro += DataCmp;
                     trattino = true;
                 }
             }
@@ -329,17 +346,21 @@ namespace GAlbum
 
             if (AbilitaSupporto)
             {
-                nomeFileLibro += "_§";
+                lNomeFileLibro += "_§";
                 trattino = false;
 
                 if (SupportoCmp.Length > 0)
                 {
-                    nomeFileLibro += SupportoCmp;
+                    lNomeFileLibro += SupportoCmp;
                     trattino = true;
                 }
             }
                
-           
+            // Assegna nome libro
+            if (FileDst != null)
+                fileDst.Nome = lNomeFileLibro;
+
+            nomeFileLibro = "==>" + lNomeFileLibro + "<===";
 
         }
         /// <summary>
@@ -526,6 +547,8 @@ namespace GAlbum
 
             return data;
         }
+
+
     }// fine class  CNomeLibro
 }// fine namespace GAlbum
 

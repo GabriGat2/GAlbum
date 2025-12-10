@@ -56,13 +56,13 @@
             this.treeViewDestinazione = new System.Windows.Forms.TreeView();
             this.splitContainer1B2B3 = new System.Windows.Forms.SplitContainer();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.butLibro = new System.Windows.Forms.Button();
             this.butNonAssegna = new System.Windows.Forms.Button();
             this.butAssegna = new System.Windows.Forms.Button();
             this.textBoxDebug = new System.Windows.Forms.TextBox();
             this.textBoxPathFoto = new System.Windows.Forms.TextBox();
             this.butPrecedente = new System.Windows.Forms.Button();
             this.butSuccessiva = new System.Windows.Forms.Button();
-            this.butLibro = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -305,6 +305,16 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
+            // butLibro
+            // 
+            this.butLibro.Location = new System.Drawing.Point(451, 35);
+            this.butLibro.Name = "butLibro";
+            this.butLibro.Size = new System.Drawing.Size(75, 23);
+            this.butLibro.TabIndex = 12;
+            this.butLibro.Text = "Libro";
+            this.butLibro.UseVisualStyleBackColor = true;
+            this.butLibro.Click += new System.EventHandler(this.butLibro_Click);
+            // 
             // butNonAssegna
             // 
             this.butNonAssegna.Location = new System.Drawing.Point(275, 35);
@@ -359,16 +369,6 @@
             this.butSuccessiva.Text = "Successiva";
             this.butSuccessiva.UseVisualStyleBackColor = true;
             this.butSuccessiva.Click += new System.EventHandler(this.butSuccessiva_Click);
-            // 
-            // butLibro
-            // 
-            this.butLibro.Location = new System.Drawing.Point(382, 34);
-            this.butLibro.Name = "butLibro";
-            this.butLibro.Size = new System.Drawing.Size(75, 23);
-            this.butLibro.TabIndex = 12;
-            this.butLibro.Text = "Libro";
-            this.butLibro.UseVisualStyleBackColor = true;
-            this.butLibro.Click += new System.EventHandler(this.butLibro_Click);
             // 
             // FormSelezioneLibro
             // 

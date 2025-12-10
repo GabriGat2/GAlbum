@@ -279,7 +279,7 @@ namespace GAlbum
             // Estrae il nome della sezione
             this.dirSezione = campi[0];
 
-            // Estrae il nome dell' archivio 
+            // Estrae il nome dell'archivio 
             this.dirArchivio = campi[1];
 
             // estrae nome e estensione 

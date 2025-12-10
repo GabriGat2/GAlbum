@@ -64,6 +64,7 @@ namespace GAlbum
             E1323_DirectoryRamoDestinazioneNonEsiste,
             E1324_DirectoryFogliaDestinazioneNonEsiste,
             E1325_DirectoryDestinazioneVuota,
+            E1326_TroppeDirectoryDiDestinazione,
 
             // Errori relativi una directory Archivio
             // =======================

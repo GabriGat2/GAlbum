@@ -591,6 +591,9 @@ namespace GAlbum
             // button NonAssegna
             butNonAssegna.Enabled = StatoSelezioneFoto;
 
+            // button Libro
+            butLibro.Enabled = StatoSelezioneFoto;
+
             //pictureBox1
             if (!StatoSelezioneFoto)
             {
@@ -651,7 +654,7 @@ namespace GAlbum
         /// <param name="e"></param>
         private void butAssegna_Click(object sender, EventArgs e)
         {
-            EseguiAssegnaNuova((true));
+            EseguiAssegna((true));
         }
         /// <summary>
         ///  Non Assegna la foto e passa alla successiva
@@ -660,36 +663,13 @@ namespace GAlbum
         /// <param name="e"></param>
         private void butNonAssegna_Click(object sender, EventArgs e)
         {
-            EseguiAssegnaNuova(false);
+            EseguiAssegna(false);
         }
         /// <summary>
-        /// Attiva l'assegnazione
+        /// Esegui assegna
         /// </summary>
         /// <param name="copia"></param>
-        //protected void EseguiAssegna(bool copia)
-        //{
-        //    // Crea l'archivo per movimentare le foto
-        //    CArchivia archivia = new CArchivia();
-
-        //    // crea la lista dei nodi selezionati
-        //    List<String> pathDestinazioni;
-        //    TreeNode nodo = treeViewDestinazione.Nodes[0];
-        //    archivia.EstraiNdodiSelezionati(ref nodo, out pathDestinazioni);
-
-        //    // libera la risorsa della foto
-        //    pictureBox1.Image = null;
-
-        //    // Assegna la foto
-        //    archivia.Assegna(textBoxPathFoto.Text, pathDestinazioni, copia, InfoTVSorgente.CopiaParallela);
-
-        //    // mostra la foto successiva
-        //    FotoSuccessiva();
-        //}
-        /// <summary>
-        /// Nuova gestione di Esegui assegna
-        /// </summary>
-        /// <param name="copia"></param>
-        protected void EseguiAssegnaNuova(bool copia)
+        protected void EseguiAssegna(bool copia)
         {
             // Crea l'archivo per movimentare le foto
             CArchivia archivia = new CArchivia();
@@ -708,9 +688,41 @@ namespace GAlbum
             // mostra la foto successiva
             FotoSuccessiva();
         }
-        // attiva la dialogue nome libro 
+        /// <summary>
+        /// attiva la dialogue nome libro 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void butLibro_Click(object sender, EventArgs e)
         {
+            // Crea l'archivo per movimentare le foto
+            CArchivia archivia = new CArchivia();
+
+            // crea la lista dei nodi destinazione selezionati
+            List<String> pathDestinazioni;
+            TreeNode nodo = treeViewDestinazione.Nodes[0];
+            archivia.EstraiNdodiSelezionati(ref nodo, out pathDestinazioni);
+
+            // verifica la lunghezza della lista 
+            if (pathDestinazioni.Count > 1)
+            {
+                GstErrori.StampaMessaggioErrore(GstErrori.EErrore.E1326_TroppeDirectoryDiDestinazione, "");
+                return;
+            }
+
+            // path nome file sorgente
+            CNomeFile fileSrc = new CNomeFile(AreaArchivio.PathArchivioAttivo);
+            fileSrc.SetPathNomeFile(textBoxPathFoto.Text);
+            AreaArchivio.NLibro.FileSrc = fileSrc;
+
+            // path file destinazione
+            CNomeFile fileDst = new CNomeFile(AreaArchivio.PathArchivioAttivo);
+            fileDst.SetPathArchivio(pathDestinazioni[0]);
+            fileDst.DirFoglia = fileSrc.DirFoglia;
+            fileDst.Estensione = fileSrc.Estensione;
+            AreaArchivio.NLibro.FileDst = fileDst;
+
+            // Mostra la dialog (DA CORRTEGGERE : DEBUG)
             FormNomeLibro dlg = new FormNomeLibro(ref AreaArchivio);
             dlg.ShowDialog();
         }
