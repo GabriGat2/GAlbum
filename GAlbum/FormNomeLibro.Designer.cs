@@ -88,6 +88,7 @@
             this.butAssegna.TabIndex = 0;
             this.butAssegna.Text = "Assegna";
             this.butAssegna.UseVisualStyleBackColor = true;
+            this.butAssegna.Click += new System.EventHandler(this.butAssegna_Click);
             // 
             // label1
             // 

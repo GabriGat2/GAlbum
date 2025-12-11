@@ -986,7 +986,60 @@ namespace GAlbum
 
             return GstErrori.EErrore.E0000_OK;
         }
+        /// <summary>
+        /// Assegna, rinominandolo, la copertina di un libro
+        /// </summary>
+        /// <param name="fileSrc"></param>
+        /// <param name="fileDst"></param>
+        /// <returns></returns>
+        public GstErrori.EErrore AssegnaLibro(CNomeFile fileSrc, CNomeFile fileDst, bool copia = true)
+        {
+            GstErrori.EErrore esito = GstErrori.EErrore.E0001_NOK;
 
+            //  verifica che fileSrc esiste
+            if (!fileSrc.PathNomeFileEsiste)
+                return GstErrori.EErrore.E1360_FileSorgenteNonEsiste;
+
+            // inizializza parzialmente il path del file archiviato 
+            CNomeFile fileArchiviato = new CNomeFile(PathArchivioAttivo);
+            fileArchiviato.DirSezione = DirSmistare;
+            fileArchiviato.DirArchivio = DirArchivio;
+
+
+            // Esegue le copie nel numero specificato dalla lista destinazioni
+            if (copia)
+            {
+                // Esegue la copia
+                esito = fileDst.CopiaFile(fileSrc);
+                SNera.InizioIstruzione("Copia file", fileSrc, fileDst, esito);
+                if (esito != GstErrori.EErrore.E0000_OK)
+                    return esito;
+                else if (esito == GstErrori.EErrore.E0000_OK)
+                {
+                    // aggiorna dati statistici
+                    statisticaAssegna.NumeroFileAssegnati++;
+                }
+            }
+
+            // prepara archiviato 
+            fileArchiviato.DirFoglia = fileSrc.DirFoglia;
+            fileArchiviato.NomeFile = fileSrc.NomeFile;
+
+            // sposta in _Archivio
+            esito = fileArchiviato.SpostaFile(fileSrc.PathNomeFile);
+            SNera.InizioIstruzione("Sposta file", fileSrc, fileArchiviato, esito);
+            if (esito != GstErrori.EErrore.E0000_OK)
+            {
+                ;// return esito;
+            }
+            else
+            {
+                // aggiorna dati statistici
+                statisticaAssegna.NumeroFileArchiviati++;
+            }
+
+            return GstErrori.EErrore.E0000_OK;
+        }
 
     }// fine class CAreaArchivio
 

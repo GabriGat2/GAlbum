@@ -17,7 +17,7 @@ namespace GAlbum
         /// <summary>
         /// File sorgente
         /// </summary>
-        public CNomeFile FileSrc { get => fileSrc; set => fileSrc = value; }
+        public CNomeFile FileSrc { get => fileSrc; set => DecodificaNomeFileSrc (value); }
         private CNomeFile fileSrc;
 
         // ------------------------------------------------------------------------------------------------------------------
@@ -547,6 +547,37 @@ namespace GAlbum
 
             return data;
         }
+        /// <summary>
+        /// Decodifica il nome del file sorgente
+        /// </summary>
+        /// <param name="file"></param>
+        private void DecodificaNomeFileSrc(CNomeFile file) 
+        {
+            // assegna il nome del file sorgente
+            fileSrc = file;
+
+            // scompongo secondo gli '_'
+            string [] campi = fileSrc.Nome.Split('_');
+
+
+            // Analiza il campo 1 : autore
+            if (campi.Length >= 1)
+            {
+                string[] campiAutore = campi[0].Split('-');
+                Autore1 = campiAutore[0];
+            }
+
+            // Analiza il campo 2 : titolo
+            if (campi.Length >= 2)
+            {
+                Titolo1 = campi[1];
+            }
+
+            // Compone nome file libro 
+            //ComponeNomeFileLibro();
+
+        }
+
 
 
     }// fine class  CNomeLibro

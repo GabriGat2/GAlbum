@@ -710,12 +710,16 @@ namespace GAlbum
                 return;
             }
 
+            // Azzera nome libro
+            AreaArchivio.NLibro.AzzeraTutto();
+
             // path nome file sorgente
             CNomeFile fileSrc = new CNomeFile(AreaArchivio.PathArchivioAttivo);
             fileSrc.SetPathNomeFile(textBoxPathFoto.Text);
             AreaArchivio.NLibro.FileSrc = fileSrc;
 
             // path file destinazione
+
             CNomeFile fileDst = new CNomeFile(AreaArchivio.PathArchivioAttivo);
             fileDst.SetPathArchivio(pathDestinazioni[0]);
             fileDst.DirFoglia = fileSrc.DirFoglia;
@@ -725,6 +729,13 @@ namespace GAlbum
             // Mostra la dialog (DA CORRTEGGERE : DEBUG)
             FormNomeLibro dlg = new FormNomeLibro(ref AreaArchivio);
             dlg.ShowDialog();
+
+            // analizza l'esito della dialog
+            if (dlg.DialogResult == DialogResult.OK)
+            { 
+                // mostra la foto successiva
+                FotoSuccessiva();
+            }
         }
     } // fine della classe FormSelezioneLibro
 }// fine del name scope

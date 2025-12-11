@@ -88,6 +88,13 @@ namespace GAlbum
             comboBoxSupporto.Items.Add("Video");
             limiteMinimo++;
 
+            // Aggiorna campi nome
+            textBoxAutore1.Text = AreaArchivio.NLibro.Autore1;
+            textBoxAutore2.Text = AreaArchivio.NLibro.Autore2;
+            textBoxAutore3.Text = AreaArchivio.NLibro.Autore3;
+            textBoxTitolo1.Text = AreaArchivio.NLibro.Titolo1;
+            textBoxTitolo2.Text = AreaArchivio.NLibro.Titolo2;
+            textBoxTitolo3.Text = AreaArchivio.NLibro.Titolo3;
             AggiornaForm();
         }
         /// <summary>
@@ -304,6 +311,37 @@ namespace GAlbum
             AreaArchivio.NLibro.AbilitaSupporto = checkBoxSupporto.Checked;
             AggiornaForm();
         }
+        /// <summary>
+        /// esegue l'assegnazione del file copertina libro 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butAssegna_Click(object sender, EventArgs e)
+        {
+            EseguiAssegna();            
+        }
+        /// <summary>
+        /// Esegui assegna
+        /// </summary>
+        /// <param name="copia"></param>
+        protected void EseguiAssegna(bool copia = true)
+        {
+
+            // Assegna la foto copertina libro
+            GstErrori.EErrore esito = AreaArchivio.AssegnaLibro(AreaArchivio.NLibro.FileSrc, AreaArchivio.NLibro.FileDst);
+
+            if (esito != GstErrori.EErrore.E0000_OK)
+            {
+                GstErrori.StampaMessaggioErrore(esito);
+            }
+            else
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+        }
+
+
     }//fine della classe  FormNomeLibro
 }// fine del name scope
 
