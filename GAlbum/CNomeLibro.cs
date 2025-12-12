@@ -586,7 +586,24 @@ namespace GAlbum
             // Analiza il campo 2 : titolo
             if (campi.Length >= 2)
             {
-                Titolo1 = campi[1];
+                // separa i titoli 
+                string[] campiTitolo = campi[1].Split('-');
+
+                // assegna titolo 1
+                Titolo1 = campiTitolo[0];
+
+                // assegna titolo 2
+                if (campiTitolo.Length >= 2)
+                {
+                    Titolo2 = campiTitolo[1];
+                }
+
+                // assegna titolo 3
+                if (campiTitolo.Length >= 3)
+                {
+                    Titolo3 = campiTitolo[2];
+                }
+
             }
 
             // Compone nome file libro 
