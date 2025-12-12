@@ -563,8 +563,24 @@ namespace GAlbum
             // Analiza il campo 1 : autore
             if (campi.Length >= 1)
             {
+                // separa gli autori 
                 string[] campiAutore = campi[0].Split('-');
+
+                // assegna autore 1
                 Autore1 = campiAutore[0];
+
+                // assegna autore 2
+                if (campiAutore.Length >= 2)
+                {
+                    Autore2 = campiAutore[1];
+                }
+
+                // assegna autore 3
+                if (campiAutore.Length >= 3)
+                {
+                    Autore3 = campiAutore[2];
+                }
+               
             }
 
             // Analiza il campo 2 : titolo
