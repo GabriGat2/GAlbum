@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -567,18 +568,18 @@ namespace GAlbum
                 string[] campiAutore = campi[0].Split('-');
 
                 // assegna autore 1
-                Autore1 = campiAutore[0];
+                Autore1 = SeparaAllaMaiuscola(campiAutore[0]);
 
                 // assegna autore 2
                 if (campiAutore.Length >= 2)
                 {
-                    Autore2 = campiAutore[1];
+                    Autore2 = SeparaAllaMaiuscola(campiAutore[1]);
                 }
 
                 // assegna autore 3
                 if (campiAutore.Length >= 3)
                 {
-                    Autore3 = campiAutore[2];
+                    Autore3 = SeparaAllaMaiuscola(campiAutore[2]);
                 }
                
             }
@@ -590,28 +591,140 @@ namespace GAlbum
                 string[] campiTitolo = campi[1].Split('-');
 
                 // assegna titolo 1
-                Titolo1 = campiTitolo[0];
+                Titolo1 = SeparaAllaMaiuscola(campiTitolo[0]);
 
                 // assegna titolo 2
                 if (campiTitolo.Length >= 2)
                 {
-                    Titolo2 = campiTitolo[1];
+                    Titolo2 = SeparaAllaMaiuscola(campiTitolo[1]);
                 }
 
                 // assegna titolo 3
                 if (campiTitolo.Length >= 3)
                 {
-                    Titolo3 = campiTitolo[2];
+                    Titolo3 = SeparaAllaMaiuscola(campiTitolo[2]);
                 }
 
             }
 
-            // Compone nome file libro 
-            //ComponeNomeFileLibro();
+            // Analizza campi succcessivi
+            for (int i = 2; i < campi.Length; i++)
+            {
+                // Estrae la prima lettera 
+                char lettera = campi[i][0];
+                
+                // analizza la prima lettera per capire il tipo di campo 
+                switch (lettera)
+                {
+                    // Volume Volumi 
+                    case '#':
+                        // Elimina carattere di testa 
+                        string volumeVolumi = campi[i].Remove(0, 1);
+                        // separa volume da Volumi 
+                        string[] campiVolumeVolumi = volumeVolumi.Split('-');
+
+
+                        // assegna Volume
+                        if (campiVolumeVolumi.Length >= 0)
+                        {
+                            Volume = campiVolumeVolumi[0];
+                        }
+
+                        // assegna Volumi
+                        if (campiVolumeVolumi.Length >= 1)
+                        {
+                            Volumi = campiVolumeVolumi[1];
+                        }
+
+                        // abilita volumi
+                        abilitaVolume = true;
+                        break;
+
+                    // Supporto 
+                    case '§':
+                        // Elimina carattere di testa 
+                        string lSupporto = campi[i].Remove(0, 1);
+
+                        // assegna supporto
+                        Supporto = lSupporto;
+
+                        // abilita supporto 
+                        abilitaSupporto = true;
+                        break;
+
+                    // Data 
+                    case '0':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9':
+                        // separa la data 
+                        string[] campiData = campi[i].Split('-');
+
+                        // creo la nuova data
+                        int anno = 2000;
+                        if (campiData.Length >= 1)
+                            anno = Convert.ToInt16(campiData[0]);
+
+                        int mese = 1;
+                        if (campiData.Length >= 2)
+                            mese = Convert.ToInt16(campiData[1]);
+
+                        int giorno = 1;
+                        if (campiData.Length >= 3)
+                            giorno = Convert.ToInt16(campiData[2]);
+
+                        DateTime nuovaData = new DateTime(anno, mese, giorno);
+
+                        Data = nuovaData;
+
+                        // abilita data
+                        abilitaData = true;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                
+            }
+
+
 
         }
+        /// <summary>
+        /// Decomprime la frase separandola ad ogni maiuscola
+        /// </summary>
+        /// <param name="fraseCmp"></param>
+        /// <returns></returns>
+        private string SeparaAllaMaiuscola (string fraseCmp)
+        {
+            string frase = String.Empty;
+            char lettera;
 
+            for (int i = 0; i < fraseCmp.Length; i++)
+            {
+                // legge la lettera da fraseCMp
+                lettera = fraseCmp[i];
 
+                // analizza se la lettera é maiuscola
+                if (Char.IsUpper(lettera) && i > 0)
+                {
+                    frase += " ";
+                }
+
+                // assegna lettera a frase
+                frase += lettera;
+
+            }
+            return frase;
+        }
+         
 
     }// fine class  CNomeLibro
 }// fine namespace GAlbum

@@ -88,13 +88,38 @@ namespace GAlbum
             comboBoxSupporto.Items.Add("Video");
             limiteMinimo++;
 
-            // Aggiorna campi nome
+            // Aggiorna campi autore
             textBoxAutore1.Text = AreaArchivio.NLibro.Autore1;
             textBoxAutore2.Text = AreaArchivio.NLibro.Autore2;
             textBoxAutore3.Text = AreaArchivio.NLibro.Autore3;
+
+            // Aggiorna campi titolo
             textBoxTitolo1.Text = AreaArchivio.NLibro.Titolo1;
             textBoxTitolo2.Text = AreaArchivio.NLibro.Titolo2;
             textBoxTitolo3.Text = AreaArchivio.NLibro.Titolo3;
+
+            // aggiorna volume - volumi
+            textBoxVolumi.Text = AreaArchivio.NLibro.Volume;
+            textBoxTotVolumi.Text = AreaArchivio.NLibro.Volumi;
+            checkBoxVolumi.Checked = AreaArchivio.NLibro.AbilitaVolume;
+
+            // Aggiorna i campi comboBox
+            int indice = comboBoxSupporto.FindString(AreaArchivio.NLibro.Supporto);
+            if (indice < 0)
+            {
+                comboBoxSupporto.Items.Add(AreaArchivio.NLibro.Supporto);
+            }
+            else
+            {
+                comboBoxSupporto.SelectedIndex = indice;
+            }
+            checkBoxSupporto.Checked = AreaArchivio.NLibro.AbilitaSupporto;
+
+            // aggiorna data
+            dateTimePickerDataLettura.Value = AreaArchivio.NLibro.Data;
+            checkBoxDataLettura.Checked = AreaArchivio.NLibro.AbilitaData;
+
+
             AggiornaForm();
         }
         /// <summary>

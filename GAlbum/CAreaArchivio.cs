@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -158,6 +159,11 @@ namespace GAlbum
         {
             // DUBUG_GG 
             //pathArchivioAttivo = "";
+
+            ///////////////// DEBUG GG
+            //pathArchivioBase = "E:\\FotoSRC";
+
+            ///DEBUG GG
             pathArchivioBase = "E:\\Angelo\\Prj\\GAlbum\\AreaArchivioBaseFoto";
             dirArchivioAttivo = "";
 
