@@ -40,6 +40,10 @@ namespace GAlbum
         ///  nome compresso autore 1 
         /// </summary>
         private string Autore1Cmp = string.Empty;
+        /// <summary>
+        /// Richiesta conferma autore 1
+        /// </summary>
+        public Boolean Autore1DaConfermare;
         // ------------------------------------------------------------------------------------------------------------------
         // Autore 2
         /// <summary>
@@ -51,6 +55,10 @@ namespace GAlbum
         ///  nome compresso autore 2 
         /// </summary>
         private string Autore2Cmp = string.Empty;
+        /// <summary>
+        /// Richiesta conferma autore 2
+        /// </summary>
+        public Boolean Autore2DaConfermare;
         // ------------------------------------------------------------------------------------------------------------------
         // Autore 3
         /// <summary>
@@ -62,6 +70,10 @@ namespace GAlbum
         ///  nome compresso autore 3 
         /// </summary>
         private string Autore3Cmp = string.Empty;
+        /// <summary>
+        /// Richiesta conferma autore 3
+        /// </summary>
+        public Boolean Autore3DaConfermare;
         // ------------------------------------------------------------------------------------------------------------------
         // Titolo 1
         /// <summary>
@@ -73,6 +85,10 @@ namespace GAlbum
         ///  nome compresso titolo 1 
         /// </summary>
         private string Titolo1Cmp = string.Empty;
+        /// <summary>
+        /// Richiesta conferma Titolo 1
+        /// </summary>
+        public Boolean Titolo1DaConfermare;
         // ------------------------------------------------------------------------------------------------------------------
         // Titolo 2
         /// <summary>
@@ -84,6 +100,10 @@ namespace GAlbum
         ///  nome compresso titolo 2
         /// </summary>
         private string Titolo2Cmp = string.Empty;
+        /// <summary>
+        /// Richiesta conferma Titolo 2
+        /// </summary>
+        public Boolean Titolo2DaConfermare;
         // ------------------------------------------------------------------------------------------------------------------
         // Titolo 3
         /// <summary>
@@ -95,6 +115,10 @@ namespace GAlbum
         ///  nome compresso titolo 3
         /// </summary>
         private string Titolo3Cmp = string.Empty;
+        /// <summary>
+        /// Richiesta conferma Titolo 3
+        /// </summary>
+        public Boolean Titolo3DaConfermare;
         // ------------------------------------------------------------------------------------------------------------------
         // Volume
         /// <summary>
@@ -111,6 +135,10 @@ namespace GAlbum
         /// </summary>
         public bool AbilitaVolume { get => abilitaVolume; set  { abilitaVolume = value; ComponeNomeFileLibro(); } }
         private bool abilitaVolume;
+        /// <summary>
+        /// Richiesta conferma Volume
+        /// </summary>
+        public Boolean VolumeDaConfermare;
         // ------------------------------------------------------------------------------------------------------------------
         // Volumi
         /// <summary>
@@ -122,6 +150,10 @@ namespace GAlbum
         ///  nome compresso Volumi
         /// </summary>
         private string VolumiCmp = string.Empty;
+        /// <summary>
+        /// Richiesta conferma Volumi
+        /// </summary>
+        public Boolean VolumiDaConfermare;
         // ------------------------------------------------------------------------------------------------------------------
         // Data
         /// <summary>
@@ -137,6 +169,10 @@ namespace GAlbum
         /// </summary>
         public bool AbilitaData { get => abilitaData; set { abilitaData = value; ComponeNomeFileLibro(); } }
         private bool abilitaData;
+        /// <summary>
+        /// Richiesta conferma Data
+        /// </summary>
+        public Boolean DataDaConfermare;
         // ------------------------------------------------------------------------------------------------------------------
         // Supporto
         /// <summary>
@@ -153,6 +189,10 @@ namespace GAlbum
         /// </summary>
         public bool AbilitaSupporto { get => abilitaSupporto; set { abilitaSupporto = value; ComponeNomeFileLibro(); } }
         private bool abilitaSupporto;
+        /// <summary>
+        /// Richiesta conferma Supporto
+        /// </summary>
+        public Boolean SupportoDaConfermare;
         // ------------------------------------------------------------------------------------------------------------------
         // Nome file libro
         /// <summary>
@@ -219,7 +259,25 @@ namespace GAlbum
             Volume = string.Empty;
             Volumi = string.Empty;
 
-            nomeFileLibro = string.Empty;            
+            nomeFileLibro = string.Empty;    
+            
+            Data = DateTime.Now;
+
+            Autore1DaConfermare = false;
+            Autore2DaConfermare = false;
+            Autore3DaConfermare = false;
+
+            Titolo1DaConfermare = false;
+            Titolo2DaConfermare = false;
+            Titolo3DaConfermare = false;
+
+            VolumeDaConfermare = false;
+            VolumiDaConfermare = false;
+
+            DataDaConfermare = false;
+            SupportoDaConfermare = false;
+
+
         }
         /// <summary>
         /// Assegna il nome e il nome compresso
@@ -569,17 +627,20 @@ namespace GAlbum
 
                 // assegna autore 1
                 Autore1 = SeparaAllaMaiuscola(campiAutore[0]);
+                Autore1DaConfermare = true;
 
                 // assegna autore 2
                 if (campiAutore.Length >= 2)
                 {
                     Autore2 = SeparaAllaMaiuscola(campiAutore[1]);
+                    Autore2DaConfermare = true;
                 }
 
                 // assegna autore 3
                 if (campiAutore.Length >= 3)
                 {
                     Autore3 = SeparaAllaMaiuscola(campiAutore[2]);
+                    Autore3DaConfermare = true;
                 }
                
             }
@@ -592,17 +653,20 @@ namespace GAlbum
 
                 // assegna titolo 1
                 Titolo1 = SeparaAllaMaiuscola(campiTitolo[0]);
+                Titolo1DaConfermare = true;
 
                 // assegna titolo 2
                 if (campiTitolo.Length >= 2)
                 {
                     Titolo2 = SeparaAllaMaiuscola(campiTitolo[1]);
+                    Titolo2DaConfermare=true;
                 }
 
                 // assegna titolo 3
                 if (campiTitolo.Length >= 3)
                 {
                     Titolo3 = SeparaAllaMaiuscola(campiTitolo[2]);
+                    Titolo3DaConfermare = true;
                 }
 
             }
@@ -628,12 +692,14 @@ namespace GAlbum
                         if (campiVolumeVolumi.Length >= 0)
                         {
                             Volume = campiVolumeVolumi[0];
+                            VolumeDaConfermare = true;
                         }
 
                         // assegna Volumi
                         if (campiVolumeVolumi.Length >= 1)
                         {
                             Volumi = campiVolumeVolumi[1];
+                            VolumiDaConfermare = true;
                         }
 
                         // abilita volumi
@@ -647,6 +713,7 @@ namespace GAlbum
 
                         // assegna supporto
                         Supporto = lSupporto;
+                        SupportoDaConfermare = true;
 
                         // abilita supporto 
                         abilitaSupporto = true;
@@ -669,7 +736,10 @@ namespace GAlbum
                         // creo la nuova data
                         int anno = 2000;
                         if (campiData.Length >= 1)
+                        {
                             anno = Convert.ToInt16(campiData[0]);
+                            DataDaConfermare = true;
+                        }
 
                         int mese = 1;
                         if (campiData.Length >= 2)

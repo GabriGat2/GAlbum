@@ -71,6 +71,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.textBoxTitolo3 = new System.Windows.Forms.TextBox();
+            this.groupBoxDataLettura2 = new System.Windows.Forms.GroupBox();
             this.groupBoxFileSorgente.SuspendLayout();
             this.groupBoxAutore.SuspendLayout();
             this.groupBoxDataLettura.SuspendLayout();
@@ -78,6 +79,7 @@
             this.groupBoxDestinazione.SuspendLayout();
             this.groupBoxSupporto.SuspendLayout();
             this.groupBoxTitoli.SuspendLayout();
+            this.groupBoxDataLettura2.SuspendLayout();
             this.SuspendLayout();
             // 
             // butAssegna
@@ -268,7 +270,7 @@
             // 
             // groupBoxDataLettura
             // 
-            this.groupBoxDataLettura.Controls.Add(this.dateTimePickerDataLettura);
+            this.groupBoxDataLettura.Controls.Add(this.groupBoxDataLettura2);
             this.groupBoxDataLettura.Controls.Add(this.checkBoxDataLettura);
             this.groupBoxDataLettura.Controls.Add(this.label8);
             this.groupBoxDataLettura.Location = new System.Drawing.Point(10, 407);
@@ -280,7 +282,7 @@
             // 
             // dateTimePickerDataLettura
             // 
-            this.dateTimePickerDataLettura.Location = new System.Drawing.Point(121, 16);
+            this.dateTimePickerDataLettura.Location = new System.Drawing.Point(6, 14);
             this.dateTimePickerDataLettura.Name = "dateTimePickerDataLettura";
             this.dateTimePickerDataLettura.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerDataLettura.TabIndex = 20;
@@ -496,6 +498,15 @@
             this.textBoxTitolo3.TabIndex = 8;
             this.textBoxTitolo3.TextChanged += new System.EventHandler(this.textBoxTitolo3_TextChanged);
             // 
+            // groupBoxDataLettura2
+            // 
+            this.groupBoxDataLettura2.Controls.Add(this.dateTimePickerDataLettura);
+            this.groupBoxDataLettura2.Location = new System.Drawing.Point(119, 9);
+            this.groupBoxDataLettura2.Name = "groupBoxDataLettura2";
+            this.groupBoxDataLettura2.Size = new System.Drawing.Size(220, 40);
+            this.groupBoxDataLettura2.TabIndex = 21;
+            this.groupBoxDataLettura2.TabStop = false;
+            // 
             // FormNomeLibro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -525,6 +536,7 @@
             this.groupBoxSupporto.PerformLayout();
             this.groupBoxTitoli.ResumeLayout(false);
             this.groupBoxTitoli.PerformLayout();
+            this.groupBoxDataLettura2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -574,5 +586,6 @@
         private System.Windows.Forms.TextBox textBoxTitolo3;
         private System.Windows.Forms.ComboBox comboBoxSupporto;
         private System.Windows.Forms.Button butDelete;
+        private System.Windows.Forms.GroupBox groupBoxDataLettura2;
     }
 }

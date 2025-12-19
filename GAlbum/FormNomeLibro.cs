@@ -90,17 +90,82 @@ namespace GAlbum
 
             // Aggiorna campi autore
             textBoxAutore1.Text = AreaArchivio.NLibro.Autore1;
+            if (AreaArchivio.NLibro.Autore1DaConfermare  )
+            {
+                textBoxAutore1.BackColor = SystemColors.Info;
+            }
+            else
+            {
+                textBoxAutore1.BackColor = SystemColors.Window;
+            }
+
             textBoxAutore2.Text = AreaArchivio.NLibro.Autore2;
+            if (AreaArchivio.NLibro.Autore2DaConfermare)
+            {
+                textBoxAutore2.BackColor = SystemColors.Info;
+            }
+            else
+            {
+                textBoxAutore2.BackColor = SystemColors.Window;
+            }
             textBoxAutore3.Text = AreaArchivio.NLibro.Autore3;
+            if (AreaArchivio.NLibro.Autore3DaConfermare)
+            {
+                textBoxAutore3.BackColor = SystemColors.Info;
+            }
+            else
+            {
+                textBoxAutore3.BackColor = SystemColors.Window;
+            }
 
             // Aggiorna campi titolo
             textBoxTitolo1.Text = AreaArchivio.NLibro.Titolo1;
+            if (AreaArchivio.NLibro.Titolo1DaConfermare)
+            {
+                textBoxTitolo1.BackColor = SystemColors.Info;
+            }
+            else
+            {
+                textBoxAutore1.BackColor = SystemColors.Window;
+            }
             textBoxTitolo2.Text = AreaArchivio.NLibro.Titolo2;
+            if (AreaArchivio.NLibro.Titolo2DaConfermare)
+            {
+                textBoxTitolo2.BackColor = SystemColors.Info;
+            }
+            else
+            {
+                textBoxAutore2.BackColor = SystemColors.Window;
+            }
             textBoxTitolo3.Text = AreaArchivio.NLibro.Titolo3;
+            if (AreaArchivio.NLibro.Titolo3DaConfermare)
+            {
+                textBoxTitolo3.BackColor = SystemColors.Info;
+            }
+            else
+            {
+                textBoxAutore3.BackColor = SystemColors.Window;
+            }
 
             // aggiorna volume - volumi
             textBoxVolumi.Text = AreaArchivio.NLibro.Volume;
+            if (AreaArchivio.NLibro.VolumeDaConfermare)
+            {
+                textBoxVolumi.BackColor = SystemColors.Info;
+            }
+            else
+            {
+                textBoxVolumi.BackColor = SystemColors.Window;
+            }
             textBoxTotVolumi.Text = AreaArchivio.NLibro.Volumi;
+            if (AreaArchivio.NLibro.VolumiDaConfermare)
+            {
+                textBoxTotVolumi.BackColor = SystemColors.Info;
+            }
+            else
+            {
+                textBoxTotVolumi.BackColor = SystemColors.Window;
+            }
             checkBoxVolumi.Checked = AreaArchivio.NLibro.AbilitaVolume;
 
             // Aggiorna i campi comboBox
@@ -113,10 +178,31 @@ namespace GAlbum
             {
                 comboBoxSupporto.SelectedIndex = indice;
             }
+            if (AreaArchivio.NLibro.SupportoDaConfermare)
+            {
+                comboBoxSupporto.BackColor = SystemColors.Info;
+            }
+            else
+            {
+                comboBoxSupporto.BackColor = SystemColors.Window;
+            }
             checkBoxSupporto.Checked = AreaArchivio.NLibro.AbilitaSupporto;
-
+            
+   
             // aggiorna data
             dateTimePickerDataLettura.Value = AreaArchivio.NLibro.Data;
+            if (AreaArchivio.NLibro.DataDaConfermare)
+            {
+                groupBoxDataLettura2.BackColor = SystemColors.Info; ;
+                dateTimePickerDataLettura.BackColor = SystemColors.Info;
+                dateTimePickerDataLettura.CalendarTitleBackColor = SystemColors.Info;
+                dateTimePickerDataLettura.CalendarMonthBackground = SystemColors.Info;
+            }
+            else
+            {
+                groupBoxDataLettura2.BackColor = SystemColors.Window;
+                dateTimePickerDataLettura.BackColor = SystemColors.Window;
+            }
             checkBoxDataLettura.Checked = AreaArchivio.NLibro.AbilitaData;
 
 
