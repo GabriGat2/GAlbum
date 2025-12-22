@@ -126,7 +126,7 @@ namespace GAlbum
             }
             else
             {
-                textBoxAutore1.BackColor = SystemColors.Window;
+                textBoxTitolo1.BackColor = SystemColors.Window;
             }
             textBoxTitolo2.Text = AreaArchivio.NLibro.Titolo2;
             if (AreaArchivio.NLibro.Titolo2DaConfermare)
@@ -135,7 +135,7 @@ namespace GAlbum
             }
             else
             {
-                textBoxAutore2.BackColor = SystemColors.Window;
+                textBoxTitolo2.BackColor = SystemColors.Window;
             }
             textBoxTitolo3.Text = AreaArchivio.NLibro.Titolo3;
             if (AreaArchivio.NLibro.Titolo3DaConfermare)
@@ -144,7 +144,7 @@ namespace GAlbum
             }
             else
             {
-                textBoxAutore3.BackColor = SystemColors.Window;
+                textBoxTitolo3.BackColor = SystemColors.Window;
             }
 
             // aggiorna volume - volumi
@@ -194,14 +194,14 @@ namespace GAlbum
             if (AreaArchivio.NLibro.DataDaConfermare)
             {
                 groupBoxDataLettura2.BackColor = SystemColors.Info; ;
-                dateTimePickerDataLettura.BackColor = SystemColors.Info;
-                dateTimePickerDataLettura.CalendarTitleBackColor = SystemColors.Info;
-                dateTimePickerDataLettura.CalendarMonthBackground = SystemColors.Info;
+                //dateTimePickerDataLettura.BackColor = SystemColors.Info;
+                //dateTimePickerDataLettura.CalendarTitleBackColor = SystemColors.Info;
+                //dateTimePickerDataLettura.CalendarMonthBackground = SystemColors.Info;
             }
             else
             {
                 groupBoxDataLettura2.BackColor = SystemColors.Window;
-                dateTimePickerDataLettura.BackColor = SystemColors.Window;
+                //dateTimePickerDataLettura.BackColor = SystemColors.Window;
             }
             checkBoxDataLettura.Checked = AreaArchivio.NLibro.AbilitaData;
 
@@ -252,6 +252,10 @@ namespace GAlbum
 
             // aggiona il nome del file destinazione 
             textBoxNomeFileDst.Text = AreaArchivio.NLibro.NomeFileLibro;
+
+            // Aggiorna l' abilitazione del button assegna
+            AggiornaAbilitazioneAssegna();
+
         }
         /// <summary>
         /// Autore 3 modificato
@@ -274,7 +278,7 @@ namespace GAlbum
         private void textBoxTitolo1_TextChanged(object sender, EventArgs e)
         {
             // Assegna titolo 1
-            AreaArchivio.NLibro.Titolo1 = textBoxTitolo1.Text;
+           AreaArchivio.NLibro.Titolo1 = textBoxTitolo1.Text;
             AggiornaForm();
         }
         /// <summary>
@@ -451,7 +455,65 @@ namespace GAlbum
                 this.Close();
             }
         }
+        /// <summary>
+        /// Entra nella text box Autore 1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxAutore1_Enter(object sender, EventArgs e)
+        {
+            AreaArchivio.NLibro.Autore1DaConfermare = false;
+            textBoxAutore1.BackColor = SystemColors.Window;
+            AggiornaAbilitazioneAssegna();
+        }
+        /// <summary>
+        ///  Entra nella text box Autore 2
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxAutore2_Enter(object sender, EventArgs e)
+        {
+            AreaArchivio.NLibro.Autore2DaConfermare = false;
+            textBoxAutore2.BackColor = SystemColors.Window;
+            AggiornaAbilitazioneAssegna();
+        }
+        /// <summary>
+        /// Entra nella text box Autore 3
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxAutore3_Enter(object sender, EventArgs e)
+        {
+            AreaArchivio.NLibro.Autore3DaConfermare = false;
+            textBoxAutore3.BackColor = SystemColors.Window;
+            AggiornaAbilitazioneAssegna();
+        }
+        /// <summary>
+        /// Aggiorna l'abilitazione del button Assegna
+        /// </summary>
+        private void AggiornaAbilitazioneAssegna()
+        {
+            // disabilita but Assegna 
+            butAssegna.Enabled = false;
 
+            // analizza i campi autore 
+            if (AreaArchivio.NLibro.Autore1DaConfermare)
+            {
+                return;
+            }
+            if (AreaArchivio.NLibro.Autore2DaConfermare)
+            {
+                return;
+            }
+            if (AreaArchivio.NLibro.Autore3DaConfermare)
+            {
+                return;
+            }
+
+            // abilita but Assegna 
+            butAssegna.Enabled = true;
+
+        }
 
     }//fine della classe  FormNomeLibro
 }// fine del name scope

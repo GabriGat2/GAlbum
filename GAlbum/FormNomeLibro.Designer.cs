@@ -49,6 +49,7 @@
             this.textBoxPathSrc = new System.Windows.Forms.TextBox();
             this.groupBoxAutore = new System.Windows.Forms.GroupBox();
             this.groupBoxDataLettura = new System.Windows.Forms.GroupBox();
+            this.groupBoxDataLettura2 = new System.Windows.Forms.GroupBox();
             this.dateTimePickerDataLettura = new System.Windows.Forms.DateTimePicker();
             this.checkBoxDataLettura = new System.Windows.Forms.CheckBox();
             this.groupBoxVolumi = new System.Windows.Forms.GroupBox();
@@ -71,15 +72,14 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.textBoxTitolo3 = new System.Windows.Forms.TextBox();
-            this.groupBoxDataLettura2 = new System.Windows.Forms.GroupBox();
             this.groupBoxFileSorgente.SuspendLayout();
             this.groupBoxAutore.SuspendLayout();
             this.groupBoxDataLettura.SuspendLayout();
+            this.groupBoxDataLettura2.SuspendLayout();
             this.groupBoxVolumi.SuspendLayout();
             this.groupBoxDestinazione.SuspendLayout();
             this.groupBoxSupporto.SuspendLayout();
             this.groupBoxTitoli.SuspendLayout();
-            this.groupBoxDataLettura2.SuspendLayout();
             this.SuspendLayout();
             // 
             // butAssegna
@@ -116,6 +116,7 @@
             this.textBoxAutore1.Size = new System.Drawing.Size(730, 20);
             this.textBoxAutore1.TabIndex = 4;
             this.textBoxAutore1.TextChanged += new System.EventHandler(this.textBoxAutore1_TextChanged);
+            this.textBoxAutore1.Enter += new System.EventHandler(this.textBoxAutore1_Enter);
             // 
             // label2
             // 
@@ -133,6 +134,7 @@
             this.textBoxAutore2.Size = new System.Drawing.Size(730, 20);
             this.textBoxAutore2.TabIndex = 6;
             this.textBoxAutore2.TextChanged += new System.EventHandler(this.textBoxAutore2_TextChanged);
+            this.textBoxAutore2.Enter += new System.EventHandler(this.textBoxAutore2_Enter);
             // 
             // label3
             // 
@@ -150,6 +152,7 @@
             this.textBoxAutore3.Size = new System.Drawing.Size(730, 20);
             this.textBoxAutore3.TabIndex = 8;
             this.textBoxAutore3.TextChanged += new System.EventHandler(this.textBoxAutore3_TextChanged);
+            this.textBoxAutore3.Enter += new System.EventHandler(this.textBoxAutore3_Enter);
             // 
             // label4
             // 
@@ -279,6 +282,15 @@
             this.groupBoxDataLettura.TabIndex = 21;
             this.groupBoxDataLettura.TabStop = false;
             this.groupBoxDataLettura.Text = "DataLettura";
+            // 
+            // groupBoxDataLettura2
+            // 
+            this.groupBoxDataLettura2.Controls.Add(this.dateTimePickerDataLettura);
+            this.groupBoxDataLettura2.Location = new System.Drawing.Point(119, 9);
+            this.groupBoxDataLettura2.Name = "groupBoxDataLettura2";
+            this.groupBoxDataLettura2.Size = new System.Drawing.Size(220, 40);
+            this.groupBoxDataLettura2.TabIndex = 21;
+            this.groupBoxDataLettura2.TabStop = false;
             // 
             // dateTimePickerDataLettura
             // 
@@ -498,15 +510,6 @@
             this.textBoxTitolo3.TabIndex = 8;
             this.textBoxTitolo3.TextChanged += new System.EventHandler(this.textBoxTitolo3_TextChanged);
             // 
-            // groupBoxDataLettura2
-            // 
-            this.groupBoxDataLettura2.Controls.Add(this.dateTimePickerDataLettura);
-            this.groupBoxDataLettura2.Location = new System.Drawing.Point(119, 9);
-            this.groupBoxDataLettura2.Name = "groupBoxDataLettura2";
-            this.groupBoxDataLettura2.Size = new System.Drawing.Size(220, 40);
-            this.groupBoxDataLettura2.TabIndex = 21;
-            this.groupBoxDataLettura2.TabStop = false;
-            // 
             // FormNomeLibro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -528,6 +531,7 @@
             this.groupBoxAutore.PerformLayout();
             this.groupBoxDataLettura.ResumeLayout(false);
             this.groupBoxDataLettura.PerformLayout();
+            this.groupBoxDataLettura2.ResumeLayout(false);
             this.groupBoxVolumi.ResumeLayout(false);
             this.groupBoxVolumi.PerformLayout();
             this.groupBoxDestinazione.ResumeLayout(false);
@@ -536,7 +540,6 @@
             this.groupBoxSupporto.PerformLayout();
             this.groupBoxTitoli.ResumeLayout(false);
             this.groupBoxTitoli.PerformLayout();
-            this.groupBoxDataLettura2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
