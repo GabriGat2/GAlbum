@@ -72,6 +72,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.textBoxTitolo3 = new System.Windows.Forms.TextBox();
+            this.butDaConfermare = new System.Windows.Forms.Button();
             this.groupBoxFileSorgente.SuspendLayout();
             this.groupBoxAutore.SuspendLayout();
             this.groupBoxDataLettura.SuspendLayout();
@@ -510,11 +511,22 @@
             this.textBoxTitolo3.TabIndex = 8;
             this.textBoxTitolo3.TextChanged += new System.EventHandler(this.textBoxTitolo3_TextChanged);
             // 
+            // butDaConfermare
+            // 
+            this.butDaConfermare.Location = new System.Drawing.Point(564, 691);
+            this.butDaConfermare.Name = "butDaConfermare";
+            this.butDaConfermare.Size = new System.Drawing.Size(178, 23);
+            this.butDaConfermare.TabIndex = 24;
+            this.butDaConfermare.Text = "Da Confermare generico";
+            this.butDaConfermare.UseVisualStyleBackColor = true;
+            this.butDaConfermare.Click += new System.EventHandler(this.butDaConfermare_Click);
+            // 
             // FormNomeLibro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(890, 726);
+            this.Controls.Add(this.butDaConfermare);
             this.Controls.Add(this.groupBoxTitoli);
             this.Controls.Add(this.groupBoxSupporto);
             this.Controls.Add(this.groupBoxDestinazione);
@@ -590,5 +602,6 @@
         private System.Windows.Forms.ComboBox comboBoxSupporto;
         private System.Windows.Forms.Button butDelete;
         private System.Windows.Forms.GroupBox groupBoxDataLettura2;
+        private System.Windows.Forms.Button butDaConfermare;
     }
 }

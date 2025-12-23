@@ -496,25 +496,65 @@ namespace GAlbum
             // disabilita but Assegna 
             butAssegna.Enabled = false;
 
+            // abilita but DaConfermare
+            butDaConfermare.Enabled = true;
+
+
             // analizza i campi autore 
             if (AreaArchivio.NLibro.Autore1DaConfermare)
             {
+                butDaConfermare.Text = "Autore 1 da confermare";
                 return;
             }
             if (AreaArchivio.NLibro.Autore2DaConfermare)
+
             {
+                butDaConfermare.Text = "Autore 2 da confermare";
                 return;
             }
             if (AreaArchivio.NLibro.Autore3DaConfermare)
             {
+                butDaConfermare.Text = "Autore 3 da confermare";
                 return;
             }
 
             // abilita but Assegna 
             butAssegna.Enabled = true;
 
+            // abilita but DaConfermare
+            butDaConfermare.Text = "Tutti i campi sono stati confermati";
+            butDaConfermare.Enabled = false;
         }
+        /// <summary>
+        /// Conferma il campo selezionato
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butDaConfermare_Click(object sender, EventArgs e)
+        {
+            //AreaArchivio.NLibro.Autore1DaConfermare = false;
+            //textBoxAutore1.BackColor = SystemColors.Window;
+            
+            //AreaArchivio.NLibro.Autore2DaConfermare = false;
+            //textBoxAutore2.BackColor = SystemColors.Window;
+            if (butDaConfermare.Text== "Autore 1 da confermare")
+            {
+                AreaArchivio.NLibro.Autore1DaConfermare = false;
+                textBoxAutore1.BackColor = SystemColors.Window;
+            }
+            else if (butDaConfermare.Text == "Autore 2 da confermare")
+            {
+                AreaArchivio.NLibro.Autore2DaConfermare = false;
+                textBoxAutore2.BackColor = SystemColors.Window;
 
+            }
+            else if (butDaConfermare.Text == "Autore 3 da confermare")
+            {
+                AreaArchivio.NLibro.Autore3DaConfermare = false;
+                textBoxAutore3.BackColor = SystemColors.Window;
+            }
+            AggiornaAbilitazioneAssegna();
+        }
     }//fine della classe  FormNomeLibro
 }// fine del name scope
 
