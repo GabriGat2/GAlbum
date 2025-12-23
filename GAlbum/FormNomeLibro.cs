@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GAlbum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -522,6 +523,27 @@ namespace GAlbum
                 return;
             }
 
+
+            // analizza i campi titolo 
+            if (AreaArchivio.NLibro.Titolo1DaConfermare)
+            {
+                butDaConfermare.Text = "Titolo 1 da confermare";
+                AreaArchivio.NLibro.CampoAttivo = CNomeLibro.CampiNomeLibro.Titolo1;
+                return;
+            }
+            if (AreaArchivio.NLibro.Titolo2DaConfermare)
+
+            {
+                butDaConfermare.Text = "Titolo 2 da confermare";
+                AreaArchivio.NLibro.CampoAttivo = CNomeLibro.CampiNomeLibro.Titolo2;
+                return;
+            }
+            if (AreaArchivio.NLibro.Titolo3DaConfermare)
+            {
+                butDaConfermare.Text = "Titolo 3 da confermare";
+                AreaArchivio.NLibro.CampoAttivo = CNomeLibro.CampiNomeLibro.Titolo3;
+                return;
+            }
             // abilita but Assegna 
             butAssegna.Enabled = true;
 
@@ -553,10 +575,16 @@ namespace GAlbum
                     textBoxAutore3.BackColor = SystemColors.Window;
                     break;
                 case CNomeLibro.CampiNomeLibro.Titolo1:
+                    AreaArchivio.NLibro.Titolo1DaConfermare = false;
+                    textBoxTitolo1.BackColor = SystemColors.Window;
                     break;
                 case CNomeLibro.CampiNomeLibro.Titolo2:
+                    AreaArchivio.NLibro.Titolo2DaConfermare = false;
+                    textBoxTitolo2.BackColor = SystemColors.Window;
                     break;
                 case CNomeLibro.CampiNomeLibro.Titolo3:
+                    AreaArchivio.NLibro.Titolo3DaConfermare = false;
+                    textBoxTitolo3.BackColor = SystemColors.Window;
                     break;
                 case CNomeLibro.CampiNomeLibro.Volume:
                     break;
@@ -594,6 +622,21 @@ namespace GAlbum
             //}
             AggiornaAbilitazioneAssegna();
         }
+        /// <summary>
+        /// Entra nella text box titolo 1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxTitolo1_Enter(object sender, EventArgs e)
+        {
+            AreaArchivio.NLibro.Titolo1DaConfermare = false;
+            textBoxTitolo1.BackColor = SystemColors.Window;
+            AggiornaAbilitazioneAssegna();
+        }
+
+    
+            
+
     }//fine della classe  FormNomeLibro
 }// fine del name scope
 

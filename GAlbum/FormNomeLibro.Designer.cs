@@ -484,6 +484,7 @@
             this.textBoxTitolo1.Size = new System.Drawing.Size(730, 20);
             this.textBoxTitolo1.TabIndex = 4;
             this.textBoxTitolo1.TextChanged += new System.EventHandler(this.textBoxTitolo1_TextChanged);
+            this.textBoxTitolo1.Enter += new System.EventHandler(this.textBoxTitolo1_Enter);
             // 
             // label17
             // 
