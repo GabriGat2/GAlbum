@@ -201,6 +201,24 @@ namespace GAlbum
         public string NomeFileLibro { get => nomeFileLibro; /*set => nomeFileLibro = value;*/ }
         private string nomeFileLibro;
 
+        // ------------------------------------------------------------------------------------------------------------------
+        // Elenco campi
+        public enum CampiNomeLibro
+        {
+            None = 0,
+            Autore1,
+            Autore2,
+            Autore3,
+            Titolo1,
+            Titolo2,
+            Titolo3,
+            Volume,
+            Volumi,
+            Data,
+            Supporto
+        }
+
+        public CampiNomeLibro CampoAttivo = CampiNomeLibro.None;
 
         // ------------------------------------------------------------------------------------------------------------------
         // Caratteri accentati 

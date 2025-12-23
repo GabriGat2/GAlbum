@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -504,17 +505,20 @@ namespace GAlbum
             if (AreaArchivio.NLibro.Autore1DaConfermare)
             {
                 butDaConfermare.Text = "Autore 1 da confermare";
+                AreaArchivio.NLibro.CampoAttivo = CNomeLibro.CampiNomeLibro.Autore1;
                 return;
             }
             if (AreaArchivio.NLibro.Autore2DaConfermare)
 
             {
                 butDaConfermare.Text = "Autore 2 da confermare";
+                AreaArchivio.NLibro.CampoAttivo = CNomeLibro.CampiNomeLibro.Autore2;
                 return;
             }
             if (AreaArchivio.NLibro.Autore3DaConfermare)
             {
                 butDaConfermare.Text = "Autore 3 da confermare";
+                AreaArchivio.NLibro.CampoAttivo = CNomeLibro.CampiNomeLibro.Autore3;
                 return;
             }
 
@@ -532,27 +536,62 @@ namespace GAlbum
         /// <param name="e"></param>
         private void butDaConfermare_Click(object sender, EventArgs e)
         {
-            //AreaArchivio.NLibro.Autore1DaConfermare = false;
-            //textBoxAutore1.BackColor = SystemColors.Window;
-            
-            //AreaArchivio.NLibro.Autore2DaConfermare = false;
-            //textBoxAutore2.BackColor = SystemColors.Window;
-            if (butDaConfermare.Text== "Autore 1 da confermare")
+            switch (AreaArchivio.NLibro.CampoAttivo)
             {
-                AreaArchivio.NLibro.Autore1DaConfermare = false;
-                textBoxAutore1.BackColor = SystemColors.Window;
+                case CNomeLibro.CampiNomeLibro.None:
+                    break;
+                case CNomeLibro.CampiNomeLibro.Autore1:
+                    AreaArchivio.NLibro.Autore1DaConfermare = false;
+                    textBoxAutore1.BackColor = SystemColors.Window;
+                    break;
+                case CNomeLibro.CampiNomeLibro.Autore2:
+                    AreaArchivio.NLibro.Autore2DaConfermare = false;
+                    textBoxAutore2.BackColor = SystemColors.Window;
+                    break;
+                case CNomeLibro.CampiNomeLibro.Autore3:
+                    AreaArchivio.NLibro.Autore3DaConfermare = false;
+                    textBoxAutore3.BackColor = SystemColors.Window;
+                    break;
+                case CNomeLibro.CampiNomeLibro.Titolo1:
+                    break;
+                case CNomeLibro.CampiNomeLibro.Titolo2:
+                    break;
+                case CNomeLibro.CampiNomeLibro.Titolo3:
+                    break;
+                case CNomeLibro.CampiNomeLibro.Volume:
+                    break;
+                case CNomeLibro.CampiNomeLibro.Volumi:
+                    break;
+                case CNomeLibro.CampiNomeLibro.Data:
+                    break;
+                case CNomeLibro.CampiNomeLibro.Supporto:
+                    break;
+                default:
+                    break;
             }
-            else if (butDaConfermare.Text == "Autore 2 da confermare")
-            {
-                AreaArchivio.NLibro.Autore2DaConfermare = false;
-                textBoxAutore2.BackColor = SystemColors.Window;
 
-            }
-            else if (butDaConfermare.Text == "Autore 3 da confermare")
-            {
-                AreaArchivio.NLibro.Autore3DaConfermare = false;
-                textBoxAutore3.BackColor = SystemColors.Window;
-            }
+
+            ////AreaArchivio.NLibro.Autore1DaConfermare = false;
+            ////textBoxAutore1.BackColor = SystemColors.Window;
+
+            ////AreaArchivio.NLibro.Autore2DaConfermare = false;
+            ////textBoxAutore2.BackColor = SystemColors.Window;
+            //if (butDaConfermare.Text== "Autore 1 da confermare")
+            //{
+            //    AreaArchivio.NLibro.Autore1DaConfermare = false;
+            //    textBoxAutore1.BackColor = SystemColors.Window;
+            //}
+            //else if (butDaConfermare.Text == "Autore 2 da confermare")
+            //{
+            //    AreaArchivio.NLibro.Autore2DaConfermare = false;
+            //    textBoxAutore2.BackColor = SystemColors.Window;
+
+            //}
+            //else if (butDaConfermare.Text == "Autore 3 da confermare")
+            //{
+            //    AreaArchivio.NLibro.Autore3DaConfermare = false;
+            //    textBoxAutore3.BackColor = SystemColors.Window;
+            //}
             AggiornaAbilitazioneAssegna();
         }
     }//fine della classe  FormNomeLibro
