@@ -111,7 +111,7 @@ namespace GAlbum
                 } 
             }
 
-            // attiva l'archivio selezionato
+            // Attiva l'archivio selezionato
             AreaArchivio.DirArchivioAttivo = dirArchivio;
 
             // Aggiorna il form

@@ -1,6 +1,6 @@
 ﻿namespace GAlbum
 {
-    partial class FormSelezioneFoto
+    partial class FormSelezioneLibro
     {
         /// <summary>
         /// Required designer variable.
@@ -28,19 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Nodo1");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Nodo2");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Nodo5");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Nodo4", new System.Windows.Forms.TreeNode[] {
-            treeNode9});
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Nodo3", new System.Windows.Forms.TreeNode[] {
-            treeNode10});
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Nodo0", new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode8,
-            treeNode11});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Nodo1");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Nodo2");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Nodo5");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Nodo4", new System.Windows.Forms.TreeNode[] {
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Nodo3", new System.Windows.Forms.TreeNode[] {
+            treeNode4});
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Nodo0", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode5});
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBoxPath = new System.Windows.Forms.GroupBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.textBoxDebug2 = new System.Windows.Forms.TextBox();
             this.textBoxSorgente = new System.Windows.Forms.TextBox();
             this.textBoxDestinazione = new System.Windows.Forms.TextBox();
@@ -55,13 +56,13 @@
             this.treeViewDestinazione = new System.Windows.Forms.TreeView();
             this.splitContainer1B2B3 = new System.Windows.Forms.SplitContainer();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.butLibro = new System.Windows.Forms.Button();
             this.butNonAssegna = new System.Windows.Forms.Button();
             this.butAssegna = new System.Windows.Forms.Button();
             this.textBoxDebug = new System.Windows.Forms.TextBox();
             this.textBoxPathFoto = new System.Windows.Forms.TextBox();
             this.butPrecedente = new System.Windows.Forms.Button();
             this.butSuccessiva = new System.Windows.Forms.Button();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -118,6 +119,14 @@
             this.groupBoxPath.TabIndex = 13;
             this.groupBoxPath.TabStop = false;
             this.groupBoxPath.Text = "Selezione di sorgente e destinazione";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(308, 16);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(479, 14);
+            this.progressBar1.TabIndex = 14;
+            this.progressBar1.Visible = false;
             // 
             // textBoxDebug2
             // 
@@ -243,20 +252,20 @@
             this.treeViewDestinazione.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewDestinazione.Location = new System.Drawing.Point(3, 16);
             this.treeViewDestinazione.Name = "treeViewDestinazione";
-            treeNode7.Name = "Nodo1";
-            treeNode7.Text = "Nodo1";
-            treeNode8.Name = "Nodo2";
-            treeNode8.Text = "Nodo2";
-            treeNode9.Name = "Nodo5";
-            treeNode9.Text = "Nodo5";
-            treeNode10.Name = "Nodo4";
-            treeNode10.Text = "Nodo4";
-            treeNode11.Name = "Nodo3";
-            treeNode11.Text = "Nodo3";
-            treeNode12.Name = "Nodo0";
-            treeNode12.Text = "Nodo0";
+            treeNode1.Name = "Nodo1";
+            treeNode1.Text = "Nodo1";
+            treeNode2.Name = "Nodo2";
+            treeNode2.Text = "Nodo2";
+            treeNode3.Name = "Nodo5";
+            treeNode3.Text = "Nodo5";
+            treeNode4.Name = "Nodo4";
+            treeNode4.Text = "Nodo4";
+            treeNode5.Name = "Nodo3";
+            treeNode5.Text = "Nodo3";
+            treeNode6.Name = "Nodo0";
+            treeNode6.Text = "Nodo0";
             this.treeViewDestinazione.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode12});
+            treeNode6});
             this.treeViewDestinazione.Size = new System.Drawing.Size(141, 613);
             this.treeViewDestinazione.TabIndex = 0;
             this.treeViewDestinazione.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDestinazione_AfterSelect);
@@ -275,6 +284,7 @@
             // 
             // splitContainer1B2B3.Panel2
             // 
+            this.splitContainer1B2B3.Panel2.Controls.Add(this.butLibro);
             this.splitContainer1B2B3.Panel2.Controls.Add(this.butNonAssegna);
             this.splitContainer1B2B3.Panel2.Controls.Add(this.butAssegna);
             this.splitContainer1B2B3.Panel2.Controls.Add(this.textBoxDebug);
@@ -294,6 +304,16 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            // 
+            // butLibro
+            // 
+            this.butLibro.Location = new System.Drawing.Point(451, 35);
+            this.butLibro.Name = "butLibro";
+            this.butLibro.Size = new System.Drawing.Size(75, 23);
+            this.butLibro.TabIndex = 12;
+            this.butLibro.Text = "Libro";
+            this.butLibro.UseVisualStyleBackColor = true;
+            this.butLibro.Click += new System.EventHandler(this.butLibro_Click);
             // 
             // butNonAssegna
             // 
@@ -350,22 +370,14 @@
             this.butSuccessiva.UseVisualStyleBackColor = true;
             this.butSuccessiva.Click += new System.EventHandler(this.butSuccessiva_Click);
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(308, 16);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(479, 14);
-            this.progressBar1.TabIndex = 14;
-            this.progressBar1.Visible = false;
-            // 
-            // FormSelezioneFoto
+            // FormSelezioneLibro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(890, 726);
             this.Controls.Add(this.splitContainer1);
-            this.Name = "FormSelezioneFoto";
-            this.Text = "Selezione Foto";
+            this.Name = "FormSelezioneLibro";
+            this.Text = "Selezione libro";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -417,5 +429,6 @@
         private System.Windows.Forms.Button butNonAssegna;
         private System.Windows.Forms.Button butAssegna;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button butLibro;
     }
 }

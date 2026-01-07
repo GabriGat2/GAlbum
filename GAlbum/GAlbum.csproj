@@ -69,7 +69,15 @@
     <Compile Include="CInfoTreeViewSmistati.cs" />
     <Compile Include="CInfoTreeViewSorgente.cs" />
     <Compile Include="CNomeFile.cs" />
+    <Compile Include="CNomeLibro.cs" />
+    <Compile Include="CScatolaNera.cs" />
     <Compile Include="CStatisticaOperazioni.cs" />
+    <Compile Include="FormNomeLibro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNomeLibro.Designer.cs">
+      <DependentUpon>FormNomeLibro.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSelezionaPerData.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +114,12 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSelezioneLibro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSelezioneLibro.Designer.cs">
+      <DependentUpon>FormSelezioneLibro.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSelezioneFoto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +135,9 @@
     <Compile Include="GstErrori.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormNomeLibro.resx">
+      <DependentUpon>FormNomeLibro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormSelezionaPerData.resx">
       <DependentUpon>FormSelezionaPerData.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,6 +155,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSelezioneLibro.resx">
+      <DependentUpon>FormSelezioneLibro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSelezioneFoto.resx">
       <DependentUpon>FormSelezioneFoto.cs</DependentUpon>

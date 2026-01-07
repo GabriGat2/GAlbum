@@ -36,12 +36,15 @@ namespace GAlbum
         /// </summary>
         private void InizializzaClasse()
         {
+            // crea la scatola Nera
+            AreaArchivio.SNera = new CScatolaNera(ref AreaArchivio);
+            
             AggiornaForm();
         }
-        // attiva il form per selezionare le foto
+        // Attiva il form per selezionare le foto
         private void ButSelezioneFoto_Click(object sender, EventArgs e)
         {
-            FormSelezioneFoto dlg = new FormSelezioneFoto();
+            FormSelezioneFoto dlg = new FormSelezioneFoto(ref this.AreaArchivio);
             dlg.ShowDialog();           
         }
         /// <summary>
@@ -162,6 +165,12 @@ namespace GAlbum
         {
             FormSelezionaPerData formSelezionaPerData = new FormSelezionaPerData(ref this.AreaArchivio);
             formSelezionaPerData.ShowDialog();
+        }
+        // Attiva il form per selezionare i libri
+        private void butSelezioneLibro_Click(object sender, EventArgs e)
+        {
+            FormSelezioneLibro dlg = new FormSelezioneLibro (ref this.AreaArchivio);
+            dlg.ShowDialog();
         }
     }// fine class FormMain
 }// fine namespace GAlbum
