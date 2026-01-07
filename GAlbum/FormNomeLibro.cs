@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
@@ -150,23 +151,23 @@ namespace GAlbum
             }
 
             // aggiorna volume - volumi
-            textBoxVolumi.Text = AreaArchivio.NLibro.Volume;
+            textBoxVolume.Text = AreaArchivio.NLibro.Volume;
             if (AreaArchivio.NLibro.VolumeDaConfermare)
+            {
+                textBoxVolume.BackColor = SystemColors.Info;
+            }
+            else
+            {
+                textBoxVolume.BackColor = SystemColors.Window;
+            }
+            textBoxVolumi.Text = AreaArchivio.NLibro.Volumi;
+            if (AreaArchivio.NLibro.VolumiDaConfermare)
             {
                 textBoxVolumi.BackColor = SystemColors.Info;
             }
             else
             {
                 textBoxVolumi.BackColor = SystemColors.Window;
-            }
-            textBoxTotVolumi.Text = AreaArchivio.NLibro.Volumi;
-            if (AreaArchivio.NLibro.VolumiDaConfermare)
-            {
-                textBoxTotVolumi.BackColor = SystemColors.Info;
-            }
-            else
-            {
-                textBoxTotVolumi.BackColor = SystemColors.Window;
             }
             checkBoxVolumi.Checked = AreaArchivio.NLibro.AbilitaVolume;
 
@@ -310,10 +311,10 @@ namespace GAlbum
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void textBoxVolumi_TextChanged(object sender, EventArgs e)
+        private void textBoxVolume_TextChanged(object sender, EventArgs e)
         {
             // Assegna Voulume
-            AreaArchivio.NLibro.Volume = textBoxVolumi.Text;
+            AreaArchivio.NLibro.Volume = textBoxVolume.Text;
             AggiornaForm();
         }
         /// <summary>
@@ -324,7 +325,7 @@ namespace GAlbum
         private void textBoxTotVolumi_TextChanged(object sender, EventArgs e)
         {
             // Assegna Voulume
-            AreaArchivio.NLibro.Volumi = textBoxTotVolumi.Text;
+            AreaArchivio.NLibro.Volumi = textBoxVolumi.Text;
             AggiornaForm();
         }
         /// <summary>
@@ -633,10 +634,79 @@ namespace GAlbum
             textBoxTitolo1.BackColor = SystemColors.Window;
             AggiornaAbilitazioneAssegna();
         }
+        /// <summary>
+        /// Entra nella text box titolo 2
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxTitolo2_Enter(object sender, EventArgs e)
+        {
+            AreaArchivio.NLibro.Titolo2DaConfermare = false;
+            textBoxTitolo2.BackColor = SystemColors.Window;
+            AggiornaAbilitazioneAssegna();
+        }
+        /// <summary>
+        /// Entra nella text box titolo 3
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxTitolo3_Enter(object sender, EventArgs e)
+        {
+            AreaArchivio.NLibro.Titolo3DaConfermare = false;
+            textBoxTitolo3.BackColor = SystemColors.Window;
+            AggiornaAbilitazioneAssegna();
+        }
+        /// <summary>
+        /// Entra nella text box Volume
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxVolume_Enter(object sender, EventArgs e)
+        {
+            AreaArchivio.NLibro.VolumeDaConfermare = false;
+            textBoxVolume.BackColor = SystemColors.Window;
+            AggiornaAbilitazioneAssegna();
+        }
+        /// <summary>
+        /// Entra nella text box Volumi
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxVolumi_Enter(object sender, EventArgs e)
+        {
+            AreaArchivio.NLibro.VolumiDaConfermare = false;
+            textBoxVolumi.BackColor = SystemColors.Window;
+            AggiornaAbilitazioneAssegna();
+        }
+        /// <summary>
+        /// Entra nella comboBox Supporto
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBoxSupporto_Enter(object sender, EventArgs e)
+        {
+            AreaArchivio.NLibro.SupportoDaConfermare = false;
+            comboBoxSupporto.BackColor = SystemColors.Window;
+            AggiornaAbilitazioneAssegna();
+        }
+        /// <summary>
+        /// Entra nella groupBoxDataLettura
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void groupBoxDataLettura2_Enter(object sender, EventArgs e)
+        {
+            AreaArchivio.NLibro.DataDaConfermare = false;
+            groupBoxDataLettura2.BackColor = SystemColors.Window;
+            AggiornaAbilitazioneAssegna();
+        }
 
-    
-            
-
+        private void groupBoxDataLettura2_MouseHover(object sender, EventArgs e)
+        {
+            AreaArchivio.NLibro.DataDaConfermare = false;
+            groupBoxDataLettura2.BackColor = SystemColors.Window;
+            AggiornaAbilitazioneAssegna();
+        }
     }//fine della classe  FormNomeLibro
 }// fine del name scope
 

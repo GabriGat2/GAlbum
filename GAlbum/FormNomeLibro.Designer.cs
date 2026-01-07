@@ -37,9 +37,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxAutore3 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBoxTotVolumi = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.textBoxVolumi = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBoxVolume = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.checkBoxVolumi = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -164,13 +164,14 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "Autore 3";
             // 
-            // textBoxTotVolumi
+            // textBoxVolumi
             // 
-            this.textBoxTotVolumi.Location = new System.Drawing.Point(351, 19);
-            this.textBoxTotVolumi.Name = "textBoxTotVolumi";
-            this.textBoxTotVolumi.Size = new System.Drawing.Size(144, 20);
-            this.textBoxTotVolumi.TabIndex = 12;
-            this.textBoxTotVolumi.TextChanged += new System.EventHandler(this.textBoxTotVolumi_TextChanged);
+            this.textBoxVolumi.Location = new System.Drawing.Point(351, 19);
+            this.textBoxVolumi.Name = "textBoxVolumi";
+            this.textBoxVolumi.Size = new System.Drawing.Size(144, 20);
+            this.textBoxVolumi.TabIndex = 12;
+            this.textBoxVolumi.TextChanged += new System.EventHandler(this.textBoxTotVolumi_TextChanged);
+            this.textBoxVolumi.Enter += new System.EventHandler(this.textBoxVolumi_Enter);
             // 
             // label6
             // 
@@ -181,13 +182,14 @@
             this.label6.TabIndex = 11;
             this.label6.Text = "Volumi";
             // 
-            // textBoxVolumi
+            // textBoxVolume
             // 
-            this.textBoxVolumi.Location = new System.Drawing.Point(120, 22);
-            this.textBoxVolumi.Name = "textBoxVolumi";
-            this.textBoxVolumi.Size = new System.Drawing.Size(144, 20);
-            this.textBoxVolumi.TabIndex = 14;
-            this.textBoxVolumi.TextChanged += new System.EventHandler(this.textBoxVolumi_TextChanged);
+            this.textBoxVolume.Location = new System.Drawing.Point(120, 22);
+            this.textBoxVolume.Name = "textBoxVolume";
+            this.textBoxVolume.Size = new System.Drawing.Size(144, 20);
+            this.textBoxVolume.TabIndex = 14;
+            this.textBoxVolume.TextChanged += new System.EventHandler(this.textBoxVolume_TextChanged);
+            this.textBoxVolume.Enter += new System.EventHandler(this.textBoxVolume_Enter);
             // 
             // label7
             // 
@@ -289,9 +291,11 @@
             this.groupBoxDataLettura2.Controls.Add(this.dateTimePickerDataLettura);
             this.groupBoxDataLettura2.Location = new System.Drawing.Point(119, 9);
             this.groupBoxDataLettura2.Name = "groupBoxDataLettura2";
-            this.groupBoxDataLettura2.Size = new System.Drawing.Size(220, 40);
+            this.groupBoxDataLettura2.Size = new System.Drawing.Size(220, 46);
             this.groupBoxDataLettura2.TabIndex = 21;
             this.groupBoxDataLettura2.TabStop = false;
+            this.groupBoxDataLettura2.Enter += new System.EventHandler(this.groupBoxDataLettura2_Enter);
+            this.groupBoxDataLettura2.MouseHover += new System.EventHandler(this.groupBoxDataLettura2_MouseHover);
             // 
             // dateTimePickerDataLettura
             // 
@@ -314,9 +318,9 @@
             // groupBoxVolumi
             // 
             this.groupBoxVolumi.Controls.Add(this.checkBoxVolumi);
-            this.groupBoxVolumi.Controls.Add(this.textBoxVolumi);
+            this.groupBoxVolumi.Controls.Add(this.textBoxVolume);
             this.groupBoxVolumi.Controls.Add(this.label7);
-            this.groupBoxVolumi.Controls.Add(this.textBoxTotVolumi);
+            this.groupBoxVolumi.Controls.Add(this.textBoxVolumi);
             this.groupBoxVolumi.Controls.Add(this.label6);
             this.groupBoxVolumi.Location = new System.Drawing.Point(9, 346);
             this.groupBoxVolumi.Name = "groupBoxVolumi";
@@ -414,6 +418,7 @@
             this.comboBoxSupporto.Size = new System.Drawing.Size(142, 21);
             this.comboBoxSupporto.TabIndex = 16;
             this.comboBoxSupporto.SelectedIndexChanged += new System.EventHandler(this.comboBoxSupporto_SelectedIndexChanged);
+            this.comboBoxSupporto.Enter += new System.EventHandler(this.comboBoxSupporto_Enter);
             this.comboBoxSupporto.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBoxSupporto_KeyUp);
             // 
             // checkBoxSupporto
@@ -467,6 +472,7 @@
             this.textBoxTitolo2.Size = new System.Drawing.Size(730, 20);
             this.textBoxTitolo2.TabIndex = 6;
             this.textBoxTitolo2.TextChanged += new System.EventHandler(this.textBoxTitolo2_TextChanged);
+            this.textBoxTitolo2.Enter += new System.EventHandler(this.textBoxTitolo2_Enter);
             // 
             // label16
             // 
@@ -511,6 +517,7 @@
             this.textBoxTitolo3.Size = new System.Drawing.Size(730, 20);
             this.textBoxTitolo3.TabIndex = 8;
             this.textBoxTitolo3.TextChanged += new System.EventHandler(this.textBoxTitolo3_TextChanged);
+            this.textBoxTitolo3.Enter += new System.EventHandler(this.textBoxTitolo3_Enter);
             // 
             // butDaConfermare
             // 
@@ -568,9 +575,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxAutore3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBoxTotVolumi;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxVolumi;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBoxVolume;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox checkBoxVolumi;
         private System.Windows.Forms.Label label8;
