@@ -598,22 +598,38 @@ namespace GAlbum
             // Verifica se deve stampare l'esito
             if (stampaEsito)
             {
-                FormLog formLog = new FormLog();
+
 
                 // Messaggio di intestazione
-                formLog.Log = "Selezione Per Data" + ACapo;
-                formLog.Log = "====================================================================" + ACapo;
-                formLog.Log = ACapo;
-                formLog.Log = ACapo;
+                SNera.AddEsito("", true);
 
-                formLog.Log = "L'operazione di Selezione Per Data si è conclusa con il seguente esito:" + ACapo;
-                formLog.Log = GstErrori.RestultToSting(esito) + ACapo;
-                formLog.Log = ACapo;
-                formLog.Log = ACapo;
-                formLog.Log = "I dati statistici dell'operazione sono i seguenti:" + ACapo;
-                formLog.Log = statisticaSelezionaPerData.GetLog();
+                SNera.AddEsito( "Selezione Per Data");
+                SNera.AddEsito("====================================================================");
+                SNera.AddEsito("");
+                SNera.AddEsito("");
+
+                SNera.AddEsito("L'operazione di Selezione Per Data si è conclusa con il seguente esito:");
+                SNera.AddMultiEsito(GstErrori.RestultToSting(esito));
+                SNera.AddEsito("");
+                SNera.AddEsito("");
+                SNera.AddEsito("I dati statistici dell'operazione sono i seguenti:");
+                SNera.AddMultiEsito(statisticaSelezionaPerData.GetLog());
+
+                //formLog.Log = "Selezione Per Data" + ACapo;
+                //formLog.Log = "====================================================================" + ACapo;
+                //formLog.Log = ACapo;
+                //formLog.Log = ACapo;
+
+                //formLog.Log = "L'operazione di Selezione Per Data si è conclusa con il seguente esito:" + ACapo;
+                //formLog.Log = GstErrori.RestultToSting(esito) + ACapo;
+                //formLog.Log = ACapo;
+                //formLog.Log = ACapo;
+                //formLog.Log = "I dati statistici dell'operazione sono i seguenti:" + ACapo;
+                //formLog.Log = statisticaSelezionaPerData.GetLog();
 
                 // Stampa il risultato
+                FormLog formLog = new FormLog();
+                formLog.Log = SNera.EsitoOperazione;
                 formLog.ShowDialog();
 
             }
