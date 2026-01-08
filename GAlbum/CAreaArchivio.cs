@@ -615,18 +615,6 @@ namespace GAlbum
                 SNera.AddEsito("I dati statistici dell'operazione sono i seguenti:");
                 SNera.AddMultiEsito(statisticaSelezionaPerData.GetLog());
 
-                //formLog.Log = "Selezione Per Data" + ACapo;
-                //formLog.Log = "====================================================================" + ACapo;
-                //formLog.Log = ACapo;
-                //formLog.Log = ACapo;
-
-                //formLog.Log = "L'operazione di Selezione Per Data si è conclusa con il seguente esito:" + ACapo;
-                //formLog.Log = GstErrori.RestultToSting(esito) + ACapo;
-                //formLog.Log = ACapo;
-                //formLog.Log = ACapo;
-                //formLog.Log = "I dati statistici dell'operazione sono i seguenti:" + ACapo;
-                //formLog.Log = statisticaSelezionaPerData.GetLog();
-
                 // Stampa il risultato
                 FormLog formLog = new FormLog();
                 formLog.Log = SNera.EsitoOperazione;
@@ -817,22 +805,26 @@ namespace GAlbum
             // Verifica se deve stampare l'esito
             if (stampaEsito && (esito != GstErrori.EErrore.E0000_OK))
             {
-                FormLog formLog = new FormLog();
+
 
                 // Messaggio di intestazione
-                formLog.Log = "Assegna" + ACapo;
-                formLog.Log = "====================================================================" + ACapo;
-                formLog.Log = ACapo;
-                formLog.Log = ACapo;
+                SNera.AddEsito("", true);
 
-                formLog.Log = "L'operazione Assegna si è conclusa con il seguente esito:" + ACapo;
-                formLog.Log = GstErrori.RestultToSting(esito) + ACapo;
-                formLog.Log = ACapo;
-                formLog.Log = ACapo;
-                formLog.Log = "I dati statistici dell'operazione sono i seguenti:" + ACapo;
-                formLog.Log = statisticaSelezionaPerData.GetLog();
+                SNera.AddEsito("Assegna");
+                SNera.AddEsito("====================================================================");
+                SNera.AddEsito("");
+                SNera.AddEsito("");
+
+                SNera.AddEsito("L'operazione Assegna si è conclusa con il seguente esito:");
+                SNera.AddMultiEsito(GstErrori.RestultToSting(esito));
+                SNera.AddEsito("");
+                SNera.AddEsito("");
+                SNera.AddEsito("I dati statistici dell'operazione sono i seguenti:");
+                SNera.AddMultiEsito(statisticaSelezionaPerData.GetLog());
 
                 // Stampa il risultato
+                FormLog formLog = new FormLog();
+                formLog.Log = SNera.EsitoOperazione;
                 formLog.ShowDialog();
 
             }
