@@ -427,8 +427,7 @@ namespace GAlbum
         /// </summary>
         /// <param name="pathArchivio"></param>
         /// <returns></returns>
-        public GstErrori.EErrore 
-            Acquisire(string pathArchivio, ref System.Windows.Forms.ProgressBar progressBar, bool stampaEsito = true)
+        public GstErrori.EErrore Acquisire(string pathArchivio, ref System.Windows.Forms.ProgressBar progressBar, bool stampaEsito = true)
         {
             // Azzera tutti i dati statistici di acquisire
             statisticaAcquisire.Azzera();
@@ -443,22 +442,25 @@ namespace GAlbum
             // Verifica se deve stampare l'esito
             if (stampaEsito)
             {
-                FormLog formLog = new FormLog();
-
                 // Messaggio di intestazione
-                formLog.Log = "Acquisire" + ACapo;
-                formLog.Log = "====================================================================" + ACapo;
-                formLog.Log = ACapo;
-                formLog.Log = ACapo;
+                SNera.AddEsito("", true);
 
-                formLog.Log = "L'operazione Acquisire si è conclusa con il seguente esito:" + ACapo;
-                formLog.Log = GstErrori.RestultToSting(esito) + ACapo;
-                formLog.Log = ACapo;
-                formLog.Log = ACapo;
-                formLog.Log = "I dati statistici dell'operazione sono i seguenti:" + ACapo;
-                formLog.Log = statisticaAcquisire.GetLog();
+                SNera.AddEsito("Acquisire");
+                SNera.AddEsito("====================================================================");
+                SNera.AddEsito("");
+                SNera.AddEsito("");
+
+                SNera.AddEsito("L'operazione Acquisire si è conclusa con il seguente esito:");
+                SNera.AddEsito(GstErrori.RestultToSting(esito));
+                SNera.AddEsito("");
+                SNera.AddEsito("");
+                SNera.AddEsito("I dati statistici dell'operazione sono i seguenti:");
+                SNera.AddMultiEsito(statisticaAcquisire.GetLog());
+
 
                 // Stampa il risultato
+                FormLog formLog = new FormLog();
+                formLog.Log = SNera.EsitoOperazione;
                 formLog.ShowDialog();
 
             }

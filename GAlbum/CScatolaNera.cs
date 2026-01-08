@@ -60,6 +60,10 @@ namespace GAlbum
         /// Linea dell'istruzione dove si è registrato il massimo tempo di esecuzione
         /// </summary>
         private uint LineaMaxTempoTrascorso;
+        /// <summary>
+        /// Esito operazione
+        /// </summary>
+        public string EsitoOperazione;
 
 
         // ------------------------------------------------------------------------------------------------------------------
@@ -457,6 +461,43 @@ namespace GAlbum
             // Aggiunge la linea a storia
             Storia += NumeroLinea.ToString("00000") + "   " + SIndentazione + linea + ACapo;
         }
+        /// <summary>
+        /// Aggiunge una stringa all'esito operazioni 
+        /// </summary>
+        public void AddEsito(string esito, bool inizializza = false)
+        {
+            // Inizializza strinag esito operazioni
+            if (inizializza)
+            {
+                AggiungiLinea("################################################################################");
+                EsitoOperazione = "";
+            }
+
+            // aggiunge la stringa al file scatola nera
+            AggiungiLinea(esito);
+
+            // aggiunge la stringa ad esito operazioni
+            EsitoOperazione += esito + ACapo; 
+        }
+        /// <summary>
+        /// Aggiunge più stringhe all'esito operazioni 
+        /// </summary>
+        /// <param name="esito"></param>
+        public void AddMultiEsito(string esito)
+        {
+            // scompone la stringa di esito
+            string[] stringhe = esito.Split('\n');
+
+            foreach (var item in stringhe)
+            {
+                // aggiunge la stringa al file scatola nera
+                AggiungiLinea(item);
+
+                // aggiunge la stringa ad esito operazioni
+                EsitoOperazione += item + ACapo;
+            }
+        }
+
 
     }// fine classe CScatolaNera
 }// fine namespace GAlbum
