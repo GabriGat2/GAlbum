@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static GAlbum.GstErrori;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace GAlbum
 {
@@ -680,6 +681,24 @@ namespace GAlbum
                     return GstErrori.EErrore.E1360_FileSorgenteNonEsiste;
                 // estrae la data del file sorgente
                 DateTime fileSrcData = File.GetLastWriteTime(fileSrc.PathNomeFile);
+
+                //// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+                //DateTime fileSrcData2 = File.GetCreationTime(fileSrc.PathNomeFile);
+
+
+                //using Windows.Storage.FileProperties;
+
+                //// ...
+
+                //// Supponendo di avere un oggetto StorageFile 'file'
+                //StorageFile file; // (ottienilo tramite StorageFile.GetFileFromPathAsync o simile)
+
+                //ImageProperties props = await file.Properties.GetImagePropertiesAsync();
+                //DateTime dateTaken = props.DateTaken; // Proprietà diretta per UWP
+
+
+                //// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
                 // Aggiusta destinazione
