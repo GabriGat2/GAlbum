@@ -111,5 +111,6 @@ namespace GAlbum
         {
             InfoTV.CopiaParallela = this .checkBoxCopiaParallela.Checked;
         }
+         
     }// fine class  FormConfigTreeView
 }// fine namespace GAlbum

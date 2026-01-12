@@ -39,7 +39,7 @@ namespace GAlbum
             // Configurazione di default
             MostraRami = true;
             MostraFoglie = true;
-            MostraRamiRiservati = true;
+            MostraRamiRiservati = false;
             MaxLivello = 10;
         }
 

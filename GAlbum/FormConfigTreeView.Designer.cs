@@ -55,10 +55,9 @@
             this.tabVisualizza.Controls.Add(this.tabPage2);
             this.tabVisualizza.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabVisualizza.Location = new System.Drawing.Point(0, 0);
-            this.tabVisualizza.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabVisualizza.Name = "tabVisualizza";
             this.tabVisualizza.SelectedIndex = 0;
-            this.tabVisualizza.Size = new System.Drawing.Size(1067, 554);
+            this.tabVisualizza.Size = new System.Drawing.Size(800, 450);
             this.tabVisualizza.TabIndex = 0;
             // 
             // tabPage1
@@ -66,11 +65,10 @@
             this.tabPage1.Controls.Add(this.groupBoxLivello);
             this.tabPage1.Controls.Add(this.groupBoxDirectory);
             this.tabPage1.Controls.Add(this.butDefault);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabPage1.Size = new System.Drawing.Size(1059, 525);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Size = new System.Drawing.Size(792, 424);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Visualizza";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -78,21 +76,18 @@
             // groupBoxLivello
             // 
             this.groupBoxLivello.Controls.Add(this.numericUpDownLivello);
-            this.groupBoxLivello.Location = new System.Drawing.Point(11, 23);
-            this.groupBoxLivello.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxLivello.Location = new System.Drawing.Point(8, 19);
             this.groupBoxLivello.Name = "groupBoxLivello";
-            this.groupBoxLivello.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBoxLivello.Size = new System.Drawing.Size(191, 69);
+            this.groupBoxLivello.Size = new System.Drawing.Size(143, 56);
             this.groupBoxLivello.TabIndex = 6;
             this.groupBoxLivello.TabStop = false;
             this.groupBoxLivello.Text = "Livello";
             // 
             // numericUpDownLivello
             // 
-            this.numericUpDownLivello.Location = new System.Drawing.Point(8, 23);
-            this.numericUpDownLivello.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDownLivello.Location = new System.Drawing.Point(6, 19);
             this.numericUpDownLivello.Name = "numericUpDownLivello";
-            this.numericUpDownLivello.Size = new System.Drawing.Size(160, 22);
+            this.numericUpDownLivello.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownLivello.TabIndex = 4;
             this.numericUpDownLivello.ValueChanged += new System.EventHandler(this.numericUpDownLivello_ValueChanged);
             // 
@@ -101,11 +96,9 @@
             this.groupBoxDirectory.Controls.Add(this.checkBoxRami);
             this.groupBoxDirectory.Controls.Add(this.checkBoxFoglie);
             this.groupBoxDirectory.Controls.Add(this.checkBoxRamiRiservati);
-            this.groupBoxDirectory.Location = new System.Drawing.Point(11, 112);
-            this.groupBoxDirectory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxDirectory.Location = new System.Drawing.Point(8, 91);
             this.groupBoxDirectory.Name = "groupBoxDirectory";
-            this.groupBoxDirectory.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBoxDirectory.Size = new System.Drawing.Size(191, 181);
+            this.groupBoxDirectory.Size = new System.Drawing.Size(143, 147);
             this.groupBoxDirectory.TabIndex = 5;
             this.groupBoxDirectory.TabStop = false;
             this.groupBoxDirectory.Text = "Directory";
@@ -113,10 +106,9 @@
             // checkBoxRami
             // 
             this.checkBoxRami.AutoSize = true;
-            this.checkBoxRami.Location = new System.Drawing.Point(8, 34);
-            this.checkBoxRami.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBoxRami.Location = new System.Drawing.Point(6, 28);
             this.checkBoxRami.Name = "checkBoxRami";
-            this.checkBoxRami.Size = new System.Drawing.Size(58, 20);
+            this.checkBoxRami.Size = new System.Drawing.Size(50, 17);
             this.checkBoxRami.TabIndex = 0;
             this.checkBoxRami.Text = "Rami";
             this.checkBoxRami.UseVisualStyleBackColor = true;
@@ -125,10 +117,9 @@
             // checkBoxFoglie
             // 
             this.checkBoxFoglie.AutoSize = true;
-            this.checkBoxFoglie.Location = new System.Drawing.Point(8, 81);
-            this.checkBoxFoglie.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBoxFoglie.Location = new System.Drawing.Point(6, 66);
             this.checkBoxFoglie.Name = "checkBoxFoglie";
-            this.checkBoxFoglie.Size = new System.Drawing.Size(64, 20);
+            this.checkBoxFoglie.Size = new System.Drawing.Size(54, 17);
             this.checkBoxFoglie.TabIndex = 1;
             this.checkBoxFoglie.Text = "Foglie";
             this.checkBoxFoglie.UseVisualStyleBackColor = true;
@@ -137,10 +128,9 @@
             // checkBoxRamiRiservati
             // 
             this.checkBoxRamiRiservati.AutoSize = true;
-            this.checkBoxRamiRiservati.Location = new System.Drawing.Point(8, 134);
-            this.checkBoxRamiRiservati.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBoxRamiRiservati.Location = new System.Drawing.Point(6, 109);
             this.checkBoxRamiRiservati.Name = "checkBoxRamiRiservati";
-            this.checkBoxRamiRiservati.Size = new System.Drawing.Size(108, 20);
+            this.checkBoxRamiRiservati.Size = new System.Drawing.Size(89, 17);
             this.checkBoxRamiRiservati.TabIndex = 2;
             this.checkBoxRamiRiservati.Text = "Rami riservati";
             this.checkBoxRamiRiservati.UseVisualStyleBackColor = true;
@@ -148,10 +138,9 @@
             // 
             // butDefault
             // 
-            this.butDefault.Location = new System.Drawing.Point(945, 484);
-            this.butDefault.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.butDefault.Location = new System.Drawing.Point(709, 393);
             this.butDefault.Name = "butDefault";
-            this.butDefault.Size = new System.Drawing.Size(100, 28);
+            this.butDefault.Size = new System.Drawing.Size(75, 23);
             this.butDefault.TabIndex = 3;
             this.butDefault.Text = "Default";
             this.butDefault.UseVisualStyleBackColor = true;
@@ -160,11 +149,10 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.groupBoxArchiviazione);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabPage2.Size = new System.Drawing.Size(1059, 525);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Size = new System.Drawing.Size(792, 424);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Archivia";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -172,9 +160,11 @@
             // groupBoxArchiviazione
             // 
             this.groupBoxArchiviazione.Controls.Add(this.checkBoxCopiaParallela);
-            this.groupBoxArchiviazione.Location = new System.Drawing.Point(26, 25);
+            this.groupBoxArchiviazione.Location = new System.Drawing.Point(20, 20);
+            this.groupBoxArchiviazione.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBoxArchiviazione.Name = "groupBoxArchiviazione";
-            this.groupBoxArchiviazione.Size = new System.Drawing.Size(218, 146);
+            this.groupBoxArchiviazione.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxArchiviazione.Size = new System.Drawing.Size(164, 119);
             this.groupBoxArchiviazione.TabIndex = 0;
             this.groupBoxArchiviazione.TabStop = false;
             this.groupBoxArchiviazione.Text = "Archiviazione";
@@ -182,9 +172,10 @@
             // checkBoxCopiaParallela
             // 
             this.checkBoxCopiaParallela.AutoSize = true;
-            this.checkBoxCopiaParallela.Location = new System.Drawing.Point(21, 44);
+            this.checkBoxCopiaParallela.Location = new System.Drawing.Point(16, 36);
+            this.checkBoxCopiaParallela.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBoxCopiaParallela.Name = "checkBoxCopiaParallela";
-            this.checkBoxCopiaParallela.Size = new System.Drawing.Size(119, 20);
+            this.checkBoxCopiaParallela.Size = new System.Drawing.Size(96, 17);
             this.checkBoxCopiaParallela.TabIndex = 0;
             this.checkBoxCopiaParallela.Text = "Copia Parallela";
             this.checkBoxCopiaParallela.UseVisualStyleBackColor = true;
@@ -192,11 +183,10 @@
             // 
             // FormConfigTreeView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tabVisualizza);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormConfigTreeView";
             this.Text = "FormConfigTreeView";
             this.tabVisualizza.ResumeLayout(false);
