@@ -483,6 +483,7 @@ namespace GAlbum
         {
             GstErrori.EErrore esito;
             bool assente;
+            bool assente2;
 
             // recupera il path di tutti i file contenuti in questa directory e le sue subdirerectory
             string[] listaPathFile = Directory.GetFiles(pathArchivio, "*.*", SearchOption.AllDirectories);
@@ -495,6 +496,7 @@ namespace GAlbum
             CNomeFile fileDst = new CNomeFile(PathArchivioAttivo);
             CNomeFile fileCopia = new CNomeFile(PathArchivioAttivo);
             CNomeFile fileDuplica = new CNomeFile(PathArchivioAttivo);
+            CNomeFile fileSmistati = new CNomeFile(PathArchivioAttivo);
 
             // Elabola ogni file contenuto nella lista
             foreach (var pathFile in listaPathFile)
@@ -511,11 +513,16 @@ namespace GAlbum
                 if (esito != GstErrori.EErrore.E0000_OK)
                     return esito;
                 esito = fileDst.SetPathNomeFile(pathFile);
+                esito = fileSmistati.SetPathNomeFile(pathFile);
                 esito = fileCopia.SetPathNomeFile(pathFile);
                 esito = fileDuplica.SetPathNomeFile(pathFile);
 
+
                 // Aggiusta destinazione
                 fileDst.DirSezione = DirSmistare;
+
+                // Aggiusta smistati
+                fileSmistati.DirSezione = DirSmistati;
 
                 // Prepara per copia
                 fileCopia.DirArchivio = prefissoCopia + fileCopia.DirArchivio;
@@ -523,13 +530,23 @@ namespace GAlbum
                 // Prepara per duplica
                 fileDuplica.DirArchivio = prefissoDuplica + fileDuplica.DirArchivio;
 
-                // Verifica se il file è già stato assente
+                // Verifica se il file è già contenuto nella sezione smistare
                 esito = fileDst.VerificaFileAssenteInSezione(fileSrc);
-                SNera.InizioIstruzione("Verifica assenza: ", fileSrc, esito);
+                SNera.InizioIstruzione("Verifica assenza in smistare: ", fileSrc, esito);
                 assente = (esito == GstErrori.EErrore.E0000_OK);
 
-                // esegue la copia 
+                // Verifica se il file è già contenuto nella sezione smistati
                 if (assente)
+                {
+                    esito = fileSmistati.VerificaFileAssenteInSezione(fileSrc);
+                    SNera.InizioIstruzione("Verifica assenza in smistati: ", fileSrc, esito);
+                    assente2 = (esito == GstErrori.EErrore.E0000_OK);
+                }
+                else
+                    assente2 = assente;
+
+                // esegue la copia 
+                if (assente && assente2)
                 {
                     esito = fileDst.CopiaFile(fileSrc);
                     SNera.InizioIstruzione("Copia: ", fileSrc, fileDst, esito);
