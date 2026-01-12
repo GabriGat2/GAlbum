@@ -4,6 +4,7 @@ using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
@@ -727,8 +728,18 @@ namespace GAlbum
 
             return pathRelativo;
         }
+        /// <summary>
+        /// Rende la data di acqusizione di un file in particolare di una foto
+        /// </summary>
+        /// <returns></returns>
+        public DateTime GetDataAcquisizione()
+        {
+            CFileInfo fileInfo = new CFileInfo();
+            DateTime dataAcquisizione;
 
-
+            GstErrori.EErrore esito = fileInfo.GetDataAcquisizione(pathNomeFile, out dataAcquisizione);
+            return dataAcquisizione;
+        }
 
     }// fine class CNomeFile
 }// fine namespace GAlbum
