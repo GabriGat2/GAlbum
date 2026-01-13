@@ -116,11 +116,11 @@ namespace GAlbum
             if (selezione)
             {
                 nodo.BackColor = Color.LightGreen;
-                nodo.Text = "-> " + nome;
+                nodo.Text = "-> " + NomeConNFile;
             }
             else
             {
-                nodo.Text = nome;
+                nodo.Text = NomeConNFile;
                 nodo.BackColor = Color.White;
             }
 

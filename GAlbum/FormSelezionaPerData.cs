@@ -120,7 +120,6 @@ namespace GAlbum
             textBoxSmistati.Text = AreaArchivio.PathSmistati;
 
             // aggiorna la visualizzazione delle tree view
-            
             AggiornaAcquisire();
             AggiornaSmistare();
             AggiornaSmistati();
@@ -251,7 +250,7 @@ namespace GAlbum
                 return;
 
             // crea il nodo
-            TreeNode nodo = new TreeNode(info.Nome);
+            TreeNode nodo = new TreeNode(info.NomeConNFile);
             nodo.Tag = info;
             nodoBase.Nodes.Add(nodo);
 
@@ -873,6 +872,12 @@ namespace GAlbum
         private void butEsegui_Click(object sender, EventArgs e)
         {
             EseguiSelezionaPerDataLog();
+
+            // aggiorna la visualizzazione delle tree view
+            AggiornaAcquisire();
+            AggiornaSmistare();
+            AggiornaSmistati();
+
         }
         /// <summary>
         /// Esegue selezione per data con log
