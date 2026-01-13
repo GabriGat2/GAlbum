@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
@@ -12,6 +13,10 @@ namespace GAlbum
 {
     public class CInfoDirFoto
     {
+        // ==================================================================================================================
+        // Proprietà
+        // ==================================================================================================================
+
         /// <summary>
         /// path della directory
         /// </summary>
@@ -23,6 +28,10 @@ namespace GAlbum
         public string Nome { get => nome; }
         private string nome;
         /// <summary>
+        /// Rende il nome della directory con il numero di file contenuti
+        /// </summary>
+        public string NomeConNFile { get => (nome + " (" + GetNumeroFile() + ")"); /* set => nomeConNFile = value; */ }
+        /// <summary>
         /// directory selezionata
         /// </summary>
         public bool Selezione { get => selezione; set => ImpostaSelezione(value); }
@@ -32,6 +41,17 @@ namespace GAlbum
         /// </summary>
         //public TreeNode Nodo { get => nodo; set => nodo = value; }
         private TreeNode nodo;
+
+        // ==================================================================================================================
+        /// <summary>
+        /// Mette qui i refatoring generati automaticamente
+        /// </summary>
+        private bool mettiloQui;
+        public bool MettiloQui { get => mettiloQui; set => mettiloQui = value; }
+
+        // ==================================================================================================================
+        // Metodi
+        // ==================================================================================================================
         /// <summary>
         /// costruttore
         /// </summary>
@@ -113,6 +133,20 @@ namespace GAlbum
         {
             this.nodo = nodo;
         }
+        /// <summary>
+        /// rende numero di file contenuti nella sub directory 
+        /// </summary>
+        /// <returns></returns>
+        private  int GetNumeroFile()
+        {
+            // crea la directory info 
+            DirectoryInfo directoryInfo = new DirectoryInfo(path);
 
-    }
-}
+           // recupera il numero di file contenuti nella sub directory
+           FileInfo [] fileInfo  = directoryInfo.GetFiles();
+
+            return fileInfo.Length;
+        }
+
+    }// fine class CDataFile
+}// fine namespace GAlbum
