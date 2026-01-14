@@ -288,11 +288,22 @@ namespace GAlbum
             string[] campiNome = LNomeFile.Split('.');
             if (campiNome.Length != 2)
             {
-                AzzeraPorzioni();
-                return GstErrori.EErrore.E0001_NOK;
+                if (campiNome.Length > 2)
+                {
+                    this.estensione = campiNome[campiNome.Length - 1];
+                    this.nome = LNomeFile.Remove(LNomeFile.Length - estensione.Length - 1, estensione.Length + 1);
+                }
+                else
+                {
+                    AzzeraPorzioni();
+                    return GstErrori.EErrore.E0001_NOK;
+                }
             }
-            this.nome = campiNome[0];
-            this.estensione = campiNome[1];
+            else
+            { 
+                this.nome = campiNome[0];
+                this.estensione = campiNome[1];
+            }
 
             // estrarre il nome della foglia
             if (campi.Length < 4)
@@ -300,7 +311,7 @@ namespace GAlbum
                 this.dirFoglia = string.Empty;
                 this.dirRamo = string.Empty;
                 this.dirInterno = string.Empty;
-                return GstErrori.EErrore.E0000_OK;
+                //return GstErrori.EErrore.E0000_OK;
             }
             else
             {
