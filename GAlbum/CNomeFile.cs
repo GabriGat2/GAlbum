@@ -63,6 +63,16 @@ namespace GAlbum
         private string estensione;              // H
         //
         // ------------------------------------------------------------------------------------------------------------------
+        // 
+        // ------------------------------------------------------------------------------------------------------------------
+        // Archivio attivo
+        //
+        /// <summary>
+        /// Path sarchivio attivo = A     SOLO lettura
+        /// </summary>
+        public string PathArchivioAttivo { get => pathArchivioAttivo; /* set => pathArchivioAttivo = value;*/ }
+        //
+        // ------------------------------------------------------------------------------------------------------------------
         //
         // ------------------------------------------------------------------------------------------------------------------
         // Sezione
@@ -215,9 +225,6 @@ namespace GAlbum
 
 
 
-
-
-
         // ==================================================================================================================
         // Metodi
         // ==================================================================================================================
@@ -249,6 +256,35 @@ namespace GAlbum
             Estensione = String.Empty; ;            // H
 
             Popola();
+
+        }
+        /// <summary>
+        /// Scompone il nome del file estrando nome e estensione
+        /// </summary>
+        /// <param name="nomeDelFile"></param>
+        /// <returns></returns>
+        private GstErrori.EErrore ScomponeNomeFile(string nomeDelFile)
+        {
+            string[] campiNome = nomeDelFile.Split('.');
+            if (campiNome.Length != 2)
+            {
+                if (campiNome.Length > 2)
+                {
+                    this.estensione = campiNome[campiNome.Length - 1];
+                    this.nome = nomeDelFile.Remove(nomeDelFile.Length - estensione.Length - 1, estensione.Length + 1);
+                }
+                else
+                {
+                    return GstErrori.EErrore.E0001_NOK;
+                }
+            }
+            else
+            {
+                this.nome = campiNome[0];
+                this.estensione = campiNome[1];
+            }
+
+            return GstErrori.EErrore.E0000_OK;
         }
         /// <summary>
         /// Set del pathNomeFile
@@ -259,15 +295,15 @@ namespace GAlbum
         {
 
             // verifica che il path contenga il pathArchvioAttivo
-            string locPathArchivioAttivo = pathNomeFile.Remove(pathArchivioAttivo.Length, pathNomeFile.Length - pathArchivioAttivo.Length);
-            if (locPathArchivioAttivo.ToLower() != pathArchivioAttivo.ToLower())
+            string locPathArchivioAttivo = pathNomeFile.Remove(PathArchivioAttivo.Length, pathNomeFile.Length - PathArchivioAttivo.Length);
+            if (locPathArchivioAttivo.ToLower() != PathArchivioAttivo.ToLower())
             {
                 AzzeraPorzioni();
                 return GstErrori.EErrore.E0001_NOK;
             }
 
             // Estrae la porzione di archivio a valle dell'archvio attivo
-            string pathNomeFileInterno = pathNomeFile.Substring(pathArchivioAttivo.Length + 1);
+            string pathNomeFileInterno = pathNomeFile.Substring(PathArchivioAttivo.Length + 1);
 
             // scompone il pathNomeFileInterno in campi e Verifica che ci siano i campi minimi
             string[] campi = pathNomeFileInterno.Split(SD);
@@ -284,26 +320,32 @@ namespace GAlbum
             this.dirArchivio = campi[1];
 
             // estrae nome e estensione 
-            string LNomeFile = campi[campi.Length - 1];
-            string[] campiNome = LNomeFile.Split('.');
-            if (campiNome.Length != 2)
+            GstErrori.EErrore esito = ScomponeNomeFile(campi[campi.Length - 1]);
+            if (esito != GstErrori.EErrore.E0000_OK)
             {
-                if (campiNome.Length > 2)
-                {
-                    this.estensione = campiNome[campiNome.Length - 1];
-                    this.nome = LNomeFile.Remove(LNomeFile.Length - estensione.Length - 1, estensione.Length + 1);
-                }
-                else
-                {
-                    AzzeraPorzioni();
-                    return GstErrori.EErrore.E0001_NOK;
-                }
+                AzzeraPorzioni();
+                return GstErrori.EErrore.E0001_NOK;
             }
-            else
-            { 
-                this.nome = campiNome[0];
-                this.estensione = campiNome[1];
-            }
+            //string LNomeFile = campi[campi.Length - 1];
+            //string[] campiNome = LNomeFile.Split('.');
+            //if (campiNome.Length != 2)
+            //{
+            //    if (campiNome.Length > 2)
+            //    {
+            //        this.estensione = campiNome[campiNome.Length - 1];
+            //        this.nome = LNomeFile.Remove(LNomeFile.Length - estensione.Length - 1, estensione.Length + 1);
+            //    }
+            //    else
+            //    {
+            //        AzzeraPorzioni();
+            //        return GstErrori.EErrore.E0001_NOK;
+            //    }
+            //}
+            //else
+            //{ 
+            //    this.nome = campiNome[0];
+            //    this.estensione = campiNome[1];
+            //}
 
             // estrarre il nome della foglia
             if (campi.Length < 4)
@@ -361,15 +403,15 @@ namespace GAlbum
             AzzeraPorzioni();
 
             // verifica che il path contenga il pathArchvioAttivo
-            string locPathArchivioAttivo = pathNomeFile.Remove(pathArchivioAttivo.Length, pathNomeFile.Length - pathArchivioAttivo.Length);
-            if (locPathArchivioAttivo.ToLower() != pathArchivioAttivo.ToLower())
+            string locPathArchivioAttivo = pathNomeFile.Remove(PathArchivioAttivo.Length, pathNomeFile.Length - PathArchivioAttivo.Length);
+            if (locPathArchivioAttivo.ToLower() != PathArchivioAttivo.ToLower())
             {
                 //AzzeraPorzioni();
                 return GstErrori.EErrore.E0001_NOK;
             }
 
             // Estrae la porzione di archivio a valle dell'archvio attivo
-            string pathArchivioInterno = pathArchivio.Substring(pathArchivioAttivo.Length + 1);
+            string pathArchivioInterno = pathArchivio.Substring(PathArchivioAttivo.Length + 1);
 
             // scompone il pathNomeFileInterno in campi e Verifica che ci siano i campi minimi
             string[] campi = pathArchivioInterno.Split(SD);
@@ -398,12 +440,12 @@ namespace GAlbum
             // popola Sezione
             if (dirSezione == string.Empty)
             {
-                pathSezione = pathArchivioAttivo;
+                pathSezione = PathArchivioAttivo;
                 pathSezioneConforme = false;
             }
             else
             {
-                pathSezione = pathArchivioAttivo + SD + dirSezione;
+                pathSezione = PathArchivioAttivo + SD + dirSezione;
                 pathSezioneConforme = true; ;
             }
 
@@ -482,17 +524,26 @@ namespace GAlbum
         /// <returns></returns>
         public GstErrori.EErrore SetNomeFile(String nomeDelFile)
         {
-            // estrae nome e estensione 
-            string[] campiNome = nomeDelFile.Split('.');
-            if (campiNome.Length != 2)
+            // estrae nome e estensione
+            GstErrori.EErrore esito = ScomponeNomeFile(nomeDelFile);
+            if (esito != GstErrori.EErrore.E0000_OK)
             {
                 AzzeraPorzioni();
                 return GstErrori.EErrore.E0001_NOK;
             }
 
-            // Assegna nome ed estensione
-            this.nome = campiNome[0];
-            this.estensione = campiNome[1];
+
+
+            //string[] campiNome = nomeDelFile.Split('.');
+            //if (campiNome.Length != 2)
+            //{
+            //    AzzeraPorzioni();
+            //    return GstErrori.EErrore.E0001_NOK;
+            //}
+
+            //// Assegna nome ed estensione
+            //this.nome = campiNome[0];
+            //this.estensione = campiNome[1];
 
             // Ripopola tutto
             Popola();
@@ -569,7 +620,7 @@ namespace GAlbum
             string fileCercatoFoglia = fileCercato.DirFoglia.ToUpper();
 
             // Crea la classe per il file trovato
-            CNomeFile CFileTrovato = new CNomeFile(pathArchivioAttivo);
+            CNomeFile CFileTrovato = new CNomeFile(PathArchivioAttivo);
 
             // definizione variabili condizioni
             bool ugualeNome = true;
@@ -727,14 +778,14 @@ namespace GAlbum
         public string GetPathRelativo(string pathTotale)
         {
             // verifica che il path contenga il pathArchvioAttivo
-            string locPathArchivioAttivo = pathTotale.Remove(pathArchivioAttivo.Length, pathTotale.Length - pathArchivioAttivo.Length);
-            if (locPathArchivioAttivo.ToLower() != pathArchivioAttivo.ToLower())
+            string locPathArchivioAttivo = pathTotale.Remove(PathArchivioAttivo.Length, pathTotale.Length - PathArchivioAttivo.Length);
+            if (locPathArchivioAttivo.ToLower() != PathArchivioAttivo.ToLower())
             {
                 return "???";
             }
 
             // Estrae la porzione di archivio a valle dell'archvio attivo
-            string pathRelativo = pathTotale.Substring(pathArchivioAttivo.Length + 1);
+            string pathRelativo = pathTotale.Substring(PathArchivioAttivo.Length + 1);
 
 
             return pathRelativo;
@@ -748,7 +799,8 @@ namespace GAlbum
             CFileInfo fileInfo = new CFileInfo();
             DateTime dataAcquisizione;
 
-            GstErrori.EErrore esito = fileInfo.GetDataAcquisizione(pathNomeFile, out dataAcquisizione);
+            //GstErrori.EErrore esito = fileInfo.GetDataAcquisizione(pathNomeFile, out dataAcquisizione);
+            GstErrori.EErrore esito = fileInfo.GetDataAcquisizione(this, out dataAcquisizione);
             return dataAcquisizione;
         }
 

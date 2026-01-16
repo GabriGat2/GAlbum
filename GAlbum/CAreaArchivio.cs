@@ -702,7 +702,6 @@ namespace GAlbum
                 // estrae la data del file sorgente
                 DateTime fileSrcData = fileSrc.GetDataAcquisizione();
 
-
                 // Aggiusta destinazione
                 fileDst.DirInterno = fileSrcData.Year.ToString();
                 fileDst.DirRamo = fileSrcData.Year.ToString() + "-" + fileSrcData.Month.ToString("00");
@@ -744,7 +743,7 @@ namespace GAlbum
                 if (esito != GstErrori.EErrore.E0000_OK)
                 {
                     if (!duplica)
-                        return esito;
+                        ;// return esito;
                 }
                 else
                 {

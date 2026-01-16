@@ -131,6 +131,7 @@ namespace GAlbum
             E1356_FileNonCancellato,
             E1357_FileCancellato,
             E1358_FileNomeNonCorretto,
+            E1359_FileDataNonDisponibile,
 
             // Errori relativi a file sorgente
             // =======================
