@@ -1,5 +1,6 @@
 ﻿using MetadataExtractor;
 using MetadataExtractor.Formats.Exif;
+using MetadataExtractor.Formats.QuickTime;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -60,7 +61,7 @@ namespace GAlbum
         /// <param name="pathNomeFile"></param>
         /// <param name="dataAcquisizione"></param>
         /// <returns></returns>
-        public GstErrori.EErrore GetDataAcquisizione(CNomeFile file, out DateTime dataAcquisizione, bool cercaData = true)
+        public GstErrori.EErrore GetDataAcquisizioneOrg1(CNomeFile file, out DateTime dataAcquisizione, bool cercaData = true)
         {
             // inizializza data di acquisizione
             dataAcquisizione = new DateTime(2100, 12, 01);
@@ -88,7 +89,7 @@ namespace GAlbum
 
                 // FINE TEST   ##############################################################################
 
-                // Estrae la subdirectory delle informazioni
+                // Estrae la subdirectory delle informazioni EXIF
                 var subIfdDirectory = directories.OfType<ExifSubIfdDirectory>().FirstOrDefault();
                 if (subIfdDirectory == null)
                 {
@@ -98,6 +99,7 @@ namespace GAlbum
                         CercaData(file, out dataAcquisizione);
                     return GstErrori.EErrore.E0001_NOK;
                 }
+
 
                 // Estrae il Tag 0x9003 che corrisponde alla data originale di scatto cioè, dataTaken
                 bool reso = subIfdDirectory.TryGetDateTime(ExifDirectoryBase.TagDateTimeOriginal, out DateTime dateTaken);
@@ -127,6 +129,135 @@ namespace GAlbum
             }
         }
         /// <summary>
+        /// Rende la data di acqusizione di un file in particolare di una foto
+        /// </summary>
+        /// <param name="pathNomeFile"></param>
+        /// <param name="dataAcquisizione"></param>
+        /// <returns></returns>
+        public GstErrori.EErrore GetDataAcquisizione(CNomeFile file, out DateTime dataAcquisizione, bool cercaData = true)
+        {
+            // inizializza data di acquisizione
+            dataAcquisizione = new DateTime(2100, 12, 01);
+ 
+            // verifica se il file esiste
+            if (!VerificaFile(file.PathNomeFile))
+                return GstErrori.EErrore.E0001_NOK;
+
+            try
+            {
+                bool reso;
+
+                var directories = ImageMetadataReader.ReadMetadata(file.PathNomeFile);
+
+                // INIZIO TEST ##############################################################################
+                string Testo = string.Empty;
+
+                foreach (var directory in directories)
+                {
+                    foreach (var tag in directory.Tags)
+                    {
+                        Testo += ($"{directory.Name} - {tag.Name} = {tag.Description}" + "\n");
+                    }
+                }
+
+
+                // FINE TEST   ##############################################################################
+
+                // Estrae la subdirectory delle informazioni EXIF
+                var subIfdDirectory = directories.OfType<ExifSubIfdDirectory>().FirstOrDefault();
+                if (subIfdDirectory != null)
+                {
+                    // Estrae il Tag 0x9003 che corrisponde alla data originale di scatto cioè, dataTaken
+                    reso = subIfdDirectory.TryGetDateTime(ExifDirectoryBase.TagDateTimeOriginal, out DateTime dataExif);
+                    if (reso)
+                    {
+                        // se attiva qui significa che la data è disponibile
+                        dataAcquisizione = dataExif;
+                        return GstErrori.EErrore.E0000_OK;
+                    }
+                    else
+                    {
+                        // se attiva qui significa che la data non è disponibile,
+                        // quindi, se abilitato, cerca una data in modo alternativo
+                        if (cercaData)
+                            CercaData(file, out dataAcquisizione);
+                        return GstErrori.EErrore.E0001_NOK;
+                    }
+                }
+
+                // Estrae la subdirectory delle informazioni QuickTime
+                var qtDir = directories.OfType<QuickTimeMovieHeaderDirectory>().FirstOrDefault();
+                if (qtDir != null)
+                {
+                    // Estrae il Tag 0x9003 che corrisponde alla data originale di scatto cioè, dataTaken
+                    reso = qtDir.TryGetDateTime(QuickTimeMovieHeaderDirectory.TagCreated, out DateTime dataQT);
+                    if (reso)
+                    {
+                        // se attiva qui significa che la data è disponibile
+                        dataAcquisizione = dataQT;
+                        return GstErrori.EErrore.E0000_OK;
+                    }
+                    else
+                    {
+                        // se attiva qui significa che la data non è disponibile,
+                        // quindi, se abilitato, cerca una data in modo alternativo
+                        if (cercaData)
+                            CercaData(file, out dataAcquisizione);
+                        return GstErrori.EErrore.E0001_NOK;
+                    }
+                }
+
+
+                //var directories = ImageMetadataReader.ReadMetadata(path);
+                //var qtDir = directories.OfType<QuickTimeMovieHeaderDirectory>().FirstOrDefault();
+
+                //if (qtDir != null && qtDir.TryGetDateTime(QuickTimeMovieHeaderDirectory.TagCreated, out var date))
+                //{
+                //    Console.WriteLine("Data registrazione video: " + date);
+                //}
+
+
+                // se attiva qui significa che la subdirectory non esiste,
+                // quindi, se abilitato, cerca una data in modo alternativo
+                if (cercaData)
+                    CercaData(file, out dataAcquisizione);
+                return GstErrori.EErrore.E0001_NOK;
+                
+
+
+
+                //// Estrae il Tag 0x9003 che corrisponde alla data originale di scatto cioè, dataTaken
+                //bool reso = subIfdDirectory.TryGetDateTime(ExifDirectoryBase.TagDateTimeOriginal, out DateTime dateTaken);
+                //if (reso)
+                //{
+                //    // se attiva qui significa che la data è disponibile
+                //    dataAcquisizione = dateTaken;
+                //    return GstErrori.EErrore.E0000_OK;
+                //}
+                //else
+                //{
+                //    // se attiva qui significa che la data non è disponibile,
+                //    // quindi, se abilitato, cerca una data in modo alternativo
+                //    if (cercaData)
+                //        CercaData(file, out dataAcquisizione);
+                //    return GstErrori.EErrore.E0001_NOK;
+                //}
+            }
+            catch (Exception ex)
+            {
+                if (cercaData)
+                {
+                    CercaData(file, out dataAcquisizione);
+                }
+
+                return GstErrori.EErrore.E1359_FileDataNonDisponibile;
+            }
+        }
+
+
+
+
+        /// <summary>
         /// Cerca la data del file per vie traverse
         /// </summary>
         /// <param name="file"></param>
@@ -139,9 +270,11 @@ namespace GAlbum
             DateTime dataMigliore = new DateTime(2100, 09, 01);
 
             // Cerca la data simile cioè, in un file che ha lo stesso nome
-            bool esito1 = CercaDataFileSimile(file, out dataSimile);
-            if (dataSimile < dataAcquisizione)
-                dataAcquisizione = dataSimile;
+            // !!! Escluso perchè inaffidabile
+
+            //bool esito1 = CercaDataFileSimile(file, out dataSimile);
+            //if (dataSimile < dataAcquisizione)
+            //    dataAcquisizione = dataSimile;
 
             // Cerca data migliore cioè, utilizza le date disponibili del file
             bool esito2 = CercaDataMigliore(file, out dataMigliore);

@@ -20,6 +20,7 @@ namespace GAlbum
         public UInt32 NumeroFileDuplicati;
         public UInt32 NumeroFileCopiati_Rinomintati;
         public UInt32 NumeroFileDuplicati_Rinomintati;
+        public UInt32 NumeroFileFogliaNS;
 
         /// <summary>
         /// Rende la percentuale di avanzamento lavoro, con un valore compreso tra 1 e 100
@@ -68,6 +69,7 @@ namespace GAlbum
             NumeroFileDuplicati = 0;
             NumeroFileCopiati_Rinomintati = 0;
             NumeroFileDuplicati_Rinomintati = 0;
+            NumeroFileFogliaNS = 0;
         }
         /// <summary>
         /// rende il log della statistica 
@@ -86,6 +88,9 @@ namespace GAlbum
             log += ACapo;
             log += "NumeroFileDuplicati :" + NumeroFileDuplicati.ToString() + ACapo;
             log += "NumeroFileDuplicati_Rinomintati :" + NumeroFileDuplicati_Rinomintati.ToString() + ACapo;
+            log += ACapo;
+            log += "NumeroFileFogliaNS :" + NumeroFileFogliaNS.ToString() + ACapo;
+            log += ACapo;
 
             return log;
         }

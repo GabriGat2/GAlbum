@@ -661,10 +661,14 @@ namespace GAlbum
                 }
 
                 // verifica le condizioni di confronto cioè, se i file sono uguali
-                if (ugualeNome && ugualeDimensione && ugualeData && ugualeFoglia)
+                //
+                // Escluso la verifica sulla data perchè, è ambigua.
+                //
+                //if (ugualeNome && ugualeDimensione && ugualeData && ugualeFoglia)
+                if (ugualeNome && ugualeDimensione && ugualeFoglia)
                 {
-                    // se arriva qui significa che i file sono uguali 
-                    return GstErrori.EErrore.E0001_NOK;
+                        // se arriva qui significa che i file sono uguali 
+                        return GstErrori.EErrore.E0001_NOK;
                 }
             }
 
@@ -802,6 +806,28 @@ namespace GAlbum
             //GstErrori.EErrore esito = fileInfo.GetDataAcquisizione(pathNomeFile, out dataAcquisizione);
             GstErrori.EErrore esito = fileInfo.GetDataAcquisizione(this, out dataAcquisizione);
             return dataAcquisizione;
+        }
+        /// <summary>
+        /// Rende TRUE se la il nome della directory della foglia è compresa nella lista delle foglie standard
+        /// </summary>
+        /// <returns></returns>
+        public bool DirFogliaStandard()
+        {
+            switch (dirFoglia.ToLower())
+            {
+                case "heic":
+                case "jpeg":
+                case "raw":
+                    return true;
+
+                case "icone":
+                case "istagram":
+                case "schermo":
+                    return true;
+
+                default:
+                    return false;
+            }
         }
 
     }// fine class CNomeFile

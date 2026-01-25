@@ -257,7 +257,7 @@ namespace GAlbum
                 // Aggiunge un nodo per ogni subdirectory
                 foreach (var subDir in listaSubDir)
                 {
-                    AggiungiNodo(subDir, ref nodo, ++livello, ref infoTV);
+                    AggiungiNodo(subDir, ref nodo, livello + 1, ref infoTV);
 
                 }
             }

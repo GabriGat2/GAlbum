@@ -114,6 +114,7 @@ namespace GAlbum
         // Prefissi
         private const string prefissoCopia = "_C_";
         private const string prefissoDuplica = "_D_";
+        private const string prefissoFogliaNS = "_F_";
 
 
 
@@ -496,6 +497,7 @@ namespace GAlbum
             CNomeFile fileDst = new CNomeFile(PathArchivioAttivo);
             CNomeFile fileCopia = new CNomeFile(PathArchivioAttivo);
             CNomeFile fileDuplica = new CNomeFile(PathArchivioAttivo);
+            CNomeFile fileFogliaNS = new CNomeFile(PathArchivioAttivo);
             CNomeFile fileSmistati = new CNomeFile(PathArchivioAttivo);
 
             // Elabola ogni file contenuto nella lista
@@ -516,7 +518,7 @@ namespace GAlbum
                 esito = fileSmistati.SetPathNomeFile(pathFile);
                 esito = fileCopia.SetPathNomeFile(pathFile);
                 esito = fileDuplica.SetPathNomeFile(pathFile);
-
+                esito = fileFogliaNS.SetPathNomeFile(pathFile);
 
                 // Aggiusta destinazione
                 fileDst.DirSezione = DirSmistare;
@@ -529,6 +531,9 @@ namespace GAlbum
 
                 // Prepara per duplica
                 fileDuplica.DirArchivio = prefissoDuplica + fileDuplica.DirArchivio;
+
+                // Prepara per foglia NS
+                fileFogliaNS.DirArchivio = prefissoFogliaNS + fileFogliaNS.DirArchivio;
 
                 // Verifica se il file è già contenuto nella sezione smistare
                 esito = fileDst.VerificaFileAssenteInSezione(fileSrc);
@@ -548,13 +553,31 @@ namespace GAlbum
                 // esegue la copia 
                 if (assente && assente2)
                 {
-                    esito = fileDst.CopiaFile(fileSrc);
-                    SNera.InizioIstruzione("Copia: ", fileSrc, fileDst, esito);
-                    if (esito != GstErrori.EErrore.E0000_OK)
-                        return esito;
+                    // Verifica se è una foglia standard
+                    if (fileSrc.DirFogliaStandard())
+                    {
 
-                    // aggiorna dati statistici
-                    statisticaAcquisire.NumeroFileAssegnati++;
+                        esito = fileDst.CopiaFile(fileSrc);
+                        SNera.InizioIstruzione("Copia: ", fileSrc, fileDst, esito);
+                        if (esito != GstErrori.EErrore.E0000_OK)
+                            return esito;
+
+                        // aggiorna dati statistici
+                        statisticaAcquisire.NumeroFileAssegnati++;
+                    }
+                    else 
+                    {
+                        // se arriva qui non è una foglia standard
+                        esito = fileFogliaNS.CopiaFile(fileSrc);
+                        SNera.InizioIstruzione("Copiain fogliaNS: ", fileSrc, fileFogliaNS, esito);
+                        if (esito != GstErrori.EErrore.E0000_OK)
+                            return esito;
+
+                        // aggiorna dati statistici
+                        statisticaAcquisire.NumeroFileFogliaNS++;
+
+
+                    }
                 }
 
                 // archivia il file dopo l'aquisizione
