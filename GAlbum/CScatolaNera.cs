@@ -308,6 +308,45 @@ namespace GAlbum
 
         }
         /// <summary>
+        /// Aggiunge un istruzione : titolo + fileSrc + esito
+        /// </summary>
+        /// <param name="titolo"></param>
+        /// <param name="fileSrc"></param>
+        /// <param name="esito"></param>
+        public void InizioIstruzioneAssente(string titolo, CNomeFile fileSrc, GstErrori.EErrore esito)
+        {
+            // aggiorna indentazione
+            Indentazione++;
+
+            // prepara titolo inizio\
+            string sTitolo = "----- Inizio: " + titolo + "   " + fileSrc.NomeFile + " ";
+            sTitolo = sTitolo.PadRight(80, '-');
+
+            // prepara titolo fine
+            string sTitoloFine = "----- Fine ";
+            sTitoloFine = sTitoloFine.PadRight(80, '-');
+
+            // prepara una frase
+            AggiungiLinea(sTitolo);
+            AggiungiLinea("NomeFileSrc     : " + fileSrc.NomeFile);
+            AggiungiLinea("PathSrc relativo: " + fileSrc.GetPathRelativo(fileSrc.PathFoglia));
+            AggiungiLinea("PathSrc Totale  : " + fileSrc.PathFoglia);
+            AggiungiLinea("");
+            AggiungiLinea("Esito           : " + GstErrori.RestultToSting(esito));
+            if (esito == GstErrori.EErrore.E0000_OK)
+                AggiungiLinea("Il file NON esite nella directory di destinazione");
+            else
+                AggiungiLinea("Il file esite nella directory di destinazione");
+            AggiungiLinea(GetDataAttuale());
+            AggiungiLinea("");
+            AggiungiLinea(sTitoloFine);
+            AggiungiLinea("");
+
+            // aggiorna indentazione
+            Indentazione--;
+
+        }
+        /// <summary>
         /// Aggiunge un istruzione : titolo + fileSrc + fileDst + esito
         /// </summary>
         /// <param name="titolo"></param>

@@ -537,14 +537,14 @@ namespace GAlbum
 
                 // Verifica se il file è già contenuto nella sezione smistare
                 esito = fileDst.VerificaFileAssenteInSezione(fileSrc);
-                SNera.InizioIstruzione("Verifica assenza in smistare: ", fileSrc, esito);
+                SNera.InizioIstruzioneAssente("Verifica assenza in smistare: ", fileSrc, esito);
                 assente = (esito == GstErrori.EErrore.E0000_OK);
 
                 // Verifica se il file è già contenuto nella sezione smistati
                 if (assente)
                 {
                     esito = fileSmistati.VerificaFileAssenteInSezione(fileSrc);
-                    SNera.InizioIstruzione("Verifica assenza in smistati: ", fileSrc, esito);
+                    SNera.InizioIstruzioneAssente("Verifica assenza in smistati: ", fileSrc, esito);
                     assente2 = (esito == GstErrori.EErrore.E0000_OK);
                 }
                 else
