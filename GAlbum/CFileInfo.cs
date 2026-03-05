@@ -138,7 +138,9 @@ namespace GAlbum
         {
             // inizializza data di acquisizione
             dataAcquisizione = new DateTime(2100, 12, 01);
- 
+            // imposta data minima accettabile
+            DateTime dataMinima = new DateTime(1990, 1, 1);
+
             // verifica se il file esiste
             if (!VerificaFile(file.PathNomeFile))
                 return GstErrori.EErrore.E0001_NOK;
@@ -171,6 +173,14 @@ namespace GAlbum
                     reso = subIfdDirectory.TryGetDateTime(ExifDirectoryBase.TagDateTimeOriginal, out DateTime dataExif);
                     if (reso)
                     {
+                        // verifica che la data sia sensata
+                        if (dataExif < dataMinima)
+                        {
+                            if (cercaData)
+                                CercaData(file, out dataAcquisizione);
+                            return GstErrori.EErrore.E0001_NOK;
+                        }
+
                         // se attiva qui significa che la data è disponibile
                         dataAcquisizione = dataExif;
                         return GstErrori.EErrore.E0000_OK;
@@ -193,6 +203,14 @@ namespace GAlbum
                     reso = qtDir.TryGetDateTime(QuickTimeMovieHeaderDirectory.TagCreated, out DateTime dataQT);
                     if (reso)
                     {
+                        // verifica che la data sia sensata
+                        if (dataQT < dataMinima)
+                        {
+                            if (cercaData)
+                                CercaData(file, out dataAcquisizione);
+                            return GstErrori.EErrore.E0001_NOK;
+                        }
+
                         // se attiva qui significa che la data è disponibile
                         dataAcquisizione = dataQT;
                         return GstErrori.EErrore.E0000_OK;
