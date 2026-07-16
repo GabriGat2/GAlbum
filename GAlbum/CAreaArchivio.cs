@@ -569,7 +569,7 @@ namespace GAlbum
                     {
                         // se arriva qui non è una foglia standard
                         esito = fileFogliaNS.CopiaFile(fileSrc);
-                        SNera.InizioIstruzione("Copiain fogliaNS: ", fileSrc, fileFogliaNS, esito);
+                        SNera.InizioIstruzione("Copia in fogliaNS: ", fileSrc, fileFogliaNS, esito);
                         if (esito != GstErrori.EErrore.E0000_OK)
                             return esito;
 
@@ -705,7 +705,7 @@ namespace GAlbum
             fileArchiviato.DirArchivio = DirArchivio;
 
 
-            // Elabola ogni file contenuto nella lista
+            // Elabora ogni file contenuto nella lista
             foreach (var pathFile in listaPathFile)
             {
                 // Incrementa file elaborati
