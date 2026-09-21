@@ -485,6 +485,7 @@ namespace GAlbum
             GstErrori.EErrore esito;
             bool assente;
             bool assente2;
+            bool assente3;
 
             // recupera il path di tutti i file contenuti in questa directory e le sue subdirerectory
             string[] listaPathFile = Directory.GetFiles(pathArchivio, "*.*", SearchOption.AllDirectories);
@@ -500,7 +501,7 @@ namespace GAlbum
             CNomeFile fileFogliaNS = new CNomeFile(PathArchivioAttivo);
             CNomeFile fileSmistati = new CNomeFile(PathArchivioAttivo);
 
-            // Elabola ogni file contenuto nella lista
+            // Elabora ogni file contenuto nella lista
             foreach (var pathFile in listaPathFile)
             {
                 // Aggiorna scatola nera
@@ -550,8 +551,10 @@ namespace GAlbum
                 else
                     assente2 = assente;
 
+                assente3 = assente && assente2;
+
                 // esegue la copia 
-                if (assente && assente2)
+                if (assente3)
                 {
                     // Verifica se è una foglia standard
                     if (fileSrc.DirFogliaStandard())
@@ -581,7 +584,7 @@ namespace GAlbum
                 }
 
                 // archivia il file dopo l'aquisizione
-                if (assente)
+                if (assente3)
                 {
                     // Sposta il file sorgente nei file copiati
                     esito = fileCopia.SpostaFile(fileSrc.PathNomeFile);
