@@ -70,10 +70,6 @@ namespace GAlbum
         /// </summary>
         private bool StatoInEsecuzione;
         /// <summary>
-        /// Infro tree view Acquisire
-        /// </summary>
-        private CInfoTreeView InfoTVAcqusire;
-        /// <summary>
         /// Infro tree view Smistare
         /// </summary>
         private CInfoTreeView InfoTVSmistare;
@@ -111,9 +107,8 @@ namespace GAlbum
             AggiornaStato(false);
 
             // Crea info tree view
-            InfoTVAcqusire = new CInfoTreeViewAcquisire();
-            InfoTVSmistare = new CInfoTreeViewSmistare();
-            InfoTVSmistati = new CInfoTreeViewSmistati();
+            InfoTVSmistare = new CInfoTreeViewAggiornaArgomenti();
+            InfoTVSmistati = new CInfoTreeViewAggiornaArgomenti();
             // inizializza le text box
             textBoxAcquisire.Text = AreaArchivio.PathAcquisire;
             textBoxSmistare.Text = AreaArchivio.PathSmistare;

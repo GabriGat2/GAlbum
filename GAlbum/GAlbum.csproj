@@ -87,6 +87,7 @@
     <Compile Include="CInfoDirFoto.cs" />
     <Compile Include="CInfoTreeView.cs" />
     <Compile Include="CInfoTreeViewAcquisire.cs" />
+    <Compile Include="CInfoTreeViewAggiornaArgomenti.cs" />
     <Compile Include="CInfoTreeViewDestinazione.cs" />
     <Compile Include="CInfoTreeViewSmistare.cs" />
     <Compile Include="CInfoTreeViewSmistati.cs" />
