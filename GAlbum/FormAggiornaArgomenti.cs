@@ -121,7 +121,6 @@ namespace GAlbum
             textBoxSmistati.Text = AreaArchivio.PathSmistare;
 
             // aggiorna la visualizzazione delle tree view
-            // AG AggiornaAcquisire();
             AggiornaSmistare();
             AggiornaSmistati();
 
@@ -229,7 +228,7 @@ namespace GAlbum
             // Espandi il sommario
             treeViewSmistare.ExpandAll();
 
-            // termina aggiornamnto
+            // termina aggiornamento
             treeViewSmistare.EndUpdate();
 
         }
@@ -331,59 +330,6 @@ namespace GAlbum
             treeViewSmistati.EndUpdate();
 
         }
-
-
-        ///// <summary>
-        ///// Aggiunge un nodo
-        ///// </summary>
-        ///// <param name="pathDir"></param>
-        ///// <param name="nodoBase"></param>
-        ///// <param name="livello"></param>
-        //private void AggiungiNodo(string pathDir, ref TreeNode nodoBase, int livello, ref CInfoTreeView infoTV)
-        //{
-        //    // crea classe info dir foto
-        //    CInfoDirFoto info = new CInfoDirFoto(pathDir);
-
-        //    // verifichiamo se può essere aggiunta all'albero della tree vie
-        //    if (!infoTV.NomeVisibile(info.Nome))
-        //        return;
-
-        //    // crea il nodo
-        //    TreeNode nodo = new TreeNode(info.Nome);
-        //    nodo.Tag = info;
-        //    nodoBase.Nodes.Add(nodo);
-
-        //    // Aggiungiamo il riferimento al nodo all'info
-        //    info.SetNodo(ref nodo);
-
-
-        //    // verifica se ha raggiunto il livello di massima indentazione
-        //    if (livello >= infoTV.MaxLivello)
-        //    {
-        //        return;
-        //    }
-
-
-        //    // Crea la lista delle sub directory
-        //    try
-        //    {
-        //        string[] listaSubDir = Directory.GetDirectories(pathDir);
-
-
-        //        // Aggiunge un nodo per ogni subdirectory
-        //        foreach (var subDir in listaSubDir)
-        //        {
-        //            AggiungiNodo(subDir, ref nodo, ++livello, ref infoTV);
-
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return;
-        //    }
-        //}
-
-
         /// <summary>
         /// il testo della Smistare é cambiato
         /// </summary>
@@ -394,79 +340,6 @@ namespace GAlbum
             // aggiorna la visualizzazione delle sub directory di Smistare
             AggiornaSmistare();
         }
-        /// <summary>
-        /// Mostra la foto selezionata
-        /// </summary>
-        /// <param name="pathFoto"></param>
-        //private void MostraFoto(string pathFoto, ref System.Windows.Forms.Button button)
-        //{
-        //    // stampa il path della foto
-        //    textBoxPathFoto.Text = pathFoto;
-
-        //    // salva il tipo di cursore
-        //    Cursor saveCursor = button.Cursor;
-
-        //    // Cambia il cursore in clessidra
-        //    button.Cursor = Cursors.WaitCursor;
-
-        //    CImmagine immagine = new CImmagine();
-        //    EErrore esito = immagine.MostraImmagine(pathFoto, ref pictureBox1);
-
-        //    // ripristina cursore
-        //    button.Cursor = saveCursor;
-
-        //}
-        /// <summary>
-        ///  Mostra la foto precedente contenuta nella lista
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void butPrecedente_Click(object sender, EventArgs e)
-        //{
-        //    // controlla che la lista esiste 
-        //    if (fotoSrcList == null)
-        //        return;
-
-        //    // verifica se l'idece puo essere decrementato
-        //    if (idFotoSrcList < 1)
-        //        return;
-
-        //    // decrementa indice 
-        //    idFotoSrcList--;
-
-        //    MostraFoto(fotoSrcList[idFotoSrcList], ref butPrecedente);
-        //}
-        /// <summary>
-        ///  Mostra la prossima foto contenuta nella lista
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void butSuccessiva_Click(object sender, EventArgs e)
-        //{
-        //    FotoSuccessiva();
-        //    //if (fotoSrcList == null)
-        //    //    return;
-        //    //if (idFotoSrcList >= (fotoSrcList.Length - 1))
-        //    //    return;
-
-        //    //idFotoSrcList++;
-
-        //    //MostraFoto(fotoSrcList[idFotoSrcList], ref butSuccessiva);
-        //}
-        /// <summary>
-        /// passa alla foto successiva
-        /// </summary>
-        //private void FotoSuccessiva()
-        //{
-        //    if (fotoSrcList == null)
-        //        return;
-        //    if (idFotoSrcList >= (fotoSrcList.Length - 1))
-        //        return;
-
-        //    idFotoSrcList++;
-
-        //    MostraFoto(fotoSrcList[idFotoSrcList], ref butSuccessiva);
-        //}
         /// <summary>
         /// Estrae il nodo selezionato
         /// </summary>
@@ -495,57 +368,6 @@ namespace GAlbum
             //info.CommutaSelezione();
         }
         /// <summary>
-        /// Aggiorna Acquisire, cioé visualizza le sotto directory contenute in Acquisire
-        /// </summary>
-        //private void AggiornaAcquisire()
-        //{
-        //    // assegna la directory Acquisire
-        //    PathDirAcquisire = textBoxAcquisire.Text;
-
-        //    // verifica che la directory esiste 
-        //    if (!Directory.Exists(PathDirAcquisire))
-        //    {
-        //        PathDirAcquisire = null;
-        //        return;
-        //    }
-
-        //    // Crea la lista delle sub directory
-        //    string[] listaSubDir = Directory.GetDirectories(PathDirAcquisire);
-
-        //    // annulla riferimento InfoNodoSelezionato
-        //    InfoNodoAcquisireSelezionato = null;
-        //    InfoNodoSmistareSelezionato = null;
-        //    InfoNodoSmistatiSelezionato = null;
-
-        //    // inizia aggiornamnto tree view
-        //    treeViewAcquisire.BeginUpdate();
-
-        //    // Azzera Tree view
-        //    treeViewAcquisire.Nodes.Clear();
-
-        //    // crea classe info dir foto vuota
-        //    CInfoDirFoto info = new CInfoDirFoto("");
-
-        //    // creiamo il nodo base
-        //    TreeNode nodoBase = new TreeNode("Acquisire");
-        //    nodoBase.Tag = info;
-        //    treeViewAcquisire.Nodes.Add(nodoBase);
-
-        //    // Aggiunge un nodo per ogni subdirectory
-        //    foreach (var subDir in listaSubDir)
-        //    {
-        //        AggiungiNodo(subDir, ref nodoBase, 1, ref InfoTVAcqusire);
-
-        //    }
-
-        //    // Espandi il sommario
-        //    treeViewAcquisire.ExpandAll();
-
-        //    // termina aggiornamnto
-        //    treeViewAcquisire.EndUpdate();
-
-        //}
-        /// <summary>
         /// cambiato il path di Acquisire
         /// </summary>
         /// <param name="sender"></param>
@@ -555,30 +377,6 @@ namespace GAlbum
             // aggiorna la visualizzazione delle sub directory Acquisire
             //AggiornaAcquisire();
         }
-        /// <summary>
-        ///  estrae nodo selezionato 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void treeViewAcquisire_AfterSelect(object sender, TreeViewEventArgs e)
-        //{
-        //    // verifica lo stato del form
-        //    if (StatoInEsecuzione)
-        //        return;
-
-        //    // recuprea il nodo selezionato 
-        //    TreeNode nodo = treeViewAcquisire.SelectedNode;
-
-        //    // Estrae le info della classe 
-        //    CInfoDirFoto info = (CInfoDirFoto)nodo.Tag;
-
-        //    // aggiorna nodo Acquisire selezionato 
-        //    AggiornaNodoSelezionato(ref info, ref InfoNodoAcquisireSelezionato);
-
-        //    //     // commuta la selezione
-        //    //info.CommutaSelezione();
-
-        //}
         /// <summary>
         /// Aggiorna il nodo selezionato 
         /// </summary>
@@ -607,19 +405,6 @@ namespace GAlbum
             //aggiorna lo stato del form
             this.StatoInEsecuzione = newStato;
 
-            // Debug: mostra stato
-            //textBoxDebug2.Text = StatoInEsecuzione.ToString();
-
-            //// button Apri
-            //if (StatoInEsecuzione)
-            //{
-            //    butApri.Text = "Chiudi";
-            //}
-            //else
-            //{
-            //    butApri.Text = "Apri";
-            //}
-
             // button Acquisire
             butAcquisire.Enabled = false;
             textBoxAcquisire.ReadOnly = true;
@@ -631,55 +416,7 @@ namespace GAlbum
             // button Smistati
             butSmistati.Enabled = false;
             textBoxSmistati.ReadOnly = true;
-
-            //// button Precedente
-            //butPrecedente.Enabled = StatoInEsecuzione;
-
-            //// button Successiva
-            //butSuccessiva.Enabled = StatoInEsecuzione;
-
-            //// button Assegna
-            //butAssegna.Enabled = StatoInEsecuzione;
-
-            //// button NonAssegna
-            //butNonAssegna.Enabled = StatoInEsecuzione;
-
-            //pictureBox1
-            //if (!StatoInEsecuzione)
-            //{
-            //    if (pictureBox1.Image != null)
-            //        pictureBox1.Image.Dispose();
-
-            //    pictureBox1.Image = null;
-
-            //    textBoxPathFoto.Text = "";
-            //}
-
-
         }
-        /// <summary>
-        /// Doppio click suula tree view Acquisire
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void treeViewAcquisire_MouseDoubleClick(object sender, MouseEventArgs e)
-        //{
-        //    // verifica che sia in stato false
-        //    if ((this.StatoInEsecuzione))
-        //        return;
-
-        //    // verifica se é stato premuto il tasto destro
-        //    if (e.Button == MouseButtons.Right)
-        //    {
-        //        FormConfigTreeView formConfigTreeView = new FormConfigTreeView(ref InfoTVAcqusire);
-        //        formConfigTreeView.ShowDialog();
-
-        //        // aggiorna la treeview
-        //        AggiornaAcquisire();
-
-        //    }
-
-        //}
         /// <summary>
         /// Doppio click sulla tree view smistare
         /// </summary>
@@ -697,50 +434,6 @@ namespace GAlbum
             // aggiorna la treeview
             AggiornaSmistare();
         }
-        /// <summary>
-        /// Assegna la foto e passa alla successiva
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void butAssegna_Click(object sender, EventArgs e)
-        //{
-        //    EseguiAssegna((true));
-        //}
-        /// <summary>
-        ///  Non Assegna la foto e passa alla successiva
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void butNonAssegna_Click(object sender, EventArgs e)
-        //{
-        //    EseguiAssegna(false);
-        //}
-        /// <summary>
-        /// Attiva l'assegnazione
-        /// </summary>
-        /// <param name="copia"></param>
-        //protected void EseguiAssegna(bool copia)
-        //{
-        //    // Crea l'archivo per movimentare le foto
-        //    CArchivia archivia = new CArchivia();
-
-        //    // crea la lista dei nodi selezionati
-        //    List<String> pathDestinazioni;
-        //    TreeNode nodo = treeViewSmistare.Nodes[0];
-        //    archivia.EstraiNdodiSelezionati(ref nodo, out pathDestinazioni);
-
-        //    // libera la risorsa della foto
-        //    pictureBox1.Image = null;
-
-        //    // Assegna la foto
-        //    archivia.Assegna(textBoxPathFoto.Text, pathDestinazioni, copia, InfoTVAcqusire.CopiaParallela);
-
-        //    // mostra la foto successiva
-        //    FotoSuccessiva();
-
-
-
-        //}
         /// <summary>
         /// seleziona la directory degli smistati
         /// </summary>
@@ -875,7 +568,6 @@ namespace GAlbum
             EseguiAggiornaArgomentiLog();
 
             // aggiorna la visualizzazione delle tree view
-            //AggiornaAcquisire();
             AggiornaSmistare();
             AggiornaSmistati();
 
@@ -914,7 +606,7 @@ namespace GAlbum
                 return EErrore.E0001_NOK;
             string pathArchivioSrc = InfoNodoSmistareSelezionato.Path;
 
-            // recupera il path dell'archivio destinazione in Smistati
+            // recupera il path dell'archivio Argomenti in smistare
             // ---------------------------------------------------
 
             // Verifica se c'è un nodo destinazione in smistati
