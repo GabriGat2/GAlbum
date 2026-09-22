@@ -129,6 +129,7 @@ namespace GAlbum
         private CStatisticaOperazioni statisticaAcquisire = new CStatisticaOperazioni();
         private CStatisticaOperazioni statisticaSelezionaPerData = new CStatisticaOperazioni();
         private CStatisticaOperazioni statisticaAssegna = new CStatisticaOperazioni();
+        private CStatisticaOperazioni statisticaAggiornaArgomenti = new CStatisticaOperazioni();
         /// <summary>
         /// scatola nera
         /// </summary>
@@ -622,7 +623,7 @@ namespace GAlbum
 
             return GstErrori.EErrore.E0000_OK;
         }
-         /// <summary>
+        /// <summary>
         /// Ordina le foto in funzione della data
         /// </summary>
         /// <param name="pathArchivioSrc"></param>
@@ -1102,6 +1103,468 @@ namespace GAlbum
 
             return GstErrori.EErrore.E0000_OK;
         }
+
+        ///////////////// Aggiorna Argomenti
+
+        /// <summary>
+        /// Aggiorna gli argomenti
+        /// </summary>
+        /// <param name="pathArchivioSrc"></param>
+        /// <param name="pathArchivioDst"></param>
+        /// <param name="stampaEsito"></param>
+        /// <returns></returns>
+        public GstErrori.EErrore AggiornaArgomenti(string pathArchivioSrc, string pathArchivioDst, ref System.Windows.Forms.ProgressBar progressBar, bool stampaEsito = true)
+        {
+            // Azzera tutti i dati statistici di acquisire
+            statisticaAggiornaArgomenti.Azzera();
+
+            // Inizilizza progressBar
+            progressBar.Value = 0;
+            progressBar.Visible = true;
+
+
+            // Chiama SelezionePerData2
+            //GstErrori.EErrore esito = AggiornaArgomenti2(pathArchivioSrc, pathArchivioDst, ref progressBar);
+            GstErrori.EErrore esito = AggiornaArgomenti3(pathArchivioSrc, pathArchivioDst, ref progressBar);
+
+            // Verifica se deve stampare l'esito
+            if (stampaEsito)
+            {
+
+
+                // Messaggio di intestazione
+                SNera.AddEsito("", true);
+
+                SNera.AddEsito("Aggiorna Argomenti");
+                SNera.AddEsito("====================================================================");
+                SNera.AddEsito("");
+                SNera.AddEsito("");
+
+                SNera.AddEsito("L'operazione di Aggiorna Argomenti si è conclusa con il seguente esito:");
+                SNera.AddMultiEsito(GstErrori.RestultToSting(esito));
+                SNera.AddEsito("");
+                SNera.AddEsito("");
+                SNera.AddEsito("I dati statistici dell'operazione sono i seguenti:");
+                SNera.AddMultiEsito(statisticaAggiornaArgomenti.GetLog());
+
+                // Stampa il risultato
+                FormLog formLog = new FormLog();
+                formLog.Log = SNera.EsitoOperazione;
+                formLog.ShowDialog();
+
+            }
+
+            // nasconde progressBar
+            progressBar.Visible = false;
+
+            return esito;
+
+        }
+
+        /// <summary>
+        /// Aggiorna argomenti
+        /// </summary>
+        /// <param name="pathArchivioSrc"></param>
+        /// <param name="pathArchivioDst"></param>
+        /// <returns></returns>
+        public GstErrori.EErrore AggiornaArgomenti2(string pathArchivioSrc, string pathArchivioDst, ref System.Windows.Forms.ProgressBar progressBar)
+        {
+
+            GstErrori.EErrore esito;
+            bool duplica;
+
+            // recupera il path di tutti i file contenuti in questa directory sorgente  e le sue subdirerectory
+            string[] listaPathFile = Directory.GetFiles(pathArchivioSrc, "*.*", SearchOption.AllDirectories);
+            // aggiorna dati statistici
+            statisticaAggiornaArgomenti.NumeroFile = (UInt32)listaPathFile.Length;
+
+            // Crea gli oggetti per gestire la copia dei file
+            CNomeFile fileSrc = new CNomeFile(PathArchivioAttivo);
+            CNomeFile fileDst = new CNomeFile(PathArchivioAttivo);
+            CNomeFile fileCopia = new CNomeFile(PathArchivioAttivo);
+            CNomeFile fileDuplica = new CNomeFile(PathArchivioAttivo);
+            CNomeFile fileArchiviato = new CNomeFile(PathArchivioAttivo);
+
+            // inizializza parzialmente il path del file destinazione
+            esito = fileDst.SetPathArchivio(pathArchivioDst);
+            if (esito != GstErrori.EErrore.E0000_OK)
+                return esito;
+
+            // inizializza parzialmente il path del file archiviato 
+            fileArchiviato.DirSezione = DirSmistare;
+            fileArchiviato.DirArchivio = DirArchivio;
+
+
+            // Elabora ogni file contenuto nella lista
+            foreach (var pathFile in listaPathFile)
+            {
+                // Incrementa file elaborati
+                statisticaAggiornaArgomenti.NumeroFileElaborati++;
+                progressBar.Value = statisticaAggiornaArgomenti.AvanzamentoLavoro;
+
+                // Aggiorna scatola nera
+                SNera.InizioIstruzione("Aggiona Argomenti", pathFile);
+
+                // inizializza fileSrc
+                esito = fileSrc.SetPathNomeFile(pathFile);
+                if (esito != GstErrori.EErrore.E0000_OK)
+                    return esito;
+                //  verifica che fileSrc esiste
+                if (!fileSrc.PathNomeFileEsiste)
+                    return GstErrori.EErrore.E1360_FileSorgenteNonEsiste;
+
+
+                // estrae la data del file sorgente
+                DateTime fileSrcData = fileSrc.GetDataAcquisizione();
+
+                // Aggiusta destinazione
+                fileDst.DirInterno = fileSrcData.Year.ToString();
+                fileDst.DirRamo = fileSrcData.Year.ToString() + "-" + fileSrcData.Month.ToString("00");
+                fileDst.DirFoglia = fileSrc.DirFoglia;
+                fileDst.NomeFile = fileSrc.NomeFile;
+
+                // Prepara per copia
+                esito = fileCopia.SetPathNomeFile(pathFile);
+                fileCopia.DirArchivio = prefissoCopia + fileCopia.DirArchivio;
+
+                // Prepara per duplica
+                esito = fileDuplica.SetPathNomeFile(pathFile);
+                fileDuplica.DirArchivio = prefissoDuplica + fileDuplica.DirArchivio;
+
+                // prepara archiviato 
+                fileArchiviato.DirFoglia = fileSrc.DirFoglia;
+                fileArchiviato.NomeFile = fileSrc.NomeFile;
+
+                // esegue la copia in destinazione
+                duplica = false;
+                esito = fileDst.CopiaFile(fileSrc);
+                SNera.InizioIstruzione("Copia: ", fileSrc, fileDst, esito);
+                if (esito == GstErrori.EErrore.E1371_FileDestinazioneEsiste)
+                {
+                    // richiede la duplicazione
+                    duplica = true;
+                }
+                else if (esito != GstErrori.EErrore.E0000_OK)
+                    return esito;
+                else if (esito == GstErrori.EErrore.E0000_OK)
+                {
+                    // aggiorna dati statistici
+                    statisticaAggiornaArgomenti.NumeroFileAssegnati++;
+                }
+
+                // esegue la copia in _Archivio
+                esito = fileArchiviato.CopiaFile(fileSrc);
+                SNera.InizioIstruzione("Copia in _archivio: ", fileSrc, fileArchiviato, esito);
+                if (esito != GstErrori.EErrore.E0000_OK)
+                {
+                    if (!duplica)
+                        ;// return esito;
+                }
+                else
+                {
+                    // aggiorna dati statistici
+                    statisticaAggiornaArgomenti.NumeroFileArchiviati++;
+                }
+
+
+                // archivia il file dopo l'aquisizione
+                if (!duplica)
+                {
+                    // Sposta il file sorgente nei file copiati
+                    esito = fileCopia.SpostaFile(fileSrc.PathNomeFile);
+                    SNera.InizioIstruzione("Sposta in copie: ", fileSrc, fileCopia, esito);
+                    if (esito != GstErrori.EErrore.E0000_OK)
+                        return esito;
+
+                    // aggiorna dati statistici
+                    statisticaAggiornaArgomenti.NumeroFileCopiati++;
+
+                    // controlla se ha rimonato il file prima di spostarlo in copiati
+                    if (fileCopia.Nome != fileSrc.Nome)
+                        statisticaAggiornaArgomenti.NumeroFileCopiati_Rinomintati++;
+                }
+                else
+                {
+                    // sposta il file sorgente nei file duplicati
+                    esito = fileDuplica.SpostaFile(fileSrc.PathNomeFile);
+                    SNera.InizioIstruzione("Sposta in duplicati: ", fileSrc, fileDuplica, esito);
+                    if (esito != GstErrori.EErrore.E0000_OK)
+                        return esito;
+
+                    // aggiorna dati statistici
+                    statisticaAggiornaArgomenti.NumeroFileDuplicati++;
+
+                    // controlla se ha rinominato il file prima di spostarlo in duplicati
+                    if (fileDuplica.Nome != fileSrc.Nome)
+                        statisticaAggiornaArgomenti.NumeroFileDuplicati_Rinomintati++;
+
+                }
+
+                // aggiorna scatola nera
+                SNera.FineIstruzione(GstErrori.EErrore.E0000_OK);
+            }
+
+            return GstErrori.EErrore.E0000_OK;
+        }
+        /// <summary>
+        ///  Aggiorna Argomenti 3
+        /// </summary>
+        /// <param name="pathArchivio"></param>
+        /// <returns></returns>
+        public GstErrori.EErrore AggiornaArgomenti3(string pathArchivio, string pathArchivioArgomenti, ref System.Windows.Forms.ProgressBar progressBar)
+        {
+            GstErrori.EErrore esito;
+            //bool assente;
+            //bool assente2;
+            //bool assente3;
+
+            // recupera il path di tutti i file contenuti in questa directory e le sue subdirerectory
+            string[] listaPathFile = Directory.GetFiles(pathArchivio, "*.*", SearchOption.AllDirectories);
+            // aggiorna dati statistici
+            statisticaAcquisire.NumeroFile = (UInt32)listaPathFile.Length;
+
+
+            // Crea gli oggetti per gestire la copia dei file
+            CNomeFile fileSrc = new CNomeFile(PathArchivioAttivo);
+            CNomeFile fileSrcRicerca = new CNomeFile(PathArchivioAttivo);
+
+            //CNomeFile fileDst = new CNomeFile(PathArchivioAttivo);
+            CNomeFile fileCopia = new CNomeFile(PathArchivioAttivo);
+            CNomeFile fileDuplica = new CNomeFile(PathArchivioAttivo);
+            //CNomeFile fileFogliaNS = new CNomeFile(PathArchivioAttivo);
+            //CNomeFile fileSmistati = new CNomeFile(PathArchivioAttivo);
+
+            CNomeFile fileArgomenti = new CNomeFile(PathArchivioAttivo);
+            CNomeFile fileTrovato = new CNomeFile(PathArchivioAttivo);
+            CNomeFile fileDstArgomento = new CNomeFile(PathArchivioAttivo);
+
+            //CNomeFile fileArgomenti = new CNomeFile(pathArchivioArgomenti);
+            //CNomeFile fileTrovato = new CNomeFile(pathArchivioArgomenti);
+            //CNomeFile fileDstArgomento = new CNomeFile(pathArchivioArgomenti);
+
+            // inizializza parzialmente il path del file destinazione
+            //esito = fileDst.SetPathArchivio(pathArchivioArgomenti);
+            //if (esito != GstErrori.EErrore.E0000_OK)
+            //    return esito;
+
+            // inizializza parzialmente il path del file Argomenti
+            esito = fileArgomenti.SetPathArchivio(pathArchivioArgomenti);
+            if (esito != GstErrori.EErrore.E0000_OK)
+                return esito;
+
+
+
+
+            // Elabora ogni file contenuto nella lista
+            foreach (var pathFile in listaPathFile)
+            {
+                // Aggiorna scatola nera
+                SNera.InizioIstruzione("Aggiorna Argomenti", pathFile);
+
+                // Incrementa file elaborati
+                statisticaAggiornaArgomenti.NumeroFileElaborati++;
+                // progressBar.Value = statisticaAggiornaArgomenti.AvanzamentoLavoro;
+
+                // inizializza le classi per la gestione del file
+                esito = fileSrc.SetPathNomeFile(pathFile);
+                if (esito != GstErrori.EErrore.E0000_OK)
+                    return esito;
+                //esito = fileDst.SetPathNomeFile(pathFile);
+                //esito = fileSmistati.SetPathNomeFile(pathFile);
+                esito = fileCopia.SetPathNomeFile(pathFile);
+                esito = fileDuplica.SetPathNomeFile(pathFile);
+                //esito = fileFogliaNS.SetPathNomeFile(pathFile);
+
+                // inizializza il file di ricerca
+                esito = fileSrcRicerca.SetPathNomeFile(pathFile);
+                fileSrcRicerca.Estensione = "*";
+
+                // Aggiusta destinazione
+                //fileDst.DirSezione = DirSmistare;
+
+                // Aggiusta smistati
+                //fileSmistati.DirSezione = DirSmistati;
+
+                // Prepara per copia
+                fileCopia.DirArchivio = prefissoCopia + fileCopia.DirArchivio;
+
+                // Prepara per duplica
+                fileDuplica.DirArchivio = prefissoDuplica + fileDuplica.DirArchivio;
+
+                // Prepara per foglia NS
+                //fileFogliaNS.DirArchivio = prefissoFogliaNS + fileFogliaNS.DirArchivio;
+
+                // Esegue la ricerca del file con lo stesso nome e qualsiasi esensione
+                string [] listaPathFileTrovati = fileArgomenti.TrovaFile2(fileSrcRicerca, fileArgomenti.PathArchivio);
+
+                // verifica la dimensione della lista
+                if (listaPathFileTrovati.Length == 0)
+                {
+                    continue;
+                }
+
+                // annula il flag di esistenza
+                bool esiste = false;
+
+                // Analizza i file trovati
+                foreach (var pathFileTrovato in listaPathFileTrovati)
+                {
+                    // compone la classe del file trovato
+                    esito = fileTrovato.SetPathNomeFile(pathFileTrovato);
+                    if (esito != GstErrori.EErrore.E0000_OK)
+                        continue;
+
+                    // verifica se le foglie coincidono
+                    bool ugualeFoglia = (fileSrc.DirFoglia.ToUpper() == fileTrovato.DirFoglia.ToUpper());
+                    if (ugualeFoglia)
+                        continue;
+
+                    // Se le foglie sono diverse compone il path di destinazione
+                    esito = fileDstArgomento.SetPathNomeFile(fileTrovato.PathNomeFile);
+                    if (esito != GstErrori.EErrore.E0000_OK)
+                        continue;
+
+                    // cambia la dir foglia
+                    fileDstArgomento.DirFoglia = fileSrc.DirFoglia;
+
+                    // cambia l'estensione
+                    fileDstArgomento.Estensione = fileSrc.Estensione;
+
+                    // copia il file 
+                    esito = fileDstArgomento.CopiaFile(fileSrc);
+                    SNera.InizioIstruzione("Copia: ", fileSrc, fileDstArgomento, esito);
+                    esiste = (esito != GstErrori.EErrore.E0000_OK);
+
+                    // aggiorna dati statistici
+                    statisticaAggiornaArgomenti.NumeroFileAssegnati++;
+                }
+
+
+                // archivia il file dopo l'aquisizione
+                if (! esiste)
+                {
+                    // Sposta il file sorgente nei file copiati
+                    esito = fileCopia.SpostaFile(fileSrc.PathNomeFile);
+                    SNera.InizioIstruzione("Sposta in copiati: ", fileSrc, fileCopia, esito);
+                    if (esito != GstErrori.EErrore.E0000_OK)
+                        return esito;
+
+                    // aggiorna dati statistici
+                    statisticaAggiornaArgomenti.NumeroFileCopiati++;
+
+                    // controlla se ha rinominato il file prima di spostarlo in copiati
+                    if (fileCopia.Nome != fileSrc.Nome)
+                        statisticaAggiornaArgomenti.NumeroFileCopiati_Rinomintati++;
+                }
+                else
+                {
+                    // sposta il file sorgente nei file duplicati
+                    esito = fileDuplica.SpostaFile(fileSrc.PathNomeFile);
+                    SNera.InizioIstruzione("Sposta in duplicati: ", fileSrc, fileDuplica, esito);
+                    if (esito != GstErrori.EErrore.E0000_OK)
+                        return esito;
+
+                    // aggiorna dati statistici
+                    statisticaAggiornaArgomenti.NumeroFileDuplicati++;
+
+                    // controlla se ha rimonato il file prima di spostarlo in duplicati
+                    if (fileDuplica.Nome != fileSrc.Nome)
+                        statisticaAggiornaArgomenti.NumeroFileDuplicati_Rinomintati++;
+
+                }
+
+
+
+
+
+
+                //SNera.InizioIstruzioneAssente("Verifica assenza in smistare: ", fileSrc, esito);
+                //assente = (esito == GstErrori.EErrore.E0000_OK);
+
+                //// Verifica se il file è già contenuto nella sezione smistati
+                //if (assente)
+                //{
+                //    esito = fileSmistati.VerificaFileAssenteInSezione(fileSrc);
+                //    SNera.InizioIstruzioneAssente("Verifica assenza in smistati: ", fileSrc, esito);
+                //    assente2 = (esito == GstErrori.EErrore.E0000_OK);
+                //}
+                //else
+                //    assente2 = assente;
+
+                //assente3 = assente && assente2;
+
+                // esegue la copia 
+                //if (assente3)
+                //{
+                //    // Verifica se è una foglia standard
+                //    if (fileSrc.DirFogliaStandard())
+                //    {
+
+                //        esito = fileDst.CopiaFile(fileSrc);
+                //        SNera.InizioIstruzione("Copia: ", fileSrc, fileDst, esito);
+                //        if (esito != GstErrori.EErrore.E0000_OK)
+                //            return esito;
+
+                //        // aggiorna dati statistici
+                //        statisticaAggiornaArgomenti.NumeroFileAssegnati++;
+                //    }
+                //    else
+                //    {
+                //        // se arriva qui non è una foglia standard
+                //        esito = fileFogliaNS.CopiaFile(fileSrc);
+                //        SNera.InizioIstruzione("Copia in fogliaNS: ", fileSrc, fileFogliaNS, esito);
+                //        if (esito != GstErrori.EErrore.E0000_OK)
+                //            return esito;
+
+                //        // aggiorna dati statistici
+                //        statisticaAggiornaArgomenti.NumeroFileFogliaNS++;
+
+
+                //    }
+                //}
+
+                //// archivia il file dopo l'aquisizione
+                //if (assente3)
+                //{
+                //    // Sposta il file sorgente nei file copiati
+                //    esito = fileCopia.SpostaFile(fileSrc.PathNomeFile);
+                //    SNera.InizioIstruzione("Sposta in copiati: ", fileSrc, fileCopia, esito);
+                //    if (esito != GstErrori.EErrore.E0000_OK)
+                //        return esito;
+
+                //    // aggiorna dati statistici
+                //    statisticaAggiornaArgomenti.NumeroFileCopiati++;
+
+                //    // controlla se ha rimonato il file prima di spostarlo in copiati
+                //    if (fileCopia.Nome != fileSrc.Nome)
+                //        statisticaAggiornaArgomenti.NumeroFileCopiati_Rinomintati++;
+                //}
+                //else
+                //{
+                //    // sposta il file sorgente nei file duplicati
+                //    esito = fileDuplica.SpostaFile(fileSrc.PathNomeFile);
+                //    SNera.InizioIstruzione("Sposta in duplicati: ", fileSrc, fileDuplica, esito);
+                //    if (esito != GstErrori.EErrore.E0000_OK)
+                //        return esito;
+
+                //    // aggiorna dati statistici
+                //    statisticaAggiornaArgomenti.NumeroFileDuplicati++;
+
+                //    // controlla se ha rimonato il file prima di spostarlo in duplicati
+                //    if (fileDuplica.Nome != fileSrc.Nome)
+                //        statisticaAggiornaArgomenti.NumeroFileDuplicati_Rinomintati++;
+
+                //}
+
+                // Aggiorna scatola nera
+                SNera.FineIstruzione(GstErrori.EErrore.E0000_OK);
+            }
+
+            return GstErrori.EErrore.E0000_OK;
+        }
+
+
+
 
     }// fine class CAreaArchivio
 

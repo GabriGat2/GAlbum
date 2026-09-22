@@ -49,6 +49,7 @@
             this.butSelezioneLibro = new System.Windows.Forms.Button();
             this.butSelezioneData = new System.Windows.Forms.Button();
             this.butAcquisire = new System.Windows.Forms.Button();
+            this.butAggiornaArgomenti = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -250,6 +251,7 @@
             // 
             // groupBoxOperazioni
             // 
+            this.groupBoxOperazioni.Controls.Add(this.butAggiornaArgomenti);
             this.groupBoxOperazioni.Controls.Add(this.butSelezioneLibro);
             this.groupBoxOperazioni.Controls.Add(this.butSelezioneData);
             this.groupBoxOperazioni.Controls.Add(this.butAcquisire);
@@ -291,6 +293,16 @@
             this.butAcquisire.Text = "Acquisire";
             this.butAcquisire.UseVisualStyleBackColor = true;
             this.butAcquisire.Click += new System.EventHandler(this.butAcquisire_Click);
+            // 
+            // butAggiornaArgomenti
+            // 
+            this.butAggiornaArgomenti.Location = new System.Drawing.Point(310, 45);
+            this.butAggiornaArgomenti.Name = "butAggiornaArgomenti";
+            this.butAggiornaArgomenti.Size = new System.Drawing.Size(125, 23);
+            this.butAggiornaArgomenti.TabIndex = 5;
+            this.butAggiornaArgomenti.Text = "AggiornaArgomenti";
+            this.butAggiornaArgomenti.UseVisualStyleBackColor = true;
+            this.butAggiornaArgomenti.Click += new System.EventHandler(this.butAggiornaArgomenti_Click);
             // 
             // FormMain
             // 
@@ -340,6 +352,7 @@
         private System.Windows.Forms.Button butAcquisire;
         private System.Windows.Forms.Button butSelezioneData;
         private System.Windows.Forms.Button butSelezioneLibro;
+        private System.Windows.Forms.Button butAggiornaArgomenti;
     }
 }
 
