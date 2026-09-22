@@ -1170,7 +1170,7 @@ namespace GAlbum
             // recupera il path di tutti i file contenuti in questa directory e le sue subdirerectory
             string[] listaPathFile = Directory.GetFiles(pathArchivioSrc, "*.*", SearchOption.AllDirectories);
             // aggiorna dati statistici
-            statisticaAcquisire.NumeroFile = (UInt32)listaPathFile.Length;
+            statisticaAggiornaArgomenti.NumeroFile = (UInt32)listaPathFile.Length;
 
 
             // Crea gli oggetti per gestire la copia dei file
@@ -1196,7 +1196,7 @@ namespace GAlbum
 
                 // Incrementa file elaborati
                 statisticaAggiornaArgomenti.NumeroFileElaborati++;
-                // progressBar.Value = statisticaAggiornaArgomenti.AvanzamentoLavoro;
+                progressBar.Value = statisticaAggiornaArgomenti.AvanzamentoLavoro;
 
                 // inizializza le classi per la gestione del file
                 esito = fileSrc.SetPathNomeFile(pathFile);
