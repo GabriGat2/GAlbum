@@ -172,6 +172,16 @@ namespace GAlbum
             FormSelezioneLibro dlg = new FormSelezioneLibro (ref this.AreaArchivio);
             dlg.ShowDialog();
         }
+        /// <summary>
+        /// Aggiorna Argomenti
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void butAggiornaArgomenti_Click(object sender, EventArgs e)
+        {
+            FormAggiornaArgomenti formAggiornaArgomenti = new FormAggiornaArgomenti(ref this.AreaArchivio);
+            formAggiornaArgomenti.ShowDialog();
+        }
     }// fine class FormMain
 }// fine namespace GAlbum
 

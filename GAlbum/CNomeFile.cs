@@ -56,7 +56,7 @@ namespace GAlbum
         private string pathArchivioAttivo;      // A
         private string dirSezione;              // B
         private string dirArchivio;             // C
-        private string dirInterno;             // D
+        private string dirInterno;              // D
         private string dirRamo;                 // E
         private string dirFoglia;               // F
         private string nome;                    // G
@@ -829,6 +829,139 @@ namespace GAlbum
                     return false;
             }
         }
+        /// <summary>
+        /// Cerca il file specificato 
+        /// </summary>
+        /// <param name="fileCercato"></param>
+        /// <returns></returns>
+        public GstErrori.EErrore TrovaFile(CNomeFile fileCercato, bool confrontaFoglia = true)
+        {
+                        GstErrori.EErrore esito;
+
+            //  compone il nome del file cercato senza l'estensione
+            CNomeFile fileCercatoNE = new CNomeFile(fileCercato.pathArchivioAttivo);
+            esito = fileCercatoNE.SetPathNomeFile(fileCercato.pathNomeFile);
+            if (esito != GstErrori.EErrore.E0000_OK)
+                return esito;
+            fileCercatoNE.Estensione = "*";
+
+            string pathNoneFileNE = fileCercatoNE.nomeFile;
+
+            // recupera il path di tutti i file contenuti in questa directory e le sue subdirerectory
+            string[] listaPathFile = Directory.GetFiles(pathArchivio, fileCercatoNE.nomeFile, SearchOption.AllDirectories);
+
+            // verifica la dimensione della lista, se uguale a 0 il file non esiste nella sezione 
+            if (listaPathFile.Length == 0)
+            {
+                return GstErrori.EErrore.E0000_OK;
+            }
+
+            //return GstErrori.EErrore.E0001_NOK;
+
+            //// Estrae le dimensioni di file cercato
+            //FileInfo fileCercatoInfo = new FileInfo(fileCercato.PathNomeFile);
+            //long fileCercatoLength = fileCercatoInfo.Length;
+
+            //// Estrae la data di ultimo accesso del file cercato
+            //DateTime fileCercatoData = File.GetLastWriteTime(fileCercato.PathNomeFile);
+            //DateTime fileCercatoDataUTC = File.GetLastWriteTimeUtc(fileCercato.PathNomeFile);
+
+            // Estrae la foglia del file cercato
+            string fileCercatoFoglia = fileCercato.DirFoglia.ToUpper();
+
+            // Crea la classe per il file trovato
+            CNomeFile CFileTrovato = new CNomeFile(PathArchivioAttivo);
+
+            // definizione variabili condizioni
+            //bool ugualeNome = true;
+            //bool ugualeDimensione = false;
+            //bool ugualeData = false;
+            bool ugualeFoglia = false;
+
+
+            // analizza i file della lista 
+            foreach (var fileTrovato in listaPathFile)
+            {
+                // compone la classe del file trovato
+                CFileTrovato.SetPathNomeFile(fileTrovato);
+
+                // Estrae la dimensione del file trovato
+                //FileInfo fileTrovatoInfo = new FileInfo(fileTrovato);
+                //long fileTrovatoLength = fileTrovatoInfo.Length;
+                //// esegue il confronto delle dimensioni del file
+                //ugualeDimensione = (fileCercatoLength == fileTrovatoLength);
+
+
+                // Estrae la data di ultimo accesso del file trovato
+                //DateTime fileTrovatoData = File.GetLastWriteTime(fileTrovato);
+                //DateTime fileTrovatoDataUTC = File.GetLastWriteTimeUtc(fileTrovato);
+                //// esegue il confronto tra le date dei file
+                //int resoConfrontoData = fileCercatoData.CompareTo(fileTrovatoData);
+                //ugualeData = (resoConfrontoData == 0);
+
+                // controla se deve valutare la foglia
+                //if (confrontaFoglia)
+                //{
+                //    // Estrae la foglia del file trovato
+                //    CFileTrovato.SetPathNomeFile(fileTrovato);
+                //    string fileTrovatoFoglia = CFileTrovato.DirFoglia.ToUpper();
+                //    // Confronta le foglie dei file
+                //    ugualeFoglia = (fileCercatoFoglia == fileTrovatoFoglia);
+                //}
+                //else
+                //{
+                //    ugualeFoglia = true;
+                //}
+
+                // confronta la foglia
+                string fileTrovatoFoglia = CFileTrovato.DirFoglia.ToUpper();
+                // Confronta le foglie dei file
+                //ugualeFoglia = (fileCercatoFoglia == fileTrovatoFoglia);
+
+
+
+
+
+                //// verifica le condizioni di confronto cioè, se i file sono uguali
+                ////
+                //// Escluso la verifica sulla data perchè, è ambigua.
+                ////
+                ////if (ugualeNome && ugualeDimensione && ugualeData && ugualeFoglia)
+                //if (ugualeNome && ugualeDimensione && ugualeFoglia)
+                //{
+                //    // se arriva qui significa che i file sono uguali 
+                //    return GstErrori.EErrore.E0001_NOK;
+                //}
+            }
+
+            return GstErrori.EErrore.E0000_OK;
+        }
+        /// <summary>
+        /// Cerca il file specificato nel path di ricerca specificato
+        /// </summary>
+        /// <param name="fileCercato"></param>
+        /// <param name="pathRicerca"></param>
+        /// <returns></returns>
+        public string [] TrovaFile2(CNomeFile fileCercato, string pathRicerca)
+        {
+            GstErrori.EErrore esito;
+
+            //  compone il nome del file cercato senza l'estensione
+            //CNomeFile fileCercatoNE = new CNomeFile(fileCercato.pathArchivioAttivo);
+            //esito = fileCercatoNE.SetPathNomeFile(fileCercato.pathNomeFile);
+            //if (esito != GstErrori.EErrore.E0000_OK)
+            //    return esito;
+            //fileCercatoNE.Estensione = "*";
+
+            string pathNoneFileNE = fileCercato.nomeFile;
+
+            // recupera il path di tutti i file contenuti in questa directory e le sue subdirerectory
+            string[] listaPathFile = Directory.GetFiles(pathRicerca, fileCercato.nomeFile, SearchOption.AllDirectories);
+            return listaPathFile;
+
+        }
+
+
 
     }// fine class CNomeFile
 }// fine namespace GAlbum

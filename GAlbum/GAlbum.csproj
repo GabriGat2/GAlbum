@@ -87,6 +87,7 @@
     <Compile Include="CInfoDirFoto.cs" />
     <Compile Include="CInfoTreeView.cs" />
     <Compile Include="CInfoTreeViewAcquisire.cs" />
+    <Compile Include="CInfoTreeViewAggiornaArgomenti.cs" />
     <Compile Include="CInfoTreeViewDestinazione.cs" />
     <Compile Include="CInfoTreeViewSmistare.cs" />
     <Compile Include="CInfoTreeViewSmistati.cs" />
@@ -100,6 +101,12 @@
     </Compile>
     <Compile Include="FormNomeLibro.Designer.cs">
       <DependentUpon>FormNomeLibro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAggiornaArgomenti.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAggiornaArgomenti.Designer.cs">
+      <DependentUpon>FormAggiornaArgomenti.cs</DependentUpon>
     </Compile>
     <Compile Include="FormSelezionaPerData.cs">
       <SubType>Form</SubType>
@@ -160,6 +167,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormNomeLibro.resx">
       <DependentUpon>FormNomeLibro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAggiornaArgomenti.resx">
+      <DependentUpon>FormAggiornaArgomenti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSelezionaPerData.resx">
       <DependentUpon>FormSelezionaPerData.cs</DependentUpon>
